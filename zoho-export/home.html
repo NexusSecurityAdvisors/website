@@ -1,0 +1,1213 @@
+<link rel="preload" href="/nsa-questrial-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/nsa-inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Questrial;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-questrial-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/nsa-inter-500.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/nsa-inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/nsa-inter-700.woff2) format("woff2")}
+#nsa{--bg:#0E131A;--bg2:#0E1B2E;--deep:#152A45;--glass:rgba(21,42,69,.38);--line:rgba(201,204,207,.14);--line2:rgba(43,155,244,.35);--blue:#1A6FD1;--blue-h:#155CB0;--accent:#2B9BF4;--text:#F3F5F7;--silver:#C9CCCF;--muted:#A7AEB8;--head:Questrial,"Segoe UI",Arial,sans-serif;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--silver);line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#nsa *{box-sizing:border-box}
+#nsa [id]{scroll-margin-top:84px}
+#nsa a{color:inherit;text-decoration:none}
+#nsa a:focus-visible,#nsa summary:focus-visible,#nsa button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#nsa .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+#nsa h1,#nsa h2,#nsa h3{font-family:var(--head);color:var(--text);font-weight:400;letter-spacing:.2px}
+#nsa h1{font-size:clamp(36px,5.4vw,62px);line-height:1.08;margin:16px 0 20px;max-width:860px}
+#nsa h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;margin:10px 0 14px}
+#nsa h3{font-size:20px;line-height:1.3;margin:0 0 8px}
+#nsa p{margin:0 0 14px}
+#nsa .lead{font-size:18px;max-width:720px;color:var(--silver)}
+#nsa .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--accent);font-size:12.5px;letter-spacing:3px;font-weight:600;text-transform:uppercase}
+#nsa .eyebrow:before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--accent))}
+#nsa .grad{background:linear-gradient(100deg,#FFFFFF 10%,#C9CCCF 45%,#2B9BF4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#nsa .skip{position:absolute;left:-999px;top:8px;background:var(--blue);color:#fff;padding:8px 14px;border-radius:6px;z-index:60}
+#nsa .skip:focus{left:12px}
+/* nav */
+#nsa .bar{position:sticky;top:0;z-index:50;background:rgba(14,19,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+#nsa .nav{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:14px 22px;max-width:1180px;margin:0 auto}
+#nsa .logo{line-height:0;flex-shrink:0;display:block}
+#nsa .logo img{height:46px;width:auto;display:block}
+#nsa footer .logo img{height:54px}
+#nsa .logo b{display:block;font-family:var(--head);font-size:28px;letter-spacing:5px;font-weight:400;background:linear-gradient(180deg,#FFFFFF 0%,#C9CCCF 55%,#8E949B 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#nsa .logo span{display:block;font-size:9.5px;letter-spacing:3.4px;color:var(--accent);font-weight:600;margin-top:4px}
+#nsa .links{display:flex;gap:26px;font-size:14px;color:var(--silver)}
+#nsa .mtog{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 11px;margin-left:4px;background:transparent;border:1px solid var(--line2);border-radius:8px;cursor:pointer}
+#nsa .ilband{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:26px;padding:20px 24px;border:1px solid var(--line2);border-radius:14px;background:linear-gradient(120deg,rgba(26,111,209,.25),rgba(14,19,26,.5));transition:border-color .2s}
+#nsa .ilband:hover{border-color:var(--accent)}#nsa .ilband b{flex:1 1 420px;color:var(--text);font-weight:500;font-size:16px}#nsa .ilband em{font-style:normal;color:var(--accent);font-weight:600;font-size:14px}
+#nsa .ilk{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:700}
+#nsa .mtog span{display:block;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+#nsa .mtog[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}#nsa .mtog[aria-expanded="true"] span:nth-child(2){opacity:0}#nsa .mtog[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#nsa .mtog:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#nsa .links a{position:relative;padding:4px 0}
+#nsa .links a:after{content:"";position:absolute;left:0;bottom:-2px;height:1px;width:0;background:var(--accent);transition:width .25s}
+#nsa .links a:hover{color:var(--text)}#nsa .links a:hover:after{width:100%}
+#nsa .navr{display:flex;align-items:center;gap:12px}
+#nsa .ico{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;transition:border-color .2s,background .2s}
+#nsa .ico:hover{border-color:var(--accent);background:rgba(43,155,244,.08)}
+#nsa .ico svg{width:17px;height:17px;fill:var(--silver)}
+/* buttons */
+#nsa .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);color:#fff;padding:13px 24px;border-radius:6px;font-weight:600;font-size:15px;line-height:1.2;transition:background .2s,box-shadow .25s,transform .2s,border-color .2s;box-shadow:0 0 0 rgba(43,155,244,0)}
+#nsa .btn:hover{background:var(--blue-h);box-shadow:0 8px 30px rgba(43,155,244,.28);transform:translateY(-1px)}
+#nsa .btn.ghost{background:rgba(14,19,26,.3);border:1px solid rgba(243,245,247,.55);box-shadow:none}
+#nsa .btn.ghost:hover{border-color:var(--accent);background:rgba(43,155,244,.08)}
+#nsa .btn.sm{padding:10px 18px;font-size:14px}
+#nsa .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+/* hero */
+#nsa .hero{position:relative;padding:120px 0 110px;background:radial-gradient(ellipse at 75% 30%,rgba(26,111,209,.28),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(21,42,69,.9),transparent 60%),linear-gradient(180deg,#0E131A 0%,#0E1B2E 100%);overflow:hidden}
+#nsa #net{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+#nsa .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,19,26,.92) 0%,rgba(14,19,26,.55) 50%,rgba(14,19,26,.1) 100%);pointer-events:none}
+#nsa .hero .wrap{position:relative;z-index:2}
+#nsa .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--silver);border:1px solid var(--line2);background:rgba(43,155,244,.07);padding:6px 14px;border-radius:999px}
+#nsa .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:nsaPulse 2.4s infinite}
+@keyframes nsaPulse{0%,100%{opacity:1}50%{opacity:.35}}
+#nsa .trust{display:flex;flex-wrap:wrap;gap:10px 26px;margin:44px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--muted)}
+#nsa .trust li:before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);transform:rotate(45deg);margin-right:10px;vertical-align:2px}
+/* stats */
+#nsa .stats{position:relative;z-index:3;margin-top:-46px}
+#nsa .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(14,27,46,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:12px;padding:0;max-width:1136px;overflow:hidden}
+#nsa .stat{padding:26px 24px;border-right:1px solid var(--line)}
+#nsa .stat:last-child{border-right:0}
+#nsa .stat b{display:block;font-family:var(--head);font-weight:400;font-size:38px;color:var(--text);line-height:1.1}
+#nsa .stat span{font-size:13.5px;color:var(--muted)}
+/* sections */
+#nsa section.s{position:relative;padding:96px 0}
+#nsa .alt{background:linear-gradient(180deg,rgba(14,27,46,.55),rgba(14,19,26,0))}
+#nsa .gridbg{background-image:linear-gradient(rgba(201,204,207,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(201,204,207,.045) 1px,transparent 1px);background-size:44px 44px}
+#nsa .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px}
+#nsa .card{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;overflow:hidden}
+#nsa .card:before{content:"";position:absolute;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--accent),transparent)}
+#nsa .card:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 1px rgba(43,155,244,.12)}
+#nsa .card .n{font-family:var(--head);font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px}
+#nsa .card p{font-size:15px;margin-bottom:16px}
+#nsa .card .out{margin-top:auto;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+#nsa .card .out b{color:var(--accent);font-weight:600}
+#nsa .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+#nsa .chip{font-size:13px;color:var(--silver);border:1px solid var(--line);background:rgba(14,27,46,.6);padding:7px 14px;border-radius:999px}
+#nsa .who{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:34px}
+#nsa .who div{border-left:2px solid var(--accent);padding:4px 0 4px 18px}
+#nsa .who b{font-family:var(--head);font-weight:400;font-size:20px;color:var(--text);display:block;margin-bottom:6px}
+#nsa .steps{counter-reset:st;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px;padding:0;list-style:none;position:relative}
+#nsa .step{counter-increment:st;padding:26px;border:1px solid var(--line);border-radius:12px;background:rgba(14,19,26,.6)}
+#nsa .step:before{content:counter(st,decimal-leading-zero);display:block;font-family:var(--head);font-size:34px;color:transparent;-webkit-text-stroke:1px var(--accent);margin-bottom:8px}
+#nsa .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
+#nsa .chk{display:block;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:22px;transition:border-color .25s,transform .25s}
+#nsa .chk:hover{border-color:var(--accent);transform:translateY(-3px)}
+#nsa .chk b{display:block;color:var(--text);margin-bottom:4px;font-weight:600}
+#nsa .chk span{font-size:14px;color:var(--muted)}
+#nsa .chk em{display:block;font-style:normal;color:var(--accent);font-size:13.5px;font-weight:600;margin-top:12px}
+/* founder */
+#nsa .about{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start}
+#nsa .frame{position:relative;border:1px solid var(--line2);border-radius:14px;padding:30px;background:linear-gradient(160deg,rgba(26,111,209,.14),rgba(14,19,26,.4))}
+#nsa .frame h3{font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-family:Inter,sans-serif;font-weight:600}
+#nsa ul.creds{list-style:none;padding:0;margin:0}
+#nsa ul.creds li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+#nsa ul.creds li:last-child{border-bottom:0}
+#nsa ul.creds li:before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);transform:rotate(45deg);margin-right:12px;vertical-align:2px}
+#nsa .plinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+#nsa .plink{display:inline-flex;align-items:center;gap:8px;font-size:14px;border:1px solid var(--line);border-radius:6px;padding:9px 14px;transition:border-color .2s,color .2s}
+#nsa .plink:hover{border-color:var(--accent);color:var(--text)}
+#nsa .plink svg{width:15px;height:15px;fill:currentColor}
+/* insights */
+#nsa .ins{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:40px}
+#nsa .panel{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:28px}
+#nsa .arts{list-style:none;padding:0;margin:0}
+#nsa .arts li{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;font-size:15px;color:var(--text)}
+#nsa .arts li:last-child{border-bottom:0}
+#nsa .arts small{color:var(--muted);white-space:nowrap;font-size:12.5px}
+#nsa .books{display:grid;gap:16px}
+#nsa .book{display:block;padding:20px;border:1px solid var(--line);border-radius:10px;transition:border-color .2s}
+#nsa .book:hover{border-color:var(--accent)}
+#nsa .book b{display:block;color:var(--text);font-family:var(--head);font-weight:400;font-size:18px}
+#nsa .book span{display:block;font-size:13.5px;color:var(--muted)}
+#nsa .book em{display:block;font-style:normal;margin-top:10px}
+#nsa .more{display:inline-block;margin-top:16px;color:var(--accent);font-weight:600;font-size:14px}
+#nsa .more:hover{color:var(--text)}
+/* faq */
+#nsa .faq{max-width:860px;margin-top:30px}
+#nsa details{border-bottom:1px solid var(--line)}
+#nsa summary{cursor:pointer;list-style:none;color:var(--text);font-weight:500;font-size:17px;padding:20px 36px 20px 0;position:relative}
+#nsa summary::-webkit-details-marker{display:none}
+#nsa summary:after{content:"";position:absolute;right:6px;top:26px;width:10px;height:10px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:transform .25s}
+#nsa details[open] summary:after{transform:rotate(-135deg);top:30px}
+#nsa details p{padding:0 0 16px;font-size:15.5px}
+/* cta */
+#nsa .cta{position:relative;text-align:center;padding:110px 0;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(43,155,244,.25),transparent 60%),linear-gradient(180deg,#0E1B2E,#0E131A)}
+#nsa .cta .lead{margin:0 auto}
+#nsa .cta .ctas{justify-content:center}
+#nsa .ring{position:absolute;left:50%;top:50%;width:760px;height:760px;margin:-380px 0 0 -380px;border:1px solid rgba(43,155,244,.12);border-radius:50%;pointer-events:none}
+#nsa .ring.r2{width:520px;height:520px;margin:-260px 0 0 -260px;border-color:rgba(43,155,244,.18)}
+/* footer */
+#nsa footer{padding:44px 0 30px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:#0B0F15}
+#nsa .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+#nsa .fgrid .fh{color:var(--text);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;font-weight:600}
+#nsa .fgrid a{display:block;padding:3px 0}
+#nsa .fgrid a:hover{color:var(--text)}
+#nsa .legal{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px}
+/* progress + top */
+#nsa .prog{position:fixed;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue),var(--accent));z-index:80;box-shadow:0 0 10px var(--accent)}
+#nsa .totop{position:fixed;right:20px;bottom:22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:rgba(14,27,46,.85);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:18px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:70;backdrop-filter:blur(8px)}
+#nsa .totop.on{opacity:1;pointer-events:auto}
+#nsa .totop:hover{transform:translateY(-3px);border-color:var(--accent)}
+/* spotlight */
+#nsa .spot{position:relative}
+#nsa .spot:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(43,155,244,.16),transparent 45%)}
+#nsa .spot:hover:after{opacity:1}
+/* ticker */
+#nsa .ticker{margin-top:40px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+#nsa .track{display:flex;gap:14px;width:max-content;padding:14px 0;animation:nsaTick 38s linear infinite}
+#nsa .ticker:hover .track{animation-play-state:paused}
+@keyframes nsaTick{to{transform:translateX(-50%)}}
+/* command center */
+#nsa .cc{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;margin-top:40px}
+#nsa .cc .panel{position:relative}
+#nsa .ptitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+#nsa .ptitle h3{margin:0;font-size:18px}
+#nsa .tag{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+#nsa .mx{display:grid;grid-template-columns:28px repeat(5,1fr);gap:5px}
+#nsa .mx .ax{font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+#nsa .cell{aspect-ratio:1/1;border-radius:6px;border:1px solid rgba(255,255,255,.06);font-family:var(--head);font-size:15px;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s,box-shadow .2s,outline-color .2s;outline:2px solid transparent;outline-offset:1px;background:var(--c)}
+#nsa .cell:hover,#nsa .cell.sel{transform:scale(1.06);box-shadow:0 0 18px var(--c);outline-color:rgba(255,255,255,.8)}
+#nsa .cell.b1{--c:#2A3544}#nsa .cell.b2{--c:#1A5596}#nsa .cell.b3{--c:#1F78D6}#nsa .cell.b4{--c:#C2384B}
+#nsa .axl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:8px 0 0 33px;letter-spacing:1px;text-transform:uppercase}
+#nsa .mxout{margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6);font-size:14.5px;min-height:76px}
+#nsa .mxout b{color:var(--text)}
+#nsa .lvl{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.2px;padding:2px 9px;border-radius:4px;margin-left:6px;background:var(--c);color:#fff}
+#nsa .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+#nsa .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+#nsa .ccr{display:grid;gap:22px}
+#nsa .term{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;background:#070B10;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+#nsa .term .tb{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:#0B1119}
+#nsa .term .tb i{width:10px;height:10px;border-radius:50%;background:#2A3442}
+#nsa .term .tb span{margin-left:8px;font-size:11.5px;color:var(--muted);font-family:Inter,sans-serif}
+#nsa .term pre{margin:0;padding:14px 16px;min-height:216px;white-space:pre-wrap;color:#B8C4D2}
+#nsa .term .ok{color:#5FD0A0}#nsa .term .wr{color:#F2C14E}#nsa .term .cr{color:#FF6B7A}#nsa .term .pr{color:var(--accent)}
+#nsa .cur{display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:-2px;animation:nsaBlink 1s steps(2) infinite}
+@keyframes nsaBlink{50%{opacity:0}}
+#nsa .radarw{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center}
+#nsa .radar{position:relative;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(43,155,244,.10) 0 1px,transparent 1px) 0 0/14px 14px,radial-gradient(circle,#0E1B2E,#070B10);border:1px solid var(--line2);overflow:hidden}
+#nsa .radar:before,#nsa .radar:after{content:"";position:absolute;inset:25%;border:1px solid rgba(43,155,244,.25);border-radius:50%}
+#nsa .radar:after{inset:42%}
+#nsa .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(43,155,244,.55),rgba(43,155,244,0) 70deg,transparent 360deg);animation:nsaSpin 4s linear infinite}
+@keyframes nsaSpin{to{transform:rotate(360deg)}}
+#nsa .blip{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;box-shadow:0 0 10px var(--accent),0 0 0 0 rgba(43,155,244,.6);animation:nsaPing 2.6s infinite}
+#nsa .blip.hot{background:#FF6B7A;box-shadow:0 0 10px #FF6B7A}
+@keyframes nsaPing{0%{box-shadow:0 0 10px var(--accent),0 0 0 0 rgba(43,155,244,.6)}80%{box-shadow:0 0 10px var(--accent),0 0 0 14px rgba(43,155,244,0)}}
+#nsa .rlist{list-style:none;margin:0;padding:0;font-size:13.5px}
+#nsa .rlist li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+#nsa .rlist li:last-child{border-bottom:0}
+#nsa .rlist b{font-weight:600;font-size:11px;letter-spacing:1px}
+#nsa .note{font-size:12px;color:var(--muted);margin-top:14px}
+/* steps line */
+#nsa .steps:before{content:"";position:absolute;left:0;right:0;top:-18px;height:2px;background:var(--line)}
+#nsa .steps:after{content:"";position:absolute;left:0;top:-18px;height:2px;width:var(--p,0%);background:linear-gradient(90deg,var(--blue),var(--accent));box-shadow:0 0 10px var(--accent);transition:width .2s linear}
+/* resource tiles */
+#nsa .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:34px}
+#nsa .tile{display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--glass);transition:border-color .25s,transform .25s}
+#nsa .tile:hover{border-color:var(--accent);transform:translateY(-3px)}
+#nsa .tile svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.6}
+#nsa .tile b{color:var(--text);font-weight:600}
+#nsa .tile span{font-size:13.5px;color:var(--muted)}
+@media(max-width:960px){#nsa .cc{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .radarw{grid-template-columns:1fr;justify-items:center}#nsa .rlist{width:100%}#nsa .term pre{font-size:12px;min-height:240px}#nsa .totop{right:14px;bottom:14px}}
+
+/* dropdown */
+#nsa .dd{position:relative;display:flex;align-items:center}
+#nsa .ddm{position:absolute;top:100%;left:-14px;min-width:240px;padding:10px;margin-top:10px;background:rgba(11,16,23,.97);border:1px solid var(--line2);border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(-4px);transition:all .2s}
+#nsa .ddm:before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+#nsa .dd:hover .ddm,#nsa .dd:focus-within .ddm{opacity:1;visibility:visible;transform:none}
+#nsa .ddm a{display:block;padding:8px 10px;border-radius:6px;font-size:14px}
+#nsa .ddm a:after{display:none}
+#nsa .ddm a:hover{background:rgba(43,155,244,.1)}
+/* regulatory watch */
+#nsa .rtabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px;border-bottom:1px solid var(--line);padding-bottom:12px}
+#nsa .rtab{font:inherit;font-size:14px;font-weight:600;color:var(--silver);background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px 16px;cursor:pointer;transition:all .2s}
+#nsa .rtab:hover{border-color:var(--accent);color:var(--text)}
+#nsa .rtab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 20px rgba(26,111,209,.35)}
+#nsa .rpanel{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:26px}
+#nsa .rpanel[hidden]{display:none}
+#nsa .status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--accent);background:rgba(43,155,244,.08);margin-bottom:14px}
+#nsa .status.warn{color:#F2C14E;border-color:rgba(242,193,78,.45);background:rgba(242,193,78,.08)}
+#nsa .status.live{color:#5FD0A0;border-color:rgba(95,208,160,.45);background:rgba(95,208,160,.08)}
+#nsa .status i{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+#nsa .tl{list-style:none;margin:18px 0 0;padding:0 0 0 18px;border-left:1px solid var(--line2)}
+#nsa .tl li{position:relative;padding:0 0 16px 6px;font-size:14.5px}
+#nsa .tl li:before{content:"";position:absolute;left:-24px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+#nsa .tl li.now:before{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+#nsa .tl b{display:block;color:var(--text);font-size:13px;letter-spacing:.5px}
+#nsa .todo{list-style:none;margin:0;padding:0}
+#nsa .todo li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);font-size:14.5px;position:relative}
+#nsa .todo li:last-child{border-bottom:0}
+#nsa .todo li:before{content:"";position:absolute;left:2px;top:15px;width:12px;height:7px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+#nsa .src{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+#nsa .src a{font-size:13px;border:1px solid var(--line);border-radius:6px;padding:7px 12px;color:var(--silver);transition:all .2s}
+#nsa .src a:hover{border-color:var(--accent);color:var(--text)}
+#nsa .reviewed{font-size:12.5px;color:var(--muted);margin-top:18px}
+#nsa .rmf{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0 6px}
+#nsa .rmf button{font:inherit;font-size:12px;font-weight:600;color:var(--silver);background:rgba(14,27,46,.7);border:1px solid var(--line);border-radius:8px;padding:12px 4px;cursor:pointer;transition:all .2s}
+#nsa .rmf button:hover,#nsa .rmf button.on{border-color:var(--accent);color:#fff;background:rgba(26,111,209,.35)}
+#nsa .rmf button span{display:block;font-family:var(--head);font-size:18px;color:var(--accent)}
+#nsa .rmfout{min-height:66px;font-size:14.5px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6)}
+/* teaching */
+#nsa .teach{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:38px}
+#nsa .tcard{position:relative;padding:30px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,rgba(26,111,209,.12),rgba(14,19,26,.5));overflow:hidden}
+#nsa .tcard .org{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600}
+#nsa .tcard h3{margin-top:8px}
+#nsa .course{display:block;margin-top:14px;padding:14px 16px;border-left:2px solid var(--accent);background:rgba(14,19,26,.55);border-radius:0 8px 8px 0}
+#nsa .course b{display:block;color:var(--text);font-weight:600}
+#nsa .course span{font-size:13.5px;color:var(--muted)}
+/* newsletter */
+#nsa .news{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;padding:36px;border:1px solid var(--line2);border-radius:16px;background:radial-gradient(ellipse at 0% 0%,rgba(43,155,244,.16),transparent 60%),rgba(14,27,46,.55)}
+#nsa .news img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+#nsa .topics{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+@media(max-width:960px){#nsa .rpanel,#nsa .news{grid-template-columns:1fr}#nsa .news img{max-width:300px}}
+@media(max-width:600px){#nsa .rmf{grid-template-columns:repeat(4,1fr)}#nsa .rtab{flex:1 1 auto;padding:9px 10px;font-size:13px}#nsa .news{padding:22px}}
+
+#nsa .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+#nsa .eng{padding:12px 0;border-bottom:1px solid var(--line)}
+#nsa .eng:last-child{border-bottom:0}
+#nsa .eng b{display:block;color:var(--text);font-weight:600}
+#nsa .eng span{font-size:14px;color:var(--muted)}
+#nsa .compare{margin-top:26px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+#nsa .crow{display:grid;grid-template-columns:160px 1fr 1fr;border-top:1px solid var(--line)}
+#nsa .crow:first-child{border-top:0}
+#nsa .crow span{padding:13px 16px;font-size:14.5px}
+#nsa .crow span:first-child{color:var(--text);font-weight:600}
+#nsa .crow span:last-child{color:var(--text);background:rgba(26,111,209,.12)}
+#nsa .crow.ch span{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:700;background:rgba(14,27,46,.8)}
+#nsa .navr .gs{border-color:rgba(243,245,247,.4)}
+@media(max-width:960px){#nsa .vgrid{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .crow{grid-template-columns:1fr}#nsa .crow span:first-child{padding-bottom:0}#nsa .crow.ch{display:none}#nsa .navr .gs{display:none}}
+
+/* who we serve */
+#nsa .aud{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:36px}
+#nsa .acard{padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--glass);display:flex;flex-direction:column}
+#nsa .acard h3{font-size:19px}
+#nsa .acard p{font-size:14.5px}
+#nsa .chips2{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 14px}
+#nsa .chips2 span{font-size:11.5px;letter-spacing:.4px;color:var(--accent);border:1px solid var(--line2);border-radius:999px;padding:3px 10px;background:rgba(43,155,244,.06)}
+#nsa .alinks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto}
+#nsa .alinks a{font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;color:var(--silver);transition:all .2s}
+#nsa .alinks a:hover{border-color:var(--accent);color:var(--text);background:rgba(43,155,244,.08)}
+#nsa .acta{background:linear-gradient(160deg,rgba(26,111,209,.22),rgba(14,19,26,.4));border-color:var(--line2);justify-content:center}
+/* approach */
+#nsa .stepbtn{all:unset;box-sizing:border-box;display:flex;flex-direction:column;flex:1;width:100%;cursor:pointer;font:inherit;color:inherit}
+#nsa .stepbtn em{margin-top:auto!important;padding-top:12px}
+#nsa .step{display:flex;flex-direction:column}
+#nsa .stepbtn .sh{display:block;font-family:var(--head);font-weight:400;font-size:20px;color:var(--text);margin:0 0 8px}
+#nsa .step{transition:border-color .2s,background .2s,transform .2s}
+#nsa .step:hover{border-color:var(--line2);transform:translateY(-2px)}
+#nsa .step.on{border-color:var(--accent);background:rgba(26,111,209,.14);box-shadow:0 10px 30px rgba(26,111,209,.2)}
+#nsa .stepbtn span{display:block;font-size:14.5px}
+#nsa .stepbtn em{display:block;font-style:normal;font-size:12.5px;font-weight:600;color:var(--accent);margin-top:12px;letter-spacing:.5px}
+#nsa .stepbtn:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:10px}
+#nsa .apd{margin-top:20px;border:1px solid var(--line2);border-radius:14px;background:rgba(14,27,46,.7);padding:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#nsa .apd .full{grid-column:1/-1}
+#nsa .apd h4{margin:0 0 8px;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);font-weight:600}
+#nsa .apd ul{margin:0;padding-left:18px;font-size:14.5px}
+#nsa .apd li{margin-bottom:6px}
+#nsa .apd .meta2{display:flex;flex-wrap:wrap;gap:8px}
+#nsa .apx{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+#nsa .tl90{list-style:none;margin:6px 0 0;padding:0}
+#nsa .tl90 li{padding:10px 0 10px 16px;border-left:2px solid var(--line2);font-size:14.5px;position:relative}
+#nsa .tl90 li:before{content:"";position:absolute;left:-6px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+#nsa .tl90 b{display:block;color:var(--text);font-size:13.5px}
+#nsa .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+#nsa .kpis div{padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(14,19,26,.55)}
+#nsa .kpis b{display:block;color:var(--text);font-size:14px}
+#nsa .kpis span{font-size:12.5px;color:var(--muted)}
+#nsa .refs{margin-top:22px;border:1px solid var(--line);border-radius:12px;padding:0 20px;background:rgba(14,19,26,.5)}
+#nsa .refs summary{font-size:15px}
+#nsa .refs ol{font-size:14px;padding-left:22px;margin:0 0 18px}
+#nsa .refs li{margin-bottom:8px}
+#nsa .refs a{color:var(--accent)}
+/* simulator */
+#nsa .sim{margin-top:40px}
+#nsa .scns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+#nsa .scn{font:inherit;font-size:13.5px;font-weight:600;color:var(--silver);background:rgba(14,19,26,.7);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .2s}
+#nsa .scn:hover{border-color:var(--accent);color:var(--text)}
+#nsa .scn[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+#nsa .simgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+#nsa .ctrl{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;background:rgba(14,19,26,.5);transition:all .2s}
+#nsa .ctrl:hover{border-color:var(--line2)}
+#nsa .ctrl input{appearance:none;-webkit-appearance:none;flex-shrink:0;width:38px;height:22px;border-radius:999px;background:#2A3544;position:relative;cursor:pointer;transition:background .2s;margin-top:1px}
+#nsa .ctrl input:after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#C9CCCF;transition:left .2s}
+#nsa .ctrl input:checked{background:var(--blue)}#nsa .ctrl input:checked:after{left:19px;background:#fff}
+#nsa .ctrl input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#nsa .ctrl b{display:block;color:var(--text);font-size:14px;font-weight:600}
+#nsa .ctrl span{font-size:12.5px;color:var(--muted)}
+#nsa .ctrl:has(input:checked){border-color:var(--line2);background:rgba(26,111,209,.12)}
+#nsa .gauge{margin-bottom:14px}
+#nsa .gl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px}
+#nsa .gl b{font-family:var(--head);font-size:22px;color:var(--text);font-weight:400}
+#nsa .gbar{height:10px;border-radius:6px;background:rgba(201,204,207,.1);overflow:hidden}
+#nsa .gbar i{display:block;height:100%;width:0;border-radius:6px;transition:width .5s cubic-bezier(.2,.8,.2,1),background .3s}
+#nsa .simres{padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6);font-size:14px;margin:6px 0 14px;min-height:96px}
+#nsa .simres b{color:var(--text)}
+#nsa .mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;max-width:220px}
+#nsa .mini i{aspect-ratio:1/1;border-radius:3px;background:var(--c);opacity:.35;transition:all .3s}
+#nsa .mini i.in{opacity:1;outline:2px dashed rgba(255,255,255,.7);outline-offset:-2px}
+#nsa .mini i.re{opacity:1;outline:2px solid #fff;outline-offset:-2px;box-shadow:0 0 12px var(--c)}
+#nsa .rl{all:unset;cursor:pointer;color:var(--silver)}
+#nsa .rl:hover,#nsa .rl:focus-visible{color:var(--text);text-decoration:underline;text-decoration-color:var(--accent)}
+#nsa .replay{margin-left:auto;font:inherit;font-size:11.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:4px;padding:2px 8px;cursor:pointer}
+#nsa .replay:hover{color:var(--text);border-color:var(--accent)}
+#nsa .term .tb{align-items:center}
+@media(max-width:960px){#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .alinks,#nsa .kpis{grid-template-columns:1fr}#nsa .apd{padding:20px}}
+/* reveal */
+#nsa.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+#nsa.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){#nsa *{animation:none!important;transition:none!important}#nsa.js .rv{opacity:1;transform:none}#nsa .track{flex-wrap:wrap;width:auto}}
+@media(prefers-reduced-motion:no-preference){#nsa{scroll-behavior:smooth}}
+@media(max-width:960px){
+ #nsa .links{display:none}
+ #nsa .mtog{display:inline-flex}
+ #nsa .links.open{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;padding:10px 20px 18px;background:rgba(11,16,23,.98);border-bottom:1px solid var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.5);max-height:calc(100vh - 70px);overflow:auto;z-index:60}
+ #nsa .links.open>a,#nsa .links.open .ddt{display:block;padding:13px 4px;font-size:16px;border-bottom:1px solid var(--line)}
+ #nsa .links.open a:after{display:none}
+ #nsa .links.open .dd{display:block}
+ #nsa .links.open .ddm{position:static;opacity:1;visibility:visible;transform:none;margin:0;padding:0 0 0 12px;background:transparent;border:0;box-shadow:none;min-width:0}
+ #nsa .links.open .ddm a{padding:11px 4px;font-size:15px}
+ #nsa .about,#nsa .ins{grid-template-columns:1fr;gap:28px}
+ #nsa .stats .wrap{grid-template-columns:repeat(2,1fr)}
+ #nsa .stat:nth-child(2){border-right:0}
+ #nsa .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ #nsa .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ #nsa .hero{padding:80px 0 90px}#nsa section.s{padding:64px 0}#nsa .cta{padding:72px 0}
+ #nsa .ctas .btn{width:100%}
+ #nsa .navr .ico{display:none}
+ #nsa .stat{padding:18px 16px}#nsa .stat b{font-size:30px}
+ #nsa .fgrid{grid-template-columns:1fr}
+ #nsa .arts li{flex-direction:column;gap:2px}
+ #nsa .hero:after{background:linear-gradient(180deg,rgba(14,19,26,.55),rgba(14,19,26,.85))}
+}
+
+#nsa .il-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+#nsa .il-card{padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--glass)}
+#nsa .il-card .il-h{margin:0 0 8px;font-size:19px}#nsa .il-card p{margin:0;font-size:14.5px}
+#nsa .il-k{display:inline-block;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+#nsa .il-sec{padding:70px 0 10px}
+#nsa .il-sec .il-sub{margin-top:6px;font-size:clamp(22px,2.4vw,30px);font-weight:400;font-family:var(--head)}
+#nsa .il-h{font-family:var(--head);font-weight:400;color:var(--text)}
+#nsa .il-map{margin-top:28px;border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+#nsa .il-map>div{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;border-bottom:1px solid var(--line)}
+#nsa .il-map>div:last-child{border-bottom:0}
+#nsa .il-map>div>*{padding:14px 18px;font-size:14px}
+#nsa .il-map .hd{background:rgba(26,111,209,.16)}#nsa .il-map .hd>*{font-weight:700;color:var(--text);font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase}
+#nsa .il-map b{color:var(--text)}
+#nsa .il-plan{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;counter-reset:ip}
+#nsa .il-plan>div{padding:22px;border:1px solid var(--line);border-radius:14px;background:rgba(14,19,26,.6)}
+#nsa .il-plan b{display:block;color:var(--text);font-size:16px;margin-bottom:8px}
+#nsa .il-plan ul{margin:0;padding-left:18px;font-size:14px}#nsa .il-plan li{margin-bottom:6px}
+#nsa .il-band{display:flex;gap:24px;align-items:center;justify-content:space-between;margin-top:40px;padding:26px 28px;border:1px solid var(--line2);border-radius:16px;background:linear-gradient(135deg,rgba(26,111,209,.22),rgba(14,19,26,.5))}
+#nsa .il-band p{margin:0;max-width:720px}
+#nsa .il-res{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+#nsa .il-res a{display:block;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--glass);transition:border-color .2s}
+#nsa .il-res a:hover{border-color:var(--accent)}#nsa .il-res b{display:block;color:var(--text);margin-bottom:4px}#nsa .il-res span{font-size:13.5px;color:var(--muted)}
+#nsa .il-note{font-size:12.5px;color:var(--muted);margin-top:14px}
+@media(max-width:960px){#nsa .il-grid,#nsa .il-res{grid-template-columns:1fr 1fr}#nsa .il-plan{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){#nsa .il-grid,#nsa .il-res,#nsa .il-plan{grid-template-columns:1fr}#nsa .il-map>div{grid-template-columns:1fr}#nsa .il-map .hd{display:none}#nsa .il-map>div>*:first-child{padding-bottom:0}#nsa .il-band{flex-direction:column;align-items:flex-start}}
+</style>
+
+<div id="nsa">
+<a class="skip" href="#services">Skip to content</a>
+<div class="prog" aria-hidden="true"></div>
+<a class="totop" href="#top" aria-label="Back to top">&uarr;</a>
+
+<div class="bar"><div class="nav">
+  <a class="logo" href="#top" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="#services">Services</a><a href="#who">Who We Serve</a><a href="#vciso">Why a vCISO</a><a href="#regs">Regulatory Watch</a><a href="#lab">Risk Lab</a><a href="#founder">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/get-started">Get Started: Client Intake</a><a href="/checklists">Readiness Checklists</a><a href="/resources">Resource Library</a><a href="/#israeli-startups">Israeli Startups: U.S. Market Entry</a></div></div></nav>
+  <div class="navr">
+    <a class="ico" href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a><a class="ico" href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63a20.9 20.9 0 0 0-2.27-.12c-2.25 0-3.79 1.37-3.79 3.89v2.17H7.92v2.94h2.54V21h3.04z"/></svg></a><a class="ico" href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.6.69.49A10.1 10.1 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
+    <a class="btn sm" href="/get-started">Request a Consultation</a>
+    <button type="button" class="mtog" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+<script>(function(){var b=document.querySelector('#nsa .mtog'),n=document.getElementById('mainnav');if(!b||!n)return;function set(o){b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');n.classList.toggle('open',o);}b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});n.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){set(false);b.focus();}});window.addEventListener('resize',function(){if(window.innerWidth>960)set(false)});})();</script>
+</div></div>
+
+<header class="hero" id="top">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span>Fractional CISO &amp; Cybersecurity Leadership</span>
+    <h1><span class="grad">Executive cyber leadership</span> that aligns security, compliance, and AI to business outcomes.</h1>
+    <p class="lead">Nexus Security Advisors is a cybersecurity leadership firm. We provide fractional and virtual CISO (vCISO) services, compliance readiness, and AI governance for small and mid-sized businesses in every industry, including financial services, healthcare, manufacturing, defense suppliers, technology, and professional services. Get senior security leadership without the cost of a full-time CISO, and a plan your board can follow.</p>
+    <div class="ctas">
+      <a class="btn" href="/get-started">Request a Free 30-Minute Consultation</a>
+      <a class="btn ghost" href="#services">Explore Services</a>
+    </div>
+    <ul class="trust" aria-label="What we deliver">
+      <li>Fractional &amp; virtual CISO</li>
+      <li>CMMC, HIPAA, SOC 2 &amp; EU CRA readiness</li>
+      <li>AI governance &amp; security</li>
+      <li>Board-ready risk reporting</li>
+      <li>SBA-certified Service-Disabled Veteran-Owned Small Business (SDVOSB)</li>
+    </ul>
+  </div>
+</header>
+
+<div class="stats" aria-label="Nexus at a glance"><div class="wrap">
+  <div class="stat"><b data-c="30">30 min</b><span>Free discovery call to scope your needs</span></div>
+  <div class="stat"><b data-c="4">4</b><span>Core services: vCISO, compliance, AI governance, assessments</span></div>
+  <div class="stat"><b data-c="6">6</b><span>Free interactive readiness checklists</span></div>
+  <div class="stat"><b data-c="135">135+</b><span>Curated free security resources</span></div>
+</div></div>
+
+<main>
+<section class="s" id="services" aria-labelledby="svc-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Services</div>
+  <h2 id="svc-h">Security leadership, built for your size and your regulators.</h2></div>
+  <div class="grid">
+    <article class="card spot rv"><div class="n">01</div><h3>Fractional vCISO</h3><p>Ongoing executive security leadership: program strategy, risk register, board and audit-committee reporting, budget planning, and incident readiness.</p><div class="out"><b>You get:</b> a named security leader and a board-ready roadmap.</div></article>
+    <article class="card spot rv"><div class="n">02</div><h3>AI Governance &amp; Security</h3><p>Shadow AI discovery, AI risk built into each initiative's business case, agent identity and least privilege, and AI red-team findings mapped to the OWASP Top 10 for LLM Apps, OWASP AI Exchange, and MITRE ATLAS.</p><div class="out"><b>You get:</b> visibility and controls where AI actually runs.</div></article>
+    <article class="card spot rv"><div class="n">03</div><h3>Compliance Readiness</h3><p>Plain-English readiness for CMMC / NIST SP 800-171, HIPAA 405(d), SOC 2, and cyber-insurance requirements, with a prioritized, owner-assigned remediation plan.</p><div class="out"><b>You get:</b> a gap list with owners and due dates.</div></article>
+    <article class="card spot rv"><div class="n">04</div><h3>Security Posture Assessment</h3><p>A NIST CSF 2.0 based review, with risks prioritized on our 5&times;5 likelihood-by-impact scale, delivered as an executive report and a 30/60/90-day roadmap.</p><div class="out"><b>You get:</b> a clear baseline and what to fix first.</div></article>
+  </div>
+  <div class="ticker" aria-label="Frameworks we work with"><div class="track">
+    <span class="chip">NIST CSF 2.0</span><span class="chip">NIST RMF</span><span class="chip">NIST AI RMF</span><span class="chip">ISO 27001</span><span class="chip">ISO/IEC 42001</span><span class="chip">CMMC</span><span class="chip">NIST SP 800-171</span><span class="chip">HIPAA</span><span class="chip">SOC 2</span><span class="chip">EU AI Act</span><span class="chip">GDPR</span><span class="chip">CCPA</span><span class="chip">MITRE ATT&amp;CK</span><span class="chip">MITRE ATLAS</span><span class="chip">OWASP AI Exchange</span>
+    <span class="chip" aria-hidden="true">NIST CSF 2.0</span><span class="chip" aria-hidden="true">NIST RMF</span><span class="chip" aria-hidden="true">NIST AI RMF</span><span class="chip" aria-hidden="true">ISO 27001</span><span class="chip" aria-hidden="true">ISO/IEC 42001</span><span class="chip" aria-hidden="true">CMMC</span><span class="chip" aria-hidden="true">NIST SP 800-171</span><span class="chip" aria-hidden="true">HIPAA</span><span class="chip" aria-hidden="true">SOC 2</span><span class="chip" aria-hidden="true">EU AI Act</span><span class="chip" aria-hidden="true">GDPR</span><span class="chip" aria-hidden="true">CCPA</span><span class="chip" aria-hidden="true">MITRE ATT&amp;CK</span><span class="chip" aria-hidden="true">MITRE ATLAS</span><span class="chip" aria-hidden="true">OWASP AI Exchange</span>
+  </div></div>
+</div></section>
+
+<style>
+#nsa .aip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:28px}
+#nsa .aip-price{margin:14px 0 4px;font-family:var(--head);font-size:15px;color:var(--muted)}
+#nsa .aip-price b{font-size:28px;color:var(--text);font-weight:600;margin-left:4px}
+#nsa .aip-price small{font-size:14px;color:var(--muted)}
+#nsa .aip-note{margin-top:18px;font-size:14px;color:var(--muted)}
+#nsa .aip-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+#nsa .aip .crow{grid-template-columns:1.2fr 1fr .8fr}
+#nsa .aip .refs{margin-top:22px}
+@media(max-width:600px){#nsa .aip .crow{grid-template-columns:1fr}#nsa .aip .crow span{padding:8px 14px}#nsa .aip .crow.ch{display:none}}
+</style>
+<section class="s aip" id="ai-consulting" aria-labelledby="aic-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">AI Consulting for SMBs</div>
+  <h2 id="aic-h">Put AI to work safely, at a small-business price.</h2>
+  <p class="lead">Nexus Security Advisors helps small and mid-sized businesses choose the right AI use cases, roll out tools like Microsoft Copilot, ChatGPT, and AI agents with guardrails, and meet NIST AI RMF, ISO/IEC 42001, and EU AI Act expectations, without a Big Four budget. Every engagement pairs AI adoption with security and governance, so productivity gains do not create new data-leak or compliance risk.</p></div>
+  <div class="aip-grid">
+    <article class="card spot rv"><div class="n">A1</div><h3>AI Readiness &amp; Use-Case Sprint</h3><p>Inventory the AI already in use, score your top use cases for value and risk, and leave with a prioritized 90-day AI roadmap.</p><div class="aip-price">from<b>$2,500</b></div><div class="out"><b>You get:</b> a ranked use-case list and a 90-day plan in 2 to 3 weeks.</div></article>
+    <article class="card spot rv"><div class="n">A2</div><h3>AI Governance Program</h3><p>AI acceptable-use policy, AI inventory and risk register, vendor and data-handling rules, and controls mapped to NIST AI RMF and ISO/IEC 42001.</p><div class="aip-price">from<b>$5,000</b></div><div class="out"><b>You get:</b> board-ready AI governance your customers and insurers can review.</div></article>
+    <article class="card spot rv"><div class="n">A3</div><h3>Fractional AI Advisor</h3><p>Ongoing monthly guidance on AI tools, vendors, agent permissions, and new regulations, plus a named advisor for leadership questions.</p><div class="aip-price">from<b>$1,500</b><small>/month</small></div><div class="out"><b>You get:</b> a trusted AI and security advisor on call.</div></article>
+    <article class="card spot rv"><div class="n">A4</div><h3>Leadership AI Workshop</h3><p>A half-day session for owners and leadership teams: practical AI wins, shadow-AI risks, and how to set the rules before something leaks.</p><div class="aip-price">from<b>$995</b></div><div class="out"><b>You get:</b> an aligned leadership team and a draft AI policy outline.</div></article>
+  </div>
+  <p class="aip-note rv">Starting prices for a typical small business. Your final fixed quote follows a free 30-minute discovery call. AI consulting can be combined with fractional vCISO or compliance work.</p>
+
+  <div class="compare rv" role="table" aria-label="2026 AI consulting price benchmarks compared with Nexus starting prices">
+    <div class="crow ch" role="row"><span role="columnheader">Engagement</span><span role="columnheader">2026 U.S. market range</span><span role="columnheader">Nexus starting price</span></div>
+    <div class="crow" role="row"><span role="rowheader">AI readiness / strategy assessment (SMB, fixed fee)</span><span role="cell">$2,000 to $25,000 <sup>[1]</sup><sup>[2]</sup></span><span role="cell">from $2,500</span></div>
+    <div class="crow" role="row"><span role="rowheader">AI governance readiness assessment</span><span role="cell">$8,000 to $12,000 <sup>[3]</sup></span><span role="cell">from $5,000</span></div>
+    <div class="crow" role="row"><span role="rowheader">Monthly AI advisory retainer</span><span role="cell">$1,500 to $8,000 per month <sup>[2]</sup><sup>[4]</sup></span><span role="cell">from $1,500/month</span></div>
+    <div class="crow" role="row"><span role="rowheader">Independent AI consultant, hourly</span><span role="cell">$150 to $350 per hour <sup>[4]</sup></span><span role="cell">Fixed-fee packages</span></div>
+  </div>
+
+  <details class="refs rv"><summary>Pricing sources &amp; methodology (last reviewed October 29, 2026)</summary>
+    <p>Market ranges are published 2026 figures for U.S. AI consulting. Most sources are consulting firms that publish their own observed rates, so treat them as directional, not as a price list.</p>
+    <ol>
+      <li>Cabin, <em>AI Readiness Assessment Cost: Real 2026 Price Ranges</em>, updated October 22, 2026 (SMB fixed-fee tier). <a href="https://cabinco.com/ai-readiness-assessment-cost/" target="_blank" rel="noopener noreferrer">cabinco.com</a></li>
+      <li>Pareto Talent, <em>AI Consultant for Small Business: Costs &amp; Options (2026)</em>, October 2026. <a href="https://paretotalent.com/guides/ai-consultant-for-small-business/" target="_blank" rel="noopener noreferrer">paretotalent.com</a></li>
+      <li>Ethical Veracity, <em>What an AI governance assessment costs, and what you get</em>, June 21, 2026. <a href="https://ethicalveracity.ai/blog/ai-governance-assessment-cost" target="_blank" rel="noopener noreferrer">ethicalveracity.ai</a></li>
+      <li>Leanware, <em>How Much Does an AI Consultant Cost in 2026?</em>, updated October 6, 2026 (independent experts; 5 to 10 hour retainers at $2,000 to $5,000 per month). <a href="https://leanware.co/insights/how-much-does-an-ai-consultant-cost" target="_blank" rel="noopener noreferrer">leanware.co</a></li>
+    </ol>
+  </details>
+  <div class="aip-ctas rv"><a class="btn" href="/get-started">Request a free AI consultation</a><a class="btn ghost" href="/checklists#aigov">Try the AI governance checklist</a></div>
+</div></section>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"OfferCatalog","name":"AI Consulting for Small and Mid-Sized Businesses","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"itemListElement":[
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Readiness & Use-Case Sprint"},"priceSpecification":{"@type":"PriceSpecification","minPrice":2500,"priceCurrency":"USD"}},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Governance Program"},"priceSpecification":{"@type":"PriceSpecification","minPrice":5000,"priceCurrency":"USD"}},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"Fractional AI Advisor"},"priceSpecification":{"@type":"UnitPriceSpecification","minPrice":1500,"priceCurrency":"USD","unitText":"MONTH"}},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"Leadership AI Workshop"},"priceSpecification":{"@type":"PriceSpecification","minPrice":995,"priceCurrency":"USD"}}]}</script>
+
+<section class="s alt gridbg" id="who" aria-labelledby="who-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Who We Serve</div>
+  <h2 id="who-h">Small and mid-sized businesses <span class="grad">in every industry.</span></h2>
+  <p class="lead">If a breach, ransomware attack, or failed audit would be a business event for you, we can help. Pick the industry closest to yours to see the requirements you're likely facing and free resources to start with.</p></div>
+  <div class="aud">
+    <article class="acard spot rv">
+      <h3>Financial Services</h3>
+      <p>Banks, credit unions, wealth managers, insurance agencies, lenders, tax preparers, and fintechs protecting customer financial data.</p>
+      <div class="chips2"><span>FTC Safeguards Rule</span><span>GLBA</span><span>NYDFS Part 500</span><span>PCI DSS</span><span>SEC cyber rules</span></div>
+      <div class="alinks"><a href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener noreferrer">FTC Safeguards Rule guide &#8599;</a><a href="#regs" data-tab="t-pci">PCI DSS status</a><a href="/checklists#insurance">Cyber insurance checklist</a><a href="/resources#red">Pentest requirements</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Healthcare</h3>
+      <p>Medical and dental practices, clinics, behavioral health, labs, and health tech vendors handling protected health information.</p>
+      <div class="chips2"><span>HIPAA Security Rule</span><span>HITECH</span><span>Business associates</span><span>Ransomware readiness</span></div>
+      <div class="alinks"><a href="/checklists#hipaa">HIPAA checklist</a><a href="#regs" data-tab="t-hipaa">HIPAA rule update</a><a href="https://405d.hhs.gov/" target="_blank" rel="noopener noreferrer">HHS 405(d) resources &#8599;</a><a href="#lab" data-scn="ransom">Simulate ransomware</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Defense &amp; Aerospace Suppliers</h3>
+      <p>Contractors and subcontractors protecting Controlled Unclassified Information (CUI) and preparing for CMMC.</p>
+      <div class="chips2"><span>CMMC 2.0</span><span>NIST SP 800-171</span><span>DFARS 7012</span><span>SPRS</span></div>
+      <div class="alinks"><a href="/checklists#cmmc">CMMC / 800-171 checklist</a><a href="#regs" data-tab="t-cmmc">CMMC status today</a><a href="https://dodcio.defense.gov/CMMC/" target="_blank" rel="noopener noreferrer">DoD CIO CMMC &#8599;</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Manufacturing, Energy &amp; Critical Infrastructure</h3>
+      <p>Manufacturers, utilities, water, logistics, and transportation operators balancing IT, OT, and safety with lean teams.</p>
+      <div class="chips2"><span>CISA CPGs</span><span>NIST CSF 2.0</span><span>IEC 62443</span><span>Incident readiness</span></div>
+      <div class="alinks"><a href="https://www.cisa.gov/cross-sector-cybersecurity-performance-goals" target="_blank" rel="noopener noreferrer">CISA Performance Goals &#8599;</a><a href="/resources#intel">Threat intelligence</a><a href="/resources#sim">Tabletop exercises</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Technology, SaaS &amp; Startups</h3>
+      <p>Growing companies facing enterprise security reviews, SOC 2 requests, and EU market requirements.</p>
+      <div class="chips2"><span>SOC 2</span><span>ISO/IEC 27001</span><span>EU CRA</span><span>GDPR</span><span>DevSecOps</span></div>
+      <div class="alinks"><a href="/checklists#soc2">SOC 2 roadmap</a><a href="/checklists#cra">EU CRA checklist</a><a href="/resources#devsecops">DevSecOps library</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Professional Services, Retail &amp; Nonprofits</h3>
+      <p>Law, accounting, and consulting firms, retailers, e-commerce, and nonprofits trusted with client, donor, and payment data.</p>
+      <div class="chips2"><span>Client confidentiality</span><span>PCI DSS</span><span>State privacy laws</span><span>Email fraud (BEC)</span></div>
+      <div class="alinks"><a href="/resources#phish">Phishing &amp; BEC defense</a><a href="/resources#privacy">Privacy laws</a><a href="/resources#passwords">Password &amp; MFA tools</a><a href="#lab" data-scn="bec">Simulate wire fraud</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Any Business Adopting AI</h3>
+      <p>Teams rolling out generative AI, copilots, or AI agents that need guardrails before data or decisions go wrong.</p>
+      <div class="chips2"><span>NIST AI RMF</span><span>ISO/IEC 42001</span><span>EU AI Act</span><span>OWASP LLM Top 10</span></div>
+      <div class="alinks"><a href="/checklists#aigov">AI governance checklist</a><a href="/resources#ai">AI security library</a><a href="#lab" data-scn="ai">Simulate a shadow AI leak</a></div>
+    </article>
+    <article class="acard spot rv">
+      <h3>Israeli &amp; International Startups</h3>
+      <p>Companies expanding into the U.S. that need SOC 2, fast security-questionnaire answers, and a named U.S.-based CISO for customers and investors.</p>
+      <div class="chips2"><span>SOC 2</span><span>U.S. state privacy</span><span>Security reviews</span><span>Investor due diligence</span></div>
+      <div class="alinks"><a href="#israeli-startups">U.S. market entry for Israeli startups</a><a href="/checklists#soc2">SOC 2 roadmap</a></div>
+    </article>
+    <article class="acard spot rv acta">
+      <h3>Not sure where you fit?</h3>
+      <p>Tell us a little about your business and we'll point you to the right starting point, or tell you plainly if you don't need us yet.</p>
+      <div class="ctas" style="margin-top:14px"><a class="btn" href="/get-started">Request a consultation</a></div>
+    </article>
+  </div>
+  <a class="ilband rv" href="#israeli-startups"><span class="ilk">Israeli startups</span><b>Expanding into the U.S.? Pass U.S. security reviews and earn SOC 2 with a U.S.-based fractional CISO.</b><em>See how we help &rarr;</em></a>
+</div></section>
+
+<section class="s alt" id="israeli-startups" aria-labelledby="il-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Israeli Startups &middot; U.S. Market Entry</div>
+  <h2 id="il-h"><span class="grad">Win U.S. enterprise buyers</span> with a U.S.-based security leader.</h2>
+  <p class="lead">Nexus Security Advisors helps Israeli startups and scale-ups pass U.S. security reviews, earn SOC 2, align with U.S. privacy laws, and put a named, U.S.-based fractional CISO in front of customers, investors, and boards.</p></div>
+
+ <section class="il-sec" style="padding-top:20px" aria-labelledby="il1">
+  <div class="eyebrow">The US security gauntlet</div>
+  <h3 class="il-sub" id="il1">Great product. Then the security review starts.</h3>
+  <p class="lead">Israeli startups build world-class technology, but U.S. enterprise deals often stall on security and compliance, not features. These are the questions your U.S. buyers, partners, and investors will ask.</p>
+  <div class="il-grid">
+   <div class="il-card"><span class="il-k">Proof</span><h4 class="il-h">"Send us your SOC 2 report"</h4><p>Many U.S. enterprises won't sign without a SOC 2 Type II report, a recent penetration test letter, and current security policies.</p></div>
+   <div class="il-card"><span class="il-k">Questionnaires</span><h4 class="il-h">200-question security reviews</h4><p>SIG, CAIQ, and custom vendor questionnaires arrive with every deal. Slow or inconsistent answers cost weeks.</p></div>
+   <div class="il-card"><span class="il-k">Privacy</span><h4 class="il-h">U.S. state privacy laws</h4><p>California's CCPA/CPRA and a growing list of state laws, plus sector rules such as HIPAA for health data and the FTC Safeguards Rule for financial data.</p></div>
+   <div class="il-card"><span class="il-k">Accountability</span><h4 class="il-h">"Who is your CISO?"</h4><p>Buyers want a named, accountable security leader they can talk to in their time zone, not a contact eight time zones away.</p></div>
+   <div class="il-card"><span class="il-k">AI</span><h4 class="il-h">AI governance questions</h4><p>AI products now face questions on model risk, data use, and the NIST AI RMF, ISO/IEC 42001, and the EU AI Act.</p></div>
+   <div class="il-card"><span class="il-k">Government</span><h4 class="il-h">Public sector and defense</h4><p>Selling to U.S. government or defense primes brings FedRAMP, CMMC, and NIST SP 800-171 requirements.</p></div>
+  </div>
+ </section>
+
+ <section class="il-sec" aria-labelledby="il2">
+  <div class="eyebrow">How Nexus helps</div>
+  <h3 class="il-sub" id="il2">Your <span class="grad">U.S.-based security leadership</span>, on a startup budget.</h3>
+  <div class="il-grid">
+   <div class="il-card"><span class="il-k">Representation</span><h4 class="il-h">A named U.S. fractional CISO</h4><p>We serve as your security leader for U.S. customers: joining security review calls, owning questionnaire responses, and speaking to your program with credibility.</p></div>
+   <div class="il-card"><span class="il-k">Trust</span><h4 class="il-h">Questionnaires and trust center</h4><p>We build a reusable answer library, security overview, and trust page so sales can respond in days, not weeks.</p></div>
+   <div class="il-card"><span class="il-k">Compliance</span><h4 class="il-h">SOC 2 readiness, start to report</h4><p>Scoping, policies, control implementation with your team, evidence, and help selecting a U.S. CPA firm and penetration tester.</p></div>
+   <div class="il-card"><span class="il-k">Privacy</span><h4 class="il-h">Bridge Israeli, EU, and U.S. privacy</h4><p>We map your program under Israel's Privacy Protection Law and GDPR to U.S. state privacy and sector requirements, working alongside your counsel.</p></div>
+   <div class="il-card"><span class="il-k">Board</span><h4 class="il-h">Investor and board reporting</h4><p>Clear cyber risk metrics for U.S. investors and boards, and due-diligence support for funding rounds and acquisitions.</p></div>
+   <div class="il-card"><span class="il-k">Resilience</span><h4 class="il-h">U.S.-ready incident response</h4><p>An incident response plan that covers U.S. breach-notification and customer-contract obligations, tested with an executive tabletop exercise.</p></div>
+  </div>
+ </section>
+
+ <section class="il-sec" aria-labelledby="il3">
+  <div class="eyebrow">Israel to U.S. compliance map</div>
+  <h3 class="il-sub" id="il3">What you have, and what U.S. buyers will ask for.</h3>
+  <div class="il-map" role="table" aria-label="Israel to U.S. compliance map">
+   <div class="hd" role="row"><span role="columnheader">Area</span><span role="columnheader">Common in Israel</span><span role="columnheader">Expected in the U.S.</span></div>
+   <div role="row"><b role="cell">Security assurance</b><span role="cell">ISO/IEC 27001 certification</span><span role="cell">SOC 2 Type II report, often alongside ISO 27001</span></div>
+   <div role="row"><b role="cell">Privacy law</b><span role="cell">Privacy Protection Law, including Amendment 13 (in effect since August 14, 2025), and the Data Security Regulations</span><span role="cell">CCPA/CPRA and other state privacy laws, plus HIPAA, GLBA, or COPPA where they apply</span></div>
+   <div role="row"><b role="cell">EU customers</b><span role="cell">EU adequacy status for Israel, renewed in January 2024</span><span role="cell">U.S. buyers with EU operations may still ask about GDPR alignment and data flows</span></div>
+   <div role="row"><b role="cell">Leadership</b><span role="cell">Founder or CTO owns security; Data Protection Officer where required</span><span role="cell">A named CISO or vCISO accountable to customers and the board</span></div>
+   <div role="row"><b role="cell">Testing</b><span role="cell">Internal or ad hoc testing</span><span role="cell">Annual third-party penetration test with a summary letter for customers</span></div>
+   <div role="row"><b role="cell">Government</b><span role="cell">Israel National Cyber Directorate guidance</span><span role="cell">FedRAMP, CMMC, and NIST SP 800-171 for federal and defense work</span></div>
+  </div>
+  <p class="il-note">General information for planning, not legal advice. Confirm obligations with your legal counsel and the official sources below.</p>
+ </section>
+
+ <section class="il-sec" aria-labelledby="il4">
+  <div class="eyebrow">90-day U.S. market readiness</div>
+  <h3 class="il-sub" id="il4">From first U.S. deal to audit-ready.</h3>
+  <div class="il-plan">
+   <div><b>Days 1&ndash;30: Baseline</b><ul><li>Security and privacy gap assessment</li><li>Answer library for your top questionnaires</li><li>Security overview for sales</li></ul></div>
+   <div><b>Days 31&ndash;60: Build</b><ul><li>SOC 2 scope and policies</li><li>Access, logging, and vendor controls</li><li>Penetration test scoped and scheduled</li></ul></div>
+   <div><b>Days 61&ndash;90: Prove</b><ul><li>U.S. privacy notices and data map</li><li>Incident response plan and tabletop</li><li>Auditor selected, observation window started</li></ul></div>
+   <div><b>Ongoing: Lead</b><ul><li>Named vCISO for U.S. customers</li><li>Board and investor reporting</li><li>Audit support and continuous improvement</li></ul></div>
+  </div>
+  <div class="il-band"><p><b>Expanding into the U.S. this year?</b> Tell us about your product, customers, and timeline, and we'll reply within one business day with a practical starting point.</p><a class="btn" href="/get-started">Request a consultation</a></div>
+ </section>
+
+ <section class="il-sec" aria-labelledby="il5">
+  <div class="eyebrow">Official resources</div>
+  <h3 class="il-sub" id="il5">Helpful links for Israeli companies entering the U.S.</h3>
+  <div class="il-res">
+   <a href="https://www.aicpa-cima.com/category/resources/audit-assurance/audit-and-assurance-greater-than-soc-2" target="_blank" rel="noopener noreferrer"><b>AICPA: SOC 2</b><span>The official SOC 2 Trust Services Criteria source.</span></a>
+   <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener noreferrer"><b>California CCPA</b><span>California Attorney General guidance on consumer privacy rights.</span></a>
+   <a href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener noreferrer"><b>FTC Safeguards Rule</b><span>Security requirements for many U.S. financial-sector businesses.</span></a>
+   <a href="https://www.gov.il/en/departments/the_privacy_protection_authority/govil-landing-page" target="_blank" rel="noopener noreferrer"><b>Israel Privacy Protection Authority</b><span>Israel's privacy regulator and Amendment 13 guidance.</span></a>
+   <a href="https://www.gov.il/en/departments/israel_national_cyber_directorate/govil-landing-page" target="_blank" rel="noopener noreferrer"><b>Israel National Cyber Directorate</b><span>National cyber guidance and alerts.</span></a>
+   <a href="https://www.birdf.com/" target="_blank" rel="noopener noreferrer"><b>BIRD Foundation</b><span>Israel-U.S. binational funding for joint R&amp;D with U.S. partners.</span></a>
+   <a href="https://www.trade.gov/selectusa" target="_blank" rel="noopener noreferrer"><b>SelectUSA</b><span>U.S. Department of Commerce program for companies investing in the U.S.</span></a>
+   <a href="https://innovationisrael.org.il/en/" target="_blank" rel="noopener noreferrer"><b>Israel Innovation Authority</b><span>Programs supporting Israeli innovation and global expansion.</span></a>
+   <a href="/checklists#soc2"><b>Free SOC 2 readiness checklist</b><span>Interactive, with Word, Excel, and JSON downloads.</span></a>
+  </div>
+ </section>
+
+ <section class="il-sec" aria-labelledby="il6" style="padding-bottom:60px">
+  <div class="eyebrow">Questions</div>
+  <h3 class="il-sub" id="il6">Frequently asked questions</h3>
+  <div class="faq" style="margin-top:24px"><details><summary>Can Nexus act as our CISO with US customers?</summary><p>Yes. As your fractional CISO, we can be the named security leader on security reviews, questionnaires, and customer calls, and we report to your founders and board. We are a U.S.-based firm working in U.S. business hours.</p></details><details><summary>We already have ISO/IEC 27001. Do US buyers still want SOC 2?</summary><p>Often, yes. Many U.S. enterprise buyers ask for a SOC 2 Type II report specifically. The controls overlap heavily, so an existing ISO 27001 program shortens the path; we map what you have and close the gaps.</p></details><details><summary>How long does SOC 2 take?</summary><p>A SOC 2 Type I report reflects a single point in time and can follow a few months of readiness work. A Type II report covers an observation period, commonly three to twelve months, so it pays to start early. We help you sequence both against your sales pipeline.</p></details><details><summary>Do we need a US legal entity?</summary><p>That is a legal and tax decision for your attorneys and accountants. We coordinate with them so your security program, SOC 2 scope, and contracts cover the right entities, which is a common source of delays in U.S. deals.</p></details><details><summary>How do you handle the time difference?</summary><p>Israel is usually seven hours ahead of U.S. Eastern Time. We schedule working sessions in the U.S. morning, which is the Israeli afternoon, and keep asynchronous updates moving across the Sunday-to-Thursday Israeli work week.</p></details><details><summary>Is this legal advice?</summary><p>No. We provide security and compliance leadership. For questions about law, contracts, or corporate structure, we work alongside your legal counsel.</p></details></div>
+ </section>
+
+</div></section>
+
+<section class="s" id="vciso" aria-labelledby="vc-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Fractional &amp; Virtual CISO</div>
+  <h2 id="vc-h">Is a fractional CISO <span class="grad">right for you?</span></h2>
+  <p class="lead">Most small and mid-sized businesses need CISO-level judgment long before they can justify a full-time, six-figure security executive. A fractional or virtual CISO gives you that leadership on a schedule and budget that fits.</p></div>
+  <div class="vgrid">
+    <div class="panel spot rv"><h3>Signs it's time</h3>
+      <ul class="todo">
+        <li>A customer, prime contractor, or insurer sent a security questionnaire you can't confidently answer</li>
+        <li>An audit or assessment is coming: CMMC, HIPAA, SOC 2, PCI DSS, or the EU CRA</li>
+        <li>Your board or investors are asking who owns cyber risk</li>
+        <li>Your IT team or MSP is stretched thin and security has no single owner</li>
+        <li>Employees are already using AI tools and no one has set the rules</li>
+        <li>You've had an incident, a near miss, or a failed phishing test</li>
+      </ul></div>
+    <div class="panel spot rv"><h3>Ways to work with us</h3>
+      <div class="eng"><b>Fractional vCISO</b><span>Ongoing monthly leadership: strategy, policies, risk register, vendor and MSP oversight, and board reporting.</span></div>
+      <div class="eng"><b>Assessment &amp; Roadmap</b><span>A fixed-scope NIST CSF 2.0 review with an executive report and a prioritized 30/60/90-day plan.</span></div>
+      <div class="eng"><b>Compliance Readiness Sprint</b><span>Focused gap closure for a specific framework, deadline, or customer requirement.</span></div>
+      <div class="eng"><b>AI Governance Program</b><span>AI inventory, acceptable-use policy, risk assessments, and controls for AI agents.</span></div>
+      <div class="eng"><b>Incident Readiness</b><span>Incident response plans and executive tabletop exercises your leadership team can rehearse.</span></div>
+    </div>
+  </div>
+  <div class="compare rv" role="table" aria-label="Full-time CISO versus fractional vCISO">
+    <div class="crow ch" role="row"><span role="columnheader"></span><span role="columnheader">Full-time CISO</span><span role="columnheader">Fractional vCISO</span></div>
+    <div class="crow" role="row"><span role="rowheader">Cost</span><span role="cell">Full executive salary, benefits, and recruiting</span><span role="cell">A fraction of the cost, scaled to your needs</span></div>
+    <div class="crow" role="row"><span role="rowheader">Time to start</span><span role="cell">Months to recruit and onboard</span><span role="cell">Typically weeks</span></div>
+    <div class="crow" role="row"><span role="rowheader">Breadth</span><span role="cell">One person's background</span><span role="cell">Cross-industry experience across many frameworks</span></div>
+    <div class="crow" role="row"><span role="rowheader">Flexibility</span><span role="cell">Fixed headcount</span><span role="cell">Scale up for audits or incidents, scale down after</span></div>
+  </div>
+  <div class="ctas rv"><a class="btn" href="/get-started">Start your intake &rarr;</a><a class="btn ghost" href="mailto:info@nexussecurityadvisors.com?subject=Website%20Inquiry">Email us instead</a></div>
+</div></section>
+
+<section class="s alt gridbg" id="regs" aria-labelledby="rg-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Regulatory Watch</div>
+  <h2 id="rg-h">Where the rules stand <span class="grad">right now.</span></h2>
+  <p class="lead">Plain-English status on the regulations our clients ask about most, with key dates, what to do next, and links to the official sources.</p></div>
+  <div class="rtabs rv" role="tablist" aria-label="Regulations">
+    <button class="rtab" role="tab" id="t-cra" aria-controls="p-cra" aria-selected="true">EU Cyber Resilience Act</button>
+    <button class="rtab" role="tab" id="t-cmmc" aria-controls="p-cmmc" aria-selected="false" tabindex="-1">CMMC 2.0</button>
+    <button class="rtab" role="tab" id="t-hipaa" aria-controls="p-hipaa" aria-selected="false" tabindex="-1">HIPAA</button>
+    <button class="rtab" role="tab" id="t-pci" aria-controls="p-pci" aria-selected="false" tabindex="-1">PCI DSS</button>
+    <button class="rtab" role="tab" id="t-rmf" aria-controls="p-rmf" aria-selected="false" tabindex="-1">NIST RMF</button>
+  </div>
+
+  <div class="rpanel" role="tabpanel" id="p-cra" aria-labelledby="t-cra">
+    <div class="panel spot">
+      <span class="status live"><i></i>Reporting obligations live since Sep 11, 2026</span>
+      <h3>EU Cyber Resilience Act &mdash; Regulation (EU) 2024/2847</h3>
+      <p>The CRA sets mandatory cybersecurity requirements for &ldquo;products with digital elements&rdquo; (hardware and software) sold in the EU, across their whole lifecycle. It applies to manufacturers, importers, and distributors, including U.S. companies selling into the EU. Fines reach up to &euro;15 million or 2.5% of worldwide annual turnover.</p>
+      <ul class="tl">
+        <li><b>DEC 10, 2024</b>Entered into force</li>
+        <li><b>JUN 11, 2026</b>Rules for conformity assessment (notified) bodies apply</li>
+        <li class="now"><b>SEP 11, 2026</b>Manufacturers must report actively exploited vulnerabilities and severe incidents: 24-hour early warning, 72-hour notification, then a final report (14 days after a fix for vulnerabilities; one month for incidents) via ENISA's Single Reporting Platform</li>
+        <li><b>DEC 11, 2027</b>Full application: essential requirements, conformity assessment, technical documentation, and CE marking</li>
+      </ul>
+    </div>
+    <div class="panel spot">
+      <h3>What to do now</h3>
+      <ul class="todo">
+        <li>Inventory every product with digital elements you place on the EU market</li>
+        <li>Stand up a 24/72-hour vulnerability and incident reporting runbook</li>
+        <li>Publish a coordinated vulnerability disclosure policy and generate SBOMs</li>
+        <li>Map secure-by-design and update obligations into your product lifecycle</li>
+        <li>Plan conformity assessment and CE marking for the December 2027 deadline</li>
+      </ul>
+      <div class="src"><a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj" target="_blank" rel="noopener noreferrer">Official text (EUR-Lex) &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="rpanel" role="tabpanel" id="p-cmmc" aria-labelledby="t-cmmc" hidden>
+    <div class="panel spot">
+      <span class="status warn"><i></i>Phase 2 suspended &mdash; under review</span>
+      <h3>CMMC 2.0: where things stand</h3>
+      <p>On July 13, 2026, the Department of War paused Phase 2, which would have made third-party (C3PAO) Level 2 certification the default for many contracts starting November 10, 2026. It also launched a 60-day CMMC Reform Task Force and a public request for information. As of late October 2026, no resumption date has been announced. The 32 CFR Part 170 rule itself remains on the books.</p>
+      <ul class="tl">
+        <li><b>DEC 16, 2024</b>CMMC program rule (32 CFR Part 170) takes effect</li>
+        <li><b>NOV 10, 2025</b>Phase 1 begins: Level 1 and Level 2 self-assessments in contracts (DFARS rule)</li>
+        <li><b>JUL 13, 2026</b>Phase 2 (C3PAO by default) suspended; reform task force and RFI launched</li>
+        <li><b>SEP 2026</b>Class deviation tells contracting officers to accept self-assessments and remove third-party assessment requirements at the next modification</li>
+        <li class="now"><b>OCT 2026</b>Task force review closed; final determinations pending</li>
+      </ul>
+    </div>
+    <div class="panel spot">
+      <h3>What still applies today</h3>
+      <ul class="todo">
+        <li>DFARS 252.204-7012 safeguarding and 72-hour incident reporting</li>
+        <li>NIST SP 800-171 Rev. 2 (110 requirements) for systems handling CUI</li>
+        <li>Level 1 / Level 2 self-assessments, SPRS scores, and annual senior-official affirmations</li>
+        <li>Existing C3PAO certifications remain valid for their three-year term</li>
+        <li>False Claims Act exposure for inaccurate affirmations continues</li>
+      </ul>
+      <p class="note">Our view: the pause is a window to get audit-ready, not a reason to stop. Requirements can return quickly.</p>
+      <div class="src"><a href="https://www.war.gov/News/Releases/Release/Article/4542329/forging-the-arsenal-of-freedom-department-of-war-suspends-cmmc-phase-ii-require/" target="_blank" rel="noopener noreferrer">DoW suspension release &#8599;</a><a href="https://dodcio.defense.gov/CMMC/" target="_blank" rel="noopener noreferrer">DoD CIO CMMC &#8599;</a><a href="https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-G/part-170" target="_blank" rel="noopener noreferrer">32 CFR Part 170 &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="rpanel" role="tabpanel" id="p-hipaa" aria-labelledby="t-hipaa" hidden>
+    <div class="panel spot">
+      <span class="status warn"><i></i>Security Rule overhaul proposed &mdash; not final</span>
+      <h3>HIPAA Security Rule</h3>
+      <p>The current HIPAA Security Rule remains in force. HHS proposed the first major update in two decades (published January 6, 2025). The federal regulatory agenda now lists final action no earlier than mid-2027, and agenda dates are not binding.</p>
+      <ul class="tl">
+        <li><b>JAN 6, 2025</b>Proposed rule published in the Federal Register</li>
+        <li><b>MAR 7, 2025</b>Public comment period closed</li>
+        <li class="now"><b>2026</b>Final rule delayed; current rule still enforced by HHS OCR</li>
+      </ul>
+    </div>
+    <div class="panel spot">
+      <h3>What the proposal would require</h3>
+      <ul class="todo">
+        <li>Remove &ldquo;addressable&rdquo; flexibility: MFA, encryption, and segmentation become expected</li>
+        <li>Written asset inventory and network map for systems touching ePHI</li>
+        <li>Risk analysis reviewed at least every 12 months</li>
+        <li>Vulnerability scans every 6 months and penetration tests every 12 months</li>
+        <li>Ability to restore critical systems within 72 hours</li>
+      </ul>
+      <p class="note">Smart move: adopt HHS 405(d) Health Industry Cybersecurity Practices now; they line up with where the rule is heading.</p>
+      <div class="src"><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" target="_blank" rel="noopener noreferrer">HHS Security Rule &#8599;</a><a href="https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information" target="_blank" rel="noopener noreferrer">Proposed rule &#8599;</a><a href="https://hhscyber.hhs.gov/" target="_blank" rel="noopener noreferrer">HHS 405(d) &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="rpanel" role="tabpanel" id="p-pci" aria-labelledby="t-pci" hidden>
+    <div class="panel spot">
+      <span class="status live"><i></i>PCI DSS v4.0.1 fully in effect</span>
+      <h3>PCI DSS v4.0.1</h3>
+      <p>Version 4.0.1 is the active standard for anyone who stores, processes, or transmits cardholder data. The &ldquo;future-dated&rdquo; requirements introduced in v4.0 became mandatory on March 31, 2025, so assessments now test all of them.</p>
+      <ul class="tl">
+        <li><b>MAR 31, 2024</b>PCI DSS v3.2.1 retired</li>
+        <li><b>JUN 2024</b>v4.0.1 published (clarifications, no new requirements)</li>
+        <li class="now"><b>MAR 31, 2025</b>Future-dated requirements became mandatory</li>
+      </ul>
+    </div>
+    <div class="panel spot">
+      <h3>Where teams most often fall short</h3>
+      <ul class="todo">
+        <li>MFA for all access into the cardholder data environment</li>
+        <li>Targeted risk analyses to justify control frequencies</li>
+        <li>Inventory and integrity monitoring of payment-page scripts (e-commerce skimming)</li>
+        <li>Authenticated internal vulnerability scanning</li>
+        <li>Stronger password and service-account management</li>
+      </ul>
+      <div class="src"><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI SSC Document Library &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="rpanel" role="tabpanel" id="p-rmf" aria-labelledby="t-rmf" hidden>
+    <div class="panel spot">
+      <span class="status"><i></i>Foundational federal framework</span>
+      <h3>NIST Risk Management Framework (SP 800-37 Rev. 2)</h3>
+      <p>The RMF is the seven-step process federal agencies and many contractors use to manage security and privacy risk across a system's lifecycle. Click a step:</p>
+      <div class="rmf" id="rmf"><button type="button" data-i="0"><span>0</span>Prepare</button><button type="button" data-i="1"><span>1</span>Categorize</button><button type="button" data-i="2"><span>2</span>Select</button><button type="button" data-i="3"><span>3</span>Implement</button><button type="button" data-i="4"><span>4</span>Assess</button><button type="button" data-i="5"><span>5</span>Authorize</button><button type="button" data-i="6"><span>6</span>Monitor</button></div>
+      <div class="rmfout" id="rmfout" aria-live="polite"></div>
+    </div>
+    <div class="panel spot">
+      <h3>Direct links</h3>
+      <ul class="todo">
+        <li>RMF overview, quick-start guides, and FAQs</li>
+        <li>SP 800-37 Rev. 2: the RMF process itself</li>
+        <li>SP 800-53 Rev. 5: the control catalog used in the Select step</li>
+        <li>Pairs with NIST AI RMF for AI systems, and with CSF 2.0 for enterprise programs</li>
+      </ul>
+      <div class="src"><a href="https://csrc.nist.gov/projects/risk-management" target="_blank" rel="noopener noreferrer">NIST RMF (CSRC) &#8599;</a><a href="https://csrc.nist.gov/pubs/sp/800/37/r2/final" target="_blank" rel="noopener noreferrer">SP 800-37 Rev. 2 &#8599;</a><a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" target="_blank" rel="noopener noreferrer">SP 800-53 Rev. 5 &#8599;</a></div>
+    </div>
+  </div>
+  <p class="reviewed rv">Last reviewed October 23, 2026. This summary is general information, not legal advice; confirm requirements against the official sources.</p>
+</div></section>
+
+<section class="s" id="approach" aria-labelledby="ap-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Our Approach</div>
+  <h2 id="ap-h">Tools find the issues. <span class="grad">People close them.</span></h2>
+  <p class="lead">Every finding gets a plain-language title, a business impact, a named owner, a due date, and a retest date. Have the plan in place, then work the plan.</p></div>
+  <ol class="steps"><li class="step rv"><button type="button" class="stepbtn" data-st="0" aria-expanded="true" aria-controls="apd"><span class="sh" role="heading" aria-level="3">Assess</span><span>Baseline your posture against NIST CSF 2.0 and the frameworks your customers and regulators require.</span><em>Details &darr;</em></button></li><li class="step rv"><button type="button" class="stepbtn" data-st="1" aria-expanded="false" aria-controls="apd"><span class="sh" role="heading" aria-level="3">Prioritize</span><span>Score risk consistently so &ldquo;Critical&rdquo; means the same thing every time, tied to business outcomes.</span><em>Details &darr;</em></button></li><li class="step rv"><button type="button" class="stepbtn" data-st="2" aria-expanded="false" aria-controls="apd"><span class="sh" role="heading" aria-level="3">Execute</span><span>Assign owners and deadlines, then drive remediation through a 30/60/90-day plan.</span><em>Details &darr;</em></button></li><li class="step rv"><button type="button" class="stepbtn" data-st="3" aria-expanded="false" aria-controls="apd"><span class="sh" role="heading" aria-level="3">Prove It</span><span>Report progress to leadership and the board as risk reduced, not activity logged.</span><em>Details &darr;</em></button></li></ol>
+  <div class="apd rv" id="apd" aria-live="polite"></div>
+
+  <div class="apx">
+    <div class="panel spot rv">
+      <h3>A typical first 90 days</h3>
+      <ol class="tl90">
+        <li><b>Weeks 1&ndash;2 &middot; Discover</b>Stakeholder interviews, document review, asset and data inventory, quick-win list</li>
+        <li><b>Weeks 3&ndash;4 &middot; Assess</b>CSF 2.0 current-state profile, control testing, risk register with 5&times;5 scoring</li>
+        <li><b>Day 30 &middot; Report</b>Executive briefing: top risks, target profile, and a funded 30/60/90-day roadmap</li>
+        <li><b>Days 31&ndash;90 &middot; Execute</b>Owners close high-priority gaps; policies, IR plan, and vendor reviews put in place</li>
+        <li><b>Day 90 &middot; Measure</b>Retest, update the risk register, and deliver the first board-level scorecard</li>
+      </ol>
+      <p class="note">Timelines are illustrative and scale with organization size and scope.</p>
+    </div>
+    <div class="panel spot rv">
+      <h3>How we measure progress</h3>
+      <p>Measures are selected using NIST SP 800-55 guidance and reported as trends, not one-off snapshots.</p>
+      <div class="kpis">
+        <div><b>Critical risks</b><span>open vs. closed within deadline</span></div>
+        <div><b>MFA coverage</b><span>% of users, admins, and remote access</span></div>
+        <div><b>Time to remediate</b><span>median days, by severity</span></div>
+        <div><b>Restore success</b><span>% of tested backups restored on time</span></div>
+        <div><b>Patch latency</b><span>internet-facing and critical systems</span></div>
+        <div><b>Phishing reporting</b><span>report rate vs. click rate</span></div>
+      </div>
+    </div>
+  </div>
+
+  <details class="refs rv"><summary>Methodology foundations &amp; references</summary>
+    <p>Our methods draw on established, peer-reviewed and consensus standards, so results are repeatable and defensible to auditors, boards, and regulators:</p>
+    <ol>
+      <li>NIST, <em>The NIST Cybersecurity Framework (CSF) 2.0</em>, NIST CSWP 29, 2024. <a href="https://www.nist.gov/publications/nist-cybersecurity-framework-csf-20" target="_blank" rel="noopener noreferrer">nist.gov</a></li>
+      <li>NIST, <em>Guide for Conducting Risk Assessments</em>, SP 800-30 Rev. 1, 2012. <a href="https://csrc.nist.gov/pubs/sp/800/30/r1/final" target="_blank" rel="noopener noreferrer">csrc.nist.gov</a></li>
+      <li>NIST, <em>Risk Management Framework for Information Systems and Organizations</em>, SP 800-37 Rev. 2, 2018. <a href="https://csrc.nist.gov/pubs/sp/800/37/r2/final" target="_blank" rel="noopener noreferrer">csrc.nist.gov</a></li>
+      <li>NIST, <em>Measurement Guide for Information Security, Vol. 1</em>, SP 800-55 Vol. 1, 2024. <a href="https://csrc.nist.gov/pubs/sp/800/55/v1/final" target="_blank" rel="noopener noreferrer">csrc.nist.gov</a></li>
+      <li>NIST, <em>Incident Response Recommendations and Considerations for Cybersecurity Risk Management</em>, SP 800-61 Rev. 3, 2025. <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank" rel="noopener noreferrer">csrc.nist.gov</a></li>
+      <li>ISO, <em>ISO 31000:2018 Risk management &mdash; Guidelines</em>. <a href="https://www.iso.org/standard/31000" target="_blank" rel="noopener noreferrer">iso.org</a></li>
+      <li>ISO/IEC, <em>ISO/IEC 27005:2022 Guidance on managing information security risks</em>. <a href="https://www.iso.org/standard/80585.html" target="_blank" rel="noopener noreferrer">iso.org</a></li>
+      <li>The Open Group, <em>Open FAIR&trade; risk analysis</em>, for quantifying risk in financial terms when needed. <a href="https://www.opengroup.org/certifications/openfair" target="_blank" rel="noopener noreferrer">opengroup.org</a></li>
+      <li>Center for Internet Security, <em>CIS Critical Security Controls</em>. <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener noreferrer">cisecurity.org</a></li>
+    </ol>
+  </details>
+</div></section>
+
+<section class="s alt gridbg" id="lab" aria-labelledby="lab-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Risk Lab</div>
+  <h2 id="lab-h">See how we turn findings into <span class="grad">decisions.</span></h2>
+  <p class="lead">Every risk is scored the same way, assigned an owner, and given a deadline. Try it: pick a square on the matrix.</p></div>
+  <div class="sim panel spot rv" id="sim">
+    <div class="ptitle"><h3>Scenario Simulator</h3><span class="tag">Interactive</span></div>
+    <p class="note" style="margin:0 0 14px">Pick a scenario, then switch controls on and off to see how inherent risk becomes residual risk.</p>
+    <div class="scns" role="tablist" aria-label="Scenarios" id="scns"></div>
+    <div class="simgrid">
+      <div><div class="ctrls" id="ctrls"></div></div>
+      <div class="simout">
+        <div class="gauge"><div class="gl"><span>Inherent</span><b id="g-in">0</b></div><div class="gbar"><i id="gb-in"></i></div></div>
+        <div class="gauge"><div class="gl"><span>Residual</span><b id="g-re">0</b></div><div class="gbar"><i id="gb-re"></i></div></div>
+        <div class="simres" id="simres" aria-live="polite"></div>
+        <div class="mini" id="mini" aria-hidden="true"></div>
+      </div>
+    </div>
+    <p class="note">Illustrative model for discussion: control effects are simplified. Real assessments use your environment, evidence, and threat data.</p>
+  </div>
+  <div class="cc">
+    <div class="panel spot rv">
+      <div class="ptitle"><h3>5&times;5 Risk Matrix</h3><span class="tag">Interactive</span></div>
+      <div class="axl" style="margin:0 0 8px 0"><span>&uarr; Impact (rows 5 &ndash; 1)</span></div>
+      <div class="mx" id="mx" role="grid" aria-label="Risk matrix: impact by likelihood"></div>
+      <div class="axl"><span>Likelihood &rarr;</span><span>1 &ndash; 5</span></div>
+      <div class="mxout" id="mxout" aria-live="polite">Select a cell to see its score, rating, and example remediation deadline.</div>
+      <div class="legend"><span><i style="--c:#2A3544"></i>Low</span><span><i style="--c:#1A5596"></i>Medium</span><span><i style="--c:#1F78D6"></i>High</span><span><i style="--c:#C2384B"></i>Critical</span></div>
+      <p class="note">Example scoring. Thresholds and deadlines are tailored to each client's risk appetite.</p>
+    </div>
+    <div class="ccr">
+      <div class="term rv" aria-label="Example assessment console">
+        <div class="tb"><i></i><i></i><i></i><span>nexus-assess &mdash; illustrative example</span><button type="button" class="replay" id="replay" aria-label="Replay the console">Replay &#8635;</button></div>
+        <pre id="tty"><span class="pr">$</span> nexus assess --framework nist-csf-2.0 --scope ai-rollout</pre>
+      </div>
+      <div class="panel spot rv">
+        <div class="ptitle"><h3>Threat Radar</h3><span class="tag">Example</span></div>
+        <div class="radarw">
+          <div class="radar" aria-hidden="true"><div class="sweep"></div>
+            <span class="blip hot" style="left:66%;top:30%"></span><span class="blip" style="left:30%;top:38%;animation-delay:.6s"></span><span class="blip hot" style="left:58%;top:70%;animation-delay:1.1s"></span><span class="blip" style="left:24%;top:66%;animation-delay:1.7s"></span><span class="blip" style="left:76%;top:52%;animation-delay:2.1s"></span>
+          </div>
+          <ul class="rlist">
+            <li><button type="button" class="rl" data-scn="ransom">Ransomware &amp; recovery gaps</button><b style="color:#FF6B7A">CRITICAL</b></li>
+            <li><button type="button" class="rl" data-scn="ai">Shadow AI &amp; agent permissions</button><b style="color:#FF6B7A">CRITICAL</b></li>
+            <li><button type="button" class="rl" data-scn="vendor">Third-party / vendor access</button><b style="color:#5B9BE8">HIGH</b></li>
+            <li><button type="button" class="rl" data-scn="bec">Phishing &amp; identity attacks</button><b style="color:#5B9BE8">HIGH</b></li>
+            <li><button type="button" class="rl" data-scn="edge">Unpatched edge devices</button><b style="color:#A7AEB8">MEDIUM</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="s alt" id="readiness" aria-labelledby="rd-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Free Resources</div>
+  <h2 id="rd-h">Plain-English readiness self-checks.</h2>
+  <p class="lead">Interactive checklists to see where you stand before an audit, assessment, or insurance renewal. Track progress in your browser, then download as Word, Excel, PDF, CSV, or JSON.</p></div>
+  <div class="checks">
+    <a class="chk spot rv" href="/checklists#cmmc"><b>CMMC / NIST SP 800-171</b><span>For defense and aerospace suppliers handling CUI.</span><em>Open checklist &rarr;</em></a>
+    <a class="chk spot rv" href="/checklists#hipaa"><b>HIPAA &amp; 405(d)</b><span>Security Rule safeguards and recognized healthcare practices.</span><em>Open checklist &rarr;</em></a>
+    <a class="chk spot rv" href="/checklists#soc2"><b>SOC 2 Roadmap</b><span>Step-by-step path to a SOC 2 report, including SOC 1 vs. SOC 2 vs. SOC 3.</span><em>Open checklist &rarr;</em></a>
+    <a class="chk spot rv" href="/checklists#insurance"><b>Cyber Insurance</b><span>The controls underwriters ask about, mapped to CIS Controls v8.</span><em>Open checklist &rarr;</em></a>
+    <a class="chk spot rv" href="/checklists#cra"><b>EU Cyber Resilience Act</b><span>Reporting duties live now, plus the December 2027 requirements.</span><em>Open checklist &rarr;</em></a>
+    <a class="chk spot rv" href="/checklists#aigov"><b>AI Governance</b><span>NIST AI RMF, ISO/IEC 42001, EU AI Act, and OWASP LLM Top 10.</span><em>Open checklist &rarr;</em></a>
+  </div>
+  <div class="ctas rv"><a class="btn" href="/checklists">Open the interactive checklists &rarr;</a><a class="btn ghost" href="/nexus-security-readiness-pack.xlsx" download>Download all (Excel)</a></div>
+</div></section>
+
+<section class="s gridbg" id="founder" aria-labelledby="ab-h"><div class="wrap about">
+  <div class="rv">
+    <div class="eyebrow">Founder &amp; Principal vCISO</div>
+    <h2 id="ab-h">Dan Sorensen</h2>
+    <p>Dan is a fractional vCISO and AI governance advisor who translates cyber threats into boardroom decisions. A U.S. Air Force and Air National Guard veteran with 22+ years of service, he builds security programs against NIST RMF, NIST AI RMF, ISO 27001, ISO/IEC 42001, CMMC, HIPAA, and the EU AI Act.</p>
+    <p>He contributes to the OWASP AI Exchange, writes for Forbes Technology Council, co-authored <em>Advanced Cyber Threat Intelligence and Hunting</em>, and is a PhD candidate in Cybersecurity Leadership at Capitol Technology University.</p>
+    <div class="plinks">
+      <a class="plink" href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg>LinkedIn</a>
+      <a class="plink" href="https://www.dansorensen.info" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.84 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.1 16zm2.95-8H5.1a8 8 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.05 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>DanSorensen.info</a>
+      <a class="plink" href="https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors" target="_blank" rel="noopener noreferrer">Forbes Profile</a>
+      <a class="plink" href="https://board.fastcompany.com/profile/Dan-Sorensen-CISO/4eed384b-8a32-42fb-9c9c-6aa5fc011463" target="_blank" rel="noopener noreferrer">Fast Company Profile</a>
+    </div>
+  </div>
+  <div class="frame rv">
+    <h3>Recognition</h3>
+    <ul class="creds">
+      <li>Forbes Technology Council member (35+ articles)</li>
+      <li>Fast Company Executive Council member</li>
+      <li>OWASP AI Exchange core team</li>
+      <li>Co-author, CSA/OWASP Agentic AI Red Teaming Guide</li>
+      <li>Editor, Geneva Manual on Cyber Threat Intelligence</li>
+      <li>Thinkers360 Top Thought Leader</li>
+      <li>PhD candidate, Cybersecurity Leadership, Capitol Technology University</li>
+    </ul>
+  </div>
+</div></section>
+
+
+
+
+<section class="s alt" id="newsletter" aria-labelledby="nl-h"><div class="wrap">
+  <div class="news rv">
+    <img src="/cyber-resilience-newsletter.webp" alt="Cyber Resilience in the AI Era newsletter logo" width="480" height="480" loading="lazy">
+    <div>
+      <div class="eyebrow">New LinkedIn Newsletter</div>
+      <h2 id="nl-h">Cyber Resilience in the AI Era</h2>
+      <p class="lead">A biweekly newsletter for technical practitioners and leaders on building resilient organizations as AI reshapes both attack and defense, grounded in research and real engagements.</p>
+      <div class="topics"><span class="chip">AI governance</span><span class="chip">Threat intelligence</span><span class="chip">Regulation &amp; compliance</span><span class="chip">Incident response ROI</span><span class="chip">Aerospace &amp; critical infrastructure</span></div>
+      <div class="ctas"><a class="btn" href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn</a><a class="btn ghost" href="#insights">Read recent insights</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="s" id="insights" aria-labelledby="in-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Insights</div>
+  <h2 id="in-h">Thought leadership on AI, risk, and the boardroom.</h2></div>
+  <div class="ins">
+    <div class="panel spot rv">
+      <h3>Latest on Forbes</h3>
+      <ul class="arts">
+        <li>The One-Page Document That Can Prevent Million-Dollar AI Mistakes<small>Aug 2026</small></li>
+        <li>From Gap To Capability: Building The CTI Function The Boardroom Actually Needs<small>Jul 2026</small></li>
+        <li>The Threat Intelligence Gap: Why AI-Augmented CTI Still Fails At The Human Layer<small>Mar 2026</small></li>
+        <li>Aerospace Cybersecurity: Stop Talking About Threats And Start Talking About Money<small>Feb 2026</small></li>
+        <li>From Risk To ROI: Rethinking Cyber Investment In Aerospace<small>Aug 2025</small></li>
+      </ul>
+      <a class="more" href="https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors" target="_blank" rel="noopener noreferrer">All Forbes articles &rarr;</a>
+    </div>
+    <div class="books rv">
+      <a class="book" href="https://www.amazon.com/Advanced-Cyber-Threat-Intelligence-Hunting-ebook/dp/B0GNYZK3SV" target="_blank" rel="noopener noreferrer"><b>Advanced Cyber Threat Intelligence and Hunting</b><span>Co-author with Gianluca Tiepolo (Packt, 2026). Intelligence-driven threat hunting with CTI, behavioral analytics, and AI.</span><em class="more">View on Amazon &rarr;</em></a>
+      <a class="book" href="https://www.amazon.com/dp/B0D2N2J568" target="_blank" rel="noopener noreferrer"><b>The AI Mindset</b><span>Co-author (Thin Leaf Press, December 2024). AI experts on how leaders and organizations can adapt to AI.</span><em class="more">View on Amazon &rarr;</em></a>
+      <a class="book" href="https://amuedge.com/cyber-spotlight-dan-sorensen-and-understanding-culture-to-protect-a-nation/" target="_blank" rel="noopener noreferrer"><b>In the Spotlight</b><span>Featured in InCyberDefense's Cyber Spotlight: understanding culture to protect a nation.</span><em class="more">Read the spotlight &rarr;</em></a>
+    </div>
+  </div>
+</div></section>
+
+<section class="s gridbg" id="free" aria-labelledby="fr-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">For Cyber Professionals</div>
+  <h2 id="fr-h">A curated library of free security resources.</h2>
+  <p class="lead">Frameworks, regulations, and hands-on tools we trust, from AI security and privacy law to red, blue, and purple teaming.</p></div>
+  <div class="tiles">
+    <a class="tile spot rv" href="/resources#ai"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4M9 9h6v6H9z"/></svg><b>AI Security &amp; Governance</b><span>OWASP AI Exchange, NIST AI RMF, EU AI Act, MITRE ATLAS</span></a>
+    <a class="tile spot rv" href="/resources#privacy"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Privacy &amp; Regulation</b><span>GDPR, CCPA, HIPAA, NIS2, PCI DSS</span></a>
+    <a class="tile spot rv" href="/resources#red"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v5M12 18v5M1 12h5M18 12h5"/></svg><b>Red Team</b><span>MITRE ATT&amp;CK, OWASP WSTG, AI red-teaming tools</span></a>
+    <a class="tile spot rv" href="/resources#blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><b>Blue Team</b><span>D3FEND, CISA KEV, Sigma, YARA, Velociraptor</span></a>
+    <a class="tile spot rv" href="/resources#purple"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/><circle cx="12" cy="12" r="3"/></svg><b>Purple Team</b><span>Atomic Red Team, Caldera, VECTR, ATT&amp;CK Navigator</span></a>
+    <a class="tile spot rv" href="/resources#training"><svg viewBox="0 0 24 24"><path d="M2 8l10-5 10 5-10 5z"/><path d="M6 10v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg><b>Free Training</b><span>CISA NICCS, PortSwigger, TryHackMe, ISC2 CC</span></a>
+  </div>
+  <div class="ctas rv"><a class="btn" href="/resources">Browse all resources &rarr;</a></div>
+</div></section>
+
+<section class="s" id="faq" aria-labelledby="faq-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">FAQ</div>
+  <h2 id="faq-h">Common questions</h2></div>
+  <div class="faq rv">
+    <details><summary>How much does AI consulting cost for a small business?</summary><p>Published 2026 U.S. benchmarks put SMB AI readiness assessments at roughly $2,000 to $25,000 and AI advisory retainers at $1,500 to $8,000 per month. Nexus packages start at $2,500 for an AI Readiness &amp; Use-Case Sprint, $5,000 for an AI Governance Program, and $1,500 per month for a Fractional AI Advisor. <a href="#ai-consulting">See packages and sources</a>.</p></details>
+    <details><summary>What is a fractional CISO (vCISO)?</summary><p>A fractional or virtual CISO is a senior security executive who leads your security program part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire.</p></details>
+    <details><summary>Who is a good fit for Nexus Security Advisors?</summary><p>Small and mid-sized businesses in any industry, including financial services, healthcare, defense suppliers, manufacturing, technology, and professional services, that need executive security leadership, are facing an audit or assessment, or are rolling out AI and need it governed.</p></details>
+    <details><summary>Can you help us prepare for CMMC?</summary><p>Yes. We assess your current state against NIST SP 800-171 and CMMC requirements, identify gaps, and build a prioritized, owner-assigned plan to close them.</p></details>
+    <details><summary>How do you approach AI governance?</summary><p>We start by finding the AI tools and agents actually in use, then build AI risk into each initiative's business case, apply least privilege to AI agents, and align to frameworks such as NIST AI RMF, ISO/IEC 42001, the EU AI Act, and the OWASP AI Exchange.</p></details>
+    <details><summary>Can we sign an NDA before sharing details?</summary><p>Yes. We are happy to sign a mutual NDA before any detailed discussion of your environment.</p></details>
+    <details><summary>Do you replace our IT team or MSP?</summary><p>No. We provide security leadership and oversight and work alongside your IT team or managed service provider, helping them prioritize and measure what matters.</p></details>
+    <details><summary>How is a fractional CISO engagement priced?</summary><p>Usually as a predictable monthly retainer sized to your needs, or a fixed fee for project work such as an assessment or readiness sprint. We recommend an option after the free discovery call.</p></details>
+    <details><summary>How do we get started?</summary><p>Complete the short intake on our Get Started page. Tell us your industry, size, and the challenge in front of you, and we'll tell you plainly whether we're a fit.</p></details>
+  </div>
+</div></section>
+</main>
+
+<section class="cta" id="contact" aria-labelledby="ct-h">
+  <div class="ring"></div><div class="ring r2"></div>
+  <div class="wrap rv" style="position:relative">
+    <div class="eyebrow">Let's Talk</div>
+    <h2 id="ct-h">Start with a free 30-minute discovery call.</h2>
+    <p class="lead">Tell us your industry, size, and the security or compliance challenge in front of you. We'll tell you plainly whether we're a fit.</p>
+    <div class="ctas">
+      <a class="btn" href="/get-started">Request a consultation</a>
+      <a class="btn ghost" href="mailto:info@nexussecurityadvisors.com?subject=Website%20Inquiry">info@nexussecurityadvisors.com</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="logo" href="#top" aria-label="Back to top"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a><p style="margin-top:14px;max-width:340px">Fractional vCISO, compliance readiness, and AI governance for small and mid-sized businesses in every industry. Serving clients across the United States.</p></div>
+    <div><h2 class="fh">Explore</h2><a href="#ai-consulting">AI Consulting</a><a href="/get-started">Get Started</a><a href="#vciso">Why a vCISO</a><a href="#regs">Regulatory Watch</a><a href="#newsletter">Newsletter</a><a href="/resources">Free Resources</a></div>
+    <div><h2 class="fh">Connect</h2><a href="/get-started">Request a Consultation</a><a href="mailto:info@nexussecurityadvisors.com">info@nexussecurityadvisors.com</a><a href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer">Nexus on LinkedIn</a><a href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on Facebook</a><a href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on GitHub</a></div>
+    <div><h2 class="fh">Dan Sorensen</h2><a href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.dansorensen.info" target="_blank" rel="noopener noreferrer">DanSorensen.info</a><a href="https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors" target="_blank" rel="noopener noreferrer">Forbes Technology Council</a></div>
+  </div>
+  <div class="legal">&copy; 2026 Nexus Security Advisors. All rights reserved. &nbsp;&middot;&nbsp; <a href="/trust">Trust &amp; Security</a> &nbsp;&middot;&nbsp; <a href="/trust#privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/trust#disclosure">Report a vulnerability</a> &nbsp;&middot;&nbsp; <a href="/security.txt">security.txt</a></div>
+</div></footer>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('nsa'); if(!root) return;
+  root.classList.add('js');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // reveal on scroll
+  var els=root.querySelectorAll('.rv');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el,i){el.style.transitionDelay=(i%4)*80+'ms';io.observe(el);});
+  } else { els.forEach(function(el){el.classList.add('in');}); }
+  // stat counters
+  var nums=root.querySelectorAll('.stat b[data-c]');
+  if(!reduce && 'IntersectionObserver' in window){
+    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var b=e.target,end=+b.getAttribute('data-c'),suf=b.textContent.replace(/[0-9]/g,''),t0=null;so.unobserve(b);
+      function step(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1);b.textContent=Math.round(end*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);})},{threshold:.6});
+    nums.forEach(function(n){so.observe(n);});
+  }
+  // scroll progress, back-to-top, approach line
+  var prog=root.querySelector('.prog'),top=root.querySelector('.totop'),steps=root.querySelector('.steps');
+  function onScroll(){var d=document.documentElement,max=d.scrollHeight-d.clientHeight,y=window.pageYOffset||d.scrollTop;
+    if(prog)prog.style.width=(max>0?y/max*100:0)+'%';if(top)top.classList.toggle('on',y>700);
+    if(steps){var r=steps.getBoundingClientRect(),vh=window.innerHeight,p=Math.max(0,Math.min(1,(vh*0.85-r.top)/(r.height+vh*0.35)));steps.style.setProperty('--p',(p*100).toFixed(1)+'%');}}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  // spotlight follow
+  root.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.spot');if(!t)return;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  // risk matrix
+  var mx=document.getElementById('mx'),out=document.getElementById('mxout');
+  if(mx){
+    var band=function(s){return s>=20?['Critical','b4','#C2384B','7 days']:s>=10?['High','b3','#1F78D6','30 days']:s>=5?['Medium','b2','#1A5596','90 days']:['Low','b1','#2A3544','next review cycle'];};
+    var html='';for(var i=5;i>=1;i--){html+='<div class="ax">'+i+'</div>';for(var l=1;l<=5;l++){var s=i*l,b=band(s);html+='<button type="button" class="cell '+b[1]+'" data-l="'+l+'" data-i="'+i+'" aria-label="Likelihood '+l+', impact '+i+', score '+s+', '+b[0]+'">'+s+'</button>';}}
+    mx.innerHTML=html;
+    mx.addEventListener('click',function(e){var c=e.target.closest('.cell');if(!c)return;mx.querySelectorAll('.sel').forEach(function(n){n.classList.remove('sel')});c.classList.add('sel');
+      var l=+c.getAttribute('data-l'),i=+c.getAttribute('data-i'),s=l*i,b=band(s);
+      out.innerHTML='<b>Likelihood '+l+' &times; Impact '+i+' = '+s+'</b><span class="lvl" style="--c:'+b[2]+'">'+b[0].toUpperCase()+'</span><br>Example remediation deadline: <b>'+b[3]+'</b>. Each finding also gets a named owner and a retest date.';});
+    var def=mx.querySelector('.cell[data-l="4"][data-i="5"]');if(def)def.click();
+  }
+  // terminal typing
+  var tty=document.getElementById('tty');
+  if(tty){
+    var lines=[['ok','[+] Asset inventory: 412 systems mapped'],['ok','[+] AI usage scan: 37 tools found, 11 unsanctioned'],['wr','[!] Finding: support agent can email CRM records externally'],['cr','    Likelihood 4 x Impact 5 = 20  -> CRITICAL, fix in 7 days'],['ok','[+] Owner assigned: IT Director | retest scheduled'],['ok','[+] 30/60/90-day roadmap ready for leadership']];
+    var started=false,full='<span class="pr">$</span> nexus assess --framework nist-csf-2.0 --scope ai-rollout';
+    var render=function(n,partial){var h=full;for(var k=0;k<n;k++)h+='\n<span class="'+lines[k][0]+'">'+lines[k][1]+'</span>';if(partial!=null)h+='\n<span class="'+lines[n][0]+'">'+partial+'</span>';tty.innerHTML=h+'<span class="cur"></span>';};
+    var play=function(){if(started)return;started=true;var n=0,c=0;(function tick(){if(n>=lines.length){render(n);return;}var t=lines[n][1];c+=2;if(c>=t.length){n++;c=0;render(n);setTimeout(tick,420);}else{render(n,t.slice(0,c));setTimeout(tick,18);}})();};
+    var rp=document.getElementById('replay');if(rp)rp.addEventListener('click',function(){started=false;render(0);play();});
+    if(reduce||!('IntersectionObserver' in window)){render(lines.length);}else{render(0);new IntersectionObserver(function(es,o){if(es[0].isIntersecting){play();o.disconnect();}},{threshold:.4}).observe(tty);}
+  }
+
+  // regulatory tabs
+  var tabs=[].slice.call(root.querySelectorAll('.rtab'));
+  function sel(t,focus){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});if(focus)t.focus();}
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});t.addEventListener('keydown',function(e){var k=e.key,n=null;if(k==='ArrowRight')n=tabs[(i+1)%tabs.length];if(k==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];if(n){e.preventDefault();sel(n,true);}});});
+  var hm={'#cra':'t-cra','#cmmc':'t-cmmc','#hipaa':'t-hipaa','#pci':'t-pci','#rmf':'t-rmf'};if(hm[location.hash]){sel(document.getElementById(hm[location.hash]));}
+  // RMF stepper
+  var rmf=document.getElementById('rmf'),ro=document.getElementById('rmfout');
+  if(rmf){var steps2=['<b>Prepare:</b> establish context, roles, risk tolerance, and common controls at the organization and system levels.','<b>Categorize:</b> determine the system\'s impact level based on the information it processes (FIPS 199).','<b>Select:</b> choose and tailor controls from NIST SP 800-53 to fit the risk.','<b>Implement:</b> put the controls in place and document how they are deployed.','<b>Assess:</b> independently verify the controls work as intended and produce an assessment report.','<b>Authorize:</b> a senior official accepts the residual risk and grants authority to operate (ATO).','<b>Monitor:</b> continuously track controls, changes, and threats; report and respond over time.'];
+    rmf.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;rmf.querySelectorAll('.on').forEach(function(x){x.classList.remove('on')});b.classList.add('on');ro.innerHTML=steps2[+b.getAttribute('data-i')];});
+    rmf.querySelector('button').click();}
+
+  // approach details
+  var APD=[
+   {o:'Establish an evidence-based baseline of your current security posture and define a realistic target.',a:['Stakeholder interviews across leadership, IT, operations, and finance','Asset, data, and third-party inventory, including where sensitive data and AI tools live','Control review mapped to NIST CSF 2.0 functions: Govern, Identify, Protect, Detect, Respond, Recover','Gap analysis against your required frameworks (CMMC, HIPAA, SOC 2, PCI DSS, CRA)'],d:['Current-state and target CSF profiles','Asset and data-flow inventory','Framework gap matrix'],t:'2 to 4 weeks',s:['NIST CSF 2.0','NIST SP 800-30','CIS Controls v8.1']},
+   {o:'Turn findings into a ranked, defensible list so leadership funds the right work first.',a:['Score each risk on a consistent 5&times;5 likelihood-by-impact scale','Tie each risk to business impact: revenue, contracts, safety, regulatory exposure','Quantify top risks in financial terms where useful (Open FAIR)','Agree on risk appetite and treatment options: mitigate, transfer, avoid, accept with evidence'],d:['Risk register with owners','Heat map and top-10 risk briefing','Treatment plan with cost estimates'],t:'1 to 2 weeks',s:['NIST SP 800-30','ISO 31000','ISO/IEC 27005','Open FAIR']},
+   {o:'Close the most important gaps quickly, with clear ownership and accountability.',a:['Build a 30/60/90-day roadmap with named owners and due dates','Write or update core policies, incident response plan, and vendor requirements','Work alongside your IT team or MSP to implement and verify controls','Track every finding to closure with evidence and a retest date'],d:['30/60/90-day roadmap','Policy set and IR plan','Remediation tracker with evidence'],t:'30 to 90 days, then ongoing',s:['NIST SP 800-53','NIST SP 800-61 Rev. 3','CIS Controls v8.1']},
+   {o:'Show measurable risk reduction to leadership, boards, customers, and auditors.',a:['Select a small set of meaningful measures and trend them over time','Retest closed findings and update residual risk','Brief leadership and the board in plain business language','Prepare evidence packages for audits, assessments, and customer reviews'],d:['Quarterly board scorecard','Updated risk register and profile','Audit-ready evidence package'],t:'Monthly and quarterly cadence',s:['NIST SP 800-55','NIST CSF 2.0 Govern','SEC / board oversight practices']}];
+  var sb=[].slice.call(root.querySelectorAll('.stepbtn')),apd=document.getElementById('apd');
+  function showStep(k){var x=APD[k];sb.forEach(function(b,j){var on=j===k;b.setAttribute('aria-expanded',on);b.parentNode.classList.toggle('on',on);});
+    apd.innerHTML='<div class="full"><h4>Step '+(k+1)+' objective</h4><p style="margin:0;color:var(--text);font-size:16px">'+x.o+'</p></div>'+
+     '<div><h4>Key activities</h4><ul>'+x.a.map(function(v){return '<li>'+v+'</li>'}).join('')+'</ul></div>'+
+     '<div><h4>Deliverables</h4><ul>'+x.d.map(function(v){return '<li>'+v+'</li>'}).join('')+'</ul></div>'+
+     '<div><h4>Typical timeframe</h4><p style="margin:0 0 14px">'+x.t+'</p><h4>Standards &amp; methods</h4><div class="meta2">'+x.s.map(function(v){return '<span class="chip">'+v+'</span>'}).join('')+'</div></div>';}
+  sb.forEach(function(b,k){b.addEventListener('click',function(){showStep(k)})});if(apd)showStep(0);
+  // regulatory tab deep links from Who We Serve
+  root.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-tab]');if(!a)return;var t=document.getElementById(a.getAttribute('data-tab'));if(t)t.click();});
+  // scenario simulator
+  var SC={ransom:{n:'Ransomware',l:4,i:5,d:'Attackers encrypt systems and steal data for extortion.',c:[['MFA on email, remote access, and admins',1,0],['EDR on all endpoints with 24/7 monitoring',1,0],['Immutable, tested offline backups',0,2],['Network segmentation',0,1],['Tested incident response plan',0,1]]},
+   bec:{n:'Business email compromise',l:5,i:4,d:'A spoofed or hijacked mailbox tricks staff into wiring funds or sharing data.',c:[['Phishing-resistant MFA',2,0],['DMARC enforcement and email filtering',1,0],['Out-of-band payment verification',0,2],['Security awareness and reporting',1,0]]},
+   ai:{n:'Shadow AI data leak',l:4,i:4,d:'Employees paste sensitive data into unapproved AI tools, or an agent has excessive permissions.',c:[['AI acceptable-use policy and training',1,0],['Approved, enterprise AI tools with data controls',1,1],['Least-privilege agent identities',1,1],['Data loss prevention on prompts and uploads',1,0],['Human approval for outbound agent actions',0,1]]},
+   vendor:{n:'Vendor / MSP compromise',l:3,i:5,d:'A trusted provider with access to your network is breached and used to reach you.',c:[['Vendor risk reviews and contract clauses',1,0],['Separate, MFA-protected vendor accounts',1,0],['Least privilege and just-in-time access',0,1],['Monitoring of vendor sessions',1,0],['Tested incident response plan',0,1]]},
+   edge:{n:'Exploited edge device',l:4,i:4,d:'An unpatched VPN, firewall, or remote access appliance is exploited from the internet.',c:[['Patch known exploited vulnerabilities fast (CISA KEV)',2,0],['Attack surface inventory and scanning',1,0],['MFA on all remote access',1,0],['Segmentation behind edge devices',0,1]]}};
+  var band2=function(s){return s>=20?['Critical','#C2384B','fix within 7 days']:s>=10?['High','#1F78D6','fix within 30 days']:s>=5?['Medium','#1A5596','fix within 90 days']:['Low','#2A3544','track at next review']};
+  var scns=document.getElementById('scns'),ctrls=document.getElementById('ctrls'),mini=document.getElementById('mini'),curS='ransom';
+  if(scns){
+    scns.innerHTML=Object.keys(SC).map(function(k){return '<button type="button" class="scn" role="tab" data-k="'+k+'" aria-selected="false">'+SC[k].n+'</button>'}).join('');
+    var mh='';for(var ii=5;ii>=1;ii--)for(var ll=1;ll<=5;ll++){var bb=band2(ii*ll);mh+='<i data-l="'+ll+'" data-i="'+ii+'" style="--c:'+bb[1]+'"></i>';}mini.innerHTML=mh;
+    var calc=function(){var s=SC[curS],L=s.l,I=s.i,on=[],off=[];[].forEach.call(ctrls.querySelectorAll('input'),function(x,j){var c=s.c[j];if(x.checked){L-=c[1];I-=c[2];on.push(c[0])}else off.push(c);});
+      L=Math.max(1,L);I=Math.max(1,I);var inh=s.l*s.i,res=L*I,bi=band2(inh),br=band2(res);
+      document.getElementById('g-in').textContent=inh;document.getElementById('g-re').textContent=res;
+      var gi=document.getElementById('gb-in'),gr=document.getElementById('gb-re');gi.style.width=(inh/25*100)+'%';gi.style.background=bi[1];gr.style.width=(res/25*100)+'%';gr.style.background=br[1];
+      var best=off.slice().sort(function(a,b){return (b[1]+b[2])-(a[1]+a[2])})[0];
+      document.getElementById('simres').innerHTML='<b>'+s.n+':</b> '+s.d+'<br>Residual: likelihood '+L+' &times; impact '+I+' = <b>'+res+'</b> <span class="lvl" style="--c:'+br[1]+'">'+br[0].toUpperCase()+'</span> &mdash; '+br[2]+'.'+
+        (best?'<br>Biggest next move: <b>'+best[0]+'</b>.':'<br>All modeled controls in place. Validate them with testing and evidence.');
+      [].forEach.call(mini.children,function(c){var l=+c.getAttribute('data-l'),i2=+c.getAttribute('data-i');c.className=(l===L&&i2===I)?'re':((l===s.l&&i2===s.i)?'in':'');});};
+    var pickS=function(k){curS=k;[].forEach.call(scns.children,function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});
+      ctrls.innerHTML=SC[k].c.map(function(c,j){var eff=(c[1]?'&minus;'+c[1]+' likelihood':'')+(c[1]&&c[2]?', ':'')+(c[2]?'&minus;'+c[2]+' impact':'');return '<label class="ctrl"><input type="checkbox" role="switch" data-j="'+j+'"><div><b>'+c[0]+'</b><span>'+eff+'</span></div></label>'}).join('');calc();};
+    scns.addEventListener('click',function(e){var b=e.target.closest('.scn');if(b)pickS(b.getAttribute('data-k'));});
+    ctrls.addEventListener('change',calc);
+    root.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-scn]');if(!t)return;var k=t.getAttribute('data-scn');if(!SC[k])return;pickS(k);if(t.tagName==='BUTTON'){var sim=document.getElementById('sim');sim.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}});
+    pickS('ransom');
+  }
+  // network canvas
+  var c=document.getElementById('net'); if(!c||!c.getContext) return;
+  var x=c.getContext('2d'),W,H,pts=[],dpr=Math.min(window.devicePixelRatio||1,2),mouse={x:-999,y:-999},run=true;
+  function size(){var r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(130,Math.max(45,W*H/8500)));pts=[];for(var i=0;i<n;i++){pts.push({x:W*(.25+Math.random()*.75),y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.6+.6});}}
+  function draw(){x.clearRect(0,0,W,H);var max=150;
+    for(var i=0;i<pts.length;i++){var p=pts[i];
+      if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+      for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<max){x.strokeStyle='rgba(43,155,244,'+(0.7*(1-d/max)).toFixed(3)+')';x.lineWidth=.7;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke();}}
+      var md=Math.hypot(p.x-mouse.x,p.y-mouse.y);
+      if(md<160){x.strokeStyle='rgba(201,204,207,'+(0.5*(1-md/160)).toFixed(3)+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(mouse.x,mouse.y);x.stroke();}
+      x.fillStyle='rgba(220,236,255,.9)';x.shadowColor='#2B9BF4';x.shadowBlur=8;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();x.shadowBlur=0;}
+    if(run&&!reduce)requestAnimationFrame(draw);}
+  size();draw();
+  window.addEventListener('resize',function(){size();if(reduce)draw();});
+  var hero=c.parentNode;
+  hero.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  hero.addEventListener('mouseleave',function(){mouse.x=mouse.y=-999;});
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!run){run=true;if(!reduce)requestAnimationFrame(draw);}run=v;}).observe(hero);}
+})();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"ProfessionalService","@id":"https://www.nexussecurityadvisors.com/#org","name":"Nexus Security Advisors","url":"https://www.nexussecurityadvisors.com/","logo":"https://www.nexussecurityadvisors.com/nexus-logo.webp","email":"info@nexussecurityadvisors.com","description":"Fractional CISO (vCISO), compliance readiness, and AI governance consultancy for small and mid-sized businesses in every industry, including financial services and healthcare.","areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"Israel"}],"founder":{"@id":"https://www.nexussecurityadvisors.com/#dan"},"sameAs":["https://www.linkedin.com/company/nexus-security-advisors","https://www.facebook.com/NexusSecurityAdvisors","https://github.com/NexusSecurityAdvisors"],"knowsAbout":["Fractional CISO","vCISO","AI governance","CMMC","NIST SP 800-171","NIST AI RMF","ISO/IEC 42001","ISO 27001","HIPAA","SOC 2","EU AI Act","NIST CSF 2.0","FTC Safeguards Rule","PCI DSS","EU Cyber Resilience Act","Penetration testing","Incident response","Cyber threat intelligence"],"award":"SBA VetCert Service-Disabled Veteran-Owned Small Business (SDVOSB)","slogan":"Executive cyber leadership that aligns security, compliance, and AI to business outcomes.","audience":{"@type":"BusinessAudience","name":"Small and mid-sized businesses in every industry"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"info@nexussecurityadvisors.com","url":"https://www.nexussecurityadvisors.com/get-started","availableLanguage":"en"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Cybersecurity leadership services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Fractional CISO (vCISO)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Cybersecurity Assessment & Roadmap (NIST CSF 2.0)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Compliance Readiness (CMMC, HIPAA, SOC 2, PCI DSS, EU CRA)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Governance & AI Security","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Incident Response Planning & Executive Tabletop Exercises","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Penetration Test Scoping & Oversight","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"U.S. Market Entry Security Leadership for Israeli Startups (SOC 2, security reviews, U.S. privacy)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US","url":"https://www.nexussecurityadvisors.com/#israeli-startups"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Board & Executive Cyber Risk Reporting","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}}]}},
+{"@type":"WebSite","@id":"https://www.nexussecurityadvisors.com/#website","url":"https://www.nexussecurityadvisors.com/","name":"Nexus Security Advisors","inLanguage":"en-US","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"}},
+{"@type":"Person","@id":"https://www.nexussecurityadvisors.com/#dan","name":"Dan Sorensen","jobTitle":"Founder & Principal vCISO","description":"Founder of Nexus Security Advisors; fractional CISO and AI governance strategist with 22+ years of U.S. Air Force and Air National Guard service, OWASP AI Exchange core team member, and PhD candidate in cybersecurity leadership.","knowsAbout":["EU Cyber Resilience Act","CMMC","AI governance","Cyber threat intelligence"],"worksFor":{"@id":"https://www.nexussecurityadvisors.com/#org"},"url":"https://www.dansorensen.info","sameAs":["https://www.linkedin.com/in/cisodan/","https://www.dansorensen.info","https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors","https://board.fastcompany.com/profile/Dan-Sorensen-CISO/4eed384b-8a32-42fb-9c9c-6aa5fc011463"]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is a fractional CISO (vCISO)?","acceptedAnswer":{"@type":"Answer","text":"A fractional or virtual CISO is a senior security executive who leads your security program part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire."}},
+{"@type":"Question","name":"Who is a good fit for Nexus Security Advisors?","acceptedAnswer":{"@type":"Answer","text":"Small and mid-sized businesses in any industry, including financial services, healthcare, defense suppliers, manufacturing, technology, and professional services, that need executive security leadership, are facing an audit or assessment, or are rolling out AI and need it governed."}},
+{"@type":"Question","name":"Can you help us prepare for CMMC?","acceptedAnswer":{"@type":"Answer","text":"Yes. We assess your current state against NIST SP 800-171 and CMMC requirements, identify gaps, and build a prioritized, owner-assigned plan to close them."}},
+{"@type":"Question","name":"How do you approach AI governance?","acceptedAnswer":{"@type":"Answer","text":"We start by finding the AI tools and agents actually in use, then build AI risk into each initiative's business case, apply least privilege to AI agents, and align to frameworks such as NIST AI RMF, ISO/IEC 42001, the EU AI Act, and the OWASP AI Exchange."}},
+{"@type":"Question","name":"Can we sign an NDA before sharing details?","acceptedAnswer":{"@type":"Answer","text":"Yes. We are happy to sign a mutual NDA before any detailed discussion of your environment."}},
+{"@type":"Question","name":"Do you replace our IT team or MSP?","acceptedAnswer":{"@type":"Answer","text":"No. We provide security leadership and oversight and work alongside your IT team or managed service provider, helping them prioritize and measure what matters."}},
+{"@type":"Question","name":"How is a fractional CISO engagement priced?","acceptedAnswer":{"@type":"Answer","text":"Usually as a predictable monthly retainer sized to your needs, or a fixed fee for project work such as an assessment or readiness sprint. We recommend an option after the free discovery call."}},
+{"@type":"Question","name":"How do we get started?","acceptedAnswer":{"@type":"Answer","text":"Complete the short intake on our Get Started page. Tell us your industry, size, and the challenge in front of you, and we'll tell you plainly whether we're a fit."}}
+]}
+]}
+</script>
