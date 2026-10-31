@@ -1,0 +1,47 @@
+# Nexus Security Advisors
+
+> Nexus Security Advisors is a U.S. cybersecurity leadership firm founded in 2025 that provides fractional and virtual CISO (vCISO) services, compliance readiness (CMMC / NIST SP 800-171, HIPAA, SOC 2, PCI DSS, EU Cyber Resilience Act), AI governance and AI security, and NIST CSF 2.0 security posture assessments for small and mid-sized businesses in every industry, plus SOC 2 and enterprise security-review support for startups. It is an SBA-certified Service-Disabled Veteran-Owned Small Business (SDVOSB) founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.
+
+Key facts:
+- Serves clients across the United States; works alongside a client's IT team or managed service provider (MSP) rather than replacing them.
+- Engagements are a monthly fractional CISO retainer or fixed-fee projects (assessments, readiness sprints). A free 30-minute discovery call is the first step.
+- AI consulting starting prices: AI Readiness & Use-Case Sprint from $2,500; AI Governance Program from $5,000; Fractional AI Advisor from $1,500/month; Leadership AI Workshop from $995.
+- Prepares clients for assessments and audits; certifications and attestations are issued by independent third-party assessors and auditors.
+- Contact: info@nexussecurityadvisors.com or https://www.nexussecurityadvisors.com/get-started
+
+## Services
+
+- [Services overview](https://www.nexussecurityadvisors.com/services): Fractional and virtual CISO leadership, compliance readiness, AI governance, and NIST CSF 2.0 security assessments for SMBs.
+- [AI consulting packages and pricing](https://www.nexussecurityadvisors.com/ai-consulting): AI readiness sprints, AI governance programs, fractional AI advisory and leadership workshops, with cited 2026 market price benchmarks.
+- [Custom and private AI](https://www.nexussecurityadvisors.com/ai-build): Secure custom AI chatbots, assistants and agents in a private cloud or on-premises.
+- [Government contracting](https://www.nexussecurityadvisors.com/government): CMMC and NIST SP 800-171 readiness, DFARS incident reporting, System Security Plans, and SDVOSB teaming for government contractors.
+- [Industries served](https://www.nexussecurityadvisors.com/industries): Financial services, healthcare, defense and aerospace suppliers, manufacturing and critical infrastructure, technology and SaaS, professional services, nonprofits, and startups.
+- [Our approach and Risk Lab](https://www.nexussecurityadvisors.com/approach): Assess, prioritize on a 5x5 likelihood-by-impact scale, execute a 30/60/90-day plan, and prove progress.
+- [About Nexus and the founder](https://www.nexussecurityadvisors.com/about)
+- [Request a consultation](https://www.nexussecurityadvisors.com/get-started)
+
+## Guides
+
+- [Regulatory Watch](https://www.nexussecurityadvisors.com/regulatory-watch): Plain-English status of the EU Cyber Resilience Act, CMMC 2.0, the HIPAA Security Rule, PCI DSS v4.0.1 and NIST RMF.
+- [EU AI Act explained for SMBs](https://www.nexussecurityadvisors.com/eu-ai-act): Who it applies to, risk tiers, prohibited practices, high-risk duties, penalties and timelines.
+- [AI explained for business leaders](https://www.nexussecurityadvisors.com/ai-guide): AI, machine learning and generative AI in plain English, including costs, privacy and regulation.
+- [Responsible and ethical AI](https://www.nexussecurityadvisors.com/responsible-ai): OWASP, NIST AI RMF, OECD and UNESCO principles and a practical AI code of conduct.
+- [Detecting AI bots, deepfakes and AI-generated content](https://www.nexussecurityadvisors.com/ai-detection)
+
+## Free tools and resources
+
+- [Free security readiness check](https://www.nexussecurityadvisors.com/readiness-check): Answer 8 questions for an instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance or AI governance, with your top 3 priorities.
+- [Personal device and privacy security](https://www.nexussecurityadvisors.com/personal-security): Checklists for laptops, phones, home networks and identity, plus a BYOD policy template.
+- [Readiness checklists](https://www.nexussecurityadvisors.com/checklists): Interactive CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, EU CRA and AI governance self-checks.
+- [Tabletop exercise kit](https://www.nexussecurityadvisors.com/tabletop): Facilitator guide, roles and eight incident scenarios with injects.
+- [Resource library](https://www.nexussecurityadvisors.com/resources): 300+ curated free cybersecurity and AI security resources.
+- [Learning hub](https://www.nexussecurityadvisors.com/learn): Free cybersecurity and AI learning paths by role.
+- [Start your cyber career](https://www.nexussecurityadvisors.com/careers): Free paths for students, veterans and career changers.
+- [Quizzes and monthly challenge](https://www.nexussecurityadvisors.com/challenges)
+- [Open-source toolkits on GitHub](https://github.com/NexusSecurityAdvisors)
+
+## Optional
+
+- [Trust, privacy and vulnerability disclosure](https://www.nexussecurityadvisors.com/trust)
+- [LinkedIn](https://www.linkedin.com/company/nexus-security-advisors)
+- [Founder's site: DanSorensen.info](https://www.dansorensen.info)
