@@ -1,3 +1,4 @@
+# Nexus Security Advisors - public marketing site. All pages are public; nothing sensitive is hosted here.
 User-agent: *
 Allow: /
 
