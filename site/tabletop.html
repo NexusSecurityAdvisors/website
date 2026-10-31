@@ -447,6 +447,17 @@ html,body{margin:0;background:#0E131A}
 #nsa .rhero .wrap{position:relative;z-index:2}
 </style>
 
+<style id="fold-css">
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -530,6 +541,7 @@ html,body{margin:0;background:#0E131A}
 <section class="s ag" id="run" aria-labelledby="run-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">How It Works</div>
   <h2 id="run-h">Five steps to a useful tabletop exercise.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <div class="pane rv"><h3>1. Plan</h3><p>Pick a scenario that matches your top risks, set two to four objectives, and invite the decision-makers. Allow 90 to 120 minutes.</p></div>
     <div class="pane rv"><h3>2. Brief</h3><p>Read the ground rules: no fault, no gotchas, and answer with the resources you really have today.</p></div>
@@ -537,19 +549,25 @@ html,body{margin:0;background:#0E131A}
     <div class="pane rv"><h3>4. Debrief (&ldquo;hotwash&rdquo;)</h3><p>Capture what went well, what was unclear, and three to five action items with owners and due dates. The scribe reads back the exercise log.</p></div>
     <div class="pane rv"><h3>5. Document and improve</h3><p>File the exercise log, complete the after-action report, update your incident response plan, and schedule the next exercise. Aim for at least one per year.</p></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="roles" aria-labelledby="ro-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Roles</div>
   <h2 id="ro-h">Who should be in the room.</h2>
   <p class="lead">In a small business one person often holds several roles. Assign each one before the exercise and name a backup for every decision-maker. The kit includes the questions each role should be ready to answer.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Role</th><th scope="col">Responsibilities during an incident</th></tr></thead><tbody><tr><td>Facilitator</td><td>Runs the exercise. Keeps time, reads injects, asks follow-up questions, and keeps the discussion blame-free.</td></tr><tr><td>Scribe / Observer</td><td>Records decisions, gaps, assumptions, and action items. Does not participate in the discussion.</td></tr><tr><td>Executive Sponsor (CEO / Owner)</td><td>Sets priorities, approves major decisions (shutting down systems, paying, notifying), and speaks for the company.</td></tr><tr><td>Incident Commander</td><td>Coordinates the response, assigns tasks, tracks status, and runs regular update calls. Often the virtual chief information security officer (vCISO) or IT/security lead.</td></tr><tr><td>information technology (IT) Lead / Managed Service Provider (MSP)</td><td>Investigates, contains, and restores systems. Preserves evidence and logs.</td></tr><tr><td>Security Lead / vCISO</td><td>Assesses scope and severity, guides containment and forensics, and maps actions to the incident response plan.</td></tr><tr><td>Legal / Privacy Counsel</td><td>Advises on privilege, regulatory and contractual notification duties, law enforcement contact, and payment legality.</td></tr><tr><td>Communications / Public Relations</td><td>Prepares internal, customer, partner, media, and regulator messaging. Controls a single source of truth.</td></tr><tr><td>Finance / chief financial officer (CFO)</td><td>Manages payments, banking contacts, insurance claims, and emergency spending authority.</td></tr><tr><td>Human Resources</td><td>Handles employee communications, insider issues, payroll continuity, and staff well-being during a long incident.</td></tr><tr><td>Operations / Business Continuity</td><td>Keeps the business serving customers using manual workarounds while systems are restored.</td></tr><tr><td>Cyber Insurance / Broker Liaison</td><td>Notifies the carrier promptly and coordinates approved vendors (breach coach, forensics, negotiators).</td></tr></tbody></table></div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="document" aria-labelledby="dc-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Document It</div>
   <h2 id="dc-h">Keep an exercise log, so the next exercise starts where this one ended.</h2>
   <p class="lead">The most valuable output of a tabletop is the written record. Name a scribe before you start, log every event and decision as it happens, and file the log and after-action report with your incident response plan. Insurers, auditors, and customers increasingly ask for this evidence.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>What to record</h3><ul class="ck">
       <li>Date, scenario, participants, and their roles</li>
@@ -567,23 +585,29 @@ html,body{margin:0;background:#0E131A}
     </ul></div>
   </div>
   <p class="rv" style="margin-top:18px">The <a href="/nexus-ttx-facilitator-guide.pdf" download style="color:var(--accent)">Facilitator Guide</a> includes a printable exercise log and after-action report template.</p>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="sizes" aria-labelledby="sz-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Any Size</div>
   <h2 id="sz-h">Scale the roles to your company.</h2>
   <p class="lead">You do not need twelve people. Every scenario works with combined roles, as long as you name a facilitator, a scribe, and one decision-maker.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Company size</th><th scope="col">Who should attend</th><th scope="col">How roles combine</th></tr></thead><tbody>
     <tr><td>Micro (1 to 10 people)</td><td>Owner, office manager, IT provider; insurance broker or attorney by phone</td><td>Owner leads and decides; IT provider covers technology and security; a trusted outsider facilitates; the office manager keeps the log.</td></tr>
     <tr><td>Small (10 to 50 people)</td><td>Owner or CEO, operations lead, finance, IT lead or managed service provider, HR or office manager</td><td>Operations lead runs the response; finance also handles insurance; HR also handles communications.</td></tr>
     <tr><td>Mid-sized (50 to 500 people)</td><td>Executive team, IT and security leads, legal, communications, HR, finance, operations</td><td>Assign each role to one person with a named backup, and consider a separate technical tabletop for the IT team.</td></tr>
   </tbody></table></div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="scenarios" aria-labelledby="sc-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Scenarios</div>
   <h2 id="sc-h">Eight ready-to-run scenarios.</h2>
   <p class="lead">An <b>inject</b> is a new piece of the story the facilitator reads aloud, such as &ldquo;the bank calls&rdquo; or &ldquo;a reporter emails.&rdquo; The <b>hotwash</b> is the short debrief at the end. Each scenario includes objectives, recommended participants, timed injects, discussion questions by role, key decisions to look for, and the related National Institute of Standards and Technology (NIST) Cybersecurity Framework (CSF) 2.0 functions.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <article class="card spot rv"><div class="n">01</div><h3>Ransomware with Data Extortion</h3><p>Attackers encrypt file servers and threaten to publish stolen data unless a ransom is paid.</p><p style="font-size:13.5px;color:var(--muted)"><b style="color:var(--silver)">Best for:</b> All industries<br><b style="color:var(--silver)">Length:</b> 90 to 120 minutes</p><div class="out"><a href="/nexus-ttx-ransomware.pdf" download>Download scenario (PDF, 83 KB) &darr;</a></div></article>
     <article class="card spot rv"><div class="n">02</div><h3>Business Email Compromise and Wire Fraud</h3><p>A vendor's email account is compromised and used to redirect a large payment to a fraudulent bank account.</p><p style="font-size:13.5px;color:var(--muted)"><b style="color:var(--silver)">Best for:</b> Finance, professional services, real estate, any business that sends payments<br><b style="color:var(--silver)">Length:</b> 60 to 90 minutes</p><div class="out"><a href="/nexus-ttx-bec.pdf" download>Download scenario (PDF, 83 KB) &darr;</a></div></article>
@@ -594,12 +618,15 @@ html,body{margin:0;background:#0E131A}
     <article class="card spot rv"><div class="n">07</div><h3>Healthcare: EHR Outage and PHI Breach</h3><p>A ransomware attack takes the practice's electronic health record (EHR) offline, and patient records may have been taken.</p><p style="font-size:13.5px;color:var(--muted)"><b style="color:var(--silver)">Best for:</b> Medical, dental, behavioral health, and other HIPAA-covered practices<br><b style="color:var(--silver)">Length:</b> 90 minutes</p><div class="out"><a href="/nexus-ttx-healthcare.pdf" download>Download scenario (PDF, 83 KB) &darr;</a></div></article>
     <article class="card spot rv"><div class="n">08</div><h3>Defense Supplier: CUI Exposure and DFARS Reporting</h3><p>A defense supplier discovers that an engineering file share containing CUI was accessed by an unknown actor.</p><p style="font-size:13.5px;color:var(--muted)"><b style="color:var(--silver)">Best for:</b> Defense and aerospace suppliers handling controlled unclassified information (CUI)<br><b style="color:var(--silver)">Length:</b> 75 minutes</p><div class="out"><a href="/nexus-ttx-defense.pdf" download>Download scenario (PDF, 83 KB) &darr;</a></div></article>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="games" aria-labelledby="ga-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Games &amp; Card Decks</div>
   <h2 id="ga-h">Security games and card decks that make practice fun.</h2>
   <p class="lead">Card and board games are a low-pressure way to build incident response and threat-modeling skills across technical and non-technical teams.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="checks">
     <a class="chk spot rv" href="https://www.blackhillsinfosec.com/tools/backdoorsandbreaches/" target="_blank" rel="noopener noreferrer"><b>Backdoors &amp; Breaches</b><span>Black Hills Information Security&#39;s incident response card game; one of the most popular ways to run a quick, low-prep tabletop. Free online version available.</span><em>Visit &#8599;</em></a>
     <a class="chk spot rv" href="https://expel.com/blog/oh-noes-our-ir-tabletop-game-is-new-and-improved/" target="_blank" rel="noopener noreferrer"><b>Oh Noes!</b><span>Expel&#39;s free, printable incident response tabletop role-playing game.</span><em>Visit &#8599;</em></a>
@@ -614,11 +641,14 @@ html,body{margin:0;background:#0E131A}
     <a class="chk spot rv" href="https://github.com/Karneades/awesome-security-card-games" target="_blank" rel="noopener noreferrer"><b>Awesome Security Card Games</b><span>A community-maintained GitHub list of security card and board games.</span><em>Visit &#8599;</em></a>
   </div>
   <p class="disc rv">Links are provided for convenience. Nexus Security Advisors is not affiliated with these publishers.</p>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="gov" aria-labelledby="gv-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Free Government Packages</div>
   <h2 id="gv-h">More free exercise material from government agencies.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="checks">
     <a class="chk spot rv" href="https://www.cisa.gov/resources-tools/services/cisa-tabletop-exercise-packages" target="_blank" rel="noopener noreferrer"><b>CISA Tabletop Exercise Packages (CTEPs)</b><span>Free Cybersecurity and Infrastructure Security Agency (CISA) exercise packages covering ransomware, insider threats, elections, and more.</span><em>Visit &#8599;</em></a>
     <a class="chk spot rv" href="https://www.ncsc.gov.uk/information/exercise-in-a-box" target="_blank" rel="noopener noreferrer"><b>NCSC Exercise in a Box</b><span>The UK National Cyber Security Centre&#39;s free online exercise tool for small organizations.</span><em>Visit &#8599;</em></a>
@@ -628,6 +658,8 @@ html,body{margin:0;background:#0E131A}
   <h3 class="rv" style="margin-top:28px">Direct downloads: CISA Tabletop Exercise Package documents</h3>
   <p class="rv">These free planning documents come straight from the Cybersecurity and Infrastructure Security Agency (CISA). Scenario packages are listed on the <a href="https://www.cisa.gov/resources-tools/resources/ctep-package-documents" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">CISA CTEP documents page</a>.</p>
   <ul class="ck rv"><li><a href="https://www.cisa.gov/sites/default/files/2023-01/1_-_ctep_welcome_letter_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">CTEP Welcome Letter (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/2_-_ctep_exercise_planner_handbook_2021_final_508.pdf" target="_blank" rel="noopener noreferrer">Exercise Planner Handbook (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/3_-_ctep_facilitator_evaluator_handbook_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">Facilitator and Evaluator Handbook (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/4_-_ctep_invitation_letter_template_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">Invitation Letter Template (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/5_-_ctep_exercise_brief_slide_deck_template_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">Exercise Brief Slide Deck Template (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/6_-_ctep_participant_feedback_template_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">Participant Feedback Template (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/7_-_ctep_planner_feedback_form_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">Planner Feedback Form (PDF) &#8599;</a></li><li><a href="https://www.cisa.gov/sites/default/files/2023-01/8_-_ctep_aar-ip_template_2020_final_508.pdf" target="_blank" rel="noopener noreferrer">After-Action Report and Improvement Plan Template (PDF) &#8599;</a></li></ul>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="help" aria-labelledby="hp-h"><div class="wrap">
@@ -666,5 +698,6 @@ html,body{margin:0;background:#0E131A}
 
 
 
+<script src="/js/fold-9353691fc3.js"></script>
 </body>
 </html>

@@ -447,6 +447,17 @@ html,body{margin:0;background:#0E131A}
 #nsa .rhero .wrap{position:relative;z-index:2}
 </style>
 
+<style id="fold-css">
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -523,6 +534,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">Learning Paths</div>
   <h2 id="pa-h">Pick your role, and we will point you to the best place to start.</h2>
   <p class="lead">Every path favors free resources. Each one links to the full Resource Library filtered for that role, so you can go deeper when you are ready.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <nav class="toc" aria-label="Roles"><a href="#path-kids">Kids, teens & educators</a><a href="#path-student">Students & career changers</a><a href="#path-analyst">SOC & security analysts</a><a href="#path-dfir">Digital forensics & incident response</a><a href="#path-hunter">CTI analysts & threat hunters</a><a href="#path-pentest">Pen testers & red team</a><a href="#path-purple">Purple & blue team engineers</a><a href="#path-devsecops">Developers & DevSecOps</a><a href="#path-ai">AI & ML engineers</a><a href="#path-pm">Scrum masters, program & project managers</a><a href="#path-smb">Small business owners & IT managers</a><a href="#path-exec">Executives, boards & directors</a><a href="#path-ciso">CISOs & security leaders</a><a href="#path-cio">CIOs & IT leaders</a><a href="#path-caio">Chief AI Officers & AI governance</a></nav>
   <div class="grid">
     <article class="pane rv" id="path-kids"><h3>Kids, teens & educators</h3><p>Build safe online habits and spark curiosity with games and free competitions.</p><ul class="ck"><li><a href="https://beinternetawesome.withgoogle.com/" target="_blank" rel="noopener noreferrer">Be Internet Awesome (Google) &#8599;</a></li><li><a href="https://code.org/ai" target="_blank" rel="noopener noreferrer">Code.org AI lessons &#8599;</a></li><li><a href="https://picoctf.org/" target="_blank" rel="noopener noreferrer">picoCTF capture-the-flag challenges &#8599;</a></li><li><a href="https://www.uscyberpatriot.org/" target="_blank" rel="noopener noreferrer">CyberPatriot youth program (Air &amp; Space Forces Association) &#8599;</a></li><li><a href="https://cyber.org/" target="_blank" rel="noopener noreferrer">CYBER.ORG free K-12 curriculum &#8599;</a></li><li><a href="https://mimo.org/" target="_blank" rel="noopener noreferrer">Mimo: learn to code on your phone &#8599;</a></li><li><a href="https://gandalf.lakera.ai/" target="_blank" rel="noopener noreferrer">Gandalf: an AI password puzzle game &#8599;</a></li><li><a href="/resources#role-kids">Browse everything for this role &rarr;</a></li></ul></article>
@@ -541,12 +553,15 @@ html,body{margin:0;background:#0E131A}
     <article class="pane rv" id="path-cio"><h3>Chief information officers (CIOs) &amp; information technology (IT) leaders</h3><p>Secure cloud, identity, and vendors while keeping the business running.</p><ul class="ck"><li><a href="/resources#cloud">Amazon Web Services (AWS), Azure, and Google Cloud security baselines</a></li><li><a href="https://www.cisa.gov/resources-tools/services/secure-cloud-business-applications-scuba-project" target="_blank" rel="noopener noreferrer">CISA SCuBA baselines &#8599;</a></li><li><a href="/resources#ghsmb">Free assessment tools on GitHub</a></li><li><a href="/ai-guide#configure">Configuring AI tools safely</a></li><li><a href="/resources#role-cio">All resources for IT leaders</a></li></ul></article>
     <article class="pane rv" id="path-caio"><h3>Chief AI Officers (CAIOs) &amp; AI governance</h3><p>Govern AI use: inventory, risk, policy, regulation, and responsible use.</p><ul class="ck"><li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework &#8599;</a></li><li><a href="https://owaspai.org/" target="_blank" rel="noopener noreferrer">OWASP AI Exchange &#8599;</a></li><li><a href="/responsible-ai">Responsible and ethical AI</a></li><li><a href="/ai-detection">Spotting AI fakes and bots</a></li><li><a href="/checklists#aigov">AI governance checklist</a></li><li><a href="/resources#role-caio">Browse everything for this role &rarr;</a></li></ul></article>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="ai-careers" aria-labelledby="aic2-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">AI &amp; Machine Learning Careers</div>
   <h2 id="aic2-h">Free learning for every AI and machine learning role.</h2>
   <p class="lead">AI teams need more than data scientists. These free, vendor-neutral resources cover the technical, infrastructure, application, security, and leadership sides of AI. <a href="/resources#mlroles" style="color:var(--accent)">See the full AI skills list &rarr;</a></p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <article class="pane rv"><h3>Machine learning engineers &amp; data scientists</h3><p>Build and evaluate models.</p><ul class="ck"><li><a href="https://developers.google.com/machine-learning/crash-course" target="_blank" rel="noopener noreferrer">Google Machine Learning Crash Course &#8599;</a></li><li><a href="https://course.fast.ai/" target="_blank" rel="noopener noreferrer">fast.ai Practical Deep Learning &#8599;</a></li><li><a href="https://www.kaggle.com/learn" target="_blank" rel="noopener noreferrer">Kaggle Learn &#8599;</a></li></ul></article>
     <article class="pane rv"><h3>AI infrastructure &amp; operations (MLOps)</h3><p>Deploy, monitor, and scale models reliably.</p><ul class="ck"><li><a href="https://madewithml.com/" target="_blank" rel="noopener noreferrer">Made With ML &#8599;</a></li><li><a href="https://mlflow.org/" target="_blank" rel="noopener noreferrer">MLflow &#8599;</a></li><li><a href="https://www.kubeflow.org/" target="_blank" rel="noopener noreferrer">Kubeflow &#8599;</a></li><li><a href="https://docs.vllm.ai/" target="_blank" rel="noopener noreferrer">vLLM model serving &#8599;</a></li></ul></article>
@@ -555,6 +570,8 @@ html,body{margin:0;background:#0E131A}
     <article class="pane rv"><h3>AI security &amp; red teaming</h3><p>Attack and defend AI systems you are authorized to test.</p><ul class="ck"><li><a href="https://owasp.org/www-project-ai-testing-guide/" target="_blank" rel="noopener noreferrer">OWASP AI Testing Guide &#8599;</a></li><li><a href="https://github.com/Azure/PyRIT" target="_blank" rel="noopener noreferrer">Microsoft PyRIT &#8599;</a></li><li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE Adversarial Threat Landscape for Artificial-Intelligence Systems (ATLAS) &#8599;</a></li><li><a href="/learn#ailab">Build your own AI lab</a></li></ul></article>
     <article class="pane rv"><h3>AI product managers &amp; AI leadership</h3><p>Pick the right use cases, set guardrails, and measure value.</p><ul class="ck"><li><a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener noreferrer">AI For Everyone (free to audit) &#8599;</a></li><li><a href="https://www.elementsofai.com/" target="_blank" rel="noopener noreferrer">Elements of AI &#8599;</a></li><li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework &#8599;</a></li><li><a href="/ai-guide">AI Explained for business leaders</a></li></ul></article>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="stay-current" aria-labelledby="sc2-h"><div class="wrap">
@@ -567,12 +584,14 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">Everyone</div>
   <h2 id="pw-h">Passwords, passphrases, multi-factor authentication, and encryption in plain English.</h2>
   <p class="lead">Most break-ins start with a stolen or guessed password. These four habits stop the majority of them, and none require technical skills.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>1. Length beats complexity</h3><p>A passphrase of four or more random words, such as <i>orbit-violin-pepper-harbor</i>, is longer, easier to remember, and much harder to crack than <i>P@ssw0rd1!</i>. Aim for 15 characters or more on important accounts. Never reuse a password, and change it when there is a sign it was exposed, not on a fixed calendar. This matches current federal guidance from the National Institute of Standards and Technology (NIST).</p></div>
     <div class="pane rv"><h3>2. Let a password manager remember for you</h3><p>A password manager creates and stores a unique, strong password for every account, so you only remember one master passphrase. Businesses should use a team edition with shared vaults instead of spreadsheets or sticky notes. Popular options include <a href="https://bitwarden.com/" target="_blank" rel="noopener noreferrer">Bitwarden</a> and <a href="https://keepassxc.org/" target="_blank" rel="noopener noreferrer">KeePassXC</a>.</p></div>
     <div class="pane rv"><h3>3. Turn on multi-factor authentication (MFA)</h3><p>Multi-factor authentication, sometimes called two-factor authentication (2FA), asks for a second proof that it is really you. From strongest to weakest:</p><ul class="ck"><li><b>Best:</b> passkeys or physical security keys, which cannot be phished</li><li><b>Good:</b> an authenticator app that asks you to match a number</li><li><b>Better than nothing:</b> a code sent by text message</li></ul><p style="margin-top:10px">Never approve a login request you did not start.</p></div>
     <div class="pane rv"><h3>4. Encrypt what matters</h3><ul class="ck"><li><b>Devices:</b> turn on built-in disk encryption (BitLocker on Windows, FileVault on Mac, and the default on modern phones) so a lost laptop is not a data breach.</li><li><b>Connections:</b> only enter information on sites showing the padlock (HTTPS).</li><li><b>Backups:</b> encrypt backups and keep one copy offline or unchangeable.</li><li><b>Sensitive files and email:</b> use your email and file platform&#39;s built-in encryption or confidential labels.</li></ul></div>
   </div>
+  </div></details>
   <div class="ctas2 rv"><a class="btn" href="/nexus-password-encryption-guide.pdf" download>Download the one-page guide (PDF)</a><a class="btn ghost" href="/resources#passwords">Check your password strength</a><a class="btn ghost" href="/personal-security">Secure your laptop, phone &amp; home network</a></div>
   <p class="disc rv">Online checkers such as <a href="https://www.security.org/how-secure-is-my-password/" target="_blank" rel="noopener noreferrer">Security.org</a> and <a href="https://howsecureismypassword.net/" target="_blank" rel="noopener noreferrer">How Secure Is My Password?</a> show how quickly a password can be cracked. Test a similar example, never your real password.</p>
 </div></section>
@@ -581,6 +600,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">Hands-On</div>
   <h2 id="al-h">Set up your own AI testing lab in an afternoon.</h2>
   <p class="lead">A private lab lets you learn how AI models behave, and how they can be attacked, without sending company data to an outside service. Everything below is free.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <div class="pane rv"><h3>1. Pick a machine</h3><p>A modern laptop with 16 GB of memory runs small models. A graphics card, or a short-term cloud server with one, handles larger models. Keep the lab separate from company data and networks.</p></div>
     <div class="pane rv"><h3>2. Install a local model runner</h3><p>Install <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a> or <a href="https://lmstudio.ai/" target="_blank" rel="noopener noreferrer">LM Studio</a>, then download a small open model from the <a href="https://huggingface.co/models" target="_blank" rel="noopener noreferrer">Hugging Face hub</a> or the runner&#39;s library.</p></div>
@@ -589,6 +609,8 @@ html,body{margin:0;background:#0E131A}
     <div class="pane rv"><h3>5. Add defenses and compare</h3><p>Put guardrails such as <a href="https://github.com/NVIDIA/NeMo-Guardrails" target="_blank" rel="noopener noreferrer">NeMo Guardrails</a> or <a href="https://github.com/protectai/llm-guard" target="_blank" rel="noopener noreferrer">large language model (LLM) Guard</a> in front of the model and rerun your tests. Map findings to the <a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">OWASP Top 10 for AI applications</a>.</p></div>
   </div>
   <p class="disc rv">Only test systems you own or have written permission to test.</p>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="help" aria-labelledby="lh-h"><div class="wrap">
@@ -627,5 +649,6 @@ html,body{margin:0;background:#0E131A}
 
 
 
+<script src="/js/fold-9353691fc3.js"></script>
 </body>
 </html>
