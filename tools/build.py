@@ -42,7 +42,7 @@ html,body{margin:0;background:#0E131A}
 
 NAV = """<div class="bar"><div class="nav">
   <a class="logo" href="/" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a>
-  <nav class="links" id="mainnav" aria-label="Main"><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/industries">Industries</a><a href="/approach">Our Approach</a><a href="/about">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/checklists">Readiness Checklists</a><a href="/regulatory-watch">Regulatory Watch</a><a href="/resources">Resource Library</a><a href="/israeli-startups">Israeli Startups: U.S. Market Entry</a><a href="/get-started">Get Started: Client Intake</a></div></div></nav>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/industries">Industries</a><a href="/approach">Our Approach</a><a href="/about">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/checklists">Readiness Checklists</a><a href="/regulatory-watch">Regulatory Watch</a><a href="/resources">Resource Library</a><a href="/get-started">Get Started: Client Intake</a></div></div></nav>
   <div class="navr">
     __ICONS__
     <a class="btn sm" href="/get-started">Request a Consultation</a>
@@ -112,7 +112,7 @@ S["ai"] = S["ai"].replace('<details class="refs rv"><summary>Pricing sources', '
 # ---------------------------------------------------------------- link rewriting
 ANCHOR_MAP = {
     "services": "/services", "ai-consulting": "/ai-consulting", "who": "/industries",
-    "israeli-startups": "/israeli-startups", "vciso": "/services#vciso", "regs": "/regulatory-watch",
+    "israeli-startups": "/industries", "vciso": "/services#vciso", "regs": "/regulatory-watch",
     "approach": "/approach", "lab": "/approach#lab", "readiness": "/#readiness", "founder": "/about",
     "newsletter": "/about#newsletter", "insights": "/about#insights", "free": "/resources",
     "faq": "/#faq", "contact": "/get-started",
@@ -204,7 +204,7 @@ EXPLORE = """<section class="s alt" id="explore" aria-labelledby="ex-h"><div cla
     <a class="chk spot rv" href="/industries"><b>Industries We Serve</b><span>Financial services, healthcare, defense suppliers, manufacturing, technology, and more.</span><em>Find your industry &rarr;</em></a>
     <a class="chk spot rv" href="/approach"><b>Our Approach &amp; Risk Lab</b><span>How we assess, prioritize, and prove progress, with an interactive risk matrix.</span><em>See how we work &rarr;</em></a>
     <a class="chk spot rv" href="/regulatory-watch"><b>Regulatory Watch</b><span>Plain-English status on CMMC, HIPAA, PCI DSS, the EU CRA, and NIST RMF.</span><em>Check the latest &rarr;</em></a>
-    <a class="chk spot rv" href="/israeli-startups"><b>Israeli Startups</b><span>Pass U.S. security reviews and earn SOC 2 with a U.S.-based fractional CISO.</span><em>U.S. market entry &rarr;</em></a>
+    <a class="chk spot rv" href="/industries"><b>Startups &amp; Scale-ups</b><span>Pass enterprise security reviews and earn SOC 2 with a fractional CISO.</span><em>See how we help &rarr;</em></a>
   </div>
 </div></section>"""
 
@@ -221,7 +221,7 @@ home_ld = re.findall(r'<script type="application/ld\+json">.*?</script>', HOME_T
 
 PAGES = []
 PAGES.append(("/", "Fractional CISO &amp; vCISO Services for SMBs | Nexus Security",
-    "Fractional vCISO, CMMC, HIPAA, SOC 2 and PCI DSS readiness, and AI governance for SMBs in every industry, plus U.S. market entry for Israeli startups.",
+    "Fractional vCISO, CMMC, HIPAA, SOC 2 and PCI DSS readiness, and AI governance for SMBs in every industry, plus SOC 2 and security-review support for startups.",
     home_content, "#services"))
 
 def sub(path, title, desc, hero, sections):
@@ -240,10 +240,6 @@ sub("/industries", "Industries We Serve: Cybersecurity for SMBs | Nexus Security
     "Cybersecurity leadership for financial services, healthcare, defense and aerospace suppliers, manufacturing and critical infrastructure, technology and SaaS, professional services, and nonprofits.",
     rhero("Industries", "we serve.", "Small and mid-sized businesses in every industry. Pick the one closest to yours to see the requirements you are likely facing and where to start."),
     [S["who"]])
-sub("/israeli-startups", "U.S. Market Entry for Israeli Startups: SOC 2 &amp; vCISO | Nexus",
-    "Help Israeli startups pass U.S. security reviews, earn SOC 2, map Israeli and EU privacy to U.S. requirements, and gain a named U.S.-based fractional CISO.",
-    rhero("Israeli startups:", "win U.S. enterprise buyers.", "A U.S.-based security leader, SOC 2 readiness, questionnaire support, and a 90-day plan to get your first U.S. deals through security review."),
-    [S["israeli"]])
 sub("/approach", "Our Approach &amp; Risk Lab: How We Reduce Cyber Risk | Nexus",
     "Our NIST CSF 2.0 based method: assess, prioritize on a 5x5 risk scale, execute a 30/60/90-day plan, and prove progress, plus an interactive risk scenario simulator.",
     rhero("Our approach:", "tools find the issues, people close them.", "How we assess, prioritize, execute, and prove progress, and an interactive Risk Lab that shows how findings turn into decisions."),
