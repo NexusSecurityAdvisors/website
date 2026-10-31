@@ -5,3 +5,30 @@ defaults: '2026-05-30',
 person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
 })
 ;(function(){var s=document.createElement('script');s.id='hs-script-loader';s.async=true;s.defer=true;s.src='https://js-na2.hs-scripts.com/247780434.js';document.head.appendChild(s);})();
+// Lead-source attribution (first-party, no identifiers). Remembers how a visitor first
+// arrived (UTM tags, ad click IDs, or the referring site, including AI assistants) and the
+// latest non-direct visit, for 90 days in this browser only. The intake form on
+// /get-started sends these with the request so each Zoho CRM lead shows where it came from.
+;(function(){try{
+ var K='nsa_attr',TTL=90*864e5,now=Date.now(),ls=window.localStorage;
+ var q=new URLSearchParams(location.search),ref=document.referrer||'',host='';
+ try{host=ref?new URL(ref).hostname.replace(/^www\./,'').toLowerCase():''}catch(e){}
+ if(/(^|\.)nexussecurityadvisors\.com$/.test(host))host='';
+ var AI=/(^|\.)(chatgpt\.com|openai\.com|perplexity\.ai|gemini\.google\.com|bard\.google\.com|copilot\.microsoft\.com|claude\.ai|you\.com|phind\.com|meta\.ai|grok\.com|deepseek\.com|mistral\.ai|kagi\.com)$/;
+ var SE=/(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|yahoo\.com|ecosia\.org|search\.brave\.com|startpage\.com|yandex\.[a-z.]+|baidu\.com)$/;
+ var SOC=/(^|\.)(linkedin\.com|lnkd\.in|facebook\.com|fb\.com|t\.co|x\.com|twitter\.com|reddit\.com|youtube\.com|instagram\.com|github\.com|medium\.com|substack\.com)$/;
+ function c(v){return String(v||'').replace(/[^\w.\-+ /:@]/g,'').slice(0,100)}
+ var t={src:c(q.get('utm_source')),med:c(q.get('utm_medium')),cmp:c(q.get('utm_campaign')),term:c(q.get('utm_term'))};
+ if(q.get('gclid')||q.get('gbraid')||q.get('wbraid')){t.src=t.src||'google';t.med=t.med||'cpc';}
+ else if(q.get('msclkid')){t.src=t.src||'bing';t.med=t.med||'cpc';}
+ else if(q.get('li_fat_id')){t.src=t.src||'linkedin';t.med=t.med||'paid-social';}
+ if(!t.src&&host)t.src=host;
+ var h=t.src.toLowerCase();
+ if(!t.med&&h)t.med=AI.test(h)?'ai-assistant':SE.test(h)?'organic':SOC.test(h)?'social':'referral';
+ if(t.src){t.ref=host;t.land=c(location.pathname);t.ts=new Date(now).toISOString().slice(0,10);}
+ var s=null;try{s=JSON.parse(ls.getItem(K)||'null')}catch(e){}
+ if(!s||!s.exp||s.exp<now)s={first:t.src?t:{src:'(direct)',med:'(none)',land:c(location.pathname),ts:new Date(now).toISOString().slice(0,10)}};
+ if(t.src)s.last=t;
+ s.exp=now+TTL;ls.setItem(K,JSON.stringify(s));
+}catch(e){}})();
+window.nsaAttribution=function(){try{var s=JSON.parse(localStorage.getItem('nsa_attr')||'null');return s&&s.exp>Date.now()?s:null}catch(e){return null}};
