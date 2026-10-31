@@ -1,0 +1,53 @@
+name: Production monitor
+
+# Daily check of the live site: security headers vs. site/_headers, TLS certificate lifetime,
+# and security.txt expiry. Opens (or updates) one issue on failure and closes it when healthy.
+on:
+  schedule:
+    - cron: "19 11 * * *" # daily 11:19 UTC
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: monitor
+  cancel-in-progress: false
+
+jobs:
+  live:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version-file: .python-version
+      - name: Check production
+        id: check
+        run: |
+          set +e
+          python tools/check_site.py --live > report.txt 2>&1
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          cat report.txt
+          { echo '```'; cat report.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Open, update or close the monitor issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          title="Production monitor: www.nexussecurityadvisors.com"
+          gh label create monitor --color B60205 --description "Automated production check" 2>/dev/null || true
+          num=$(gh issue list --label monitor --state open --json number --jq '.[0].number // empty')
+          body=$(printf 'Daily check failed on %s.\n\n```\n%s\n```\n\nRun: %s/%s/actions/runs/%s' "$(date -u +%F)" "$(cat report.txt)" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+          if [ "$STATUS" != "0" ]; then
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "$title" --label monitor --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "Healthy again on $(date -u +%F)."
+          fi
