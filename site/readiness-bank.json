@@ -1,0 +1,86 @@
+{
+  "version": "2026-10-31",
+  "answers": {
+    "yes": { "label": "Yes", "points": 2 },
+    "partly": { "label": "Partly", "points": 1 },
+    "no": { "label": "No", "points": 0 },
+    "unsure": { "label": "Not sure", "points": 0 }
+  },
+  "tracks": {
+    "cmmc": {
+      "title": "CMMC / NIST SP 800-171",
+      "blurb": "For defense and aerospace suppliers that handle Controlled Unclassified Information (CUI).",
+      "framework": "CMMC / NIST 800-171",
+      "questions": [
+        { "id": "c1", "q": "Do you know exactly where CUI is stored, processed, and sent (systems, people, and vendors)?", "fix": "Map your CUI data flows and define your assessment boundary before anything else." },
+        { "id": "c2", "q": "Do you have a current System Security Plan (SSP) that describes how each NIST SP 800-171 requirement is met?", "fix": "Write or refresh your SSP so every requirement has an owner and a description of how it is met." },
+        { "id": "c3", "q": "Do you have a Plan of Action & Milestones (POA&M) for requirements that are not fully met yet?", "fix": "Create a POA&M with owners and dates for every gap." },
+        { "id": "c4", "q": "Is multi-factor authentication required for all remote access and all privileged accounts?", "fix": "Turn on MFA for remote access, email, and every admin account." },
+        { "id": "c5", "q": "Have you calculated and submitted your NIST SP 800-171 score to SPRS within the last year?", "fix": "Run an honest self-assessment and post your SPRS score." },
+        { "id": "c6", "q": "Do you use FIPS-validated encryption for CUI at rest and in transit (or a compliant cloud such as a GCC High-type environment)?", "fix": "Confirm FIPS-validated encryption and an appropriate cloud enclave for CUI." },
+        { "id": "c7", "q": "Are security logs collected centrally and reviewed regularly?", "fix": "Centralize audit logs and set a regular review routine." },
+        { "id": "c8", "q": "Do you have a tested incident response plan that covers the 72-hour DoD reporting requirement?", "fix": "Document and tabletop-test an incident response plan that includes DoD reporting." }
+      ]
+    },
+    "hipaa": {
+      "title": "HIPAA Security Rule",
+      "blurb": "For healthcare providers, health tech, and business associates handling patient data.",
+      "framework": "HIPAA",
+      "questions": [
+        { "id": "h1", "q": "Have you completed a documented HIPAA security risk analysis in the last 12 months?", "fix": "Complete a documented risk analysis; it is the first thing regulators ask for." },
+        { "id": "h2", "q": "Do you have signed Business Associate Agreements (BAAs) with every vendor that touches patient data?", "fix": "Inventory vendors that touch ePHI and get BAAs signed." },
+        { "id": "h3", "q": "Is multi-factor authentication enabled for email, remote access, and systems holding patient data?", "fix": "Enable MFA on email, remote access, and EHR/admin accounts." },
+        { "id": "h4", "q": "Are laptops, phones, and backups that hold patient data encrypted?", "fix": "Encrypt endpoints and backups that hold ePHI." },
+        { "id": "h5", "q": "Do staff receive security and phishing awareness training at least once a year?", "fix": "Run annual HIPAA security and phishing training and keep records." },
+        { "id": "h6", "q": "Do you have offline or immutable backups, and have you tested restoring them?", "fix": "Keep offline/immutable backups and test a restore." },
+        { "id": "h7", "q": "Is there a named security official responsible for HIPAA security?", "fix": "Formally designate a security official." },
+        { "id": "h8", "q": "Do you have a written incident and breach response plan that covers notification timelines?", "fix": "Write an incident and breach notification plan and practice it." }
+      ]
+    },
+    "soc2": {
+      "title": "SOC 2",
+      "blurb": "For SaaS and service companies whose customers ask for a SOC 2 report.",
+      "framework": "SOC 2",
+      "questions": [
+        { "id": "s1", "q": "Have you decided which Trust Services Criteria and which systems are in scope for your SOC 2?", "fix": "Define your SOC 2 scope and criteria before buying tools or hiring an auditor." },
+        { "id": "s2", "q": "Do you have written, approved security policies that employees acknowledge?", "fix": "Adopt a right-sized policy set and collect employee acknowledgments." },
+        { "id": "s3", "q": "Are access reviews performed at least quarterly, with joiner/mover/leaver steps documented?", "fix": "Start quarterly access reviews and a documented onboarding/offboarding checklist." },
+        { "id": "s4", "q": "Do code and infrastructure changes go through review and approval before production?", "fix": "Require peer review and approval for production changes." },
+        { "id": "s5", "q": "Do you assess the security of critical vendors and keep evidence of it?", "fix": "Build a simple vendor risk review for critical suppliers." },
+        { "id": "s6", "q": "Are logging, monitoring, and alerting in place for production systems?", "fix": "Turn on centralized logging and alerting for production." },
+        { "id": "s7", "q": "Have you run a risk assessment and documented how each risk is treated?", "fix": "Run and document an annual risk assessment." },
+        { "id": "s8", "q": "Are you collecting evidence continuously (screenshots, tickets, reports) rather than right before the audit?", "fix": "Set up continuous evidence collection so the audit window is not a scramble." }
+      ]
+    },
+    "insurance": {
+      "title": "Cyber insurance readiness",
+      "blurb": "For any business applying for or renewing cyber insurance.",
+      "framework": "Cyber-Insurance Requirements",
+      "questions": [
+        { "id": "i1", "q": "Is multi-factor authentication enforced on email, remote access, and all admin accounts?", "fix": "Enforce MFA everywhere insurers check: email, remote access, and admin accounts." },
+        { "id": "i2", "q": "Do you have endpoint detection and response (EDR) on all laptops and servers?", "fix": "Deploy EDR on every endpoint and server." },
+        { "id": "i3", "q": "Are backups offline or immutable, and have you tested a full restore in the last year?", "fix": "Make backups offline/immutable and test a restore." },
+        { "id": "i4", "q": "Are security patches applied to critical systems within 30 days?", "fix": "Set a patching cadence with a 30-day target for critical systems." },
+        { "id": "i5", "q": "Do you filter email for phishing and train staff to report suspicious messages?", "fix": "Add email filtering and phishing-reporting training." },
+        { "id": "i6", "q": "Are privileged/admin accounts separate from everyday user accounts?", "fix": "Separate admin accounts from daily-use accounts." },
+        { "id": "i7", "q": "Do you have an incident response plan with your insurer's breach hotline listed?", "fix": "Write an incident response plan that starts with your insurer's hotline." },
+        { "id": "i8", "q": "Do you require call-back verification before changing payment or banking details?", "fix": "Require out-of-band verification for any payment or bank-detail change." }
+      ]
+    },
+    "aigov": {
+      "title": "AI governance",
+      "blurb": "For companies adopting AI tools or agents (NIST AI RMF, ISO/IEC 42001, EU AI Act).",
+      "framework": "AI Governance (NIST AI RMF / ISO 42001 / EU AI Act)",
+      "questions": [
+        { "id": "a1", "q": "Do you have an inventory of the AI tools, models, and agents your company uses, including free tools employees use on their own?", "fix": "Build an AI inventory that includes shadow AI tools." },
+        { "id": "a2", "q": "Do you have an AI acceptable-use policy that says what data may and may not be put into AI tools?", "fix": "Publish a short AI acceptable-use policy with clear data rules." },
+        { "id": "a3", "q": "Is someone accountable for AI risk decisions (a named owner or committee)?", "fix": "Name an accountable AI risk owner." },
+        { "id": "a4", "q": "Do you review AI vendors for data use, retention, and model-training terms before approving them?", "fix": "Add AI-specific questions to vendor reviews (training on your data, retention, location)." },
+        { "id": "a5", "q": "Do you know whether any of your AI uses would count as high-risk under the EU AI Act or similar laws?", "fix": "Classify each AI use case by regulatory risk level." },
+        { "id": "a6", "q": "Are AI agents limited to the least access they need, with human approval for risky actions?", "fix": "Apply least privilege and human approval steps to AI agents." },
+        { "id": "a7", "q": "Do you test AI features for prompt injection, data leakage, and harmful output before release?", "fix": "Add AI security testing (prompt injection, leakage) to your release process." },
+        { "id": "a8", "q": "Do you monitor AI use and outputs after deployment and have a way to report AI incidents?", "fix": "Monitor AI use in production and define an AI incident path." }
+      ]
+    }
+  }
+}
