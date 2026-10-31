@@ -88,7 +88,7 @@ def repo_checks():
     pages = sorted(SITE.glob("*.html"))
     for page in pages:
         html = page.read_text(encoding="utf-8")
-        if re.search(r"<script(?![^>]*\bsrc=)(?![^>]*application/ld\+json)[^>]*>\s*\S", html):
+        if re.search(r"<script\b(?![^>]*\bsrc\s*=)(?![^>]*application/ld\+json)[^>]*>\s*\S", html, re.IGNORECASE):
             err(f"{page.name}: inline <script> found (CSP expects external scripts)")
         for ref in re.findall(r'(?:href|src)="([^"]+)"', html):
             if ref.startswith(("http:", "https:", "mailto:", "tel:", "#", "data:", "javascript:")):
@@ -119,6 +119,7 @@ def live_checks():
     if live.get("Content-Security-Policy") != want.get("Content-Security-Policy"):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
     ctx = ssl.create_default_context()
+    ctx.minimum_version = ssl.TLSVersion.TLSv1_2  # never negotiate TLS 1.0/1.1
     with socket.create_connection((HOST, 443), timeout=30) as s, ctx.wrap_socket(s, server_hostname=HOST) as t:
         not_after = datetime.strptime(t.getpeercert()["notAfter"], "%b %d %H:%M:%S %Y %Z").replace(tzinfo=timezone.utc)
     days = (not_after - datetime.now(timezone.utc)).days
