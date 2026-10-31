@@ -1,5 +1,5 @@
 /*
-  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Strict-Transport-Security: max-age=15552000
   Content-Security-Policy: default-src 'self'; script-src 'self' https://*.posthog.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.usemessages.com https://*.hsadspixel.net https://*.hubspot.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.hubspot.com https://*.hsforms.com https://*.hs-analytics.net https://*.hs-banner.com; font-src 'self'; connect-src 'self' https://*.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsforms.com https://*.hs-analytics.net https://*.usemessages.com; frame-src https://*.hubspot.com; form-action 'self' https://crm.zoho.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
@@ -7,9 +7,24 @@
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()
   Cross-Origin-Opener-Policy: same-origin
   X-Permitted-Cross-Domain-Policies: none
+  Cross-Origin-Resource-Policy: same-origin
 
+# Content-hashed bundles: cache for a year. analytics.js is not hashed, so it revalidates.
 /js/*
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/analytics.js
+  ! Cache-Control
+
+/*.webp
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/*.pdf
+  Cache-Control: public, max-age=86400
+/*.docx
+  Cache-Control: public, max-age=86400
+/*.xlsx
+  Cache-Control: public, max-age=86400
 
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
@@ -18,3 +33,10 @@
   Content-Type: text/plain; charset=utf-8
 /security.txt
   Content-Type: text/plain; charset=utf-8
+
+# Keep *.pages.dev copies out of search results (canonical host is www).
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
