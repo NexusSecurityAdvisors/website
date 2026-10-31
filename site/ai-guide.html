@@ -447,6 +447,17 @@ html,body{margin:0;background:#0E131A}
 #nsa .rhero .wrap{position:relative;z-index:2}
 </style>
 
+<style id="fold-css">
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -523,6 +534,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">The Basics</div>
   <h2 id="b-h">AI, machine learning, deep learning, and generative AI.</h2>
   <p class="lead">These terms are nested, not competing. Every generative AI tool is machine learning, and all machine learning is AI, but most AI in your business today is not generative.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <figure class="dg rv">
     <svg viewBox="0 0 900 470" role="img" aria-labelledby="dg1t dg1d">
       <title id="dg1t">How AI, machine learning, deep learning, and generative AI relate</title>
@@ -555,12 +567,15 @@ html,body{margin:0;background:#0E131A}
       <tr><td>AI agent</td><td>An LLM connected to tools, data, and permissions so it can act, not just answer.</td><td>Booking meetings, updating customer relationship management (CRM) records, triaging tickets</td><td>Excessive permissions and unintended actions</td></tr>
     </tbody>
   </table></div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="how" aria-labelledby="h-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Under the Hood</div>
   <h2 id="h-h">How a generative AI request actually flows.</h2>
   <p class="lead">An LLM does not look facts up. It predicts likely output based on patterns learned in training, plus whatever context you give it at the moment you ask. A well-built business deployment wraps the model in controls on both sides.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <figure class="dg rv">
     <svg viewBox="0 0 960 330" role="img" aria-labelledby="dg2t dg2d">
       <title id="dg2t">Generative AI request flow with security controls</title>
@@ -598,12 +613,15 @@ html,body{margin:0;background:#0E131A}
     <div class="pane rv"><h3>Why AI "hallucinates"</h3><p>Because the model predicts plausible text rather than retrieving verified facts, it can produce confident, fluent, and wrong answers, including invented citations. Grounding answers in your documents, asking for sources, and keeping a human reviewer on anything consequential are the standard mitigations.<sup><a href="#g2">[2]</a></sup></p></div>
     <div class="pane rv"><h3>Tokens and context windows</h3><p>Models read and write in <b>tokens</b>, roughly three-quarters of a word each. The <b>context window</b> is how much text the model can consider at once. Bigger windows allow longer documents but cost more per request.</p></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="configure" aria-labelledby="c-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Configure &amp; Deploy</div>
   <h2 id="c-h">Ways to bring AI into your business, from simplest to most custom.</h2>
   <p class="lead">Most small businesses should start at the top of this table and only move down when a clear use case justifies the extra cost and responsibility.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t">
     <thead><tr><th scope="col">Option</th><th scope="col">What it is</th><th scope="col">Data control</th><th scope="col">Effort &amp; cost</th></tr></thead>
     <tbody>
@@ -627,12 +645,15 @@ html,body{margin:0;background:#0E131A}
     <li>Publish a one-page AI acceptable-use policy and train employees on it before rollout.</li>
     <li>Map controls to a recognized framework such as the National Institute of Standards and Technology (NIST) AI Risk Management Framework (RMF)<sup><a href="#g1">[1]</a></sup> or International Organization for Standardization and International Electrotechnical Commission (ISO/IEC) 42001<sup><a href="#g11">[11]</a></sup> so customers and insurers can review them.</li>
   </ul>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="prompting" aria-labelledby="p-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Prompt Engineering</div>
   <h2 id="p-h">Better instructions, better answers.</h2>
   <p class="lead">Prompt engineering is the skill of giving an AI model clear context, a specific task, and a defined output. It is the cheapest way to improve AI results, and it requires no code.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>The six parts of a strong prompt</h3><ul class="ck">
       <li><b>Role:</b> who the AI should act as ("You are a healthcare privacy compliance analyst").</li>
@@ -660,12 +681,15 @@ Format: under 200 words, three short paragraphs, no jargon.
 Guardrails: do not promise certifications we do not hold; if the policy does not cover something, say we will follow up.</pre>
   </div>
   <div class="kb warn rv"><b>Security note:</b> never paste passwords, API keys, client records, or regulated data into AI tools that are not approved for that data. Be aware that text hidden in documents, emails, or web pages can carry instructions that hijack an AI assistant. This is called <b>prompt injection</b> and it is the number one risk on the Open Worldwide Application Security Project (OWASP) Top 10 for LLM Applications.<sup><a href="#g12">[12]</a></sup></div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="privacy" aria-labelledby="pv-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Privacy &amp; Regulations</div>
   <h2 id="pv-h">The AI rules that matter to U.S. small and mid-sized businesses.</h2>
   <p class="lead">There is no single U.S. AI law yet. Existing privacy, consumer-protection, and sector rules already apply to AI, and new AI-specific laws are arriving at the state and international level.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t">
     <thead><tr><th scope="col">Rule or framework</th><th scope="col">What it means for you</th><th scope="col">Status (as of Oct. 2026)</th></tr></thead>
     <tbody>
@@ -687,11 +711,14 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
     <li>Keep a human in the loop for hiring, lending, insurance, health, and other consequential decisions.</li>
     <li>Update your privacy notice and customer contracts to describe AI use and subprocessors honestly.</li>
   </ul>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="enterprise" aria-labelledby="e-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">The Big Picture</div>
   <h2 id="e-h">How large organizations are using AI, and what it is really delivering.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <article class="card rv"><div class="n">$2.67T</div><h3>Global AI spending in 2026</h3><p>Gartner forecasts worldwide AI spending of about $2.67 trillion in 2026, up 49.5% from 2025, with infrastructure the largest share.<sup><a href="#g4">[4]</a></sup></p></article>
     <article class="card rv"><div class="n">44%</div><h3>Scaling AI enterprise-wide</h3><p>In McKinsey's 2026 survey, 44% of organizations said they are scaling AI across the enterprise, up from 38% a year earlier. Nearly nine in ten use AI regularly.<sup><a href="#g3">[3]</a></sup></p></article>
@@ -715,12 +742,15 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
       <li>They train people. MIT NANDA researchers reported in 2025 that most enterprise generative AI pilots they studied showed no measurable profit return, largely because tools were not integrated into real workflows.<sup><a href="#g6">[6]</a></sup></li>
     </ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="cost" aria-labelledby="co-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Cost</div>
   <h2 id="co-h">What AI really costs to implement, update, and use.</h2>
   <p class="lead">License fees are the visible part. Integration, data cleanup, security, training, and ongoing monitoring usually cost more over the life of an AI program.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t">
     <thead><tr><th scope="col">Cost category</th><th scope="col">What drives it</th><th scope="col">One-time or ongoing</th></tr></thead>
     <tbody>
@@ -734,12 +764,15 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
     </tbody>
   </table></div>
   <div class="kb rv"><b>Illustration:</b> 25 employees on a $21 per user per month copilot license is $6,300 a year in licenses alone, before integration, training, or governance. Pilot with the people most likely to benefit, measure, then expand. Run your own numbers with our <a href="/ai-consulting#ai-roi">AI return on investment (ROI) calculator</a>.</div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="trust" aria-labelledby="t-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Trust</div>
   <h2 id="t-h">Seven trust factors to check before you rely on AI.</h2>
   <p class="lead">NIST describes trustworthy AI with seven characteristics. Use them as questions for any AI tool or vendor.<sup><a href="#g1">[1]</a></sup></p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t">
     <thead><tr><th scope="col">Characteristic</th><th scope="col">Question to ask</th></tr></thead>
     <tbody>
@@ -760,11 +793,14 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
     <li>Admin controls for SSO, retention, logging, and data residency</li>
     <li>A responsible-disclosure program and a history of fixing reported issues</li>
   </ul>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="benefits" aria-labelledby="bc-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Benefits &amp; Cautions</div>
   <h2 id="bc-h">The upside of AI and ML, and where to be careful.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane good rv"><h3>Benefits</h3><ul class="ck">
       <li>Time back on drafting, summarizing, and searching for information</li>
@@ -784,12 +820,15 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
       <li>Vendor lock-in, rising usage bills, and skills erosion from over-reliance</li>
     </ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="people" aria-labelledby="pe-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">People &amp; Resources</div>
   <h2 id="pe-h">Who you need to deploy, update, and maintain AI.</h2>
   <p class="lead">AI is not set-and-forget. Models change, vendors ship new versions, data drifts, and regulations evolve. Large enterprises staff every role below. Small and mid-sized businesses usually combine roles and bring in fractional help.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <figure class="dg rv">
     <svg viewBox="0 0 900 300" role="img" aria-labelledby="dg3t dg3d">
       <title id="dg3t">The AI lifecycle</title>
@@ -831,6 +870,8 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
     <div class="pane rv"><h3>Quarterly</h3><ul class="ck"><li>Re-test key prompts and agents after vendor model updates</li><li>Update the AI inventory and risk register</li><li>Review permissions and connectors</li></ul></div>
     <div class="pane rv"><h3>Annually</h3><ul class="ck"><li>Refresh the AI policy and training</li><li>Re-assess vendors and contracts</li><li>Red-team high-risk use cases and run an AI incident tabletop</li></ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="help" aria-labelledby="hp-h"><div class="wrap">
@@ -899,5 +940,6 @@ Guardrails: do not promise certifications we do not hold; if the policy does not
 
 
 
+<script src="/js/fold-9353691fc3.js"></script>
 </body>
 </html>
