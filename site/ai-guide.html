@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Explained for Business Leaders: AI, ML &amp; GenAI Guide | Nexus</title>
+<meta name="description" content="A plain-English guide to AI, machine learning, and generative AI: how it works, how to configure and prompt it, privacy and regulations, real costs, trust, and the people needed to run it.">
+<link rel="canonical" href="https://www.nexussecurityadvisors.com/ai-guide">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nexus Security Advisors">
+<meta property="og:title" content="AI Explained for Business Leaders: AI, ML &amp; GenAI Guide | Nexus">
+<meta property="og:description" content="A plain-English guide to AI, machine learning, and generative AI: how it works, how to configure and prompt it, privacy and regulations, real costs, trust, and the people needed to run it.">
+<meta property="og:url" content="https://www.nexussecurityadvisors.com/ai-guide">
+<meta property="og:image" content="https://www.nexussecurityadvisors.com/nexus-logo.webp">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0E131A">
+<link rel="icon" href="/nexus-favicon-512.webp" type="image/webp">
+<link rel="apple-touch-icon" href="/nexus-favicon-512.webp">
+<script src="/js/analytics.js" defer></script>
+<link rel="preload" href="/nsa-questrial-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/nsa-inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Questrial;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-questrial-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-inter-400.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/nsa-inter-500.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/nsa-inter-600.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/nsa-inter-700.woff2) format("woff2")}
+#nsa{--bg:#0E131A;--bg2:#0E1B2E;--deep:#152A45;--glass:rgba(21,42,69,.38);--line:rgba(201,204,207,.14);--line2:rgba(43,155,244,.35);--blue:#1A6FD1;--blue-h:#155CB0;--accent:#2B9BF4;--text:#F3F5F7;--silver:#C9CCCF;--muted:#A7AEB8;--head:Questrial,"Segoe UI",Arial,sans-serif;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--silver);line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#nsa *{box-sizing:border-box}
+#nsa [id]{scroll-margin-top:84px}
+#nsa a{color:inherit;text-decoration:none}
+#nsa a:focus-visible,#nsa summary:focus-visible,#nsa button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+#nsa .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+#nsa h1,#nsa h2,#nsa h3{font-family:var(--head);color:var(--text);font-weight:400;letter-spacing:.2px}
+#nsa h1{font-size:clamp(36px,5.4vw,62px);line-height:1.08;margin:16px 0 20px;max-width:860px}
+#nsa h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;margin:10px 0 14px}
+#nsa h3{font-size:20px;line-height:1.3;margin:0 0 8px}
+#nsa p{margin:0 0 14px}
+#nsa .lead{font-size:18px;max-width:720px;color:var(--silver)}
+#nsa .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--accent);font-size:12.5px;letter-spacing:3px;font-weight:600;text-transform:uppercase}
+#nsa .eyebrow:before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--accent))}
+#nsa .grad{background:linear-gradient(100deg,#FFFFFF 10%,#C9CCCF 45%,#2B9BF4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#nsa .skip{position:absolute;left:-999px;top:8px;background:var(--blue);color:#fff;padding:8px 14px;border-radius:6px;z-index:60}
+#nsa .skip:focus{left:12px}
+/* nav */
+#nsa .bar{position:sticky;top:0;z-index:50;background:rgba(14,19,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+#nsa .nav{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:14px 22px;max-width:1180px;margin:0 auto}
+#nsa .logo{line-height:0;flex-shrink:0;display:block}
+#nsa .logo img{height:46px;width:auto;display:block}
+#nsa footer .logo img{height:54px}
+#nsa .logo b{display:block;font-family:var(--head);font-size:28px;letter-spacing:5px;font-weight:400;background:linear-gradient(180deg,#FFFFFF 0%,#C9CCCF 55%,#8E949B 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#nsa .logo span{display:block;font-size:9.5px;letter-spacing:3.4px;color:var(--accent);font-weight:600;margin-top:4px}
+#nsa .links{display:flex;gap:26px;font-size:14px;color:var(--silver)}
+#nsa .mtog{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 11px;margin-left:4px;background:transparent;border:1px solid var(--line2);border-radius:8px;cursor:pointer}
+#nsa .ilband{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:26px;padding:20px 24px;border:1px solid var(--line2);border-radius:14px;background:linear-gradient(120deg,rgba(26,111,209,.25),rgba(14,19,26,.5));transition:border-color .2s}
+#nsa .ilband:hover{border-color:var(--accent)}#nsa .ilband b{flex:1 1 420px;color:var(--text);font-weight:500;font-size:16px}#nsa .ilband em{font-style:normal;color:var(--accent);font-weight:600;font-size:14px}
+#nsa .ilk{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:700}
+#nsa .mtog span{display:block;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+#nsa .mtog[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}#nsa .mtog[aria-expanded="true"] span:nth-child(2){opacity:0}#nsa .mtog[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#nsa .mtog:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#nsa .links a{position:relative;padding:4px 0}
+#nsa .links a:after{content:"";position:absolute;left:0;bottom:-2px;height:1px;width:0;background:var(--accent);transition:width .25s}
+#nsa .links a:hover{color:var(--text)}#nsa .links a:hover:after{width:100%}
+#nsa .navr{display:flex;align-items:center;gap:12px}
+#nsa .ico{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;transition:border-color .2s,background .2s}
+#nsa .ico:hover{border-color:var(--accent);background:rgba(43,155,244,.08)}
+#nsa .ico svg{width:17px;height:17px;fill:var(--silver)}
+/* buttons */
+#nsa .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);color:#fff;padding:13px 24px;border-radius:6px;font-weight:600;font-size:15px;line-height:1.2;transition:background .2s,box-shadow .25s,transform .2s,border-color .2s;box-shadow:0 0 0 rgba(43,155,244,0)}
+#nsa .btn:hover{background:var(--blue-h);box-shadow:0 8px 30px rgba(43,155,244,.28);transform:translateY(-1px)}
+#nsa .btn.ghost{background:rgba(14,19,26,.3);border:1px solid rgba(243,245,247,.55);box-shadow:none}
+#nsa .btn.ghost:hover{border-color:var(--accent);background:rgba(43,155,244,.08)}
+#nsa .btn.sm{padding:10px 18px;font-size:14px}
+#nsa .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+/* hero */
+#nsa .hero{position:relative;padding:120px 0 110px;background:radial-gradient(ellipse at 75% 30%,rgba(26,111,209,.28),transparent 55%),radial-gradient(ellipse at 10% 90%,rgba(21,42,69,.9),transparent 60%),linear-gradient(180deg,#0E131A 0%,#0E1B2E 100%);overflow:hidden}
+#nsa #net{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+#nsa .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,19,26,.92) 0%,rgba(14,19,26,.55) 50%,rgba(14,19,26,.1) 100%);pointer-events:none}
+#nsa .hero .wrap{position:relative;z-index:2}
+#nsa .pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--silver);border:1px solid var(--line2);background:rgba(43,155,244,.07);padding:6px 14px;border-radius:999px}
+#nsa .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:nsaPulse 2.4s infinite}
+@keyframes nsaPulse{0%,100%{opacity:1}50%{opacity:.35}}
+#nsa .trust{display:flex;flex-wrap:wrap;gap:10px 26px;margin:44px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--muted)}
+#nsa .trust li:before{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);transform:rotate(45deg);margin-right:10px;vertical-align:2px}
+/* stats */
+#nsa .stats{position:relative;z-index:3;margin-top:-46px}
+#nsa .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:rgba(14,27,46,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:12px;padding:0;max-width:1136px;overflow:hidden}
+#nsa .stat{padding:26px 24px;border-right:1px solid var(--line)}
+#nsa .stat:last-child{border-right:0}
+#nsa .stat b{display:block;font-family:var(--head);font-weight:400;font-size:38px;color:var(--text);line-height:1.1}
+#nsa .stat span{font-size:13.5px;color:var(--muted)}
+/* sections */
+#nsa section.s{position:relative;padding:96px 0}
+#nsa .alt{background:linear-gradient(180deg,rgba(14,27,46,.55),rgba(14,19,26,0))}
+#nsa .gridbg{background-image:linear-gradient(rgba(201,204,207,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(201,204,207,.045) 1px,transparent 1px);background-size:44px 44px}
+#nsa .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:40px}
+#nsa .card{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;overflow:hidden}
+#nsa .card:before{content:"";position:absolute;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--accent),transparent)}
+#nsa .card:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 0 1px rgba(43,155,244,.12)}
+#nsa .card .n{font-family:var(--head);font-size:13px;color:var(--accent);letter-spacing:2px;margin-bottom:14px}
+#nsa .card p{font-size:15px;margin-bottom:16px}
+#nsa .card .out{margin-top:auto;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+#nsa .card .out b{color:var(--accent);font-weight:600}
+#nsa .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+#nsa .chip{font-size:13px;color:var(--silver);border:1px solid var(--line);background:rgba(14,27,46,.6);padding:7px 14px;border-radius:999px}
+#nsa .who{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:34px}
+#nsa .who div{border-left:2px solid var(--accent);padding:4px 0 4px 18px}
+#nsa .who b{font-family:var(--head);font-weight:400;font-size:20px;color:var(--text);display:block;margin-bottom:6px}
+#nsa .steps{counter-reset:st;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px;padding:0;list-style:none;position:relative}
+#nsa .step{counter-increment:st;padding:26px;border:1px solid var(--line);border-radius:12px;background:rgba(14,19,26,.6)}
+#nsa .step:before{content:counter(st,decimal-leading-zero);display:block;font-family:var(--head);font-size:34px;color:transparent;-webkit-text-stroke:1px var(--accent);margin-bottom:8px}
+#nsa .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:34px}
+#nsa .chk{display:block;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:22px;transition:border-color .25s,transform .25s}
+#nsa .chk:hover{border-color:var(--accent);transform:translateY(-3px)}
+#nsa .chk b{display:block;color:var(--text);margin-bottom:4px;font-weight:600}
+#nsa .chk span{font-size:14px;color:var(--muted)}
+#nsa .chk em{display:block;font-style:normal;color:var(--accent);font-size:13.5px;font-weight:600;margin-top:12px}
+/* founder */
+#nsa .about{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start}
+#nsa .frame{position:relative;border:1px solid var(--line2);border-radius:14px;padding:30px;background:linear-gradient(160deg,rgba(26,111,209,.14),rgba(14,19,26,.4))}
+#nsa .frame h3{font-size:16px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-family:Inter,sans-serif;font-weight:600}
+#nsa ul.creds{list-style:none;padding:0;margin:0}
+#nsa ul.creds li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+#nsa ul.creds li:last-child{border-bottom:0}
+#nsa ul.creds li:before{content:"";display:inline-block;width:5px;height:5px;background:var(--accent);transform:rotate(45deg);margin-right:12px;vertical-align:2px}
+#nsa .plinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+#nsa .plink{display:inline-flex;align-items:center;gap:8px;font-size:14px;border:1px solid var(--line);border-radius:6px;padding:9px 14px;transition:border-color .2s,color .2s}
+#nsa .plink:hover{border-color:var(--accent);color:var(--text)}
+#nsa .plink svg{width:15px;height:15px;fill:currentColor}
+/* insights */
+#nsa .ins{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:40px}
+#nsa .panel{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:28px}
+#nsa .arts{list-style:none;padding:0;margin:0}
+#nsa .arts li{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;font-size:15px;color:var(--text)}
+#nsa .arts li:last-child{border-bottom:0}
+#nsa .arts small{color:var(--muted);white-space:nowrap;font-size:12.5px}
+#nsa .books{display:grid;gap:16px}
+#nsa .book{display:block;padding:20px;border:1px solid var(--line);border-radius:10px;transition:border-color .2s}
+#nsa .book:hover{border-color:var(--accent)}
+#nsa .book b{display:block;color:var(--text);font-family:var(--head);font-weight:400;font-size:18px}
+#nsa .book span{display:block;font-size:13.5px;color:var(--muted)}
+#nsa .book em{display:block;font-style:normal;margin-top:10px}
+#nsa .more{display:inline-block;margin-top:16px;color:var(--accent);font-weight:600;font-size:14px}
+#nsa .more:hover{color:var(--text)}
+/* faq */
+#nsa .faq{max-width:860px;margin-top:30px}
+#nsa details{border-bottom:1px solid var(--line)}
+#nsa summary{cursor:pointer;list-style:none;color:var(--text);font-weight:500;font-size:17px;padding:20px 36px 20px 0;position:relative}
+#nsa summary::-webkit-details-marker{display:none}
+#nsa summary:after{content:"";position:absolute;right:6px;top:26px;width:10px;height:10px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:transform .25s}
+#nsa details[open] summary:after{transform:rotate(-135deg);top:30px}
+#nsa details p{padding:0 0 16px;font-size:15.5px}
+/* cta */
+#nsa .cta{position:relative;text-align:center;padding:110px 0;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(43,155,244,.25),transparent 60%),linear-gradient(180deg,#0E1B2E,#0E131A)}
+#nsa .cta .lead{margin:0 auto}
+#nsa .cta .ctas{justify-content:center}
+#nsa .ring{position:absolute;left:50%;top:50%;width:760px;height:760px;margin:-380px 0 0 -380px;border:1px solid rgba(43,155,244,.12);border-radius:50%;pointer-events:none}
+#nsa .ring.r2{width:520px;height:520px;margin:-260px 0 0 -260px;border-color:rgba(43,155,244,.18)}
+/* footer */
+#nsa footer{padding:44px 0 30px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:#0B0F15}
+#nsa .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+#nsa .fgrid .fh{color:var(--text);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:0 0 12px;font-weight:600}
+#nsa .fgrid a{display:block;padding:3px 0}
+#nsa .fgrid a:hover{color:var(--text)}
+#nsa .legal{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px}
+/* progress + top */
+#nsa .prog{position:fixed;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--blue),var(--accent));z-index:80;box-shadow:0 0 10px var(--accent)}
+#nsa .totop{position:fixed;right:20px;bottom:22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:rgba(14,27,46,.85);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:18px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:70;backdrop-filter:blur(8px)}
+#nsa .totop.on{opacity:1;pointer-events:auto}
+#nsa .totop:hover{transform:translateY(-3px);border-color:var(--accent)}
+/* spotlight */
+#nsa .spot{position:relative}
+#nsa .spot:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(43,155,244,.16),transparent 45%)}
+#nsa .spot:hover:after{opacity:1}
+/* ticker */
+#nsa .ticker{margin-top:40px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+#nsa .track{display:flex;gap:14px;width:max-content;padding:14px 0;animation:nsaTick 38s linear infinite}
+#nsa .ticker:hover .track{animation-play-state:paused}
+@keyframes nsaTick{to{transform:translateX(-50%)}}
+/* command center */
+#nsa .cc{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;margin-top:40px}
+#nsa .cc .panel{position:relative}
+#nsa .ptitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+#nsa .ptitle h3{margin:0;font-size:18px}
+#nsa .tag{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+#nsa .mx{display:grid;grid-template-columns:28px repeat(5,1fr);gap:5px}
+#nsa .mx .ax{font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+#nsa .cell{aspect-ratio:1/1;border-radius:6px;border:1px solid rgba(255,255,255,.06);font-family:var(--head);font-size:15px;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s,box-shadow .2s,outline-color .2s;outline:2px solid transparent;outline-offset:1px;background:var(--c)}
+#nsa .cell:hover,#nsa .cell.sel{transform:scale(1.06);box-shadow:0 0 18px var(--c);outline-color:rgba(255,255,255,.8)}
+#nsa .cell.b1{--c:#2A3544}#nsa .cell.b2{--c:#1A5596}#nsa .cell.b3{--c:#1F78D6}#nsa .cell.b4{--c:#C2384B}
+#nsa .axl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:8px 0 0 33px;letter-spacing:1px;text-transform:uppercase}
+#nsa .mxout{margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6);font-size:14.5px;min-height:76px}
+#nsa .mxout b{color:var(--text)}
+#nsa .lvl{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.2px;padding:2px 9px;border-radius:4px;margin-left:6px;background:var(--c);color:#fff}
+#nsa .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
+#nsa .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+#nsa .ccr{display:grid;gap:22px}
+#nsa .term{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.7;background:#070B10;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+#nsa .term .tb{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:#0B1119}
+#nsa .term .tb i{width:10px;height:10px;border-radius:50%;background:#2A3442}
+#nsa .term .tb span{margin-left:8px;font-size:11.5px;color:var(--muted);font-family:Inter,sans-serif}
+#nsa .term pre{margin:0;padding:14px 16px;min-height:216px;white-space:pre-wrap;color:#B8C4D2}
+#nsa .term .ok{color:#5FD0A0}#nsa .term .wr{color:#F2C14E}#nsa .term .cr{color:#FF6B7A}#nsa .term .pr{color:var(--accent)}
+#nsa .cur{display:inline-block;width:8px;height:15px;background:var(--accent);vertical-align:-2px;animation:nsaBlink 1s steps(2) infinite}
+@keyframes nsaBlink{50%{opacity:0}}
+#nsa .radarw{display:grid;grid-template-columns:170px 1fr;gap:18px;align-items:center}
+#nsa .radar{position:relative;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(43,155,244,.10) 0 1px,transparent 1px) 0 0/14px 14px,radial-gradient(circle,#0E1B2E,#070B10);border:1px solid var(--line2);overflow:hidden}
+#nsa .radar:before,#nsa .radar:after{content:"";position:absolute;inset:25%;border:1px solid rgba(43,155,244,.25);border-radius:50%}
+#nsa .radar:after{inset:42%}
+#nsa .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(43,155,244,.55),rgba(43,155,244,0) 70deg,transparent 360deg);animation:nsaSpin 4s linear infinite}
+@keyframes nsaSpin{to{transform:rotate(360deg)}}
+#nsa .blip{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;box-shadow:0 0 10px var(--accent),0 0 0 0 rgba(43,155,244,.6);animation:nsaPing 2.6s infinite}
+#nsa .blip.hot{background:#FF6B7A;box-shadow:0 0 10px #FF6B7A}
+@keyframes nsaPing{0%{box-shadow:0 0 10px var(--accent),0 0 0 0 rgba(43,155,244,.6)}80%{box-shadow:0 0 10px var(--accent),0 0 0 14px rgba(43,155,244,0)}}
+#nsa .rlist{list-style:none;margin:0;padding:0;font-size:13.5px}
+#nsa .rlist li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+#nsa .rlist li:last-child{border-bottom:0}
+#nsa .rlist b{font-weight:600;font-size:11px;letter-spacing:1px}
+#nsa .note{font-size:12px;color:var(--muted);margin-top:14px}
+/* steps line */
+#nsa .steps:before{content:"";position:absolute;left:0;right:0;top:-18px;height:2px;background:var(--line)}
+#nsa .steps:after{content:"";position:absolute;left:0;top:-18px;height:2px;width:var(--p,0%);background:linear-gradient(90deg,var(--blue),var(--accent));box-shadow:0 0 10px var(--accent);transition:width .2s linear}
+/* resource tiles */
+#nsa .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:34px}
+#nsa .tile{display:flex;flex-direction:column;gap:6px;padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--glass);transition:border-color .25s,transform .25s}
+#nsa .tile:hover{border-color:var(--accent);transform:translateY(-3px)}
+#nsa .tile svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.6}
+#nsa .tile b{color:var(--text);font-weight:600}
+#nsa .tile span{font-size:13.5px;color:var(--muted)}
+@media(max-width:960px){#nsa .cc{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .radarw{grid-template-columns:1fr;justify-items:center}#nsa .rlist{width:100%}#nsa .term pre{font-size:12px;min-height:240px}#nsa .totop{right:14px;bottom:14px}}
+
+/* dropdown */
+#nsa .dd{position:relative;display:flex;align-items:center}
+#nsa .ddm{position:absolute;top:100%;left:-14px;min-width:240px;padding:10px;margin-top:10px;background:rgba(11,16,23,.97);border:1px solid var(--line2);border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(-4px);transition:all .2s}
+#nsa .ddm:before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+#nsa .dd:hover .ddm,#nsa .dd:focus-within .ddm{opacity:1;visibility:visible;transform:none}
+#nsa .ddm a{display:block;padding:8px 10px;border-radius:6px;font-size:14px}
+#nsa .ddm a:after{display:none}
+#nsa .ddm a:hover{background:rgba(43,155,244,.1)}
+/* regulatory watch */
+#nsa .rtabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px;border-bottom:1px solid var(--line);padding-bottom:12px}
+#nsa .rtab{font:inherit;font-size:14px;font-weight:600;color:var(--silver);background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px 16px;cursor:pointer;transition:all .2s}
+#nsa .rtab:hover{border-color:var(--accent);color:var(--text)}
+#nsa .rtab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 20px rgba(26,111,209,.35)}
+#nsa .rpanel{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;margin-top:26px}
+#nsa .rpanel[hidden]{display:none}
+#nsa .status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--accent);background:rgba(43,155,244,.08);margin-bottom:14px}
+#nsa .status.warn{color:#F2C14E;border-color:rgba(242,193,78,.45);background:rgba(242,193,78,.08)}
+#nsa .status.live{color:#5FD0A0;border-color:rgba(95,208,160,.45);background:rgba(95,208,160,.08)}
+#nsa .status i{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+#nsa .tl{list-style:none;margin:18px 0 0;padding:0 0 0 18px;border-left:1px solid var(--line2)}
+#nsa .tl li{position:relative;padding:0 0 16px 6px;font-size:14.5px}
+#nsa .tl li:before{content:"";position:absolute;left:-24px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+#nsa .tl li.now:before{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+#nsa .tl b{display:block;color:var(--text);font-size:13px;letter-spacing:.5px}
+#nsa .todo{list-style:none;margin:0;padding:0}
+#nsa .todo li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);font-size:14.5px;position:relative}
+#nsa .todo li:last-child{border-bottom:0}
+#nsa .todo li:before{content:"";position:absolute;left:2px;top:15px;width:12px;height:7px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+#nsa .src{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+#nsa .src a{font-size:13px;border:1px solid var(--line);border-radius:6px;padding:7px 12px;color:var(--silver);transition:all .2s}
+#nsa .src a:hover{border-color:var(--accent);color:var(--text)}
+#nsa .reviewed{font-size:12.5px;color:var(--muted);margin-top:18px}
+#nsa .rmf{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0 6px}
+#nsa .rmf button{font:inherit;font-size:12px;font-weight:600;color:var(--silver);background:rgba(14,27,46,.7);border:1px solid var(--line);border-radius:8px;padding:12px 4px;cursor:pointer;transition:all .2s}
+#nsa .rmf button:hover,#nsa .rmf button.on{border-color:var(--accent);color:#fff;background:rgba(26,111,209,.35)}
+#nsa .rmf button span{display:block;font-family:var(--head);font-size:18px;color:var(--accent)}
+#nsa .rmfout{min-height:66px;font-size:14.5px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6)}
+/* teaching */
+#nsa .teach{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:38px}
+#nsa .tcard{position:relative;padding:30px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,rgba(26,111,209,.12),rgba(14,19,26,.5));overflow:hidden}
+#nsa .tcard .org{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600}
+#nsa .tcard h3{margin-top:8px}
+#nsa .course{display:block;margin-top:14px;padding:14px 16px;border-left:2px solid var(--accent);background:rgba(14,19,26,.55);border-radius:0 8px 8px 0}
+#nsa .course b{display:block;color:var(--text);font-weight:600}
+#nsa .course span{font-size:13.5px;color:var(--muted)}
+/* newsletter */
+#nsa .news{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;padding:36px;border:1px solid var(--line2);border-radius:16px;background:radial-gradient(ellipse at 0% 0%,rgba(43,155,244,.16),transparent 60%),rgba(14,27,46,.55)}
+#nsa .news img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+#nsa .topics{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+@media(max-width:960px){#nsa .rpanel,#nsa .news{grid-template-columns:1fr}#nsa .news img{max-width:300px}}
+@media(max-width:600px){#nsa .rmf{grid-template-columns:repeat(4,1fr)}#nsa .rtab{flex:1 1 auto;padding:9px 10px;font-size:13px}#nsa .news{padding:22px}}
+
+#nsa .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+#nsa .eng{padding:12px 0;border-bottom:1px solid var(--line)}
+#nsa .eng:last-child{border-bottom:0}
+#nsa .eng b{display:block;color:var(--text);font-weight:600}
+#nsa .eng span{font-size:14px;color:var(--muted)}
+#nsa .compare{margin-top:26px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+#nsa .crow{display:grid;grid-template-columns:160px 1fr 1fr;border-top:1px solid var(--line)}
+#nsa .crow:first-child{border-top:0}
+#nsa .crow span{padding:13px 16px;font-size:14.5px}
+#nsa .crow span:first-child{color:var(--text);font-weight:600}
+#nsa .crow span:last-child{color:var(--text);background:rgba(26,111,209,.12)}
+#nsa .crow.ch span{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:700;background:rgba(14,27,46,.8)}
+#nsa .navr .gs{border-color:rgba(243,245,247,.4)}
+@media(max-width:960px){#nsa .vgrid{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .crow{grid-template-columns:1fr}#nsa .crow span:first-child{padding-bottom:0}#nsa .crow.ch{display:none}#nsa .navr .gs{display:none}}
+
+/* who we serve */
+#nsa .aud{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:36px}
+#nsa .acard{padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--glass);display:flex;flex-direction:column}
+#nsa .acard h3{font-size:19px}
+#nsa .acard p{font-size:14.5px}
+#nsa .chips2{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 14px}
+#nsa .chips2 span{font-size:11.5px;letter-spacing:.4px;color:var(--accent);border:1px solid var(--line2);border-radius:999px;padding:3px 10px;background:rgba(43,155,244,.06)}
+#nsa .alinks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto}
+#nsa .alinks a{font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;color:var(--silver);transition:all .2s}
+#nsa .alinks a:hover{border-color:var(--accent);color:var(--text);background:rgba(43,155,244,.08)}
+#nsa .acta{background:linear-gradient(160deg,rgba(26,111,209,.22),rgba(14,19,26,.4));border-color:var(--line2);justify-content:center}
+/* approach */
+#nsa .stepbtn{all:unset;box-sizing:border-box;display:flex;flex-direction:column;flex:1;width:100%;cursor:pointer;font:inherit;color:inherit}
+#nsa .stepbtn em{margin-top:auto!important;padding-top:12px}
+#nsa .step{display:flex;flex-direction:column}
+#nsa .stepbtn .sh{display:block;font-family:var(--head);font-weight:400;font-size:20px;color:var(--text);margin:0 0 8px}
+#nsa .step{transition:border-color .2s,background .2s,transform .2s}
+#nsa .step:hover{border-color:var(--line2);transform:translateY(-2px)}
+#nsa .step.on{border-color:var(--accent);background:rgba(26,111,209,.14);box-shadow:0 10px 30px rgba(26,111,209,.2)}
+#nsa .stepbtn span{display:block;font-size:14.5px}
+#nsa .stepbtn em{display:block;font-style:normal;font-size:12.5px;font-weight:600;color:var(--accent);margin-top:12px;letter-spacing:.5px}
+#nsa .stepbtn:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:10px}
+#nsa .apd{margin-top:20px;border:1px solid var(--line2);border-radius:14px;background:rgba(14,27,46,.7);padding:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#nsa .apd .full{grid-column:1/-1}
+#nsa .apd h4{margin:0 0 8px;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);font-weight:600}
+#nsa .apd ul{margin:0;padding-left:18px;font-size:14.5px}
+#nsa .apd li{margin-bottom:6px}
+#nsa .apd .meta2{display:flex;flex-wrap:wrap;gap:8px}
+#nsa .apx{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+#nsa .tl90{list-style:none;margin:6px 0 0;padding:0}
+#nsa .tl90 li{padding:10px 0 10px 16px;border-left:2px solid var(--line2);font-size:14.5px;position:relative}
+#nsa .tl90 li:before{content:"";position:absolute;left:-6px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+#nsa .tl90 b{display:block;color:var(--text);font-size:13.5px}
+#nsa .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+#nsa .kpis div{padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(14,19,26,.55)}
+#nsa .kpis b{display:block;color:var(--text);font-size:14px}
+#nsa .kpis span{font-size:12.5px;color:var(--muted)}
+#nsa .refs{margin-top:22px;border:1px solid var(--line);border-radius:12px;padding:0 20px;background:rgba(14,19,26,.5)}
+#nsa .refs summary{font-size:15px}
+#nsa .refs ol{font-size:14px;padding-left:22px;margin:0 0 18px}
+#nsa .refs li{margin-bottom:8px}
+#nsa .refs a{color:var(--accent)}
+/* simulator */
+#nsa .sim{margin-top:40px}
+#nsa .scns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+#nsa .scn{font:inherit;font-size:13.5px;font-weight:600;color:var(--silver);background:rgba(14,19,26,.7);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .2s}
+#nsa .scn:hover{border-color:var(--accent);color:var(--text)}
+#nsa .scn[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+#nsa .simgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+#nsa .ctrl{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;background:rgba(14,19,26,.5);transition:all .2s}
+#nsa .ctrl:hover{border-color:var(--line2)}
+#nsa .ctrl input{appearance:none;-webkit-appearance:none;flex-shrink:0;width:38px;height:22px;border-radius:999px;background:#2A3544;position:relative;cursor:pointer;transition:background .2s;margin-top:1px}
+#nsa .ctrl input:after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#C9CCCF;transition:left .2s}
+#nsa .ctrl input:checked{background:var(--blue)}#nsa .ctrl input:checked:after{left:19px;background:#fff}
+#nsa .ctrl input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#nsa .ctrl b{display:block;color:var(--text);font-size:14px;font-weight:600}
+#nsa .ctrl span{font-size:12.5px;color:var(--muted)}
+#nsa .ctrl:has(input:checked){border-color:var(--line2);background:rgba(26,111,209,.12)}
+#nsa .gauge{margin-bottom:14px}
+#nsa .gl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px}
+#nsa .gl b{font-family:var(--head);font-size:22px;color:var(--text);font-weight:400}
+#nsa .gbar{height:10px;border-radius:6px;background:rgba(201,204,207,.1);overflow:hidden}
+#nsa .gbar i{display:block;height:100%;width:0;border-radius:6px;transition:width .5s cubic-bezier(.2,.8,.2,1),background .3s}
+#nsa .simres{padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.6);font-size:14px;margin:6px 0 14px;min-height:96px}
+#nsa .simres b{color:var(--text)}
+#nsa .mini{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;max-width:220px}
+#nsa .mini i{aspect-ratio:1/1;border-radius:3px;background:var(--c);opacity:.35;transition:all .3s}
+#nsa .mini i.in{opacity:1;outline:2px dashed rgba(255,255,255,.7);outline-offset:-2px}
+#nsa .mini i.re{opacity:1;outline:2px solid #fff;outline-offset:-2px;box-shadow:0 0 12px var(--c)}
+#nsa .rl{all:unset;cursor:pointer;color:var(--silver)}
+#nsa .rl:hover,#nsa .rl:focus-visible{color:var(--text);text-decoration:underline;text-decoration-color:var(--accent)}
+#nsa .replay{margin-left:auto;font:inherit;font-size:11.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:4px;padding:2px 8px;cursor:pointer}
+#nsa .replay:hover{color:var(--text);border-color:var(--accent)}
+#nsa .term .tb{align-items:center}
+@media(max-width:960px){#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .alinks,#nsa .kpis{grid-template-columns:1fr}#nsa .apd{padding:20px}}
+/* reveal */
+#nsa.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+#nsa.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){#nsa *{animation:none!important;transition:none!important}#nsa.js .rv{opacity:1;transform:none}#nsa .track{flex-wrap:wrap;width:auto}}
+@media(prefers-reduced-motion:no-preference){#nsa{scroll-behavior:smooth}}
+@media(max-width:960px){
+ #nsa .links{display:none}
+ #nsa .mtog{display:inline-flex}
+ #nsa .links.open{display:flex;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;padding:10px 20px 18px;background:rgba(11,16,23,.98);border-bottom:1px solid var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.5);max-height:calc(100vh - 70px);overflow:auto;z-index:60}
+ #nsa .links.open>a,#nsa .links.open .ddt{display:block;padding:13px 4px;font-size:16px;border-bottom:1px solid var(--line)}
+ #nsa .links.open a:after{display:none}
+ #nsa .links.open .dd{display:block}
+ #nsa .links.open .ddm{position:static;opacity:1;visibility:visible;transform:none;margin:0;padding:0 0 0 12px;background:transparent;border:0;box-shadow:none;min-width:0}
+ #nsa .links.open .ddm a{padding:11px 4px;font-size:15px}
+ #nsa .about,#nsa .ins{grid-template-columns:1fr;gap:28px}
+ #nsa .stats .wrap{grid-template-columns:repeat(2,1fr)}
+ #nsa .stat:nth-child(2){border-right:0}
+ #nsa .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ #nsa .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ #nsa .hero{padding:80px 0 90px}#nsa section.s{padding:64px 0}#nsa .cta{padding:72px 0}
+ #nsa .ctas .btn{width:100%}
+ #nsa .navr .ico{display:none}
+ #nsa .stat{padding:18px 16px}#nsa .stat b{font-size:30px}
+ #nsa .fgrid{grid-template-columns:1fr}
+ #nsa .arts li{flex-direction:column;gap:2px}
+ #nsa .hero:after{background:linear-gradient(180deg,rgba(14,19,26,.55),rgba(14,19,26,.85))}
+}
+
+#nsa .il-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+#nsa .il-card{padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--glass)}
+#nsa .il-card .il-h{margin:0 0 8px;font-size:19px}#nsa .il-card p{margin:0;font-size:14.5px}
+#nsa .il-k{display:inline-block;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+#nsa .il-sec{padding:70px 0 10px}
+#nsa .il-sec .il-sub{margin-top:6px;font-size:clamp(22px,2.4vw,30px);font-weight:400;font-family:var(--head)}
+#nsa .il-h{font-family:var(--head);font-weight:400;color:var(--text)}
+#nsa .il-map{margin-top:28px;border:1px solid var(--line2);border-radius:14px;overflow:hidden}
+#nsa .il-map>div{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;border-bottom:1px solid var(--line)}
+#nsa .il-map>div:last-child{border-bottom:0}
+#nsa .il-map>div>*{padding:14px 18px;font-size:14px}
+#nsa .il-map .hd{background:rgba(26,111,209,.16)}#nsa .il-map .hd>*{font-weight:700;color:var(--text);font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase}
+#nsa .il-map b{color:var(--text)}
+#nsa .il-plan{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;counter-reset:ip}
+#nsa .il-plan>div{padding:22px;border:1px solid var(--line);border-radius:14px;background:rgba(14,19,26,.6)}
+#nsa .il-plan b{display:block;color:var(--text);font-size:16px;margin-bottom:8px}
+#nsa .il-plan ul{margin:0;padding-left:18px;font-size:14px}#nsa .il-plan li{margin-bottom:6px}
+#nsa .il-band{display:flex;gap:24px;align-items:center;justify-content:space-between;margin-top:40px;padding:26px 28px;border:1px solid var(--line2);border-radius:16px;background:linear-gradient(135deg,rgba(26,111,209,.22),rgba(14,19,26,.5))}
+#nsa .il-band p{margin:0;max-width:720px}
+#nsa .il-res{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+#nsa .il-res a{display:block;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--glass);transition:border-color .2s}
+#nsa .il-res a:hover{border-color:var(--accent)}#nsa .il-res b{display:block;color:var(--text);margin-bottom:4px}#nsa .il-res span{font-size:13.5px;color:var(--muted)}
+#nsa .il-note{font-size:12.5px;color:var(--muted);margin-top:14px}
+@media(max-width:960px){#nsa .il-grid,#nsa .il-res{grid-template-columns:1fr 1fr}#nsa .il-plan{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){#nsa .il-grid,#nsa .il-res,#nsa .il-plan{grid-template-columns:1fr}#nsa .il-map>div{grid-template-columns:1fr}#nsa .il-map .hd{display:none}#nsa .il-map>div>*:first-child{padding-bottom:0}#nsa .il-band{flex-direction:column;align-items:flex-start}}
+</style>
+<style>
+html,body{margin:0;background:#0E131A}
+#nsa .rhero h1{margin-top:0}
+#nsa .links a,#nsa .links .ddt{white-space:nowrap}
+@media(max-width:1180px){#nsa .navr .ico{display:none}#nsa .links{gap:18px}}
+@media(max-width:1060px) and (min-width:961px){#nsa .links{gap:14px;font-size:13.5px}#nsa .navr .btn.sm{padding-left:12px;padding-right:12px}}
+#nsa .explore .chk em{font-style:normal}
+#nsa .teaser{max-width:760px}
+#nsa .aip-grid .card{display:flex;flex-direction:column}
+#nsa .aip-grid .card .aip-price{margin-top:auto}
+#nsa .rhero{position:relative;padding:96px 0 60px;background:radial-gradient(ellipse at 80% 0%,rgba(26,111,209,.28),transparent 55%),linear-gradient(180deg,#0E131A,#0E1B2E);overflow:hidden}
+#nsa .rhero .wrap{position:relative;z-index:2}
+</style>
+
+</head>
+<body>
+<div id="nsa">
+<a class="skip" href="#main">Skip to content</a>
+<div class="prog" aria-hidden="true"></div>
+<a class="totop" href="#top" aria-label="Back to top">&uarr;</a>
+
+<div class="bar"><div class="nav">
+  <a class="logo" href="/" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/industries">Industries</a><a href="/approach">Our Approach</a><a href="/about">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/checklists">Readiness Checklists</a><a href="/regulatory-watch">Regulatory Watch</a><a href="/resources">Resource Library</a><a href="/ai-guide">AI Explained Guide</a><a href="/responsible-ai">Responsible AI</a><a href="/ai-detection">Spotting AI Fakes</a><a href="/resources#github">Free GitHub Toolkits</a><a href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on GitHub &#8599;</a><a href="/get-started">Get Started: Client Intake</a></div></div></nav>
+  <div class="navr">
+    <a class="ico" href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a><a class="ico" href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63a20.9 20.9 0 0 0-2.27-.12c-2.25 0-3.79 1.37-3.79 3.89v2.17H7.92v2.94h2.54V21h3.04z"/></svg></a><a class="ico" href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.6.69.49A10.1 10.1 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
+    <a class="btn sm" href="/get-started">Request a Consultation</a>
+    <button type="button" class="mtog" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+<script src="/js/shared-869813e0a8.js"></script>
+</div></div>
+
+<header class="rhero" id="top"><canvas id="net" aria-hidden="true"></canvas><div class="wrap">
+  <h1><span class="grad">AI explained</span> for business leaders.</h1>
+  <p class="lead">What AI, machine learning, and generative AI really are, how to configure and use them safely, what they cost, and who you need to keep them running.</p>
+</div></header>
+
+<main id="main">
+<style>
+#nsa .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+#nsa .toc a{font-size:13.5px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;color:var(--silver);text-decoration:none;background:rgba(14,27,46,.5)}
+#nsa .toc a:hover,#nsa .toc a:focus-visible{border-color:var(--accent);color:var(--text)}
+#nsa .ag p,#nsa .ag li{color:var(--silver)}
+#nsa .ag h3{margin-top:30px}
+#nsa .ag ul.ck{list-style:none;padding:0;margin:14px 0 0}
+#nsa .ag ul.ck li{position:relative;padding-left:24px;margin:8px 0;font-size:15.5px;line-height:1.55}
+#nsa .ag ul.ck li:before{content:"";position:absolute;left:3px;top:.55em;width:9px;height:9px;border-radius:2px;background:var(--accent);opacity:.85}
+#nsa .ag ul.ck.warn li:before{background:#E0A93B}
+#nsa .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:26px}
+#nsa .pane{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:24px 26px}
+#nsa .pane h3{margin-top:0}
+#nsa .pane.good{border-top:2px solid var(--accent)}
+#nsa .pane.bad{border-top:2px solid #E0A93B}
+#nsa .tw{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:12px;-webkit-overflow-scrolling:touch}
+#nsa table.t{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
+#nsa table.t th{text-align:left;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);font-weight:700;background:rgba(14,27,46,.85);padding:12px 14px}
+#nsa table.t td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--silver);line-height:1.5}
+#nsa table.t td:first-child{color:var(--text);font-weight:600}
+#nsa figure.dg{margin:28px 0 0;background:rgba(14,27,46,.55);border:1px solid var(--line);border-radius:14px;padding:18px}
+#nsa figure.dg svg{display:block;width:100%;height:auto}
+#nsa figure.dg figcaption{font-size:13.5px;color:var(--muted);margin-top:10px;text-align:center}
+#nsa .kb{margin-top:24px;padding:18px 22px;border-left:3px solid var(--accent);background:rgba(26,111,209,.10);border-radius:0 10px 10px 0;font-size:15.5px;color:var(--silver)}
+#nsa .kb b{color:var(--text)}
+#nsa .kb.warn{border-left-color:#E0A93B;background:rgba(224,169,59,.08)}
+#nsa pre.pr{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;color:var(--silver);background:rgba(14,19,26,.8);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:10px 0 0}
+#nsa .pr .lbl{display:block;color:var(--accent);font-weight:700;letter-spacing:1.2px;font-size:11.5px;text-transform:uppercase;margin-bottom:6px}
+#nsa sup a{color:var(--accent);text-decoration:none;font-size:11px;margin-left:1px}
+#nsa .ag a:not(.btn):not(.chk){color:var(--accent)}
+#nsa .refs ol li{color:var(--silver)}
+#nsa .ctas2{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+#nsa .xdet{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:0 20px;background:rgba(14,19,26,.45)}
+#nsa .xdet summary{font-size:16px}
+#nsa .xdet > div{padding-bottom:16px}
+#nsa .disc{font-size:13px;color:var(--muted);margin-top:18px}
+@media(max-width:600px){#nsa .pane{padding:20px}#nsa figure.dg{padding:10px}}
+
+</style>
+<section class="s ag" id="overview" aria-labelledby="ov-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Free Guide</div>
+  <h2 id="ov-h">Everything a leadership team needs to know before betting on AI.</h2>
+  <p class="lead">This guide is written for owners, executives, and information technology (IT) leads at small and mid-sized businesses. It explains the technology without the hype, shows how to set AI up safely, and is honest about the costs and the people it takes to keep AI working. Sources are listed at the bottom and linked throughout.</p></div>
+  <nav class="toc" aria-label="On this page">
+    <a href="#basics">AI vs ML vs GenAI</a><a href="#how">How GenAI works</a><a href="#configure">Configure &amp; deploy</a><a href="#prompting">Prompt engineering</a><a href="#privacy">Privacy &amp; regulations</a><a href="#enterprise">How big companies use AI</a><a href="#cost">What AI costs</a><a href="#trust">Trust factors</a><a href="#benefits">Benefits &amp; cautions</a><a href="#people">People to run AI</a><a href="#help">How Nexus helps</a><a href="#g-sources">Sources</a>
+  </nav>
+</div></section>
+
+<section class="s alt ag" id="basics" aria-labelledby="b-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">The Basics</div>
+  <h2 id="b-h">AI, machine learning, deep learning, and generative AI.</h2>
+  <p class="lead">These terms are nested, not competing. Every generative AI tool is machine learning, and all machine learning is AI, but most AI in your business today is not generative.</p></div>
+  <figure class="dg rv">
+    <svg viewBox="0 0 900 470" role="img" aria-labelledby="dg1t dg1d">
+      <title id="dg1t">How AI, machine learning, deep learning, and generative AI relate</title>
+      <desc id="dg1d">Four nested rounded boxes. Artificial intelligence is the outer box, containing machine learning, which contains deep learning, which contains generative AI and large language models.</desc>
+      <rect x="10" y="10" width="880" height="450" rx="26" fill="#0E1B2E" stroke="#C9CCCF" stroke-opacity=".35"/>
+      <text x="40" y="52" fill="#F3F5F7" font-family="Questrial,Arial,sans-serif" font-size="24">Artificial Intelligence (AI)</text>
+      <text x="40" y="80" fill="#A7AEB8" font-family="Inter,Arial,sans-serif" font-size="15">Any system that performs tasks we associate with human intelligence. Includes rules engines and expert systems.</text>
+      <rect x="40" y="100" width="820" height="340" rx="22" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".35"/>
+      <text x="70" y="140" fill="#F3F5F7" font-family="Questrial,Arial,sans-serif" font-size="22">Machine Learning (ML)</text>
+      <text x="70" y="166" fill="#A7AEB8" font-family="Inter,Arial,sans-serif" font-size="15">Learns patterns from data instead of hand-written rules. Spam filters, fraud scoring, forecasting.</text>
+      <rect x="70" y="186" width="760" height="234" rx="18" fill="#17365C" stroke="#2B9BF4" stroke-opacity=".55"/>
+      <text x="100" y="224" fill="#F3F5F7" font-family="Questrial,Arial,sans-serif" font-size="21">Deep Learning</text>
+      <text x="100" y="250" fill="#C9CCCF" font-family="Inter,Arial,sans-serif" font-size="15">Many-layered neural networks. Image recognition, speech-to-text, translation.</text>
+      <rect x="100" y="270" width="700" height="130" rx="16" fill="#1A6FD1" fill-opacity=".9"/>
+      <text x="130" y="308" fill="#FFFFFF" font-family="Questrial,Arial,sans-serif" font-size="21">Generative AI &#183; LLMs &#183; Diffusion models</text>
+      <text x="130" y="336" fill="#EAF3FF" font-family="Inter,Arial,sans-serif" font-size="15">Creates new text, code, images, audio, and video from a prompt.</text>
+      <text x="130" y="362" fill="#EAF3FF" font-family="Inter,Arial,sans-serif" font-size="15">ChatGPT, Microsoft Copilot, Claude, Gemini, image and voice generators.</text>
+      <text x="130" y="386" fill="#EAF3FF" font-family="Inter,Arial,sans-serif" font-size="13.5">AI agents = generative models that can also take actions with tools and data.</text>
+    </svg>
+    <figcaption>Each ring is a subset of the one around it.</figcaption>
+  </figure>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Term</th><th scope="col">Plain-English meaning</th><th scope="col">Business examples</th><th scope="col">Main risk to manage</th></tr></thead>
+    <tbody>
+      <tr><td>Artificial intelligence</td><td>Software that perceives, reasons, predicts, or decides in ways that normally need a person.</td><td>Chatbots, routing rules, recommendation engines</td><td>Unclear ownership and accountability</td></tr>
+      <tr><td>Machine learning</td><td>Statistical models trained on historical data to make predictions.</td><td>Fraud scoring, demand forecasting, lead scoring, email filtering</td><td>Biased or stale training data</td></tr>
+      <tr><td>Deep learning</td><td>Machine learning using large neural networks, good with images, audio, and language.</td><td>Document optical character recognition (OCR), call transcription, defect detection</td><td>Hard to explain individual decisions</td></tr>
+      <tr><td>Generative AI</td><td>Models that produce new content by predicting the most likely next piece of output.</td><td>Drafting email and proposals, summarizing meetings, writing code, creating images</td><td>Confident wrong answers (hallucinations), data leakage, intellectual property (IP) questions</td></tr>
+      <tr><td>Large language model (LLM)</td><td>A generative model trained on huge amounts of text to predict the next word or token.</td><td>The engine inside ChatGPT, Copilot, Claude, and Gemini</td><td>Prompt injection and over-trust</td></tr>
+      <tr><td>AI agent</td><td>An LLM connected to tools, data, and permissions so it can act, not just answer.</td><td>Booking meetings, updating customer relationship management (CRM) records, triaging tickets</td><td>Excessive permissions and unintended actions</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section class="s ag" id="how" aria-labelledby="h-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Under the Hood</div>
+  <h2 id="h-h">How a generative AI request actually flows.</h2>
+  <p class="lead">An LLM does not look facts up. It predicts likely output based on patterns learned in training, plus whatever context you give it at the moment you ask. A well-built business deployment wraps the model in controls on both sides.</p></div>
+  <figure class="dg rv">
+    <svg viewBox="0 0 960 330" role="img" aria-labelledby="dg2t dg2d">
+      <title id="dg2t">Generative AI request flow with security controls</title>
+      <desc id="dg2d">A user prompt passes through input guardrails, is combined with approved company data through retrieval, is processed by the language model, then passes output filters and human review before the answer is used. Logging and monitoring run underneath every step.</desc>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2B9BF4"/></marker></defs>
+      <g font-family="Inter,Arial,sans-serif" text-anchor="middle">
+        <rect x="10" y="40" width="150" height="110" rx="14" fill="#152A45" stroke="#C9CCCF" stroke-opacity=".4"/>
+        <text x="85" y="88" fill="#F3F5F7" font-size="17" font-family="Questrial,Arial,sans-serif">1. Prompt</text>
+        <text x="85" y="112" fill="#A7AEB8" font-size="13">User question</text><text x="85" y="130" fill="#A7AEB8" font-size="13">+ instructions</text>
+        <rect x="200" y="40" width="150" height="110" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/>
+        <text x="275" y="88" fill="#F3F5F7" font-size="17" font-family="Questrial,Arial,sans-serif">2. Guardrails</text>
+        <text x="275" y="112" fill="#A7AEB8" font-size="13">Block secrets, PII,</text><text x="275" y="130" fill="#A7AEB8" font-size="13">injection attempts</text>
+        <rect x="390" y="40" width="160" height="110" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/>
+        <text x="470" y="88" fill="#F3F5F7" font-size="17" font-family="Questrial,Arial,sans-serif">3. Retrieval</text>
+        <text x="470" y="112" fill="#A7AEB8" font-size="13">Approved company</text><text x="470" y="130" fill="#A7AEB8" font-size="13">data (RAG)</text>
+        <rect x="590" y="30" width="160" height="130" rx="14" fill="#1A6FD1"/>
+        <text x="670" y="86" fill="#FFFFFF" font-size="18" font-family="Questrial,Arial,sans-serif">4. LLM</text>
+        <text x="670" y="110" fill="#EAF3FF" font-size="13">Predicts the most</text><text x="670" y="128" fill="#EAF3FF" font-size="13">likely response</text>
+        <rect x="790" y="40" width="160" height="110" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/>
+        <text x="870" y="82" fill="#F3F5F7" font-size="17" font-family="Questrial,Arial,sans-serif">5. Check</text>
+        <text x="870" y="106" fill="#A7AEB8" font-size="13">Output filters,</text><text x="870" y="124" fill="#A7AEB8" font-size="13">citations, human</text><text x="870" y="140" fill="#A7AEB8" font-size="13">review</text>
+        <path d="M160 95 H196" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar)"/>
+        <path d="M350 95 H386" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar)"/>
+        <path d="M550 95 H586" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar)"/>
+        <path d="M750 95 H786" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="10" y="200" width="940" height="56" rx="12" fill="#0E1B2E" stroke="#C9CCCF" stroke-opacity=".3" stroke-dasharray="6 5"/>
+        <text x="480" y="234" fill="#C9CCCF" font-size="15">Identity &amp; least privilege &#183; Logging &amp; monitoring &#183; Cost tracking &#183; Incident response</text>
+        <text x="480" y="300" fill="#A7AEB8" font-size="13.5">Training happens once (or periodically) on the vendor's side. Steps 1 to 5 happen every time someone asks a question.</text>
+      </g>
+    </svg>
+    <figcaption>RAG (retrieval-augmented generation) grounds answers in your own documents instead of the model's memory.</figcaption>
+  </figure>
+  <div class="two">
+    <div class="pane rv"><h3>Training vs. inference</h3><p><b>Training</b> is when a model learns patterns from a very large dataset. It is expensive and done by the model provider. <b>Inference</b> is each time you use the model. You pay for inference through per-seat licenses or per-token usage fees.</p></div>
+    <div class="pane rv"><h3>Why AI "hallucinates"</h3><p>Because the model predicts plausible text rather than retrieving verified facts, it can produce confident, fluent, and wrong answers, including invented citations. Grounding answers in your documents, asking for sources, and keeping a human reviewer on anything consequential are the standard mitigations.<sup><a href="#g2">[2]</a></sup></p></div>
+    <div class="pane rv"><h3>Tokens and context windows</h3><p>Models read and write in <b>tokens</b>, roughly three-quarters of a word each. The <b>context window</b> is how much text the model can consider at once. Bigger windows allow longer documents but cost more per request.</p></div>
+  </div>
+</div></section>
+
+<section class="s alt ag" id="configure" aria-labelledby="c-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Configure &amp; Deploy</div>
+  <h2 id="c-h">Ways to bring AI into your business, from simplest to most custom.</h2>
+  <p class="lead">Most small businesses should start at the top of this table and only move down when a clear use case justifies the extra cost and responsibility.</p></div>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Option</th><th scope="col">What it is</th><th scope="col">Data control</th><th scope="col">Effort &amp; cost</th></tr></thead>
+    <tbody>
+      <tr><td>Free consumer chat apps</td><td>Personal accounts on public AI chat sites</td><td>Lowest. Prompts may be retained or used to improve models depending on the vendor's terms and settings.</td><td>Free, but the hidden cost is data exposure. Not for company data.</td></tr>
+      <tr><td>Business or enterprise AI plans</td><td>Team and enterprise tiers of ChatGPT, Claude, Gemini, and similar</td><td>Better. Admin console, SSO, and contractual commitments not to train on your data (verify in the contract).</td><td>Per-user monthly license. Fast to roll out.</td></tr>
+      <tr><td>AI built into tools you already use</td><td>Microsoft 365 Copilot, Google Workspace with Gemini, CRM and helpdesk AI features</td><td>Inherits your existing tenant permissions, which means over-shared files become over-shared answers.</td><td>Add-on license per user, plus permission cleanup first.</td></tr>
+      <tr><td>Application programming interface (API) + retrieval (RAG)</td><td>Your own app or chatbot calling a model API and searching your approved documents</td><td>High, if built well. You choose what data is retrieved and logged.</td><td>Development, hosting, and pay-per-use token costs.</td></tr>
+      <tr><td>Fine-tuned models</td><td>A base model further trained on your examples to match your tone or task</td><td>High, but training data must be cleaned and protected.</td><td>Higher. Needs ML skills and an evaluation process.</td></tr>
+      <tr><td>Self-hosted open-weight models</td><td>Running models such as Llama, Mistral, or Gemma on your own servers or private cloud</td><td>Highest. Data never leaves your environment.</td><td>Highest. Graphics processing unit (GPU) hardware or cloud spend, patching, and monitoring are on you.</td></tr>
+      <tr><td>AI agents</td><td>Models that can act through connected tools, email, files, or APIs</td><td>Depends entirely on the permissions you grant.</td><td>Moderate to high. Requires strict least privilege and approval steps.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="rv">A safe-configuration checklist for any AI tool</h3>
+  <ul class="ck rv">
+    <li>Use business or enterprise plans with single sign-on (SSO) and multi-factor authentication (MFA), never personal accounts for company work.</li>
+    <li>Confirm in writing that your prompts and files are not used to train the vendor's models, and set data-retention to the shortest period that meets your needs.</li>
+    <li>Clean up file-sharing permissions before turning on copilots that search your documents.</li>
+    <li>Turn on data loss prevention (DLP) and sensitivity labels so regulated data (protected health information (PHI), card data, controlled unclassified information (CUI), client secrets) cannot be pasted or retrieved.</li>
+    <li>Grant connectors and agents the minimum permissions they need, and require human approval for sending, paying, deleting, or changing records.</li>
+    <li>Enable audit logging, keep logs for your retention period, and review them on a schedule.</li>
+    <li>Publish a one-page AI acceptable-use policy and train employees on it before rollout.</li>
+    <li>Map controls to a recognized framework such as the National Institute of Standards and Technology (NIST) AI Risk Management Framework (RMF)<sup><a href="#g1">[1]</a></sup> or International Organization for Standardization and International Electrotechnical Commission (ISO/IEC) 42001<sup><a href="#g11">[11]</a></sup> so customers and insurers can review them.</li>
+  </ul>
+</div></section>
+
+<section class="s ag" id="prompting" aria-labelledby="p-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Prompt Engineering</div>
+  <h2 id="p-h">Better instructions, better answers.</h2>
+  <p class="lead">Prompt engineering is the skill of giving an AI model clear context, a specific task, and a defined output. It is the cheapest way to improve AI results, and it requires no code.</p></div>
+  <div class="two">
+    <div class="pane rv"><h3>The six parts of a strong prompt</h3><ul class="ck">
+      <li><b>Role:</b> who the AI should act as ("You are a Health Insurance Portability and Accountability Act (HIPAA) compliance analyst").</li>
+      <li><b>Context:</b> the background it cannot know (audience, company size, constraints).</li>
+      <li><b>Task:</b> one clear verb ("summarize," "compare," "draft," "critique").</li>
+      <li><b>Format:</b> the shape of the answer (table, five bullets, 150 words).</li>
+      <li><b>Examples:</b> a sample of good output, if you have one.</li>
+      <li><b>Guardrails:</b> what to avoid, and permission to say "I don't know."</li>
+    </ul></div>
+    <div class="pane rv"><h3>Techniques that work</h3><ul class="ck">
+      <li>Ask it to think step by step, or to list assumptions before answering.</li>
+      <li>Provide the source documents and tell it to answer only from them.</li>
+      <li>Ask for citations and spot-check every one of them.</li>
+      <li>Break big jobs into a chain of smaller prompts.</li>
+      <li>Ask the model to critique its own draft against your criteria.</li>
+      <li>Save prompts that work as shared templates for your team.</li>
+    </ul></div>
+  </div>
+  <div class="two">
+    <pre class="pr rv"><span class="lbl">Weak prompt</span>Write something about our security for a customer.</pre>
+    <pre class="pr rv"><span class="lbl">Strong prompt</span>You are a security program manager at a 60-person accounting firm.
+Context: a new client asked how we protect their tax documents. Use only the attached policy summary.
+Task: draft a reply email in plain English.
+Format: under 200 words, three short paragraphs, no jargon.
+Guardrails: do not promise certifications we do not hold; if the policy does not cover something, say we will follow up.</pre>
+  </div>
+  <div class="kb warn rv"><b>Security note:</b> never paste passwords, API keys, client records, or regulated data into AI tools that are not approved for that data. Be aware that text hidden in documents, emails, or web pages can carry instructions that hijack an AI assistant. This is called <b>prompt injection</b> and it is the number one risk on the Open Worldwide Application Security Project (OWASP) Top 10 for LLM Applications.<sup><a href="#g12">[12]</a></sup></div>
+</div></section>
+
+<section class="s alt ag" id="privacy" aria-labelledby="pv-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Privacy &amp; Regulations</div>
+  <h2 id="pv-h">The AI rules that matter to U.S. small and mid-sized businesses.</h2>
+  <p class="lead">There is no single U.S. AI law yet. Existing privacy, consumer-protection, and sector rules already apply to AI, and new AI-specific laws are arriving at the state and international level.</p></div>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Rule or framework</th><th scope="col">What it means for you</th><th scope="col">Status (as of Oct. 2026)</th></tr></thead>
+    <tbody>
+      <tr><td>Existing U.S. law</td><td>HIPAA, the Gramm-Leach-Bliley Act (GLBA) and Federal Trade Commission (FTC) Safeguards Rule, state privacy laws, and FTC rules on unfair or deceptive practices all apply when AI handles personal data or makes claims to customers.</td><td>In force today</td></tr>
+      <tr><td>Federal AI policy</td><td>Executive Order 14365 (December 2025) set up a federal push to preempt state AI laws, and the White House released a National Policy Framework for AI in March 2026.</td><td>State AI laws remain in effect unless Congress acts or courts rule otherwise<sup><a href="#g10">[10]</a></sup></td></tr>
+      <tr><td>Colorado Senate Bill (SB) 26-189</td><td>Replaced the original Colorado AI Act. Requires notice before using automated decision technology for consequential decisions, plain-language explanations after adverse outcomes, and a path to human review.</td><td>Effective January 1, 2027<sup><a href="#g9">[9]</a></sup></td></tr>
+      <tr><td>Texas Responsible Artificial Intelligence Governance Act (TRAIGA), House Bill (HB) 149</td><td>Prohibits certain harmful AI uses and sets disclosure duties, mainly for government agencies and health care.</td><td>In force since January 1, 2026<sup><a href="#g13">[13]</a></sup></td></tr>
+      <tr><td>EU AI Act</td><td>Applies if you sell to or serve people in the EU. The 2026 Digital Omnibus (Regulation (EU) 2026/1744) moved high-risk Annex III obligations to December 2, 2027 and Annex I to August 2, 2028.</td><td>Prohibitions and general-purpose AI rules already apply; transparency labeling for some systems from December 2, 2026<sup><a href="#g8">[8]</a></sup></td></tr>
+      <tr><td>NIST AI RMF and generative AI (GenAI) Profile</td><td>Voluntary U.S. framework (Govern, Map, Measure, Manage) that regulators, customers, and insurers increasingly ask about.</td><td>Published; widely referenced<sup><a href="#g1">[1]</a></sup><sup><a href="#g2">[2]</a></sup></td></tr>
+      <tr><td>ISO/IEC 42001</td><td>Certifiable international standard for an AI management system.</td><td>Published 2023; certification available<sup><a href="#g11">[11]</a></sup></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disc rv">This is general information, not legal advice. AI law is changing quickly; confirm current requirements with your counsel. See <a href="/regulatory-watch">Regulatory Watch</a> for updates.</p>
+  <h3 class="rv">Privacy practices that keep AI out of trouble</h3>
+  <ul class="ck rv">
+    <li>Know which AI tools touch personal data, and list them in your records of processing and vendor inventory.</li>
+    <li>Minimize: send the AI only the data the task needs, and strip identifiers where possible.</li>
+    <li>Tell people when they are interacting with AI or when AI helps make a decision about them.</li>
+    <li>Keep a human in the loop for hiring, lending, insurance, health, and other consequential decisions.</li>
+    <li>Update your privacy notice and customer contracts to describe AI use and subprocessors honestly.</li>
+  </ul>
+</div></section>
+
+<section class="s ag" id="enterprise" aria-labelledby="e-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">The Big Picture</div>
+  <h2 id="e-h">How large organizations are using AI, and what it is really delivering.</h2></div>
+  <div class="grid">
+    <article class="card rv"><div class="n">$2.67T</div><h3>Global AI spending in 2026</h3><p>Gartner forecasts worldwide AI spending of about $2.67 trillion in 2026, up 49.5% from 2025, with infrastructure the largest share.<sup><a href="#g4">[4]</a></sup></p></article>
+    <article class="card rv"><div class="n">44%</div><h3>Scaling AI enterprise-wide</h3><p>In McKinsey's 2026 survey, 44% of organizations said they are scaling AI across the enterprise, up from 38% a year earlier. Nearly nine in ten use AI regularly.<sup><a href="#g3">[3]</a></sup></p></article>
+    <article class="card rv"><div class="n">37%</div><h3>Seeing enterprise-level profit impact</h3><p>Only 37% report enterprise-level earnings before interest and taxes (EBIT) impact from AI, essentially flat year over year. Adoption is easier than results.<sup><a href="#g3">[3]</a></sup></p></article>
+    <article class="card rv"><div class="n">362</div><h3>Reported AI incidents in 2025</h3><p>The Stanford AI Index recorded a record 362 reported AI incidents in 2025, a reminder that governance has not kept pace with deployment.<sup><a href="#g5">[5]</a></sup></p></article>
+  </div>
+  <div class="two">
+    <div class="pane rv"><h3>Where large companies are putting AI to work</h3><ul class="ck">
+      <li>Customer service: AI-drafted replies, chat triage, and call summaries</li>
+      <li>Software engineering: coding assistants and agents for tests and documentation</li>
+      <li>Marketing and sales: content drafts, personalization, and lead research</li>
+      <li>IT and security operations: alert triage, ticket routing, and threat-intel summaries</li>
+      <li>Knowledge management: searchable answers over policies, contracts, and manuals</li>
+      <li>Finance and operations: invoice processing, forecasting, and anomaly detection</li>
+    </ul></div>
+    <div class="pane rv"><h3>What separates winners from stalled pilots</h3><ul class="ck">
+      <li>They redesign the workflow, not just add a chatbot to it.</li>
+      <li>They pick a few measurable use cases and track results.</li>
+      <li>They clean up data and permissions first.</li>
+      <li>They assign an accountable owner and governance from day one.</li>
+      <li>They train people. MIT NANDA researchers reported in 2025 that most enterprise generative AI pilots they studied showed no measurable P&amp;L return, largely because tools were not integrated into real workflows.<sup><a href="#g6">[6]</a></sup></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="s alt ag" id="cost" aria-labelledby="co-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Cost</div>
+  <h2 id="co-h">What AI really costs to implement, update, and use.</h2>
+  <p class="lead">License fees are the visible part. Integration, data cleanup, security, training, and ongoing monitoring usually cost more over the life of an AI program.</p></div>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Cost category</th><th scope="col">What drives it</th><th scope="col">One-time or ongoing</th></tr></thead>
+    <tbody>
+      <tr><td>Licenses and seats</td><td>Number of users and tier. For example, Microsoft lists Microsoft 365 Copilot Business at $21 per user per month, with an $18 promotional first-year price through December 31, 2026.<sup><a href="#g7">[7]</a></sup></td><td>Ongoing</td></tr>
+      <tr><td>Usage and API fees</td><td>Tokens processed, model size, and how many requests your apps or agents make</td><td>Ongoing, variable</td></tr>
+      <tr><td>Data preparation and integration</td><td>Cleaning documents, fixing permissions, connecting CRM, enterprise resource planning (ERP), or file systems</td><td>Mostly one-time, plus upkeep</td></tr>
+      <tr><td>Security and governance</td><td>Policy, AI inventory, vendor reviews, DLP, logging, red-team testing</td><td>Setup, then ongoing</td></tr>
+      <tr><td>Training and change management</td><td>Role-based training, prompt libraries, champions program</td><td>Setup, then refreshers</td></tr>
+      <tr><td>Monitoring and model updates</td><td>Accuracy checks, drift, new vendor model versions, re-testing prompts and agents</td><td>Ongoing</td></tr>
+      <tr><td>Hardware (self-hosted only)</td><td>GPUs, servers or private cloud, power, and patching</td><td>Capital plus ongoing</td></tr>
+    </tbody>
+  </table></div>
+  <div class="kb rv"><b>Illustration:</b> 25 employees on a $21 per user per month copilot license is $6,300 a year in licenses alone, before integration, training, or governance. Pilot with the people most likely to benefit, measure, then expand.</div>
+</div></section>
+
+<section class="s ag" id="trust" aria-labelledby="t-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Trust</div>
+  <h2 id="t-h">Seven trust factors to check before you rely on AI.</h2>
+  <p class="lead">NIST describes trustworthy AI with seven characteristics. Use them as questions for any AI tool or vendor.<sup><a href="#g1">[1]</a></sup></p></div>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Characteristic</th><th scope="col">Question to ask</th></tr></thead>
+    <tbody>
+      <tr><td>Valid and reliable</td><td>How accurate is it on our tasks, and how was that measured?</td></tr>
+      <tr><td>Safe</td><td>What happens when it is wrong, and who catches it?</td></tr>
+      <tr><td>Secure and resilient</td><td>Has it been tested against prompt injection, data leakage, and abuse?</td></tr>
+      <tr><td>Accountable and transparent</td><td>Who owns it, and can we see what data and model it uses?</td></tr>
+      <tr><td>Explainable and interpretable</td><td>Can we explain an output to a customer, auditor, or regulator?</td></tr>
+      <tr><td>Privacy-enhanced</td><td>What data is retained, where, for how long, and is it used for training?</td></tr>
+      <tr><td>Fair, with harmful bias managed</td><td>Has it been checked for unequal outcomes across groups of people?</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="rv">Vendor trust signals</h3>
+  <ul class="ck rv">
+    <li>A current System and Organization Controls (SOC) 2 Type II report, and ISO/IEC 42001 or ISO/IEC 27001 certification where available</li>
+    <li>A clear data processing agreement with a no-training commitment and a subprocessor list</li>
+    <li>Published model or system cards that describe limitations and testing</li>
+    <li>Admin controls for SSO, retention, logging, and data residency</li>
+    <li>A responsible-disclosure program and a history of fixing reported issues</li>
+  </ul>
+</div></section>
+
+<section class="s alt ag" id="benefits" aria-labelledby="bc-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Benefits &amp; Cautions</div>
+  <h2 id="bc-h">The upside of AI and ML, and where to be careful.</h2></div>
+  <div class="two">
+    <div class="pane good rv"><h3>Benefits</h3><ul class="ck">
+      <li>Time back on drafting, summarizing, and searching for information</li>
+      <li>Faster customer response and around-the-clock first-line support</li>
+      <li>Better forecasting and anomaly detection from machine learning</li>
+      <li>Accessibility gains: transcription, translation, and plain-language rewrites</li>
+      <li>Faster security triage and threat-intelligence analysis</li>
+      <li>Small teams can compete on output with much larger ones</li>
+    </ul></div>
+    <div class="pane bad rv"><h3>Cautions</h3><ul class="ck warn">
+      <li>Hallucinations: fluent, confident, and wrong answers, including fake citations</li>
+      <li>Data leakage through prompts, over-shared files, or unapproved tools (shadow AI)</li>
+      <li>Prompt injection and over-permissioned agents taking unintended actions</li>
+      <li>Bias in training data that leads to unfair outcomes for people</li>
+      <li>Intellectual property and copyright uncertainty in generated content</li>
+      <li>Deepfakes and AI-powered fraud aimed at your staff (see <a href="/ai-detection">How to Spot AI Fakes</a>)</li>
+      <li>Vendor lock-in, rising usage bills, and skills erosion from over-reliance</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="s ag" id="people" aria-labelledby="pe-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">People &amp; Resources</div>
+  <h2 id="pe-h">Who you need to deploy, update, and maintain AI.</h2>
+  <p class="lead">AI is not set-and-forget. Models change, vendors ship new versions, data drifts, and regulations evolve. Large enterprises staff every role below. Small and mid-sized businesses usually combine roles and bring in fractional help.</p></div>
+  <figure class="dg rv">
+    <svg viewBox="0 0 900 300" role="img" aria-labelledby="dg3t dg3d">
+      <title id="dg3t">The AI lifecycle</title>
+      <desc id="dg3d">A continuous loop of six stages: plan and govern, prepare data, build or configure, test and red-team, deploy with controls, and monitor and improve, which feeds back into planning.</desc>
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2B9BF4"/></marker></defs>
+      <g font-family="Questrial,Arial,sans-serif" text-anchor="middle" font-size="16">
+        <rect x="20" y="40" width="240" height="70" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/><text x="140" y="72" fill="#F3F5F7">1. Plan &amp; govern</text><text x="140" y="94" fill="#A7AEB8" font-size="13" font-family="Inter,Arial,sans-serif">Use case, risk, owner</text>
+        <rect x="330" y="40" width="240" height="70" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/><text x="450" y="72" fill="#F3F5F7">2. Prepare data</text><text x="450" y="94" fill="#A7AEB8" font-size="13" font-family="Inter,Arial,sans-serif">Clean, label, set permissions</text>
+        <rect x="640" y="40" width="240" height="70" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/><text x="760" y="72" fill="#F3F5F7">3. Build or configure</text><text x="760" y="94" fill="#A7AEB8" font-size="13" font-family="Inter,Arial,sans-serif">Tool setup, prompts, RAG</text>
+        <rect x="640" y="190" width="240" height="70" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/><text x="760" y="222" fill="#F3F5F7">4. Test &amp; red-team</text><text x="760" y="244" fill="#A7AEB8" font-size="13" font-family="Inter,Arial,sans-serif">Accuracy, bias, security</text>
+        <rect x="330" y="190" width="240" height="70" rx="14" fill="#1A6FD1"/><text x="450" y="222" fill="#FFFFFF">5. Deploy with controls</text><text x="450" y="244" fill="#EAF3FF" font-size="13" font-family="Inter,Arial,sans-serif">Least privilege, logging</text>
+        <rect x="20" y="190" width="240" height="70" rx="14" fill="#152A45" stroke="#2B9BF4" stroke-opacity=".6"/><text x="140" y="222" fill="#F3F5F7">6. Monitor &amp; improve</text><text x="140" y="244" fill="#A7AEB8" font-size="13" font-family="Inter,Arial,sans-serif">Drift, incidents, updates</text>
+        <path d="M260 75 H326" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+        <path d="M570 75 H636" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+        <path d="M760 110 V186" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+        <path d="M640 225 H574" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+        <path d="M330 225 H264" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+        <path d="M140 190 V114" stroke="#2B9BF4" stroke-width="2" marker-end="url(#ar2)"/>
+      </g>
+    </svg>
+    <figcaption>Every stage needs an owner. Monitoring feeds the next round of planning.</figcaption>
+  </figure>
+  <div class="tw rv"><table class="t">
+    <thead><tr><th scope="col">Role</th><th scope="col">Responsibilities</th><th scope="col">Typical SMB approach</th></tr></thead>
+    <tbody>
+      <tr><td>Executive sponsor</td><td>Sets goals, approves budget and risk appetite, owns outcomes</td><td>Owner, chief executive officer (CEO), or chief operating officer (COO)</td></tr>
+      <tr><td>AI governance lead</td><td>AI policy, inventory, risk register, vendor approvals, regulatory tracking</td><td>Fractional virtual chief information security officer (vCISO) or fractional AI advisor</td></tr>
+      <tr><td>Security engineer</td><td>Identity, DLP, logging, prompt-injection defenses, agent permissions, red-team testing</td><td>Managed service provider (MSP) plus a fractional security lead</td></tr>
+      <tr><td>Data owner or data engineer</td><td>Data quality, permissions, pipelines, retention</td><td>Existing IT lead or MSP, with project help</td></tr>
+      <tr><td>AI or ML engineer</td><td>Builds RAG apps, integrations, fine-tuning, evaluations</td><td>Project-based contractor, only if building custom AI</td></tr>
+      <tr><td>Privacy and legal</td><td>Contracts, privacy notices, regulatory interpretation</td><td>Outside counsel as needed</td></tr>
+      <tr><td>Domain experts and reviewers</td><td>Define "good," review outputs, catch errors</td><td>Your own staff</td></tr>
+      <tr><td>AI champions and trainers</td><td>Prompt libraries, peer coaching, adoption tracking</td><td>One or two enthusiastic employees</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="rv">A maintenance cadence that works</h3>
+  <div class="grid">
+    <div class="pane rv"><h3>Monthly</h3><ul class="ck"><li>Review usage, cost, and audit logs</li><li>Triage user-reported errors</li><li>Check for new shadow AI tools</li></ul></div>
+    <div class="pane rv"><h3>Quarterly</h3><ul class="ck"><li>Re-test key prompts and agents after vendor model updates</li><li>Update the AI inventory and risk register</li><li>Review permissions and connectors</li></ul></div>
+    <div class="pane rv"><h3>Annually</h3><ul class="ck"><li>Refresh the AI policy and training</li><li>Re-assess vendors and contracts</li><li>Red-team high-risk use cases and run an AI incident tabletop</li></ul></div>
+  </div>
+</div></section>
+
+<section class="s alt ag" id="help" aria-labelledby="hp-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">How Nexus Helps</div>
+  <h2 id="hp-h">Services to implement, update, and maintain AI safely.</h2>
+  <p class="lead">Nexus Security Advisors can fill the governance and security roles above on a fractional basis, so you get enterprise-grade AI oversight without a full-time hire.</p></div>
+  <div class="grid">
+    <article class="card spot rv"><div class="n">01</div><h3>AI readiness &amp; use-case sprint</h3><p>Inventory current AI use, rank use cases by value and risk, and build a 90-day plan.</p></article>
+    <article class="card spot rv"><div class="n">02</div><h3>AI governance program</h3><p>Policy, inventory, risk register, vendor rules, and controls mapped to NIST AI RMF and ISO/IEC 42001.</p></article>
+    <article class="card spot rv"><div class="n">03</div><h3>Secure copilot &amp; agent rollout</h3><p>Permission cleanup, DLP, SSO, logging, and least-privilege design before you switch AI on.</p></article>
+    <article class="card spot rv"><div class="n">04</div><h3>AI red teaming &amp; testing</h3><p>Prompt-injection, data-leakage, and agent-abuse testing, with findings mapped to OWASP and MITRE Adversarial Threat Landscape for Artificial-Intelligence Systems (ATLAS).</p></article>
+    <article class="card spot rv"><div class="n">05</div><h3>Ongoing AI oversight</h3><p>Monthly and quarterly maintenance cadence, vendor and model-update reviews, and regulatory tracking as a fractional AI advisor.</p></article>
+    <article class="card spot rv"><div class="n">06</div><h3>Training &amp; incident readiness</h3><p>Leadership workshops, staff prompt and safety training, deepfake-fraud tabletops, and AI incident response plans.</p></article>
+  </div>
+  <div class="ctas2 rv"><a class="btn" href="/ai-consulting">See AI consulting packages</a><a class="btn ghost" href="/get-started">Request a free consultation</a></div>
+</div></section>
+
+<section class="s ag" id="g-sources" aria-labelledby="gs-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">Sources</div><h2 id="gs-h">References</h2></div>
+  <details class="refs rv" open><summary>Sources cited on this page (last reviewed October 31, 2026)</summary>
+    <ol>
+      <li id="g1">NIST, <em>AI Risk Management Framework (AI RMF 1.0)</em>. <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">nist.gov</a></li>
+      <li id="g2">NIST, <em>AI 600-1: Generative AI Profile</em>, July 2024. <a href="https://doi.org/10.6028/NIST.AI.600-1" target="_blank" rel="noopener noreferrer">doi.org/10.6028/NIST.AI.600-1</a></li>
+      <li id="g3">McKinsey &amp; Company, <em>The state of AI in 2026: On the road to return on investment (ROI)</em>, August 2026. <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener noreferrer">mckinsey.com</a></li>
+      <li id="g4">Gartner, <em>Gartner Forecasts Worldwide AI Spending to Grow 49.5% in 2026</em>, September 16, 2026. <a href="https://www.gartner.com/en/newsroom/press-releases/2026-09-16-gartner-forecasts-worldwide-ai-spending-to-grow-49-point-5-percent-in-2026" target="_blank" rel="noopener noreferrer">gartner.com</a></li>
+      <li id="g5">Stanford HAI, <em>The 2026 AI Index Report</em>. <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener noreferrer">hai.stanford.edu</a></li>
+      <li id="g6">The Register, reporting on MIT NANDA's <em>The GenAI Divide: State of AI in Business 2025</em>, August 18, 2025. <a href="https://www.theregister.com/2025/08/18/generative_ai_zero_return_95_percent" target="_blank" rel="noopener noreferrer">theregister.com</a></li>
+      <li id="g7">Microsoft, <em>Microsoft 365 Copilot plans and pricing</em>, accessed October 31, 2026. <a href="https://www.microsoft.com/en-us/microsoft-365-copilot/pricing" target="_blank" rel="noopener noreferrer">microsoft.com</a></li>
+      <li id="g8">Orrick, <em>EU AI Act Update: Digital Omnibus Finalizes 8 Compliance Changes</em>, July 2026. <a href="https://www.orrick.com/en/Insights/2026/07/EU-AI-Act-Update-Digital-Omnibus-Finalizes-8-Compliance-Changes" target="_blank" rel="noopener noreferrer">orrick.com</a></li>
+      <li id="g9">Seyfarth Shaw, <em>Colorado Enacts Artificial Intelligence Replacement Law</em>, 2026. <a href="https://www.seyfarth.com/news-insights/colorado-enacts-artificial-intelligence-replacement-law.html" target="_blank" rel="noopener noreferrer">seyfarth.com</a></li>
+      <li id="g10">Ropes &amp; Gray, <em>The White House Legislative Recommendations: National Policy Framework for AI and Federal Preemption of State AI Laws</em>, March 2026. <a href="https://www.ropesgray.com/en/insights/alerts/2026/03/the-white-house-legislative-recommendations-national-policy-framework-for-artificial-intelligence-an" target="_blank" rel="noopener noreferrer">ropesgray.com</a></li>
+      <li id="g11">ISO, <em>ISO/IEC 42001:2023 Artificial intelligence management system</em>. <a href="https://www.iso.org/standard/42001" target="_blank" rel="noopener noreferrer">iso.org</a></li>
+      <li id="g12">OWASP GenAI Security Project, <em>Top 10 for LLM Applications 2025</em>. <a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">genai.owasp.org</a></li>
+      <li id="g13">Digital Policy Alert, <em>Texas Responsible Artificial Intelligence Governance Act (HB 149) enters into force</em>. <a href="https://digitalpolicyalert.org/event/31262-texas-responsible-artificial-intelligence-governance-bill-hb-149-including-design-requirements-enters-into-force" target="_blank" rel="noopener noreferrer">digitalpolicyalert.org</a></li>
+    </ol>
+  </details>
+  <p class="disc rv">Related free guides: <a href="/responsible-ai">Responsible &amp; Ethical AI</a> &middot; <a href="/ai-detection">How to Spot AI Fakes and AI Bots</a> &middot; <a href="/checklists#aigov">AI Governance Checklist</a></p>
+</div></section>
+
+</main>
+
+<section class="cta" id="contact" aria-labelledby="ct-h">
+  <div class="ring"></div><div class="ring r2"></div>
+  <div class="wrap rv" style="position:relative">
+    <div class="eyebrow">Let's Talk</div>
+    <h2 id="ct-h">Start with a free 30-minute discovery call.</h2>
+    <p class="lead">Tell us your industry, size, and the security or compliance challenge in front of you. We'll tell you plainly whether we're a fit.</p>
+    <div class="ctas">
+      <a class="btn" href="/get-started">Request a consultation</a>
+      <a class="btn ghost" href="mailto:info@nexussecurityadvisors.com?subject=Website%20Inquiry">info@nexussecurityadvisors.com</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="logo" href="/" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a><p style="margin-top:14px;max-width:340px">Fractional vCISO, compliance readiness, and AI governance for small and mid-sized businesses in every industry. Serving clients across the United States.</p></div>
+    <div><h2 class="fh">Explore</h2><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/industries">Industries</a><a href="/approach">Our Approach</a><a href="/regulatory-watch">Regulatory Watch</a><a href="/about">About</a><a href="/resources">Free Resources</a><a href="/ai-guide">AI Explained Guide</a><a href="/resources#github">Free GitHub Toolkits</a></div>
+    <div><h2 class="fh">Connect</h2><a href="/get-started">Request a Consultation</a><a href="mailto:info@nexussecurityadvisors.com">info@nexussecurityadvisors.com</a><a href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer">Nexus on LinkedIn</a><a href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on Facebook</a><a href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on GitHub</a></div>
+    <div><h2 class="fh">Dan Sorensen</h2><a href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.dansorensen.info" target="_blank" rel="noopener noreferrer">DanSorensen.info</a><a href="https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors" target="_blank" rel="noopener noreferrer">Forbes Technology Council</a></div>
+  </div>
+  <div class="legal">&copy; 2026 Nexus Security Advisors. All rights reserved. &nbsp;&middot;&nbsp; <a href="/trust">Trust &amp; Security</a> &nbsp;&middot;&nbsp; <a href="/trust#privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/trust#disclosure">Report a vulnerability</a> &nbsp;&middot;&nbsp; <a href="/.well-known/security.txt">security.txt</a></div>
+</div></footer>
+</div>
+
+<script src="/js/shared-091d8bca1b.js"></script>
+
+
+
+</body>
+</html>
