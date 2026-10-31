@@ -480,7 +480,7 @@
   <ol class="steps2" id="steps" aria-label="Intake steps">
    <li class="on"><i>1</i>About you</li><li><i>2</i>Your organization</li><li><i>3</i>What you need</li><li><i>4</i>Priorities &amp; timing</li><li><i>5</i>Review &amp; send</li>
   </ol>
-  <form class="card2 ph-no-capture" id="intake" novalidate>
+  <form class="card2 ph-no-capture" id="intake" data-hs-do-not-collect="true" novalidate>
    <div class="pbar" aria-hidden="true"><i id="pb"></i></div>
 
    <fieldset class="st" data-s="0" style="border:0;padding:0;margin:0">
@@ -634,7 +634,7 @@ document.getElementById('b-send').addEventListener('click',function(){
    if(!CFG.a||!CFG.b||/^TEST/.test(CFG.a)){var o0=val();window.location.href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting request: '+(o0.company||''))+'&body='+encodeURIComponent(summary());ok.textContent='Your email app should open with your request filled in. Just press send. If it does not open, use "Download a copy" and email it to info@nexussecurityadvisors.com.';return;}
    var o=val(),nm=split(o.name),w=(o.website||'').trim();if(w&&!/^https?:\/\//i.test(w))w='https://'+w;
    var data={xnQsjsdp:CFG.a,zc_gad:'',xmIwtLD:CFG.b,actionType:CFG.t,returnURL:CFG.r,'First Name':clip(neut(nm.f),40),'Last Name':clip(neut(nm.l||o.name),80),Email:clip(o.email,100),Company:clip(neut(o.company),200),Designation:clip(neut(o.role),100),Phone:clip(phone(o.phone),30),Website:clip(neut(w),255),'Lead Source':CFG.ls,LEADCF6:clip(summary(),30000),aG9uZXlwb3Q:hpv};
-   Object.assign(data,nsaMap(o));var fm=document.createElement('form');fm.method='POST';fm.action=CFG.u;fm.acceptCharset='UTF-8';fm.style.display='none';
+   Object.assign(data,nsaMap(o));var fm=document.createElement('form');fm.method='POST';fm.action=CFG.u;fm.acceptCharset='UTF-8';fm.style.display='none';fm.setAttribute('data-hs-do-not-collect','true');fm.className='ph-no-capture';
    Object.keys(data).forEach(function(k){[].concat(data[k]).forEach(function(x){var el=document.createElement(k==='LEADCF6'?'textarea':'input');if(el.tagName==='INPUT')el.type='hidden';el.name=k;el.value=x;fm.appendChild(el);});});
    document.body.appendChild(fm);var btn=this;btn.disabled=true;btn.textContent='Sending…';
    try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}
