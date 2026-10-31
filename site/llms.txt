@@ -30,6 +30,8 @@ Key facts:
 
 ## Free tools and resources
 
+- [Free security readiness check](https://www.nexussecurityadvisors.com/readiness-check): Answer 8 questions for an instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance or AI governance, with your top 3 priorities.
+- [Personal device and privacy security](https://www.nexussecurityadvisors.com/personal-security): Checklists for laptops, phones, home networks and identity, plus a BYOD policy template.
 - [Readiness checklists](https://www.nexussecurityadvisors.com/checklists): Interactive CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, EU CRA and AI governance self-checks.
 - [Tabletop exercise kit](https://www.nexussecurityadvisors.com/tabletop): Facilitator guide, roles and eight incident scenarios with injects.
 - [Resource library](https://www.nexussecurityadvisors.com/resources): 300+ curated free cybersecurity and AI security resources.
