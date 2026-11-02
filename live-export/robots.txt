@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://www.nexussecurityadvisors.com/sitemap.xml
