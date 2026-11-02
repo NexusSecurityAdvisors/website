@@ -2,10 +2,15 @@
 """
 Synthetic end-to-end check of the Readiness Check API on production (standard library only).
 
-python3 tools/check_readiness.py [--base https://www.nexussecurityadvisors.com]
+python3 tools/check_readiness.py [--base https://www.nexussecurityadvisors.com]   # production
+python3 tools/check_readiness.py --base http://localhost:8788 --local             # wrangler pages dev
 
-Exercises the deployed Pages Function at /api/readiness without creating a lead, calling Claude
-or spending a rate-limit slot: every probe is rejected or short-circuited before those steps.
+Exercises the Pages Function at /api/readiness without creating a lead, calling Claude or spending
+a rate-limit slot: every probe is rejected or short-circuited before those steps.
+Cloudflare Bot Fight Mode blocks POSTs from cloud (GitHub runner) IP ranges at the edge, before the
+function runs, and the free plan cannot exempt them. So against production an edge-blocked POST is
+reported as a warning and the POST probes are skipped; the workflow runs the same probes in full
+against the function served locally by `wrangler pages dev` (--local makes them mandatory).
 - GET /readiness-check serves the page and its client script
 - GET /api/readiness            -> 405 with Allow: POST
 - POST from a foreign Origin    -> 403 forbidden
@@ -22,6 +27,7 @@ import urllib.request
 from pathlib import Path
 
 BASE = sys.argv[sys.argv.index("--base") + 1] if "--base" in sys.argv else "https://www.nexussecurityadvisors.com"
+LOCAL = "--local" in sys.argv
 BANK = json.loads((Path(__file__).resolve().parents[1] / "site" / "readiness-bank.json").read_text())
 UA = "nexus-readiness-monitor"
 errors = []
@@ -67,6 +73,17 @@ def main():
         errors.append(f"GET /api/readiness: expected 405 with Allow: POST, got {status} {allow!r}")
 
     origin = {"Origin": BASE, "Content-Type": "application/json"}
+    probe = call("POST", "/api/readiness", json.dumps({"track": "__synthetic__"}), origin)
+    if probe[0] == 403 and not probe[2].lstrip().startswith("{"):
+        msg = "POST /api/readiness blocked at the Cloudflare edge (Bot Fight Mode) for this runner"
+        if LOCAL:
+            errors.append(msg)
+        else:
+            print(f"::warning::{msg}; POST probes skipped here and covered by the local run")
+            print(f"{'FAIL' if errors else 'PASS'}: {len(errors)} error(s)")
+            for e in errors:
+                print(f"::error::{e}")
+            sys.exit(1 if errors else 0)
     expect("foreign origin", call("POST", "/api/readiness", "{}",
            {"Origin": "https://evil.example", "Content-Type": "application/json"}), 403, "forbidden")
     expect("wrong content type", call("POST", "/api/readiness", "x=1",
