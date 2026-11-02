@@ -114,7 +114,7 @@ def live_checks():
     want = headers_file()
     req = urllib.request.Request(f"https://{HOST}/", headers={"User-Agent": "nexus-site-monitor"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        live = {k: v for k, v in r.headers.items()}
+        live = {"-".join(p.capitalize() for p in k.split("-")): v for k, v in r.headers.items()}  # edge may send lowercase names
     check_headers(live, "production /")
     if live.get("Content-Security-Policy") != want.get("Content-Security-Policy"):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
