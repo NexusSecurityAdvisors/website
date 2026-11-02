@@ -1,0 +1,59 @@
+name: CI digest
+
+# One daily summary of every still-failing workflow across the NexusSecurityAdvisors org, kept in a
+# single "CI digest" issue (GitHub emails new comments to participants), closed automatically when
+# everything is green. Covers private repositories once the CI_DIGEST_TOKEN secret is added
+# (fine-grained token: owner NexusSecurityAdvisors, all repositories, Actions: read, Metadata: read).
+on:
+  schedule:
+    - cron: "53 12 * * *" # daily 12:53 UTC (07:53 Eastern), after the morning monitors
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ci-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Build digest
+        id: digest
+        env:
+          DIGEST_TOKEN: ${{ secrets.CI_DIGEST_TOKEN }}
+          FALLBACK_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          if [ -n "$DIGEST_TOKEN" ]; then export GH_TOKEN="$DIGEST_TOKEN"; else export GH_TOKEN="$FALLBACK_TOKEN" TOKEN_KIND=fallback; fi
+          python tools/ci_digest.py --hours 24 > digest.md
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          cat digest.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Post to the CI digest issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STATUS: ${{ steps.digest.outputs.status }}
+        run: |
+          gh label create ci-digest --color FBCA04 --description "Daily summary of failing workflows" 2>/dev/null || true
+          num=$(gh issue list --label ci-digest --state open --json number --jq '.[0].number // empty')
+          if [ "$STATUS" = "1" ]; then
+            if [ -n "$num" ]; then gh issue comment "$num" --body-file digest.md
+            else gh issue create --title "CI digest: failing workflows" --label ci-digest --body-file digest.md; fi
+          elif [ "$STATUS" = "0" ]; then
+            if [ -n "$num" ]; then gh issue close "$num" --comment "All workflows green on $(date -u +%F)."; fi
+          else
+            echo "::error::digest script failed (exit $STATUS)"; cat digest.md; exit 1
+          fi

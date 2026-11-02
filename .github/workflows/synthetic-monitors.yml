@@ -1,0 +1,75 @@
+name: Synthetic monitors
+
+# Daily checks that complement the Production monitor:
+# - dns:       domain and email-authentication posture (tools/check_dns.py)
+# - readiness: Readiness Check API end to end, without creating leads (tools/check_readiness.py)
+# Each check opens (or updates) its own issue on failure and closes it when healthy again.
+on:
+  schedule:
+    - cron: "41 11 * * *" # daily 11:41 UTC
+  pull_request:
+    paths: ["tools/check_dns.py", "tools/check_readiness.py", ".github/workflows/synthetic-monitors.yml"]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: synthetic-monitors-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: dns
+            script: tools/check_dns.py
+            title: "DNS and email security monitor: nexussecurityadvisors.com"
+          - name: readiness
+            script: tools/check_readiness.py
+            title: "Readiness Check API monitor: /api/readiness"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Run check
+        id: check
+        env:
+          SCRIPT: ${{ matrix.script }}
+        run: |
+          set +e
+          python "$SCRIPT" > report.txt 2>&1
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          cat report.txt
+          { echo '```'; cat report.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Fail the pull request check
+        if: github.event_name == 'pull_request' && steps.check.outputs.status != '0'
+        run: exit 1
+      - name: Open, update or close the monitor issue
+        if: github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STATUS: ${{ steps.check.outputs.status }}
+          LABEL: monitor-${{ matrix.name }}
+          TITLE: ${{ matrix.title }}
+        run: |
+          gh label create "$LABEL" --color B60205 --description "Automated synthetic check" 2>/dev/null || true
+          num=$(gh issue list --label "$LABEL" --state open --json number --jq '.[0].number // empty')
+          body=$(printf 'Daily check failed on %s.\n\n```\n%s\n```\n\nRun: %s/%s/actions/runs/%s' "$(date -u +%F)" "$(cat report.txt)" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+          if [ "$STATUS" != "0" ]; then
+            if [ -n "$num" ]; then gh issue comment "$num" --body "$body"; else gh issue create --title "$TITLE" --label "$LABEL" --body "$body"; fi
+            exit 1
+          elif [ -n "$num" ]; then
+            gh issue close "$num" --comment "Healthy again on $(date -u +%F)."
+          fi
