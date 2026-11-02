@@ -447,6 +447,17 @@ html,body{margin:0;background:#0E131A}
 #nsa .rhero .wrap{position:relative;z-index:2}
 </style>
 
+<style id="fold-css">
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -529,6 +540,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">Common Ground</div>
   <h2 id="pr-h">The principles nearly every framework agrees on.</h2>
   <p class="lead">Security practitioners, standards bodies, governments, and professional societies use different words, but they converge on the same core ideas.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t">
     <thead><tr><th scope="col">Principle</th><th scope="col">What it means in practice</th><th scope="col">Where you will see it</th></tr></thead>
     <tbody>
@@ -543,12 +555,15 @@ html,body{margin:0;background:#0E131A}
       <tr><td>Sustainability</td><td>Weigh the energy and environmental cost of AI against its benefit.</td><td>UNESCO, OECD</td></tr>
     </tbody>
   </table></div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="owasp" aria-labelledby="ow-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">OWASP</div>
   <h2 id="ow-h">Open Worldwide Application Security Project (OWASP) guidance for responsible, secure AI.</h2>
   <p class="lead">OWASP is a nonprofit, vendor-neutral community whose free, openly licensed guidance is built by volunteers worldwide. Its AI work treats security, privacy, and responsible use as one discipline.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="grid">
     <a class="chk spot rv" href="https://owaspai.org/" target="_blank" rel="noopener noreferrer"><b>OWASP AI Exchange</b><span>An open, comprehensive body of knowledge on AI threats and controls, contributed to international standards work including the EU AI Act standards.</span><em>Visit owaspai.org &rarr;</em></a>
     <a class="chk spot rv" href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer"><b>Top 10 for Large Language Model (LLM) Applications</b><span>The most critical risks in LLM apps, led by prompt injection, sensitive information disclosure, and excessive agency.</span><em>Read the Top 10 &rarr;</em></a>
@@ -583,11 +598,14 @@ html,body{margin:0;background:#0E131A}
     <tr><td><a href="https://owasp.org/www-project-non-human-identities-top-10/" target="_blank" rel="noopener noreferrer">OWASP Non-Human Identities Top 10</a></td><td>Risks from machine accounts, API keys, and service identities, which AI agents increasingly use.</td></tr>
   </tbody></table></div>
   <div class="kb rv"><b>OWASP and SANS, working together:</b> In July 2025 the SANS Institute and the OWASP AI Exchange announced a partnership to build one shared, open set of AI security controls, combining the AI Exchange&#39;s 200-page body of knowledge with the <a href="https://www.sans.org/mlp/critical-ai-security-guidelines" target="_blank" rel="noopener noreferrer">SANS Critical AI Security Guidelines</a> across six areas: access, data, deployment, inference, monitoring, and governance. The work feeds international standards, including the EU AI Act standards and ISO/IEC 27090. In April 2026, OWASP, SANS, NIST, the Cloud Security Alliance, the Center for Internet Security, and others formed <a href="https://www.sans.org/press/announcements/global-ai-security-standard-organizations-gather-mosaic-reduce-fragmentation" target="_blank" rel="noopener noreferrer">MOSAIC (Multi-Organization Secure AI Coordination)</a> to align AI security guidance, using the open <a href="https://opencre.org/" target="_blank" rel="noopener noreferrer">OpenCRE</a> taxonomy to connect their standards. Our founder is a member of the OWASP AI Exchange core team. Sources: <a href="https://www.globenewswire.com/news-release/2025/07/01/3108547/0/en/SANS-and-OWASP-Join-Forces-to-Standardize-AI-Security-Controls.html" target="_blank" rel="noopener noreferrer">SANS and OWASP partnership announcement</a>; <a href="https://www.sans.org/press/announcements/global-ai-security-standard-organizations-gather-mosaic-reduce-fragmentation" target="_blank" rel="noopener noreferrer">SANS MOSAIC announcement</a>.</div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="communities" aria-labelledby="cm-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Communities</div>
   <h2 id="cm-h">Professional, standards, and civic communities shaping AI ethics.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="checks">
     <a class="chk spot rv" href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer"><b>National Institute of Standards and Technology (NIST) AI Risk Management Framework</b><span>U.S. voluntary framework built around Govern, Map, Measure, and Manage, with seven trustworthy-AI characteristics.</span><em>nist.gov &rarr;</em></a>
     <a class="chk spot rv" href="https://www.iso.org/standard/42001" target="_blank" rel="noopener noreferrer"><b>ISO/IEC 42001</b><span>The ISO and IEC standard for an AI management system.</span><em>iso.org &rarr;</em></a>
@@ -599,12 +617,15 @@ html,body{margin:0;background:#0E131A}
     <a class="chk spot rv" href="https://atlas.mitre.org/" target="_blank" rel="noopener noreferrer"><b>MITRE ATLAS</b><span>Adversarial Threat Landscape for Artificial-Intelligence Systems: a knowledge base of real-world attacks on AI.</span><em>atlas.mitre.org &rarr;</em></a>
     <a class="chk spot rv" href="https://montrealdeclaration-responsibleai.com/" target="_blank" rel="noopener noreferrer"><b>Montreal Declaration for Responsible AI</b><span>A citizen-built declaration of ten principles, including well-being, autonomy, solidarity, and democratic participation.</span><em>Read the declaration &rarr;</em></a>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="what-they-say" aria-labelledby="ws-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">In Their Words</div>
   <h2 id="ws-h">What leading organizations say about using AI responsibly.</h2>
   <p class="lead">These are established standards bodies, intergovernmental organizations, professional societies, and research institutes. Their guidance overlaps far more than it differs.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Organization</th><th scope="col">Their core guidance</th></tr></thead><tbody><tr><td><a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">UNESCO Recommendation on the Ethics of AI (2021)</a></td><td>Adopted by its member states. Puts human rights and dignity first, asks that AI do no harm and be proportionate to its purpose, calls for ethical impact assessments, and says AI should not be used for social scoring or mass surveillance.</td></tr><tr><td><a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">OECD AI Principles (2019, updated 2024)</a></td><td>Endorsed by dozens of governments. AI should benefit people and the planet, respect human rights and democratic values, be transparent and explainable, be robust, secure, and safe, and have clear accountability.</td></tr><tr><td><a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai" target="_blank" rel="noopener noreferrer">European Union Ethics Guidelines for Trustworthy AI (2019)</a></td><td>Trustworthy AI must be lawful, ethical, and robust, meeting seven requirements: human agency and oversight; technical robustness and safety; privacy and data governance; transparency; diversity, non-discrimination, and fairness; societal and environmental well-being; and accountability.</td></tr><tr><td><a href="https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence" target="_blank" rel="noopener noreferrer">Council of Europe Framework Convention on AI (2024)</a></td><td>The first legally binding international treaty on AI. Requires that AI systems respect human rights, democracy, and the rule of law throughout their lifecycle.</td></tr><tr><td><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework</a></td><td>Treats responsible AI as risk management: build a governance culture, map where AI is used, measure risks, and manage them, aiming for AI that is valid, safe, secure, accountable, explainable, privacy-enhanced, and fair.</td></tr><tr><td><a href="https://www.acm.org/binaries/content/assets/public-policy/final-joint-ai-statement-update.pdf" target="_blank" rel="noopener noreferrer">ACM Principles for Responsible Algorithmic Systems (2022)</a></td><td>Computing professionals should ensure legitimacy and competence, minimize harm, protect security and privacy, be transparent and explainable, keep systems maintainable, make decisions contestable and auditable, accept accountability, and limit environmental impact.</td></tr><tr><td><a href="https://standards.ieee.org/ieee/7000/6781/" target="_blank" rel="noopener noreferrer">IEEE 7000 and Ethically Aligned Design</a></td><td>Engineers should identify stakeholder values early and design them into systems, rather than adding ethics after launch.</td></tr><tr><td><a href="https://partnershiponai.org/" target="_blank" rel="noopener noreferrer">Partnership on AI</a></td><td>Industry, academic, and civil-society members recommend responsible practices such as disclosing synthetic media and obtaining consent.</td></tr><tr><td><a href="https://montrealdeclaration-responsibleai.com/" target="_blank" rel="noopener noreferrer">Montreal Declaration for Responsible AI</a></td><td>Ten principles written with public input, including well-being, autonomy, privacy, solidarity, equity, diversity, prudence, and responsibility.</td></tr><tr><td><a href="https://www.adalovelaceinstitute.org/" target="_blank" rel="noopener noreferrer">Ada Lovelace Institute</a></td><td>Independent research institute focused on making data and AI work for people and society, with emphasis on public participation and accountability.</td></tr><tr><td><a href="https://www.turing.ac.uk/" target="_blank" rel="noopener noreferrer">The Alan Turing Institute</a></td><td>The United Kingdom's national institute for data science and AI; its public-sector guidance stresses fairness, accountability, sustainability, and transparency.</td></tr></tbody></table></div>
   <h3 class="rv">The ethical concerns they raise most often</h3>
   <ul class="ck warn rv">
@@ -617,12 +638,15 @@ html,body{margin:0;background:#0E131A}
     <li><b>Impacts on jobs and workers</b>, and the need for training and fair transitions</li>
     <li><b>Environmental cost</b> of the energy and water used to train and run large models</li>
   </ul>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="countries" aria-labelledby="cn-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Country &amp; Regional Guidance</div>
   <h2 id="cn-h">AI ethics, policy, and legal resources by country.</h2>
   <p class="lead">If you serve customers in more than one country, these official sources explain local expectations. Rules change often; check the source before relying on it.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Country or region</th><th scope="col">Official guidance and trackers</th></tr></thead><tbody><tr><td>United States</td><td><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework</a>; <a href="https://www.ftc.gov/industry/technology/artificial-intelligence" target="_blank" rel="noopener noreferrer">Federal Trade Commission (FTC) AI guidance</a>; <a href="https://www.copyright.gov/ai/" target="_blank" rel="noopener noreferrer">U.S. Copyright Office: Copyright and AI</a>; <a href="https://www.ncsl.org/technology-and-communication/artificial-intelligence-2025-legislation" target="_blank" rel="noopener noreferrer">State AI legislation tracker (NCSL)</a></td></tr><tr><td>European Union</td><td><a href="/eu-ai-act">Our EU AI Act guide</a>; <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-office" target="_blank" rel="noopener noreferrer">European AI Office (EU AI Act)</a>; <a href="https://artificialintelligenceact.eu/" target="_blank" rel="noopener noreferrer">EU AI Act Explorer</a>; <a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai" target="_blank" rel="noopener noreferrer">Ethics Guidelines for Trustworthy AI</a></td></tr><tr><td>United Kingdom</td><td><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/" target="_blank" rel="noopener noreferrer">Information Commissioner&#39;s Office (ICO) AI and data protection guidance</a>; <a href="https://www.aisi.gov.uk/" target="_blank" rel="noopener noreferrer">AI Security Institute</a></td></tr><tr><td>Canada</td><td><a href="https://ised-isde.canada.ca/site/ised/en/voluntary-code-conduct-responsible-development-and-management-advanced-generative-ai-systems" target="_blank" rel="noopener noreferrer">Voluntary Code of Conduct for Advanced Generative AI Systems</a></td></tr><tr><td>Australia</td><td><a href="https://www.industry.gov.au/publications/australias-artificial-intelligence-ethics-principles" target="_blank" rel="noopener noreferrer">Australia&#39;s AI Ethics Principles</a></td></tr><tr><td>Singapore</td><td><a href="https://www.pdpc.gov.sg/help-and-resources/2020/01/model-ai-governance-framework" target="_blank" rel="noopener noreferrer">Singapore&#39;s approach to AI governance (Model AI Governance Framework)</a></td></tr><tr><td>Japan</td><td><a href="https://www.meti.go.jp/english/press/2024/0419_002.html" target="_blank" rel="noopener noreferrer">AI Guidelines for Business (Ministry of Economy, Trade and Industry)</a></td></tr><tr><td>International</td><td><a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">OECD AI Principles</a>; <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">UNESCO Recommendation</a>; <a href="https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence" target="_blank" rel="noopener noreferrer">Council of Europe AI Convention</a>; <a href="https://iapp.org/resources/article/global-ai-legislation-tracker/" target="_blank" rel="noopener noreferrer">IAPP Global AI Law and Policy Tracker</a></td></tr></tbody></table></div>
   <h3 class="rv">Legal support for AI questions</h3>
   <ul class="ck rv">
@@ -633,12 +657,15 @@ html,body{margin:0;background:#0E131A}
     <li><b>Get counsel:</b> for contracts, regulated decisions, or cross-border data, work with a qualified attorney. Nexus works alongside your counsel to turn legal requirements into practical controls.</li>
   </ul>
   <p class="disc rv">General information, not legal advice.</p>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="lenses" aria-labelledby="f-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Ethical Lenses</div>
   <h2 id="f-h">Simple ways to test whether an AI use is the right thing to do.</h2>
   <p class="lead">Beyond laws and standards, these questions help leaders decide whether a use of AI fits their values and their customers&#39; expectations.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>Philosophical lenses</h3><p>Ethicists commonly test AI decisions through several lenses: <b>consequences</b> (does it produce more benefit than harm?), <b>duties and rights</b> (does it respect people's rights regardless of outcome?), <b>virtue</b> (would a person of good character deploy it this way?), and <b>care</b> (how does it affect the people with the least power?). A use case that fails any lens deserves a second look.</p></div>
     <div class="pane rv"><h3>Shared values</h3><ul class="ck">
@@ -652,20 +679,26 @@ html,body{margin:0;background:#0E131A}
   <div class="two">
     <div class="pane rv"><h3>Respecting your people</h3><p>A responsible AI program makes room for employees with different values. Explain why AI is used, invite concerns through a clear channel, and avoid mandating AI for tasks where a human relationship is the point of the work.</p></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="providers" aria-labelledby="pv2-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">AI Providers</div>
   <h2 id="pv2-h">What the major AI companies say about ethical use.</h2>
   <p class="lead">Every major AI provider publishes rules for how its tools may and may not be used. Your business agrees to these terms when employees use the tools, so your AI policy should be consistent with them. Summaries are ours; read each policy for the full terms, which change over time.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Provider</th><th scope="col">Published policy</th><th scope="col">Key commitments and limits (summary)</th></tr></thead><tbody><tr><td>OpenAI (ChatGPT)</td><td><a href="https://openai.com/policies/usage-policies/" target="_blank" rel="noopener noreferrer">Usage policies</a></td><td>Prohibits uses that harm people, violate privacy, deceive, or bypass safeguards; asks businesses to keep humans accountable for high-stakes decisions.</td></tr><tr><td>Anthropic (Claude)</td><td><a href="https://www.anthropic.com/legal/aup" target="_blank" rel="noopener noreferrer">Usage Policy</a>; <a href="https://www.anthropic.com/responsible-scaling-policy" target="_blank" rel="noopener noreferrer">Responsible Scaling Policy</a></td><td>Prohibits harmful, deceptive, and privacy-violating uses, adds requirements for high-risk uses such as legal, health, and financial advice, and commits to safety measures that scale with model capability.</td></tr><tr><td>Google (Gemini)</td><td><a href="https://ai.google/principles/" target="_blank" rel="noopener noreferrer">AI Principles</a>; <a href="https://policies.google.com/terms/generative-ai/use-policy" target="_blank" rel="noopener noreferrer">Generative AI Prohibited Use Policy</a></td><td>Commits to developing AI responsibly with human oversight and safety testing; prohibits dangerous, deceptive, and sexually explicit misuse.</td></tr><tr><td>Microsoft (Copilot)</td><td><a href="https://www.microsoft.com/en-us/ai/responsible-ai" target="_blank" rel="noopener noreferrer">Responsible AI principles and standard</a></td><td>Six principles: fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability.</td></tr><tr><td>Meta (Llama, Muse Spark)</td><td><a href="https://www.llama.com/use-policy/" target="_blank" rel="noopener noreferrer">Use Policy</a></td><td>Prohibits illegal, harmful, deceptive, and privacy-violating uses of Meta's models, and requires disclosing AI risks to end users.</td></tr><tr><td>Perplexity</td><td><a href="https://www.perplexity.ai/hub/legal/aup" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a></td><td>Prohibits illegal, harmful, and deceptive uses and attempts to bypass safeguards.</td></tr><tr><td>xAI (Grok)</td><td><a href="https://x.ai/legal/acceptable-use-policy" target="_blank" rel="noopener noreferrer">Acceptable Use Policy</a></td><td>Prohibits illegal and harmful uses, including violating privacy and deceiving or harming people.</td></tr></tbody></table></div>
   <div class="kb rv"><b>The common thread:</b> every provider prohibits using AI to break the law, deceive people, violate privacy, or cause harm, and expects a person to stay responsible for important decisions. Those same themes appear in the ten-point code of conduct below.</div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="code" aria-labelledby="cd-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Put It In Practice</div>
   <h2 id="cd-h">A ten-point AI code of conduct for small and mid-sized businesses.</h2>
   <p class="lead">Adopt, adapt, and publish these commitments. Each one is backed by the published standards, laws, and guidance linked beneath it.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <ol class="ck rv" style="list-style:decimal;padding-left:22px">
     <li><b>We disclose AI use</b> to customers and employees when AI interacts with them or helps make decisions about them. <span class="srcs">Sources: <a href="https://www.orrick.com/en/Insights/2026/07/EU-AI-Act-Update-Digital-Omnibus-Finalizes-8-Compliance-Changes" target="_blank" rel="noopener noreferrer">EU AI Act transparency duties (Article 50)</a>; <a href="https://www.seyfarth.com/news-insights/colorado-enacts-artificial-intelligence-replacement-law.html" target="_blank" rel="noopener noreferrer">Colorado Senate Bill (SB) 26-189 notice requirements</a>; <a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">OECD transparency principle</a></span></li>
     <li><b>We keep humans accountable.</b> Every AI system has a named owner. <span class="srcs">Sources: <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI Risk Management Framework (RMF) &ldquo;Govern&rdquo; function</a>; <a href="https://www.iso.org/standard/42001" target="_blank" rel="noopener noreferrer">ISO/IEC 42001</a>; <a href="https://owaspai.org/goto/aiprogram/" target="_blank" rel="noopener noreferrer">OWASP AI Exchange: AI program</a></span></li>
@@ -678,6 +711,8 @@ html,body{margin:0;background:#0E131A}
     <li><b>We make AI accessible</b> and offer a human alternative when AI does not work for someone. <span class="srcs">Sources: <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">UNESCO: fairness and inclusion</a>; <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" rel="noopener noreferrer">W3C Web Content Accessibility Guidelines</a></span></li>
     <li><b>We listen and correct.</b> People can report AI concerns, and we fix what we find. <span class="srcs">Sources: <a href="https://www.acm.org/binaries/content/assets/public-policy/final-joint-ai-statement-update.pdf" target="_blank" rel="noopener noreferrer">ACM principles: contestability and auditability</a>; <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">NIST AI RMF &ldquo;Manage&rdquo; function</a></span></li>
   </ol>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="redlines" aria-labelledby="rl-h"><div class="wrap">
@@ -738,5 +773,6 @@ html,body{margin:0;background:#0E131A}
 
 
 
+<script src="/js/fold-9353691fc3.js"></script>
 </body>
 </html>

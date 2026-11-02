@@ -447,6 +447,17 @@ html,body{margin:0;background:#0E131A}
 #nsa .rhero .wrap{position:relative;z-index:2}
 </style>
 
+<style id="fold-css">
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -524,6 +535,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rv"><div class="eyebrow">Deepfakes Explained</div>
   <h2 id="df-h">What deepfakes are, and why they matter to small businesses.</h2>
   <p class="lead">A deepfake is audio, video, or an image created or altered by AI to make someone appear to say or do something they never did. The technology is cheap and widely available, and criminals use it mostly for one thing: getting money or access. In 2024, an employee at global engineering firm Arup sent about US$25 million to fraudsters after a video call in which every other participant, including the &ldquo;chief financial officer,&rdquo; was a deepfake (<a href="https://edition.cnn.com/2024/05/16/tech/arup-deepfake-scam-loss-hong-kong-intl-hnk" target="_blank" rel="noopener noreferrer">CNN, May 2024</a>).</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Type</th><th scope="col">What it is</th><th scope="col">How it is used against businesses</th></tr></thead><tbody>
     <tr><td>Voice clone</td><td>AI copies a voice from a short recording, such as a podcast, webinar, or voicemail greeting</td><td>&ldquo;Urgent&rdquo; calls from the boss requesting wire transfers, gift cards, or password resets</td></tr>
     <tr><td>Face swap or puppet video</td><td>A real person&#39;s face is mapped onto someone else in live or recorded video</td><td>Fake video calls with executives; fake job candidates in remote interviews</td></tr>
@@ -532,11 +544,14 @@ html,body{margin:0;background:#0E131A}
     <tr><td>AI-written messages</td><td>Fluent, personalized emails and texts in any language</td><td>More convincing phishing and business email compromise with fewer spelling mistakes</td></tr>
   </tbody></table></div>
   <div class="kb warn rv"><b>The key lesson:</b> you cannot rely on spotting a good deepfake by eye or ear. Protect the <i>process</i>: call-back verification, two-person approval for payments, and code words for executives. Download our free <a href="/nexus-deepfake-verification-checklist.pdf" download>Deepfake &amp; AI Fraud Verification Checklist (PDF)</a>.</div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="text" aria-labelledby="tx-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Text</div>
   <h2 id="tx-h">Checking whether text was written by a large language model (LLM).</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>Signals worth noticing</h3><ul class="ck">
       <li>Polished but generic writing with few specific, checkable details</li>
@@ -553,11 +568,14 @@ html,body{margin:0;background:#0E131A}
     </ul></div>
   </div>
   <div class="kb warn rv"><b>Caution:</b> AI-text detectors produce false positives, and they are known to misflag writing by non-native English speakers. Never discipline an employee, student, or vendor based on a detector score alone.</div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="images" aria-labelledby="im-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Images</div>
   <h2 id="im-h">Spotting AI-generated and AI-edited images.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>Look closely</h3><ul class="ck">
       <li>Hands, teeth, ears, and jewelry with extra, merged, or missing parts</li>
@@ -575,11 +593,14 @@ html,body{margin:0;background:#0E131A}
       <li><b>Error level analysis:</b> <a href="https://fotoforensics.com/" target="_blank" rel="noopener noreferrer">FotoForensics</a> can highlight areas edited differently from the rest of an image. Interpret with care.</li>
     </ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="video" aria-labelledby="vd-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Video &amp; Deepfakes</div>
   <h2 id="vd-h">Checking video and live video calls.</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>Recorded video</h3><ul class="ck">
       <li>Lip movements that drift out of sync with speech</li>
@@ -595,6 +616,8 @@ html,body{margin:0;background:#0E131A}
       <li>End the call and call back on a number you already have on file.</li>
     </ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="voice" aria-labelledby="vc-h"><div class="wrap">
@@ -613,6 +636,7 @@ html,body{margin:0;background:#0E131A}
 <section class="s ag" id="chat" aria-labelledby="ch-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Chat &amp; Social Media</div>
   <h2 id="ch-h">Is the account or chat partner a bot or a person?</h2></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>Common signs</h3><ul class="ck">
       <li>Long, polished replies that arrive instantly at any hour</li>
@@ -627,12 +651,15 @@ html,body{margin:0;background:#0E131A}
       <li>Move important conversations to a verified channel such as a video call or known email address.</li>
     </ul></div>
   </div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="checkers" aria-labelledby="ck-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">AI Checkers</div>
   <h2 id="ck-h">AI detectors and checkers: what they can and cannot tell you.</h2>
   <p class="lead">Detection tools look for statistical patterns, hidden watermarks, or provenance records. They are useful clues, but every one of them produces false alarms and misses. Researchers at Stanford found popular AI-text detectors frequently misflagged essays by non-native English writers as AI-generated (<a href="https://arxiv.org/abs/2304.02819" target="_blank" rel="noopener noreferrer">Liang et al., 2023</a>), and OpenAI withdrew its own text classifier for low accuracy.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="tw rv"><table class="t"><thead><tr><th scope="col">Content</th><th scope="col">Example tools</th><th scope="col">How they work</th><th scope="col">Limits</th></tr></thead><tbody>
     <tr><td>Text</td><td><a href="https://gptzero.me/" target="_blank" rel="noopener noreferrer">GPTZero</a>, <a href="https://originality.ai/" target="_blank" rel="noopener noreferrer">Originality.ai</a>, <a href="https://copyleaks.com/ai-content-detector" target="_blank" rel="noopener noreferrer">Copyleaks</a>, <a href="https://www.turnitin.com/solutions/topics/ai-writing/" target="_blank" rel="noopener noreferrer">Turnitin</a></td><td>Score how predictable the wording is compared with known AI writing</td><td>False positives on simple or non-native writing; easily fooled by light editing</td></tr>
     <tr><td>Images and video</td><td><a href="https://thehive.ai/" target="_blank" rel="noopener noreferrer">Hive</a>, <a href="https://www.realitydefender.com/" target="_blank" rel="noopener noreferrer">Reality Defender</a>, <a href="https://sensity.ai/" target="_blank" rel="noopener noreferrer">Sensity</a></td><td>Machine learning models trained to spot generation artifacts</td><td>Struggle with new generators, compression, and screenshots</td></tr>
@@ -654,12 +681,15 @@ html,body{margin:0;background:#0E131A}
     </ul></div>
   </div>
   <p class="disc rv">Tools are listed as examples, not endorsements; most offer free trials or tiers with paid plans.</p>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="frontend" aria-labelledby="fe-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Your Website: Front End</div>
   <h2 id="fe-h">Detecting AI bots and automated agents on your website.</h2>
   <p class="lead">AI crawlers, scrapers, and browser-driving AI agents now make up a meaningful share of web traffic. Some announce themselves; others pretend to be people.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <div class="two">
     <div class="pane rv"><h3>What you can see in the browser and analytics</h3><ul class="ck">
       <li>Visits with no mouse movement, scrolling, or time on page, or impossibly fast form fills</li>
@@ -687,12 +717,15 @@ html,body{margin:0;background:#0E131A}
     </tbody>
   </table></div>
   <div class="kb warn rv"><b>Watch for spoofing:</b> anyone can fake a user-agent string. Confirm that a "GPTBot" or similar visitor really comes from the operator by checking its Internet Protocol (IP) address against the operator's published IP ranges (OpenAI publishes JSON lists for each crawler) or by a reverse Domain Name System (DNS) lookup.<sup><a href="#d5">[5]</a></sup></div>
+</div></details>
+  
 </div></section>
 
 <section class="s alt ag" id="backend" aria-labelledby="be-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Your Systems: Back End</div>
   <h2 id="be-h">Finding bots and AI agents in server logs and APIs.</h2>
   <p class="lead">This section is written for your information technology (IT) team or managed service provider. Share it with them.</p></div>
+  <details class="fold"><summary><span class="o">Show details</span><span class="c">Hide details</span></summary><div class="foldb">
   <ul class="ck rv">
     <li><b>Request patterns:</b> steady, high-rate requests, sequential URL walking, and no loading of images, CSS, or JavaScript.</li>
     <li><b>Network origin:</b> group traffic by autonomous system number (ASN) to spot cloud and hosting providers posing as home users.</li>
@@ -701,6 +734,8 @@ html,body{margin:0;background:#0E131A}
     <li><b>Agent behavior:</b> AI agents that drive a real browser can look human, so watch for unusually consistent timing and task-only navigation.</li>
     <li><b>Centralize logs</b> in your security information and event management (SIEM) tool and alert on spikes, new ASNs, and failed-login bursts.</li>
   </ul>
+</div></details>
+  
 </div></section>
 
 <section class="s ag" id="llm-inside" aria-labelledby="li-h"><div class="wrap">
@@ -776,5 +811,6 @@ html,body{margin:0;background:#0E131A}
 
 
 
+<script src="/js/fold-9353691fc3.js"></script>
 </body>
 </html>
