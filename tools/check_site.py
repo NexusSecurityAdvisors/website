@@ -125,7 +125,8 @@ def live_checks():
     days = (not_after - datetime.now(timezone.utc)).days
     if days < 21:
         err(f"TLS certificate for {HOST} expires in {days} days ({not_after:%Y-%m-%d})")
-    with urllib.request.urlopen(f"https://{HOST}/.well-known/security.txt", timeout=30) as r:
+    req_txt = urllib.request.Request(f"https://{HOST}/.well-known/security.txt", headers={"User-Agent": "nexus-site-monitor"})
+    with urllib.request.urlopen(req_txt, timeout=30) as r:
         check_security_txt(r.read().decode(), "production security.txt")
     print(f"live: headers ok={not errors}, TLS valid {days} more days")
 
