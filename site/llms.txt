@@ -22,7 +22,7 @@ Key facts:
 
 ## Guides
 
-- [Regulatory Watch](https://www.nexussecurityadvisors.com/regulatory-watch): Plain-English status of the EU Cyber Resilience Act, CMMC 2.0, the HIPAA Security Rule, PCI DSS v4.0.1 and NIST RMF.
+- [Regulatory Watch](https://www.nexussecurityadvisors.com/regulatory-watch): Plain-English status of US AI policy (AI Action Plan and executive orders), the NIST AI RMF, state AI laws (California, Colorado, Texas, Illinois, New York, Utah), the EU Cyber Resilience Act, CMMC 2.0, the HIPAA Security Rule, PCI DSS v4.0.1 and NIST RMF.
 - [EU AI Act explained for SMBs](https://www.nexussecurityadvisors.com/eu-ai-act): Who it applies to, risk tiers, prohibited practices, high-risk duties, penalties and timelines.
 - [AI explained for business leaders](https://www.nexussecurityadvisors.com/ai-guide): AI, machine learning and generative AI in plain English, including costs, privacy and regulation.
 - [Responsible and ethical AI](https://www.nexussecurityadvisors.com/responsible-ai): OWASP, NIST AI RMF, OECD and UNESCO principles and a practical AI code of conduct.
