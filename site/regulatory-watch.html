@@ -457,6 +457,9 @@ html,body{margin:0;background:#0E131A}
 #nsa .sts li:last-child{border-bottom:0}
 #nsa .sts b{display:block;color:var(--text);font-size:13px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:2px}
 #nsa .sts strong{color:var(--text);font-weight:600}
+#nsa .slinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+#nsa .slinks a{font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:4px 10px;color:var(--silver);transition:all .2s}
+#nsa .slinks a:hover{border-color:var(--accent);color:var(--text)}
 @media(max-width:600px){#nsa .rmf.f4{grid-template-columns:repeat(2,1fr)}}
 </style>
 
@@ -492,7 +495,7 @@ html,body{margin:0;background:#0E131A}
   <div class="rtabs rv" role="tablist" aria-label="Regulations">
     <button class="rtab" role="tab" id="t-usai" aria-controls="p-usai" aria-selected="true">US AI Policy</button>
     <button class="rtab" role="tab" id="t-nistai" aria-controls="p-nistai" aria-selected="false" tabindex="-1">NIST AI RMF</button>
-    <button class="rtab" role="tab" id="t-stateai" aria-controls="p-stateai" aria-selected="false" tabindex="-1">State AI Laws</button>
+    <button class="rtab" role="tab" id="t-stateai" aria-controls="p-stateai" aria-selected="false" tabindex="-1">US State AI Laws</button>
     <button class="rtab" role="tab" id="t-cra" aria-controls="p-cra" aria-selected="false" tabindex="-1">EU Cyber Resilience Act</button>
     <button class="rtab" role="tab" id="t-cmmc" aria-controls="p-cmmc" aria-selected="false" tabindex="-1">CMMC 2.0</button>
     <button class="rtab" role="tab" id="t-hipaa" aria-controls="p-hipaa" aria-selected="false" tabindex="-1">HIPAA</button>
@@ -573,15 +576,16 @@ html,body{margin:0;background:#0E131A}
         <li class="now"><b>SEP 30, 2026</b>SB 947 &ldquo;No Robo Bosses Act&rdquo; signed: a human must review AI-driven discipline or termination decisions (operative July 1, 2027)</li>
         <li><b>JAN 1, 2027</b>CCPA ADMT compliance date: pre-use notice, opt-out, and access rights when ADMT makes significant decisions about consumers</li>
       </ul>
+      <div class="src"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53" target="_blank" rel="noopener noreferrer">SB 53 &#8599;</a><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240AB2013" target="_blank" rel="noopener noreferrer">AB 2013 &#8599;</a><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB243" target="_blank" rel="noopener noreferrer">SB 243 &#8599;</a><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB942" target="_blank" rel="noopener noreferrer">SB 942 &#8599;</a><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB947" target="_blank" rel="noopener noreferrer">SB 947 &#8599;</a><a href="https://privacy.ca.gov/laws-and-regulations/ccpa-cyber-risk-admt-insurance/" target="_blank" rel="noopener noreferrer">CalPrivacy: CCPA ADMT rules &#8599;</a><a href="https://calcivilrights.ca.gov/2025/06/30/civil-rights-council-secures-approval-for-regulations-to-protect-against-employment-discrimination-related-to-artificial-intelligence/" target="_blank" rel="noopener noreferrer">Civil Rights Council: ADS rules &#8599;</a></div>
     </div>
     <div class="panel spot">
       <h3>Other states to watch</h3>
       <ul class="sts">
-        <li><b>Colorado</b>SB 26-189 (signed May 14, 2026) repealed and replaced the original 2024 Colorado AI Act after a federal court paused its enforcement. Starting <strong>January 1, 2027</strong>: notice, explanation, data-correction, and human-review rights when automated decisions affect jobs, lending, housing, insurance, health care, or education. Attorney General enforcement with a 60-day cure period.</li>
-        <li><b>Texas</b>Texas Responsible AI Governance Act (TRAIGA, HB 149), in effect since <strong>January 1, 2026</strong>: bans certain harmful AI uses and requires AI disclosures by government agencies and health care providers. Attorney General enforcement with a 60-day cure period; following the NIST AI RMF supports a defense.</li>
-        <li><b>Illinois</b>HB 3773, in effect since <strong>January 1, 2026</strong>: AI that produces discrimination in hiring, promotion, or discipline is a civil-rights violation, and employees must be told when AI is used.</li>
-        <li><b>New York</b>RAISE Act (amended March 2026), effective <strong>January 1, 2027</strong>: safety frameworks and incident reporting for large frontier AI developers. New York City Local Law 144 already requires bias audits and notices for automated hiring tools.</li>
-        <li><b>Utah</b>AI Policy Act (2024): using generative AI is no defense to a consumer-protection violation; disclose AI use when asked, and up front in licensed professions.</li>
+        <li><b>Colorado</b>SB 26-189 (signed May 14, 2026) repealed and replaced the original 2024 Colorado AI Act after a federal court paused its enforcement. Starting <strong>January 1, 2027</strong>: notice, explanation, data-correction, and human-review rights when automated decisions affect jobs, lending, housing, insurance, health care, or education. Attorney General enforcement with a 60-day cure period. A separate Chatbot Safety Act (HB 26-1263) adds AI disclosure and teen protections for chatbot operators.<span class="slinks"><a href="https://leg.colorado.gov/bills/sb26-189" target="_blank" rel="noopener noreferrer">SB 26-189 &#8599;</a><a href="https://coag.gov/ai/" target="_blank" rel="noopener noreferrer">Colorado AG: AI rules &amp; rulemaking &#8599;</a></span></li>
+        <li><b>Texas</b>Texas Responsible AI Governance Act (TRAIGA, HB 149), in effect since <strong>January 1, 2026</strong>: bans certain harmful AI uses and requires AI disclosures by government agencies and health care providers. Attorney General enforcement with a 60-day cure period; following the NIST AI RMF supports a defense.<span class="slinks"><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB149" target="_blank" rel="noopener noreferrer">HB 149 &#8599;</a><a href="https://www.texasattorneygeneral.gov/consumer-protection/file-consumer-complaint/consumer-ai-rights" target="_blank" rel="noopener noreferrer">Texas AG: AI rights &amp; complaints &#8599;</a></span></li>
+        <li><b>Illinois</b>HB 3773, in effect since <strong>January 1, 2026</strong>: AI that produces discrimination in hiring, promotion, or discipline is a civil-rights violation, and employees must be told when AI is used.<span class="slinks"><a href="https://www.ilga.gov/legislation/publicacts/fulltext.asp?Name=103-0804" target="_blank" rel="noopener noreferrer">Public Act 103-0804 (HB 3773) &#8599;</a></span></li>
+        <li><b>New York</b>RAISE Act (amended March 2026), effective <strong>January 1, 2027</strong>: safety frameworks and incident reporting for large frontier AI developers. New York City Local Law 144 already requires bias audits and notices for automated hiring tools.<span class="slinks"><a href="https://www.nysenate.gov/legislation/bills/2025/S6953" target="_blank" rel="noopener noreferrer">RAISE Act (S6953) &#8599;</a><a href="https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page" target="_blank" rel="noopener noreferrer">NYC Local Law 144 &#8599;</a></span></li>
+        <li><b>Utah</b>AI Policy Act (2024): using generative AI is no defense to a consumer-protection violation; disclose AI use when asked, and up front in licensed professions.<span class="slinks"><a href="https://le.utah.gov/~2024/bills/static/SB0149.html" target="_blank" rel="noopener noreferrer">SB 149 (2024) &#8599;</a></span></li>
       </ul>
     </div>
     <div class="panel spot rfull">
@@ -594,7 +598,7 @@ html,body{margin:0;background:#0E131A}
         <li>Anchor everything in one NIST AI RMF-based program so a single set of evidence answers many states at once</li>
       </ul>
       <p class="note">Federal preemption is being pushed but has not been enacted. As of November 2026, state AI laws remain enforceable unless a court blocks them, as happened with Colorado&rsquo;s original law in April 2026.</p>
-      <div class="src"><a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB53" target="_blank" rel="noopener noreferrer">California SB 53 &#8599;</a><a href="https://privacy.ca.gov/laws-and-regulations/ccpa-cyber-risk-admt-insurance/" target="_blank" rel="noopener noreferrer">CCPA ADMT regulations &#8599;</a><a href="https://leg.colorado.gov/bills/sb26-189" target="_blank" rel="noopener noreferrer">Colorado SB 26-189 &#8599;</a><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB149" target="_blank" rel="noopener noreferrer">Texas HB 149 &#8599;</a><a href="https://www.nyc.gov/site/dca/about/automated-employment-decision-tools.page" target="_blank" rel="noopener noreferrer">NYC Local Law 144 &#8599;</a><a href="/nexus-aigov-checklist.pdf">AI governance readiness checklist (PDF)</a><a href="/ai-consulting">Nexus AI governance services</a></div>
+      <div class="src"><a href="/nexus-aigov-checklist.pdf">AI governance readiness checklist (PDF)</a><a href="/ai-consulting">Nexus AI governance services</a></div>
     </div>
   </div>
 
