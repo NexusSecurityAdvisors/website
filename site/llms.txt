@@ -43,5 +43,6 @@ Key facts:
 ## Optional
 
 - [Trust, privacy and vulnerability disclosure](https://www.nexussecurityadvisors.com/trust)
+- [Business policies](https://www.nexussecurityadvisors.com/policies): Code of business ethics and conduct, conflict of interest and independence, anti-bribery and anti-corruption, and client data handling and retention.
 - [LinkedIn](https://www.linkedin.com/company/nexus-security-advisors)
 - [Founder's site: DanSorensen.info](https://www.dansorensen.info)
