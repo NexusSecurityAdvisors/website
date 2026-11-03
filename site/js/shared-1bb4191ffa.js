@@ -78,7 +78,7 @@
    vendor:{n:'Vendor / MSP compromise',l:3,i:5,d:'A trusted provider with access to your network is breached and used to reach you.',c:[['Vendor risk reviews and contract clauses',1,0],['Separate, MFA-protected vendor accounts',1,0],['Least privilege and just-in-time access',0,1],['Monitoring of vendor sessions',1,0],['Tested incident response plan',0,1]]},
    edge:{n:'Exploited edge device',l:4,i:4,d:'An unpatched VPN, firewall, or remote access appliance is exploited from the internet.',c:[['Patch known exploited vulnerabilities fast (CISA KEV)',2,0],['Attack surface inventory and scanning',1,0],['MFA on all remote access',1,0],['Segmentation behind edge devices',0,1]]}};
   var band2=function(s){return s>=20?['Critical','#C2384B','fix within 7 days']:s>=10?['High','#1F78D6','fix within 30 days']:s>=5?['Medium','#1A5596','fix within 90 days']:['Low','#2A3544','track at next review']};
-  var scns=document.getElementById('scns'),ctrls=document.getElementById('ctrls'),mini=document.getElementById('mini'),curS='ransom';var ST={};window.NexusRiskLab={SC:SC,ST:ST,band:band2};
+  var scns=document.getElementById('scns'),ctrls=document.getElementById('ctrls'),mini=document.getElementById('mini'),curS='ransom';var ST=Object.create(null);window.NexusRiskLab={SC:SC,ST:ST,band:band2};
   if(scns){
     scns.innerHTML=Object.keys(SC).map(function(k){return '<button type="button" class="scn" role="tab" data-k="'+k+'" aria-selected="false">'+SC[k].n+'</button>'}).join('');
     var mh='';for(var ii=5;ii>=1;ii--)for(var ll=1;ll<=5;ll++){var bb=band2(ii*ll);mh+='<i data-l="'+ll+'" data-i="'+ii+'" style="--c:'+bb[1]+'"></i>';}mini.innerHTML=mh;
@@ -90,7 +90,7 @@
       document.getElementById('simres').innerHTML='<b>'+s.n+':</b> '+s.d+'<br>Residual: likelihood '+L+' &times; impact '+I+' = <b>'+res+'</b> <span class="lvl" style="--c:'+br[1]+'">'+br[0].toUpperCase()+'</span> &mdash; '+br[2]+'.'+
         (best?'<br>Biggest next move: <b>'+best[0]+'</b>.':'<br>All modeled controls in place. Validate them with testing and evidence.');
       [].forEach.call(mini.children,function(c){var l=+c.getAttribute('data-l'),i2=+c.getAttribute('data-i');c.className=(l===L&&i2===I)?'re':((l===s.l&&i2===s.i)?'in':'');});try{document.dispatchEvent(new CustomEvent('nexus-risk-update'));}catch(e){}};
-    var pickS=function(k){curS=k;[].forEach.call(scns.children,function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});
+    var pickS=function(k){if(!Object.prototype.hasOwnProperty.call(SC,k))return;curS=k;[].forEach.call(scns.children,function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});
       ctrls.innerHTML=SC[k].c.map(function(c,j){var eff=(c[1]?'&minus;'+c[1]+' likelihood':'')+(c[1]&&c[2]?', ':'')+(c[2]?'&minus;'+c[2]+' impact':'');return '<label class="ctrl"><input type="checkbox" role="switch" data-j="'+j+'"'+(ST[k]&&ST[k][j]?' checked':'')+'><div><b>'+c[0]+'</b><span>'+eff+'</span></div></label>'}).join('');calc();};
     scns.addEventListener('click',function(e){var b=e.target.closest('.scn');if(b)pickS(b.getAttribute('data-k'));});
     ctrls.addEventListener('change',calc);
