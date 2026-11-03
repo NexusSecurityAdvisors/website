@@ -43,6 +43,8 @@ npx -y @lhci/cli@0.15.1 autorun       # Lighthouse (needs Chrome)
 
 - **security.txt** must be re-dated before `Expires` (currently 2027-10-01); CI fails 30 days before and warns at 90.
 - **HSTS** is 180 days to match the zone policy. Raise to ≥ 1 year with `includeSubDomains; preload` only when every subdomain is HTTPS-only.
-- **Cloudflare Web Analytics** is blocked by the CSP. Either disable it for the Pages project (PostHog already covers analytics) or allow `https://static.cloudflareinsights.com` in `script-src` and `https://cloudflareinsights.com` in `connect-src`.
+- **Cloudflare Web Analytics** (cookieless) is allowed by the CSP: `https://static.cloudflareinsights.com` in `script-src` and `https://cloudflareinsights.com` in `connect-src`. Turn it on in the Pages project's Metrics tab; it runs alongside PostHog and is not hidden by ad blockers the same way.
+- **Lead-source attribution**: `site/js/analytics.js` stores first-touch and latest-touch source (UTM, ad click IDs, referrer incl. AI assistants) in `localStorage` key `nsa_attr` for 90 days; `/get-started` sends it to Zoho CRM (UTM fields LEADCF3–5 and the Description summary). Disclosed on `/trust#privacy`.
+- **AI crawlers** are explicitly allowed in `robots.txt`; `llms.txt` gives AI assistants a plain-text map of the site. Keep both in step when pages are added.
 
 References: [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/) · [MDN: Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) · [RFC 9116: security.txt](https://www.rfc-editor.org/rfc/rfc9116) · [Cloudflare Pages headers](https://developers.cloudflare.com/pages/configuration/headers/)

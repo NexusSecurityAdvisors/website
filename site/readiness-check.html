@@ -3,34 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://us-assets.i.posthog.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsadspixel.net https://*.hubspot.com https://*.usemessages.com 'sha256-hpgT4KgQhzA24OVyNTIF9FvgZPj8ssv5f9/jhGBaHKs=' 'sha256-wVbZwFy8ovIu8e7vtZGr+LWJ0qTxcI2vKvHGenBvrJw='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hscollectedforms.net https://*.hs-banner.com https://*.hs-analytics.net https://crm.zoho.com; frame-src https://crm.zoho.com https://*.hubspot.com; worker-src 'self' blob:; form-action 'self' https://crm.zoho.com https://www.nexussecurityadvisors.com; base-uri 'self'; object-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Request a Fractional CISO Consultation | Nexus Security</title>
-<link rel="canonical" href="https://www.nexussecurityadvisors.com/get-started">
-<meta name="description" content="Answer five quick questions to request a free 30-minute vCISO consultation. We reply within one business day. NDA available before detailed discussion.">
-<meta name="keywords" content="fractional CISO consultation, vCISO services, hire a virtual CISO, cybersecurity consulting for small business, SOC 2 consultant, CMMC consultant, HIPAA security consultant, Israeli startup SOC 2">
+<title>Free Security Readiness Check (CMMC, HIPAA, SOC 2, AI) | Nexus Security</title>
+<meta name="description" content="Answer 8 quick questions and get a free, instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, or AI governance, with your top 3 priorities.">
+<link rel="canonical" href="https://www.nexussecurityadvisors.com/readiness-check">
+<meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Request a Fractional CISO Consultation | Nexus Security">
-<meta property="og:description" content="Answer five quick questions to request a free 30-minute vCISO consultation. We reply within one business day. NDA available before detailed discussion.">
-<meta name="twitter:title" content="Request a Fractional CISO Consultation | Nexus Security">
-<meta name="twitter:description" content="Answer five quick questions to request a free 30-minute vCISO consultation. We reply within one business day. NDA available before detailed discussion.">
-<meta name="theme-color" content="#0E131A">
-<meta name="format-detection" content="telephone=no">
 <meta property="og:site_name" content="Nexus Security Advisors">
-<meta property="og:image" content="https://www.nexussecurityadvisors.com/nexus-share.webp">
+<meta property="og:title" content="Free Security Readiness Check (CMMC, HIPAA, SOC 2, AI) | Nexus Security">
+<meta property="og:description" content="Answer 8 quick questions and get a free, instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, or AI governance, with your top 3 priorities.">
+<meta property="og:url" content="https://www.nexussecurityadvisors.com/readiness-check">
+<meta property="og:image" content="https://www.nexussecurityadvisors.com/nexus-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Nexus Security Advisors: Fractional CISO and Cybersecurity Leadership">
+<meta property="og:image:alt" content="Nexus Security Advisors: fractional CISO, compliance and AI governance for SMBs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.nexussecurityadvisors.com/nexus-share.webp">
-<meta property="og:url" content="https://www.nexussecurityadvisors.com/get-started">
-<link rel="icon" type="image/webp" href="/nexus-favicon-512.webp">
+<meta name="twitter:image" content="https://www.nexussecurityadvisors.com/nexus-og.png">
+<meta name="theme-color" content="#0E131A">
+<link rel="icon" href="/nexus-favicon-512.webp" type="image/webp">
 <link rel="apple-touch-icon" href="/nexus-favicon-512.webp">
-<script type="application/ld+json">{"@context":"http://schema.org/","@graph":[{"@type":"Organization","logo":"https://www.nexussecurityadvisors.com/Nexus-Security-Advisors-Best-Logo.webp","@id":"https://www.nexussecurityadvisors.com#organization","url":"https://www.nexussecurityadvisors.com"},{"@type":"WebSite","name":"Nexus Security Advisors","@id":"https://www.nexussecurityadvisors.com#website","url":"https://www.nexussecurityadvisors.com"}]}</script>
-<style>html,body{margin:0;padding:0;background:#0E131A}</style>
-<script src="/assets/analytics.js" defer></script>
-</head>
-<body>
+<script src="/js/analytics.js" defer></script>
 <link rel="preload" href="/nsa-questrial-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/nsa-inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -487,210 +478,115 @@
 @media(max-width:600px){#nsa .row2{grid-template-columns:1fr}#nsa .card2{padding:20px}}
 
 .wiz>#sent{grid-column:1/-1;width:100%;max-width:760px;justify-self:center}
+#nsa .fsoc{display:flex;gap:10px;margin-top:16px}#nsa .fgrid .fsoc a.ico{display:inline-grid;place-items:center;width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:8px}#nsa .fgrid .fsoc a.ico:hover{border-color:var(--accent)}#nsa .fsoc svg{width:18px;height:18px;fill:currentColor}
 </style>
+<style>
+html,body{margin:0;background:#0E131A}
+#nsa .rhero h1{margin-top:0}
+#nsa .links a,#nsa .links .ddt{white-space:nowrap}
+#nsa .navr .btn.sm{white-space:nowrap}
+@media(max-width:1360px){#nsa .navr .ico{display:none}#nsa .links{gap:18px}}
+@media(max-width:1060px) and (min-width:961px){#nsa .links{gap:14px;font-size:13.5px}#nsa .navr .btn.sm{padding-left:12px;padding-right:12px}}
+#nsa .explore .chk em{font-style:normal}
+#nsa .teaser{max-width:760px}
+#nsa .aip-grid .card{display:flex;flex-direction:column}
+#nsa .aip-grid .card .aip-price{margin-top:auto}
+#nsa .rhero{position:relative;padding:96px 0 60px;background:radial-gradient(ellipse at 80% 0%,rgba(26,111,209,.28),transparent 55%),linear-gradient(180deg,#0E131A,#0E1B2E);overflow:hidden}
+#nsa .rhero .wrap{position:relative;z-index:2}
+</style>
+
+<style>
+#nsa #rc.wiz{grid-template-columns:1fr;max-width:860px}
+#rc .rc-track{align-items:flex-start}#rc #rc-tracks{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}#rc .rc-ans{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:560px){#rc .rc-ans{grid-template-columns:repeat(2,minmax(0,1fr))}}#rc .rc-track small{opacity:.75;font-size:13px}
+#rc .q{margin-bottom:18px}
+#rc .rc-res{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin:6px 0 18px}
+#rc .rc-big{font-size:56px;font-weight:700;line-height:1}
+#rc .rc-bar{height:10px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;flex:1;min-width:200px}
+#rc .rc-bar i{display:block;height:100%;background:linear-gradient(90deg,#1A6FD1,#9FB3C8)}
+#rc ol.rc-pri{padding-left:20px}#rc ol.rc-pri li{margin:0 0 12px}#rc ol.rc-pri li span{display:block;opacity:.85}
+#rc .rc-note{font-size:13px;opacity:.7}
+#rc .rc-err{color:#ff8a8a;min-height:1.2em}
+</style>
+</head>
+<body>
 <div id="nsa">
 <a class="skip" href="#main">Skip to content</a>
 <div class="prog" aria-hidden="true"></div>
 <a class="totop" href="#top" aria-label="Back to top">&uarr;</a>
 <div class="bar"><div class="nav">
   <a class="logo" href="/" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a>
-  <nav class="links" id="mainnav" aria-label="Main"><a href="/#services">Services</a><a href="/#who">Who We Serve</a><a href="/#vciso">Why a vCISO</a><a href="/#regs">Regulatory Watch</a><a href="/#lab">Risk Lab</a><a href="/#founder">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/get-started" aria-current="page">Get Started: Client Intake</a><a href="/checklists">Readiness Checklists</a><a href="/resources">Resource Library</a><a href="/#israeli-startups">Israeli Startups: U.S. Market Entry</a></div></div></nav>
+  <nav class="links" id="mainnav" aria-label="Main"><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/industries">Industries</a><a href="/government">Government</a><a href="/approach">Our Approach</a><a href="/about">About</a><div class="dd"><a href="/resources" class="ddt">Resources &#9662;</a><div class="ddm"><a href="/learn">Learning Hub</a><a href="/careers">Start Your Cyber Career</a><a href="/challenges">Quizzes &amp; Monthly Challenge</a><a href="/checklists">Readiness Checklists</a><a href="/readiness-check">Free Readiness Check</a><a href="/personal-security">Personal &amp; Device Security</a><a href="/regulatory-watch">Regulatory Watch</a><a href="/resources">Resource Library</a><a href="/ai-guide">AI Explained Guide</a><a href="/responsible-ai">Responsible AI</a><a href="/ai-detection">Spotting AI Fakes</a><a href="/eu-ai-act">EU AI Act Guide</a><a href="/tabletop">Tabletop Exercises</a><a href="/resources#github">Free GitHub Toolkits</a><a href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on GitHub &#8599;</a><a href="/get-started">Get Started: Client Intake</a></div></div></nav>
   <div class="navr">
-    <a class="ico" href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a><a class="ico" href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63a20.9 20.9 0 0 0-2.27-.12c-2.25 0-3.79 1.37-3.79 3.89v2.17H7.92v2.94h2.54V21h3.04z"/></svg></a><a class="ico" href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.6.69.49A10.1 10.1 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a>
+    <a class="ico" href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a><a class="ico" href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63a20.9 20.9 0 0 0-2.27-.12c-2.25 0-3.79 1.37-3.79 3.89v2.17H7.92v2.94h2.54V21h3.04z"/></svg></a><a class="ico" href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.6.69.49A10.1 10.1 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a><a class="ico" href="https://bsky.app/profile/did:plc:s2zq7m67kblpnp6c33ig6uwt" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Bluesky"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.09-2.11-4.05-6.05-6.8-8C2.57.94 1.56 1.27.9 1.57.14 1.91 0 3.08 0 3.77c0 .69.38 5.65.62 6.48.82 2.74 3.71 3.66 6.38 3.36l.42-.06-.42.06c-3.91.58-7.39 2-2.83 7.08 5.01 5.19 6.87-1.11 7.83-4.31.95 3.2 2.05 9.27 7.73 4.31 4.27-4.31 1.17-6.5-2.74-7.08l-.42-.06.42.06c2.67.3 5.57-.63 6.38-3.36.25-.83.62-5.79.62-6.48 0-.69-.14-1.86-.9-2.21-.66-.3-1.66-.62-4.3 1.24C16.05 4.75 13.09 8.69 12 10.8z"/></svg></a>
     <a class="btn sm" href="/get-started">Request a Consultation</a>
     <button type="button" class="mtog" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-<script>(function(){var b=document.querySelector('#nsa .mtog'),n=document.getElementById('mainnav');if(!b||!n)return;function set(o){b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');n.classList.toggle('open',o);}b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});n.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){set(false);b.focus();}});window.addEventListener('resize',function(){if(window.innerWidth>960)set(false)});})();</script>
+<script src="/js/shared-869813e0a8.js"></script>
 </div></div>
 <header class="rhero" id="top"><canvas id="net" aria-hidden="true"></canvas><div class="wrap">
-  <span class="pill"><span class="dot"></span>About 5 minutes</span>
-  <h1><span class="grad">Get started</span> with Nexus Security Advisors.</h1>
-  <p class="lead">Answer a few quick questions so your free 30-minute discovery call focuses on what matters to your business. Then send it securely and we will reply within one business day.</p>
+  <span class="pill"><span class="dot"></span>About 3 minutes &middot; Free</span>
+  <h1><span class="grad">Security readiness check</span></h1>
+  <p class="lead">Pick a framework, answer 8 plain-English questions, and get an instant readiness score with your top three priorities. No sales pitch, no jargon.</p>
 </div></header>
 
 <main id="main"><div class="wrap">
- <div class="wiz">
-  <ol class="steps2" id="steps" aria-label="Intake steps">
-   <li class="on"><i>1</i>About you</li><li><i>2</i>Your organization</li><li><i>3</i>What you need</li><li><i>4</i>Priorities &amp; timing</li><li><i>5</i>Review &amp; send</li>
-  </ol>
-  <form class="card2 ph-no-capture" id="intake" novalidate>
-   <div class="pbar" aria-hidden="true"><i id="pb"></i></div>
-
-   <fieldset class="st" data-s="0" style="border:0;padding:0;margin:0">
-    <legend class="eyebrow">Step 1 of 5</legend><h2 style="margin-top:8px">Tell us about you</h2>
+ <div class="wiz" id="rc">
+  <div class="card2 ph-no-capture">
+   <section id="rc-s0">
+    <div class="eyebrow">Step 1 of 3</div><h2 style="margin-top:8px">Which checklist fits you best?</h2>
+    <div class="opts" id="rc-tracks" role="radiogroup" aria-label="Checklist"><p>Loading…</p></div>
+    <div class="navbtns"><button type="button" class="btn" id="rc-start">Start &rarr;</button></div>
+   </section>
+   <section id="rc-s1" hidden>
+    <div class="eyebrow">Step 2 of 3</div><h2 style="margin-top:8px" id="rc-qtitle"></h2>
+    <p class="rc-note">Answer honestly. "Not sure" is a useful answer too.</p>
+    <div id="rc-qs"></div>
+    <div class="navbtns"><button type="button" class="btn ghost" id="rc-back1">&larr; Back</button><button type="button" class="btn" id="rc-next">Next &rarr;</button></div>
+   </section>
+   <section id="rc-s2" hidden>
+    <div class="eyebrow">Step 3 of 3</div><h2 style="margin-top:8px">Where should we send a copy?</h2>
+    <p>Your results appear on the next screen right away. We also keep a copy so we can follow up if you'd like help.</p>
     <div class="row2">
-     <div class="q"><label for="f-name">Full name *</label><input type="text" id="f-name" maxlength="120" name="name" autocomplete="name" required></div>
-     <div class="q"><label for="f-email">Work email *</label><input type="email" id="f-email" maxlength="100" name="email" autocomplete="email" required></div>
+     <div class="q"><label for="rc-name">Full name *</label><input type="text" id="rc-name" maxlength="120" autocomplete="name"></div>
+     <div class="q"><label for="rc-email">Work email *</label><input type="email" id="rc-email" maxlength="100" autocomplete="email"></div>
     </div>
     <div class="row2">
-     <div class="q"><label for="f-company">Company *</label><input type="text" id="f-company" maxlength="200" name="company" autocomplete="organization" required></div>
-     <div class="q"><label for="f-role">Your role</label><input type="text" id="f-role" maxlength="100" name="role" placeholder="e.g. CEO, COO, IT Director"></div>
+     <div class="q"><label for="rc-company">Company *</label><input type="text" id="rc-company" maxlength="200" autocomplete="organization"></div>
+     <div class="q"><label for="rc-role">Your role</label><input type="text" id="rc-role" maxlength="100" placeholder="e.g. CEO, COO, IT Director"></div>
     </div>
     <div class="row2">
-     <div class="q"><label for="f-phone">Phone (optional)</label><input type="tel" id="f-phone" maxlength="30" name="phone" autocomplete="tel"></div>
-     <div class="q"><label for="f-web">Company website (optional)</label><input type="text" id="f-web" maxlength="255" name="website" placeholder="example.com"></div>
+     <div class="q"><label for="rc-ind">Industry</label><select id="rc-ind"><option value="">Select…</option><option>Aerospace &amp; defense</option><option>Healthcare</option><option>Financial services</option><option>Manufacturing</option><option>Energy &amp; utilities</option><option>Government contractor</option><option>SaaS / technology</option><option>Professional services (legal, accounting)</option><option>Education / research</option><option>Nonprofit</option><option>Retail / e-commerce</option><option>Other</option></select></div>
+     <div class="q"><label for="rc-size">Number of employees</label><select id="rc-size"><option value="">Select…</option><option>1–10</option><option>11–50</option><option>51–200</option><option>201–500</option><option>501–1,000</option><option>1,000+</option></select></div>
     </div>
-   </fieldset>
-
-   <fieldset class="st" data-s="1" hidden style="border:0;padding:0;margin:0">
-    <legend class="eyebrow">Step 2 of 5</legend><h2 style="margin-top:8px">Your organization</h2>
-    <div class="row2">
-     <div class="q"><label for="f-ind">Industry *</label><select id="f-ind" name="industry" required><option value="">Select…</option><option>Aerospace & defense</option><option>Healthcare</option><option>Financial services</option><option>Manufacturing</option><option>Energy & utilities</option><option>Government contractor</option><option>SaaS / technology</option><option>Professional services (legal, accounting)</option><option>Education / research</option><option>Nonprofit</option><option>Retail / e-commerce</option><option>Other</option></select></div>
-     <div class="q"><label for="f-size">Number of employees *</label><select id="f-size" name="size" required><option value="">Select…</option><option>1–10</option><option>11–50</option><option>51–200</option><option>201–500</option><option>501–1,000</option><option>1,000+</option></select></div>
-    </div>
-    <div class="q"><span class="ql">Who handles IT and security today? *</span><div class="opts"><label class="opt"><input type="radio" name="team" value="No dedicated IT or security staff"> No dedicated IT or security staff</label><label class="opt"><input type="radio" name="team" value="IT staff, no security specialist"> IT staff, no security specialist</label><label class="opt"><input type="radio" name="team" value="Managed service provider (MSP)"> Managed service provider (MSP)</label><label class="opt"><input type="radio" name="team" value="Some security staff"> Some security staff</label><label class="opt"><input type="radio" name="team" value="A security team without a CISO"> A security team without a CISO</label><label class="opt"><input type="radio" name="team" value="A CISO or security leader today"> A CISO or security leader today</label></div></div>
-    <div class="q"><label for="f-env">Main systems (optional)</label><small>e.g. Microsoft 365, Google Workspace, AWS, Azure, on-prem servers, OT/ICS</small><input type="text" id="f-env" name="environment"></div>
-   </fieldset>
-
-   <fieldset class="st" data-s="2" hidden style="border:0;padding:0;margin:0">
-    <legend class="eyebrow">Step 3 of 5</legend><h2 style="margin-top:8px">What do you need?</h2>
-    <div class="q"><span class="ql">Services you're interested in *</span><small>Choose all that apply.</small><div class="opts"><label class="opt"><input type="checkbox" name="services" value="Fractional / virtual CISO"> Fractional / virtual CISO</label><label class="opt"><input type="checkbox" name="services" value="Security posture assessment & roadmap"> Security posture assessment & roadmap</label><label class="opt"><input type="checkbox" name="services" value="Compliance readiness"> Compliance readiness</label><label class="opt"><input type="checkbox" name="services" value="AI governance & security"> AI governance & security</label><label class="opt"><input type="checkbox" name="services" value="Incident response plan & tabletop exercise"> Incident response plan & tabletop exercise</label><label class="opt"><input type="checkbox" name="services" value="Policy development"> Policy development</label><label class="opt"><input type="checkbox" name="services" value="Vendor / MSP security oversight"> Vendor / MSP security oversight</label><label class="opt"><input type="checkbox" name="services" value="Board or investor reporting"> Board or investor reporting</label><label class="opt"><input type="checkbox" name="services" value="Not sure yet: help me decide"> Not sure yet: help me decide</label></div></div>
-    <div class="q"><span class="ql">Frameworks or regulations that apply</span><div class="opts"><label class="opt"><input type="checkbox" name="frameworks" value="CMMC / NIST SP 800-171"> CMMC / NIST SP 800-171</label><label class="opt"><input type="checkbox" name="frameworks" value="HIPAA"> HIPAA</label><label class="opt"><input type="checkbox" name="frameworks" value="SOC 2"> SOC 2</label><label class="opt"><input type="checkbox" name="frameworks" value="PCI DSS"> PCI DSS</label><label class="opt"><input type="checkbox" name="frameworks" value="EU Cyber Resilience Act"> EU Cyber Resilience Act</label><label class="opt"><input type="checkbox" name="frameworks" value="ISO/IEC 27001"> ISO/IEC 27001</label><label class="opt"><input type="checkbox" name="frameworks" value="ISO/IEC 42001 / EU AI Act"> ISO/IEC 42001 / EU AI Act</label><label class="opt"><input type="checkbox" name="frameworks" value="NIST CSF 2.0"> NIST CSF 2.0</label><label class="opt"><input type="checkbox" name="frameworks" value="Cyber insurance requirements"> Cyber insurance requirements</label><label class="opt"><input type="checkbox" name="frameworks" value="GDPR / CCPA privacy"> GDPR / CCPA privacy</label><label class="opt"><input type="checkbox" name="frameworks" value="None / not sure"> None / not sure</label></div></div>
-    <div class="q"><span class="ql">What prompted you to reach out?</span><div class="opts"><label class="opt"><input type="checkbox" name="triggers" value="Customer or prime contractor questionnaire"> Customer or prime contractor questionnaire</label><label class="opt"><input type="checkbox" name="triggers" value="Upcoming audit or assessment"> Upcoming audit or assessment</label><label class="opt"><input type="checkbox" name="triggers" value="Cyber insurance application or renewal"> Cyber insurance application or renewal</label><label class="opt"><input type="checkbox" name="triggers" value="Recent incident or near miss"> Recent incident or near miss</label><label class="opt"><input type="checkbox" name="triggers" value="Rolling out AI tools or agents"> Rolling out AI tools or agents</label><label class="opt"><input type="checkbox" name="triggers" value="Board, investor, or acquirer request"> Board, investor, or acquirer request</label><label class="opt"><input type="checkbox" name="triggers" value="Growth / new market or contract"> Growth / new market or contract</label><label class="opt"><input type="checkbox" name="triggers" value="Expanding into the U.S. from Israel or abroad"> Expanding into the U.S. from Israel or abroad</label><label class="opt"><input type="checkbox" name="triggers" value="Security has no clear owner"> Security has no clear owner</label></div></div>
-   </fieldset>
-
-   <fieldset class="st" data-s="3" hidden style="border:0;padding:0;margin:0">
-    <legend class="eyebrow">Step 4 of 5</legend><h2 style="margin-top:8px">Priorities &amp; timing</h2>
-    <div class="q"><label for="f-goal">What's your biggest security concern or goal right now? *</label><textarea id="f-goal" name="goal" required placeholder="e.g. We have a CMMC assessment next spring and don't know where we stand."></textarea></div>
-    <div class="q"><label for="f-dead">Any hard deadlines? (optional)</label><input type="text" id="f-dead" name="deadline" placeholder="e.g. SOC 2 report needed by March for a customer"></div>
-    <div class="row2">
-     <div class="q"><label for="f-time">When do you want to start? *</label><select id="f-time" name="timeline" required><option value="">Select…</option><option>As soon as possible</option><option>Within 30 days</option><option>Within 90 days</option><option>This year</option><option>Just exploring</option></select></div>
-     <div class="q"><label for="f-bud">Budget range (optional)</label><select id="f-bud" name="budget"><option value="">Prefer not to say</option><option>Under $2,500 / month</option><option>$2,500 – $5,000 / month</option><option>$5,000 – $10,000 / month</option><option>Over $10,000 / month</option><option>Project-based / one-time</option><option>Not sure yet</option></select></div>
-    </div>
-    <div class="q"><label for="f-src">How did you hear about us? (optional)</label><input type="text" id="f-src" name="source" placeholder="LinkedIn, referral, search…"></div>
-   </fieldset>
-
-   <fieldset class="st" data-s="4" hidden style="border:0;padding:0;margin:0">
-    <legend class="eyebrow">Step 5 of 5</legend><h2 style="margin-top:8px">Review &amp; send your request</h2>
-    <p>Here's the summary we'll use to prepare. Send it securely and we'll reply within one business day to set up your free 30-minute discovery call.</p>
-    <div class="sum" id="sum"></div>
-    <label class="consent"><input type="checkbox" id="f-consent"> I agree that Nexus Security Advisors may store this information and contact me about my request, as described in the <a href="/trust#privacy">privacy notice</a>. *</label>
-    <div class="hp" aria-hidden="true"><label for="f-hp">Leave this field empty</label><input type="text" id="f-hp" name="company_url_confirm" tabindex="-1" autocomplete="off"></div>
-    <div class="finals">
-     <button type="button" class="btn" id="b-send">Send my request &rarr;</button>
-     <button type="button" class="btn ghost" id="b-dl">Download a copy (.txt)</button>
-     <button type="button" class="btn ghost" id="b-copy">Copy summary</button>
-     <button type="button" class="btn ghost" id="b-clear">Clear my answers</button>
-    </div>
-    <p class="ok2" id="ok"></p>
-    <p class="note">Your request is sent over an encrypted connection directly to our client management system (Zoho CRM), never through a web address. We use it only to respond and prepare. Prefer email? Send it to <a href="/cdn-cgi/l/email-protection#7a13141c153a141f020f09091f190f08130e031b1e0c130915080954191517" id="b-mail" style="color:#2B9BF4"><span class="__cf_email__" data-cfemail="84edeae2ebc4eae1fcf1f7f7e1e7f1f6edf0fde5e0f2edf7ebf6f7aae7ebe9">[email&#160;protected]</span></a>.</p>
-   </fieldset>
-   <div class="sent" id="sent" hidden tabindex="-1">
-    <div class="eyebrow">Request received</div><h2>Thank you. We'll be in touch within one business day.</h2>
-    <p>We've received your intake. Look for an email from <b>@nexussecurityadvisors.com</b> with times for your free 30-minute discovery call. Legitimate messages from us never ask for passwords or payment details.</p>
-    <p>Your answers have been cleared from this browser. <a href="/resources">Browse free resources</a> or <a href="/checklists">try a readiness checklist</a> while you wait.</p>
-   </div>
-
-   <p class="err" id="err" role="alert"></p>
-   <div class="navbtns"><button type="button" class="btn ghost" id="back" disabled>&larr; Back</button><button type="button" class="btn" id="next">Next &rarr;</button></div>
-  </form>
+    <label class="consent"><input type="checkbox" id="rc-consent"> I agree that Nexus Security Advisors may store my answers and contact me about my results, as described in the <a href="/trust#privacy">privacy notice</a>. *</label>
+    <div class="hp" aria-hidden="true"><label for="rc-hp">Leave this field empty</label><input type="text" id="rc-hp" tabindex="-1" autocomplete="off"></div>
+    <div class="navbtns"><button type="button" class="btn ghost" id="rc-back2">&larr; Back</button><button type="button" class="btn" id="rc-send">See my results &rarr;</button></div>
+    <p class="rc-note">Your summary may be drafted with AI from your multiple-choice answers only, then shown to you as-is. Please do not enter confidential details.</p>
+   </section>
+   <section id="rc-s3" hidden aria-live="polite">
+    <div class="eyebrow">Your results</div>
+    <div class="rc-res"><div class="rc-big" id="rc-score"></div><div style="flex:1;min-width:220px"><b id="rc-band"></b><div class="rc-bar" aria-hidden="true"><i id="rc-meter"></i></div></div></div>
+    <p id="rc-summary"></p>
+    <h3>Your top priorities</h3><ol class="rc-pri" id="rc-pri"></ol>
+    <details><summary>All areas to strengthen</summary><ul id="rc-gaps"></ul></details>
+    <div class="navbtns" style="margin-top:22px"><a class="btn" href="/get-started">Talk it through: free 30-minute call &rarr;</a><button type="button" class="btn ghost" id="rc-restart">Check another framework</button></div>
+    <p class="rc-note">This self-check is a starting point, not an audit or a compliance determination. We'll follow up by email within one business day.</p>
+   </section>
+   <p class="err rc-err" id="rc-err" role="alert"></p>
+  </div>
  </div>
-
- <section class="faq2" aria-labelledby="ex-h">
-  <div class="eyebrow">Your first session</div><h2 id="ex-h">What to expect</h2>
-  <div class="expect">
-   <div><b>1. We reply within one business day</b><span>We review your request and send you a private link to schedule a free 30-minute discovery call.</span></div><div><b>2. Discovery call</b><span>We ask a few follow-up questions and tell you plainly whether we're a fit.</span></div>
-   <div><b>3. Scoped proposal</b><span>A short proposal with the recommended engagement, deliverables, and timeline.</span></div>
-   <div><b>4. Kickoff</b><span>We confirm stakeholders, gather documents, and schedule the first working sessions.</span></div>
-   <div><b>5. First results</b><span>An early read on your top risks and quick wins, then a prioritized roadmap.</span></div>
-  </div>
-  <div class="faq" style="margin-top:30px">
-   <details><summary>What should I have ready for the first call?</summary><p>Nothing is required. If handy: any recent security questionnaire, audit or assessment results, your cyber insurance application, a list of key systems and vendors (including your MSP), and existing security policies.</p></details>
-   <details><summary>Who from our side should join?</summary><p>Ideally a business decision-maker (owner, CEO, COO, or CFO) and whoever runs IT today, whether internal staff or your MSP.</p></details>
-   <details><summary>Can we sign an NDA before sharing details?</summary><p>Yes. Just ask, and we'll put one in place before any detailed discussion.</p></details>
-   <details><summary>Do you replace our IT team or MSP?</summary><p>No. We provide security leadership and oversight and work alongside your IT team or MSP, helping them prioritize and measure what matters.</p></details>
-   <details><summary>How is a fractional CISO engagement priced?</summary><p>Usually a predictable monthly retainer sized to your needs, or a fixed fee for project work like an assessment or readiness sprint. We'll recommend an option after the discovery call.</p></details>
-   <details><summary>Do you work with companies outside the U.S.?</summary><p>We serve clients across the United States and can support organizations selling into the EU on requirements like the Cyber Resilience Act and AI Act.</p></details>
-  </div>
- </section>
 </div></main>
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><a class="logo" href="/" aria-label="Back to top"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a><p style="margin-top:14px;max-width:340px">Fractional vCISO, compliance readiness, and AI governance for small and mid-sized businesses in every industry. Serving clients across the United States.</p></div>
-    <div><h2 class="fh">Explore</h2><a href="/get-started">Get Started</a><a href="/#vciso">Why a vCISO</a><a href="/#regs">Regulatory Watch</a><a href="/#newsletter">Newsletter</a><a href="/resources">Free Resources</a></div>
-    <div><h2 class="fh">Connect</h2><a href="/get-started">Request a Consultation</a><a href="/cdn-cgi/l/email-protection#5b32353d341b353e232e28283e382e29322f223a3f2d322834292875383436"><span class="__cf_email__" data-cfemail="432a2d252c032d263b363030262036312a373a2227352a302c31306d202c2e">[email&#160;protected]</span></a><a href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer">Nexus on LinkedIn</a><a href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on Facebook</a><a href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer">Nexus on GitHub</a></div>
-    <div><h2 class="fh">Dan Sorensen</h2><a href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.dansorensen.info" target="_blank" rel="noopener noreferrer">DanSorensen.info</a><a href="https://councils.forbes.com/profile/Dan-Sorensen-Fractional-vCISO-AI-Governance-Strategist-Nexus-Security-Advisors" target="_blank" rel="noopener noreferrer">Forbes Technology Council</a></div>
+    <div><a class="logo" href="/" aria-label="Nexus Security Advisors home"><img src="/nexus-logo.webp" alt="Nexus Security Advisors" width="440" height="131"></a><p style="margin-top:14px;max-width:340px">Fractional vCISO, compliance readiness, and AI governance for small and mid-sized businesses in every industry. Serving clients across the United States.</p><div class="fsoc" aria-label="Nexus Security Advisors on social media"><a class="ico" href="https://www.linkedin.com/company/nexus-security-advisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11z"/></svg></a><a class="ico" href="https://www.facebook.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.56V4.63a20.9 20.9 0 0 0-2.27-.12c-2.25 0-3.79 1.37-3.79 3.89v2.17H7.92v2.94h2.54V21h3.04z"/></svg></a><a class="ico" href="https://github.com/NexusSecurityAdvisors" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.85.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 6.84c.85 0 1.71.12 2.51.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.81c0 .27.18.6.69.49A10.1 10.1 0 0 0 22 12.23C22 6.58 17.52 2 12 2z"/></svg></a><a class="ico" href="https://bsky.app/profile/did:plc:s2zq7m67kblpnp6c33ig6uwt" target="_blank" rel="noopener noreferrer" aria-label="Nexus Security Advisors on Bluesky"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 10.8c-1.09-2.11-4.05-6.05-6.8-8C2.57.94 1.56 1.27.9 1.57.14 1.91 0 3.08 0 3.77c0 .69.38 5.65.62 6.48.82 2.74 3.71 3.66 6.38 3.36l.42-.06-.42.06c-3.91.58-7.39 2-2.83 7.08 5.01 5.19 6.87-1.11 7.83-4.31.95 3.2 2.05 9.27 7.73 4.31 4.27-4.31 1.17-6.5-2.74-7.08l-.42-.06.42.06c2.67.3 5.57-.63 6.38-3.36.25-.83.62-5.79.62-6.48 0-.69-.14-1.86-.9-2.21-.66-.3-1.66-.62-4.3 1.24C16.05 4.75 13.09 8.69 12 10.8z"/></svg></a></div></div>
+    <div><h2 class="fh">What We Do</h2><a href="/services">Services</a><a href="/ai-consulting">AI Consulting</a><a href="/ai-build">Custom &amp; Private AI</a><a href="/government">Government Contracting</a><a href="/industries">Industries</a><a href="/approach">Our Approach &amp; Risk Lab</a></div>
+    <div><h2 class="fh">Free Resources</h2><a href="/learn">Learning Hub</a><a href="/careers">Start Your Cyber Career</a><a href="/challenges">Quizzes &amp; Challenges</a><a href="/resources">Resource Library</a><a href="/tabletop">Tabletop Exercise Kit</a><a href="/checklists">Readiness Checklists</a><a href="/readiness-check">Free Readiness Check</a><a href="/personal-security">Personal &amp; Device Security</a><a href="/regulatory-watch">Regulatory Watch</a></div>
+    <div><h2 class="fh">Contact</h2><a href="/get-started">Request a Consultation</a><a href="mailto:info@nexussecurityadvisors.com">info@nexussecurityadvisors.com</a><a href="/about">About Nexus</a><h2 class="fh" style="margin-top:18px">Founder: Dan Sorensen</h2><a href="https://www.linkedin.com/in/cisodan/" target="_blank" rel="noopener noreferrer">Dan Sorensen on LinkedIn</a><a href="https://bsky.app/profile/did:plc:qfh6jcyeesvpb3aqwt4funlj" target="_blank" rel="noopener noreferrer">Dan Sorensen on Bluesky</a><a href="https://www.dansorensen.info" target="_blank" rel="noopener noreferrer">DanSorensen.info</a><a href="https://www.forbes.com/councils/forbestechcouncil/people/dansorensen/" target="_blank" rel="noopener noreferrer">Forbes Technology Council</a><a href="https://www.amazon.com/author/dansorensen" target="_blank" rel="noopener noreferrer">Amazon Author Page</a></div>
   </div>
-  <div class="legal">&copy; 2026 Nexus Security Advisors. All rights reserved. &nbsp;&middot;&nbsp; <a href="/trust">Trust &amp; Security</a> &nbsp;&middot;&nbsp; <a href="/trust#privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/trust#disclosure">Report a vulnerability</a> &nbsp;&middot;&nbsp; <a href="/security.txt">security.txt</a></div>
+  <div class="legal">&copy; 2026 Nexus Security Advisors. All rights reserved. &nbsp;&middot;&nbsp; <a href="/trust">Trust &amp; Security</a> &nbsp;&middot;&nbsp; <a href="/trust#privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/trust#disclosure">Report a vulnerability</a></div>
 </div></footer>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function(){
- var root=document.getElementById('nsa');if(!root)return;root.classList.add('js');
- var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- var prog=root.querySelector('.prog'),top=root.querySelector('.totop');
- function onScroll(){var d=document.documentElement,max=d.scrollHeight-d.clientHeight,y=window.pageYOffset||d.scrollTop;if(prog)prog.style.width=(max>0?y/max*100:0)+'%';if(top)top.classList.toggle('on',y>700);}
- window.addEventListener('scroll',onScroll,{passive:true});onScroll();
- root.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.spot');if(!t)return;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');});
-
- var f=document.getElementById('intake'),S=[].slice.call(f.querySelectorAll('.st')),li=[].slice.call(document.querySelectorAll('#steps li')),i=0,
-     back=document.getElementById('back'),next=document.getElementById('next'),err=document.getElementById('err'),pb=document.getElementById('pb'),KEY='nsa-intake';
- var TTL=7*864e5,store={get:function(){try{var o=JSON.parse(sessionStorage.getItem(KEY)||'null');if(!o||!o.savedAt||!o.data||Date.now()-o.savedAt>TTL){sessionStorage.removeItem(KEY);return null}return o.data}catch(e){return null}},set:function(v){try{sessionStorage.setItem(KEY,JSON.stringify({savedAt:Date.now(),data:v}))}catch(e){}}};
- function val(){var o={};[].forEach.call(f.elements,function(el){if(!el.name)return;if(el.type==='checkbox'){o[el.name]=o[el.name]||[];if(el.checked)o[el.name].push(el.value);}else if(el.type==='radio'){if(el.checked)o[el.name]=el.value;else if(!(el.name in o))o[el.name]='';}else o[el.name]=el.value.trim();});return o;}
- function restore(){var o=store.get();if(!o)return;[].forEach.call(f.elements,function(el){if(!el.name||!(el.name in o))return;if(el.type==='checkbox')el.checked=(o[el.name]||[]).indexOf(el.value)>-1;else if(el.type==='radio')el.checked=o[el.name]===el.value;else el.value=o[el.name];});}
- f.addEventListener('input',function(){store.set(val())});f.addEventListener('change',function(){store.set(val())});
- function check(n){var o=val();var need={0:['name','email','company'],1:['industry','size','team'],2:['services'],3:['goal','timeline']}[n]||[];
-   for(var k=0;k<need.length;k++){var v=o[need[k]];if(!v||(Array.isArray(v)&&!v.length))return 'Please complete the required fields (*) to continue.';}
-   if(n===0&&(o.email.length>100||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)))return 'Please enter a valid email address.';return '';}
- function L(a){return a&&a.length?a.join('; '):'(none)'}
- function summary(){var o=val();return ['NEXUS SECURITY ADVISORS: CLIENT INTAKE','Submitted: '+new Date().toLocaleString(),'',
-  'CONTACT','  Name: '+o.name,'  Email: '+o.email,'  Company: '+o.company,'  Role: '+(o.role||'-'),'  Phone: '+(o.phone||'-'),'  Website: '+(o.website||'-'),'',
-  'ORGANIZATION','  Industry: '+o.industry,'  Employees: '+o.size,'  IT/security today: '+(o.team||'-'),'  Main systems: '+(o.environment||'-'),'',
-  'NEEDS','  Services: '+L(o.services),'  Frameworks: '+L(o.frameworks),'  Triggers: '+L(o.triggers),'',
-  'PRIORITIES','  Biggest concern/goal: '+o.goal,'  Deadlines: '+(o.deadline||'-'),'  Start: '+o.timeline,'  Budget: '+(o.budget||'Prefer not to say'),'  Heard about us: '+(o.source||'-'),'','CONSENT','  Agreed to privacy notice and to be contacted: '+(document.getElementById('f-consent')&&document.getElementById('f-consent').checked?'yes ('+new Date().toISOString()+')':'not yet')].join('\n');}
- function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';
-   back.disabled=i===0;next.style.display=i===S.length-1?'none':'';err.textContent='';
-   if(i===S.length-1){var o=val(),t=summary();document.getElementById('sum').textContent=t;
-     document.getElementById('b-mail').href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting intake: '+o.company)+'&body='+encodeURIComponent(t);}
-   var top=f.getBoundingClientRect().top+window.pageYOffset-90;if(window.pageYOffset>top)window.scrollTo({top:top,behavior:reduce?'auto':'smooth'});
-   var first=S[i].querySelector('input,select,textarea');if(first&&n>0)first.focus({preventScroll:true});}
- next.addEventListener('click',function(){var m=check(i);if(m){err.textContent=m;return;}go(i+1)});
- back.addEventListener('click',function(){go(i-1)});
- f.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'&&e.target.type!=='checkbox'&&e.target.tagName!=='BUTTON'){e.preventDefault();if(i<S.length-1)next.click();}});
- li.forEach(function(l,k){l.style.cursor='pointer';l.addEventListener('click',function(){if(k<i)go(k);else{for(var j=i;j<k;j++){var m=check(j);if(m){go(j);err.textContent=m;return;}}go(k);}})});
- var ok=document.getElementById('ok');
- function copyT(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){ok.textContent=msg}).catch(function(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok.textContent=msg}catch(e){ok.textContent='Select the summary above and copy it.'}ta.remove();});}
- document.getElementById('b-clear').addEventListener('click',function(){if(!confirm('Clear all your answers from this browser?'))return;try{sessionStorage.removeItem(KEY)}catch(e){}f.reset();ok.textContent='Your answers were cleared from this browser.';go(0);});
- document.getElementById('b-copy').addEventListener('click',function(){copyT(summary(),'Summary copied.');});
- document.getElementById('b-dl').addEventListener('click',function(){var o=val(),b=new Blob([summary()],{type:'text/plain'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='nexus-intake-'+(o.company||'summary').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.txt';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500);ok.textContent='Summary downloaded.';});
-
- var CFG={u:'https://crm.zoho.com/crm/WebToLeadForm',a:'26b3ed224959eed21ff859b2a27cafa0d48f0956b8c076ea103a1426f52ecb13',b:'81b32ded400032379d48d3c5a8d6689e97cebacbd3fa5615348025ea152850642c388991f70c0f9840f72fa50c75a555',t:'TGVhZHM=',r:'https://www.nexussecurityadvisors.com/get-started?submitted=1',ls:'Website Inquiry Form'};
- function split(n){n=(n||'').trim().replace(/\s+/g,' ');var p=n.split(' ');return p.length>1?{f:p.slice(0,-1).join(' '),l:p[p.length-1]}:{f:'',l:n};}
- function clip(v,m){v=String(v||'');return v.length>m?v.slice(0,m):v;}
- function neut(v){v=String(v||'').trim();return /^[=+\-@\t\r]/.test(v)?"'"+v:v;}
- function phone(v){v=String(v||'').replace(/[^\d+()\-.\sxXet]/g,'').trim();return v.replace(/^\+(?!\d)/,'');}
- function nsaMap(o){var N=function(s){return String(s||'').replace(/[\u2013\u2014]/g,'-').replace(/\s+/g,' ').trim().toLowerCase();};var one=function(v,t){return v?(t[N(v)]||''):'';};var many=function(a,t){var r=[];[].concat(a||[]).forEach(function(x){var m=t[N(x)];if(m&&r.indexOf(m)<0)r.push(m);});return r;};var SIZE={'1-10':'1-10','11-50':'11-50','51-200':'51-200','201-500':'201-500','501-1,000':'501-1,000','1,000+':'1,000+'};var IND={'aerospace & defense':'Aerospace & Defense (DIB)','healthcare':'Healthcare','financial services':'Financial Services','manufacturing':'Manufacturing','energy & utilities':'Critical Infrastructure / Utilities','saas / technology':'Technology / SaaS','professional services (legal, accounting)':'Legal / Professional Services','education / research':'Education','government contractor':'Other','nonprofit':'Other','retail / e-commerce':'Other','other':'Other'};var STAFF={'no dedicated it or security staff':'No dedicated security staff','it staff, no security specialist':'IT handles security part-time','managed service provider (msp)':'Outsourced to MSP/MSSP','some security staff':'1-2 security staff','a security team without a ciso':'Security team, no CISO','a ciso or security leader today':'Have a CISO / security leader'};var SVC={'fractional / virtual ciso':'Fractional vCISO','security posture assessment & roadmap':'Security Posture Assessment','compliance readiness':'Compliance Readiness','ai governance & security':'AI Governance','incident response plan & tabletop exercise':'Incident Response Planning','not sure yet: help me decide':'Not Sure - Need Guidance'};var FW={'cmmc / nist sp 800-171':'CMMC / NIST 800-171','hipaa':'HIPAA','soc 2':'SOC 2','pci dss':'PCI DSS','iso/iec 27001':'ISO 27001','iso/iec 42001 / eu ai act':'AI Governance (NIST AI RMF / ISO 42001 / EU AI Act)','nist csf 2.0':'NIST CSF','cyber insurance requirements':'Cyber-Insurance Requirements','none / not sure':'Not Sure'};var TL={'as soon as possible':'Immediate (within 30 days)','within 30 days':'Immediate (within 30 days)','within 90 days':'1-3 months','this year':'3-6 months','just exploring':'6+ months / exploring'};var BUD={'under $2,500 / month':'Under $2,500 / month','$2,500 - $5,000 / month':'$2,500 – $5,000 / month','$5,000 - $10,000 / month':'$5,000 – $10,000 / month','over $10,000 / month':'Over $10,000 / month','project-based / one-time':'Project-based / one-time','not sure yet':'Not yet defined'};var TRG={'customer or prime contractor questionnaire':'Customer or prime contract requirement','upcoming audit or assessment':'Upcoming audit / assessment','cyber insurance application or renewal':'Cyber-insurance application / renewal','recent incident or near miss':'Recent incident or breach','rolling out ai tools or agents':'AI adoption / AI risk','board, investor, or acquirer request':'Board / investor request','growth / new market or contract':'Growth / new market','security has no clear owner':'Other'};var src=N(o.source),heard=!src?'':/linkedin/.test(src)?'LinkedIn':/forbes/.test(src)?'Forbes Technology Council':/owasp/.test(src)?'OWASP':/podcast|webinar/.test(src)?'Podcast / Webinar':/conference|event|talk|summit/.test(src)?'Conference / Event':/refer|friend|colleague/.test(src)?'Referral':/google|search|bing/.test(src)?'Google / Search':'Other';var q=new URLSearchParams(location.search),u=function(k){try{var x=q.get(k)||sessionStorage.getItem('nsa_'+k)||'';if(x)sessionStorage.setItem('nsa_'+k,x);return x.slice(0,100);}catch(e){return '';}};var svc=many(o.services,SVC);if(!svc.length)svc=['Not Sure - Need Guidance'];var r={LEADCF7:one(o.size,SIZE),Industry:one(o.industry,IND),LEADCF2:svc,LEADCF8:one(o.team,STAFF),LEADCF1:many(o.frameworks,FW),LEADCF9:one(o.timeline,TL),LEADCF10:one(o.budget,BUD),LEADCF11:many(o.triggers,TRG)[0]||'',LEADCF12:heard,LEADCF3:u('utm_source'),LEADCF4:u('utm_medium'),LEADCF5:u('utm_campaign'),LEADCF51:'on','Lead Status':'New Inquiry'};Object.keys(r).forEach(function(k){if(r[k]===''||(Array.isArray(r[k])&&!r[k].length))delete r[k];});return r;}
-document.getElementById('b-send').addEventListener('click',function(){
-   for(var j=0;j<4;j++){var m=check(j);if(m){go(j);err.textContent=m;return;}}
-   if(!document.getElementById('f-consent').checked){ok.textContent='';err.textContent='Please check the consent box to send your request.';return;}
-   err.textContent='';var hpv=document.getElementById('f-hp').value;if(hpv){return;}
-   if(!CFG.a||!CFG.b||/^TEST/.test(CFG.a)){var o0=val();window.location.href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting request: '+(o0.company||''))+'&body='+encodeURIComponent(summary());ok.textContent='Your email app should open with your request filled in. Just press send. If it does not open, use "Download a copy" and email it to info@nexussecurityadvisors.com.';return;}
-   var o=val(),nm=split(o.name),w=(o.website||'').trim();if(w&&!/^https?:\/\//i.test(w))w='https://'+w;
-   var data={xnQsjsdp:CFG.a,zc_gad:'',xmIwtLD:CFG.b,actionType:CFG.t,returnURL:CFG.r,'First Name':clip(neut(nm.f),40),'Last Name':clip(neut(nm.l||o.name),80),Email:clip(o.email,100),Company:clip(neut(o.company),200),Designation:clip(neut(o.role),100),Phone:clip(phone(o.phone),30),Website:clip(neut(w),255),'Lead Source':CFG.ls,LEADCF6:clip(summary(),30000),aG9uZXlwb3Q:hpv};
-   Object.assign(data,nsaMap(o));var fm=document.createElement('form');fm.method='POST';fm.action=CFG.u;fm.acceptCharset='UTF-8';fm.style.display='none';
-   Object.keys(data).forEach(function(k){[].concat(data[k]).forEach(function(x){var el=document.createElement(k==='LEADCF6'?'textarea':'input');if(el.tagName==='INPUT')el.type='hidden';el.name=k;el.value=x;fm.appendChild(el);});});
-   document.body.appendChild(fm);var btn=this;btn.disabled=true;btn.textContent='Sending…';
-   try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}
-   fm.submit();});
- var pend=null;try{pend=sessionStorage.getItem('nsa-intake-pending')}catch(e){}
- window.addEventListener('pageshow',function(e){if(e.persisted){var bs=document.getElementById('b-send');bs.disabled=false;bs.textContent='Send my request \u2192';}});
- if(/[?&]submitted=1(&|$)/.test(location.search)&&pend){try{sessionStorage.removeItem(KEY);sessionStorage.removeItem('nsa-intake-pending')}catch(e){}
-   f.hidden=true;var sn=document.getElementById('sent');f.parentNode.appendChild(sn);sn.hidden=false;var st=document.getElementById('steps');if(st)st.style.display='none';
-   try{history.replaceState(null,'',location.pathname)}catch(e){}setTimeout(function(){sn.focus()},50);}
- else{if(/[?&]submitted=1/.test(location.search)){try{history.replaceState(null,'',location.pathname)}catch(e){}}restore();go(0);}
-
- var c=document.getElementById('net');if(c&&c.getContext){
- var x=c.getContext('2d'),W,H,pts=[],dpr=Math.min(window.devicePixelRatio||1,2),run=true;
- function size(){var r=c.getBoundingClientRect();W=r.width;H=r.height;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);var n=Math.round(Math.min(90,Math.max(30,W*H/9000)));pts=[];for(var i=0;i<n;i++)pts.push({x:W*(.3+Math.random()*.7),y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.6});}
- function draw(){x.clearRect(0,0,W,H);for(var i=0;i<pts.length;i++){var p=pts[i];if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
-  for(var j=i+1;j<pts.length;j++){var q2=pts[j],d=Math.hypot(p.x-q2.x,p.y-q2.y);if(d<140){x.strokeStyle='rgba(43,155,244,'+(0.6*(1-d/140)).toFixed(3)+')';x.lineWidth=.7;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q2.x,q2.y);x.stroke();}}
-  x.fillStyle='rgba(220,236,255,.9)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
-  if(run&&!reduce)requestAnimationFrame(draw);}
- c.style.cssText='position:absolute;inset:0;width:100%;height:100%;opacity:.7';size();draw();window.addEventListener('resize',function(){size();if(reduce)draw();});
- if('IntersectionObserver' in window){new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!run){run=true;if(!reduce)requestAnimationFrame(draw);}run=v;}).observe(c.parentNode);}}
-})();
-</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Get Started: Cybersecurity Consulting Intake","url":"https://www.nexussecurityadvisors.com/get-started","description":"Step-by-step intake for fractional CISO, vCISO, compliance readiness, and AI governance services from Nexus Security Advisors.","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"},"mainEntity":{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What should I have ready for the first call?","acceptedAnswer":{"@type":"Answer","text":"Nothing is required. If handy: any recent security questionnaire, audit or assessment results, your cyber insurance application, a list of key systems and vendors (including your MSP), and existing security policies."}},{"@type":"Question","name":"Who from our side should join?","acceptedAnswer":{"@type":"Answer","text":"Ideally a business decision-maker (owner, CEO, COO, or CFO) and whoever runs IT today, whether internal staff or your MSP."}},{"@type":"Question","name":"Can we sign an NDA before sharing details?","acceptedAnswer":{"@type":"Answer","text":"Yes. Just ask, and we'll put one in place before any detailed discussion."}},{"@type":"Question","name":"Do you replace our IT team or MSP?","acceptedAnswer":{"@type":"Answer","text":"No. We provide security leadership and oversight and work alongside your IT team or MSP, helping them prioritize and measure what matters."}},{"@type":"Question","name":"How is a fractional CISO engagement priced?","acceptedAnswer":{"@type":"Answer","text":"Usually a predictable monthly retainer sized to your needs, or a fixed fee for project work like an assessment or readiness sprint. We'll recommend an option after the discovery call."}},{"@type":"Question","name":"Do you work with companies outside the U.S.?","acceptedAnswer":{"@type":"Answer","text":"We serve clients across the United States and can support organizations selling into the EU on requirements like the Cyber Resilience Act and AI Act."}}]},"isPartOf":{"@id":"https://www.nexussecurityadvisors.com/#website"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.nexussecurityadvisors.com/"},{"@type":"ListItem","position":2,"name":"Get Started","item":"https://www.nexussecurityadvisors.com/get-started"}]}]}</script>
-
+<script src="/js/readiness-check.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Security Readiness Check","url":"https://www.nexussecurityadvisors.com/readiness-check","description":"Answer 8 quick questions and get a free, instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, or AI governance, with your top 3 priorities.","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"},"isPartOf":{"@id":"https://www.nexussecurityadvisors.com/#website"},"inLanguage":"en-US"}</script>
 </body>
 </html>

@@ -44,15 +44,15 @@ def headers_file():
             block = line.strip()
         elif block == "/*" and ":" in line:
             k, v = line.strip().split(":", 1)
-            out[k.strip()] = v.strip()
+            out[k.strip().lower()] = v.strip()
     return out
 
 
 def check_headers(h, where):
     for name in REQUIRED_HEADERS:
-        if name not in h:
+        if name.lower() not in h:
             err(f"{where}: missing {name}")
-    csp = h.get("Content-Security-Policy", "")
+    csp = h.get("content-security-policy", "")
     if "'unsafe-eval'" in csp:
         err(f"{where}: CSP allows 'unsafe-eval'")
     script_src = re.search(r"script-src ([^;]+)", csp)
@@ -61,7 +61,7 @@ def check_headers(h, where):
     for d in ("frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'"):
         if d not in csp:
             err(f"{where}: CSP missing {d}")
-    hsts = h.get("Strict-Transport-Security", "")
+    hsts = h.get("strict-transport-security", "")
     m = re.search(r"max-age=(\d+)", hsts)
     if not m or int(m.group(1)) < MIN_HSTS:
         err(f"{where}: HSTS max-age below {MIN_HSTS // 86400} days")
@@ -114,9 +114,9 @@ def live_checks():
     want = headers_file()
     req = urllib.request.Request(f"https://{HOST}/", headers={"User-Agent": "nexus-site-monitor"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        live = {k: v for k, v in r.headers.items()}
+        live = {k.lower(): v for k, v in r.headers.items()}  # HTTP header names are case-insensitive; Cloudflare Pages sends _headers rules in lowercase
     check_headers(live, "production /")
-    if live.get("Content-Security-Policy") != want.get("Content-Security-Policy"):
+    if live.get("content-security-policy") != want.get("content-security-policy"):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
     ctx = ssl.create_default_context()
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2  # never negotiate TLS 1.0/1.1
@@ -125,7 +125,8 @@ def live_checks():
     days = (not_after - datetime.now(timezone.utc)).days
     if days < 21:
         err(f"TLS certificate for {HOST} expires in {days} days ({not_after:%Y-%m-%d})")
-    with urllib.request.urlopen(f"https://{HOST}/.well-known/security.txt", timeout=30) as r:
+    req_txt = urllib.request.Request(f"https://{HOST}/.well-known/security.txt", headers={"User-Agent": "nexus-site-monitor"})
+    with urllib.request.urlopen(req_txt, timeout=30) as r:
         check_security_txt(r.read().decode(), "production security.txt")
     print(f"live: headers ok={not errors}, TLS valid {days} more days")
 
