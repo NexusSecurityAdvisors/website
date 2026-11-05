@@ -489,6 +489,51 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 @media(max-width:1100px){#nsa .hgrid{grid-template-columns:1fr}#nsa .hmock{display:none}}
 @media(max-width:800px){#nsa .explore.three{grid-template-columns:1fr}}
 </style>
+<style id="motion-css">
+#nsa .hmock .m-pin{transition:transform 1.1s cubic-bezier(.4,0,.2,1)}
+#nsa .hmock .m-v,#nsa .hmock .m-ok,#nsa .hmock .m-q{transition:opacity .3s ease}
+#nsa .hmock .m-fade{opacity:.25}
+#nsa .cdgrid{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:56px;align-items:center}
+#nsa .cdemo{margin:0}
+#nsa .cd-card{background:#0F1C2E;border:1px solid var(--line2);border-radius:14px;padding:22px;min-height:290px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+#nsa .cd-top{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.4px;color:var(--muted)}
+#nsa .cd-track{color:#6FA8F0;font-weight:600;text-transform:uppercase;letter-spacing:1.2px}
+#nsa .cd-bar{height:4px;background:rgba(255,255,255,.08);border-radius:4px;margin:12px 0 18px;overflow:hidden}
+#nsa .cd-bar i{display:block;height:100%;width:12.5%;background:var(--accent);transition:width .5s ease}
+#nsa .cd-text{font-size:16px;line-height:1.45;color:var(--text);margin:0 0 18px;min-height:70px}
+#nsa .cd-ans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#nsa .cd-ans span{border:1px solid var(--line2);border-radius:8px;padding:10px 12px;font-size:14px;color:var(--silver);transition:background .25s,border-color .25s,color .25s}
+#nsa .cd-ans span.on{background:rgba(26,111,209,.25);border-color:var(--accent);color:#fff}
+#nsa .cd-r{display:none;grid-template-columns:96px 1fr;gap:6px 18px;align-items:center}
+#nsa .cdemo.res .cd-q{display:none}
+#nsa .cdemo.res .cd-r{display:grid}
+#nsa .cd-score{position:relative;width:96px;height:96px}
+#nsa .cd-score svg{width:96px;height:96px;transform:rotate(-90deg)}
+#nsa .cd-ring0{fill:none;stroke:rgba(255,255,255,.08);stroke-width:7}
+#nsa .cd-ring{fill:none;stroke:#E0B341;stroke-width:7;stroke-linecap:round;stroke-dasharray:213.6;stroke-dashoffset:119.6;transition:stroke-dashoffset 1s ease}
+#nsa .cd-score b{position:absolute;inset:0;display:grid;place-items:center;font:400 24px var(--head);color:var(--text)}
+#nsa .cd-band span{display:block;font-size:12px;color:var(--muted)}
+#nsa .cd-band b{font:400 22px var(--head);color:#E0B341}
+#nsa .cd-pri{grid-column:1/-1;margin:14px 0 0;padding-left:20px;font-size:14px;color:var(--silver);line-height:1.5}
+#nsa .cd-pri li{margin:4px 0}
+#nsa .cdemo figcaption{margin-top:10px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+#nsa .cd-pause{background:none;border:1px solid var(--line2);color:var(--silver);border-radius:999px;padding:4px 12px;font:inherit;font-size:12px;cursor:pointer}
+#nsa .cd-pause:hover,#nsa .cd-pause:focus-visible{border-color:var(--accent);color:#fff}
+@media(max-width:1000px){#nsa .cdgrid{grid-template-columns:1fr}#nsa .cdemo{max-width:440px}}
+@media(prefers-reduced-motion:reduce){#nsa .hmock .m-pin,#nsa .cd-ring,#nsa .cd-bar i{transition:none}#nsa .cd-pause{display:none}}
+</style>
+<style id="msg-css">
+#nsa a.hmock{display:block;color:inherit;text-decoration:none;border-radius:16px;transition:transform .25s ease}
+#nsa a.hmock:hover{transform:translateY(-3px)}
+#nsa a.hmock:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+#nsa .hcap{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);text-align:center}
+#nsa .hcap b{color:var(--accent);font-weight:600}
+#nsa a.hmock:hover .hcap b{text-decoration:underline}
+#nsa .hgrid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1100px){#nsa .hgrid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){#nsa .hgrid4{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#nsa a.hmock{transition:none}#nsa a.hmock:hover{transform:none}}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -510,9 +555,9 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 <header class="hero" id="top">
   <div class="wrap hgrid">
     <div class="hcopy">
-    <span class="pill"><span class="dot"></span>Fractional CISO &amp; AI Governance</span>
-    <h1><span class="grad">Fractional CISO</span> and AI governance for small and mid-sized businesses.</h1>
-    <p class="lead">Senior security leadership and safe AI adoption, without a full-time hire. We own your security program, report to your board, and work alongside your IT team.</p>
+    <span class="pill"><span class="dot"></span>Fractional CISO (vCISO) &amp; AI Governance</span>
+    <h1><span class="grad">Your senior security leader</span>, without the full-time cost.</h1>
+    <p class="lead">We serve as your part-time Chief Information Security Officer (CISO): we own your security program, report to your board, and make AI use safe. Built on NIST CSF 2.0, ISO/IEC 27001, and the NIST AI RMF.</p>
     <div class="ctas">
       <a class="btn" href="/get-started">Request Your Free 30-Minute Call</a>
       <a class="btn ghost" href="/readiness-check">Take the Free Readiness Check</a>
@@ -531,12 +576,13 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
       <li>Forbes Technology Council</li>
     </ul>
     </div>
-    <figure class="hmock" role="img" aria-label="Illustrative sample of a Nexus board risk summary: a five-by-five likelihood and impact matrix and the top three risks with their status.">
+    <a class="hmock" href="/approach#lab" aria-label="Build your own risk summary in the free Risk Lab. Preview: an illustrative board risk summary where, over three quarters, the top three risks move from high to low on a five-by-five likelihood and impact matrix and maturity rises from 2.4 to 2.9.">
       <svg viewBox="0 0 400 430" aria-hidden="true" focusable="false">
         <rect x="0.5" y="0.5" width="399" height="429" rx="14" class="m-card"/>
         <text x="24" y="38" class="m-k">BOARD RISK SUMMARY</text>
         <text x="24" y="62" class="m-t">Quarterly security report</text>
         <text x="376" y="38" text-anchor="end" class="m-s">SAMPLE</text>
+        <text x="376" y="104" text-anchor="end" class="m-k m-q" id="mq">QUARTER 1</text>
         <line x1="24" y1="80" x2="376" y2="80" class="m-l"/>
         <text x="24" y="104" class="m-k">LIKELIHOOD &#215; IMPACT</text>
         <g transform="translate(24,116)">
@@ -545,24 +591,24 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
           <rect x="0" y="60" width="34" height="26" rx="3" class="c1"/><rect x="38" y="60" width="34" height="26" rx="3" class="c2"/><rect x="76" y="60" width="34" height="26" rx="3" class="c3"/><rect x="114" y="60" width="34" height="26" rx="3" class="c3"/><rect x="152" y="60" width="34" height="26" rx="3" class="c4"/>
           <rect x="0" y="90" width="34" height="26" rx="3" class="c1"/><rect x="38" y="90" width="34" height="26" rx="3" class="c1"/><rect x="76" y="90" width="34" height="26" rx="3" class="c2"/><rect x="114" y="90" width="34" height="26" rx="3" class="c2"/><rect x="152" y="90" width="34" height="26" rx="3" class="c3"/>
           <rect x="0" y="120" width="34" height="26" rx="3" class="c1"/><rect x="38" y="120" width="34" height="26" rx="3" class="c1"/><rect x="76" y="120" width="34" height="26" rx="3" class="c1"/><rect x="114" y="120" width="34" height="26" rx="3" class="c2"/><rect x="152" y="120" width="34" height="26" rx="3" class="c2"/>
-          <circle cx="131" cy="13" r="8" class="m-dot"/><text x="131" y="17" text-anchor="middle" class="m-n">1</text>
-          <circle cx="93" cy="43" r="8" class="m-dot"/><text x="93" y="47" text-anchor="middle" class="m-n">2</text>
-          <circle cx="169" cy="73" r="8" class="m-dot"/><text x="169" y="77" text-anchor="middle" class="m-n">3</text>
+          <g class="m-pin" id="mp1"><circle cx="131" cy="13" r="8" class="m-dot"/><text x="131" y="17" text-anchor="middle" class="m-n">1</text></g>
+          <g class="m-pin" id="mp2"><circle cx="93" cy="43" r="8" class="m-dot"/><text x="93" y="47" text-anchor="middle" class="m-n">2</text></g>
+          <g class="m-pin" id="mp3"><circle cx="169" cy="73" r="8" class="m-dot"/><text x="169" y="77" text-anchor="middle" class="m-n">3</text></g>
         </g>
         <g transform="translate(222,116)">
-          <text x="0" y="12" class="m-s">Open risks</text><text x="154" y="12" text-anchor="end" class="m-v">12</text>
-          <text x="0" y="44" class="m-s">High or critical</text><text x="154" y="44" text-anchor="end" class="m-v">3</text>
-          <text x="0" y="76" class="m-s">Closed this quarter</text><text x="154" y="76" text-anchor="end" class="m-v">7</text>
-          <text x="0" y="108" class="m-s">CSF maturity</text><text x="154" y="108" text-anchor="end" class="m-v">2.4 &#8594; 2.9</text>
+          <text x="0" y="12" class="m-s">Open risks</text><text x="154" y="12" text-anchor="end" class="m-v" id="mv1">12</text>
+          <text x="0" y="44" class="m-s">High or critical</text><text x="154" y="44" text-anchor="end" class="m-v" id="mv2">3</text>
+          <text x="0" y="76" class="m-s">Closed this quarter</text><text x="154" y="76" text-anchor="end" class="m-v" id="mv3">7</text>
+          <text x="0" y="108" class="m-s">CSF maturity</text><text x="154" y="108" text-anchor="end" class="m-v" id="mv4">2.4</text>
         </g>
         <line x1="24" y1="284" x2="376" y2="284" class="m-l"/>
         <text x="24" y="308" class="m-k">TOP RISKS</text>
-        <g class="m-row"><circle cx="34" cy="332" r="8" class="m-dot"/><text x="34" y="336" text-anchor="middle" class="m-n">1</text><text x="52" y="337" class="m-r">Admin accounts without MFA</text><text x="376" y="337" text-anchor="end" class="m-ok">30 days</text></g>
-        <g class="m-row"><circle cx="34" cy="364" r="8" class="m-dot"/><text x="34" y="368" text-anchor="middle" class="m-n">2</text><text x="52" y="369" class="m-r">Unapproved AI tools with client data</text><text x="376" y="369" text-anchor="end" class="m-ok">60 days</text></g>
-        <g class="m-row"><circle cx="34" cy="396" r="8" class="m-dot"/><text x="34" y="400" text-anchor="middle" class="m-n">3</text><text x="52" y="401" class="m-r">Untested backups</text><text x="376" y="401" text-anchor="end" class="m-ok">90 days</text></g>
+        <g class="m-row"><circle cx="34" cy="332" r="8" class="m-dot"/><text x="34" y="336" text-anchor="middle" class="m-n">1</text><text x="52" y="337" class="m-r">Admin accounts without MFA</text><text x="376" y="337" text-anchor="end" class="m-ok" id="ms1">Due in 30 days</text></g>
+        <g class="m-row"><circle cx="34" cy="364" r="8" class="m-dot"/><text x="34" y="368" text-anchor="middle" class="m-n">2</text><text x="52" y="369" class="m-r">Unapproved AI tools with client data</text><text x="376" y="369" text-anchor="end" class="m-ok" id="ms2">Due in 60 days</text></g>
+        <g class="m-row"><circle cx="34" cy="396" r="8" class="m-dot"/><text x="34" y="400" text-anchor="middle" class="m-n">3</text><text x="52" y="401" class="m-r">Untested backups</text><text x="376" y="401" text-anchor="end" class="m-ok" id="ms3">Due in 90 days</text></g>
       </svg>
-      <figcaption>Illustrative sample. Not client data.</figcaption>
-    </figure>
+      <span class="hcap">Illustrative sample, not client data. <b>Build your own risk summary &rarr;</b></span>
+    </a>
   </div>
 </header>
 
@@ -648,6 +694,35 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
   </div>
 </div></section>
 
+<section class="s" id="check-demo" aria-labelledby="cd-h"><div class="wrap cdgrid">
+  <div class="rv">
+    <div class="eyebrow">Free Readiness Check</div>
+    <h2 id="cd-h">See where you stand in about two minutes.</h2>
+    <p class="lead">Answer eight plain-English questions for CMMC, HIPAA, SOC 2, cyber insurance, or AI governance. You get an instant score and your top three priorities. No call required.</p>
+    <div class="ctas"><a class="btn" href="/readiness-check">Take the Free Readiness Check</a></div>
+  </div>
+  <figure class="cdemo rv" id="cdemo" aria-labelledby="cd-cap">
+    <div class="cd-card" aria-hidden="true">
+      <div class="cd-top"><span class="cd-track">AI governance</span><span class="cd-step" id="cd-step">Question 1 of 8</span></div>
+      <div class="cd-bar"><i id="cd-bar"></i></div>
+      <div class="cd-q" id="cd-qview">
+        <p class="cd-text" id="cd-text">Do you have an inventory of the AI tools, models, and agents your company uses?</p>
+        <div class="cd-ans"><span data-a="yes">Yes</span><span data-a="partly">Partly</span><span data-a="no">No</span><span data-a="unsure">Not sure</span></div>
+      </div>
+      <div class="cd-r" id="cd-rview">
+        <div class="cd-score"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" class="cd-ring0"/><circle cx="40" cy="40" r="34" class="cd-ring" id="cd-ring"/></svg><b id="cd-pct">44%</b></div>
+        <div class="cd-band"><span>Readiness</span><b>Early</b></div>
+        <ol class="cd-pri">
+          <li>Build an AI inventory, including shadow AI</li>
+          <li>Publish an AI acceptable-use policy</li>
+          <li>Name an accountable AI risk owner</li>
+        </ol>
+      </div>
+    </div>
+    <figcaption id="cd-cap">Demo of the AI governance check with sample answers. <button type="button" class="cd-pause" id="cd-pause" aria-pressed="false">Pause animation</button></figcaption>
+  </figure>
+</div></section>
+
 <section class="s alt" id="readiness" aria-labelledby="rd-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Free Resources</div>
   <h2 id="rd-h">Plain-English readiness self-checks.</h2>
@@ -663,6 +738,19 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
   <div class="ctas rv"><a class="btn" href="/checklists">Open the interactive checklists &rarr;</a><a class="btn ghost" href="/nexus-security-readiness-pack.xlsx" download>Download all (Excel)</a></div>
 </div></section>
 
+<section class="s" id="how" aria-labelledby="how-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">How We Work</div>
+  <h2 id="how-h">Servant leadership, run like a disciplined program.</h2>
+  <p class="lead">We lead by serving your people first, and we deliver security the way strong programs deliver anything: clear priorities, short cycles, measured results.</p></div>
+  <div class="grid hgrid4">
+    <article class="card rv"><div class="n">01</div><h3>Servant leadership</h3><p>We listen before we recommend, explain the &ldquo;why&rdquo; in plain English, and measure success by how capable your team becomes, not how dependent it is on us.</p></article>
+    <article class="card rv"><div class="n">02</div><h3>Lean and Six Sigma</h3><p>We remove wasted steps from security work and fix root causes with data, using DMAIC (define, measure, analyze, improve, control) so gains stick.</p></article>
+    <article class="card rv"><div class="n">03</div><h3>Agile and Scrum</h3><p>Your roadmap becomes a prioritized backlog delivered in short sprints, with Scrum Master support for security and AI initiatives.</p></article>
+    <article class="card rv"><div class="n">04</div><h3>Program and project management</h3><p>Milestones, owners (RACI), risks, and status reporting your executives and board can follow, including PMO support for security, compliance, and AI programs.</p></article>
+  </div>
+  <div class="ctas rv"><a class="btn ghost" href="/approach">See our approach &rarr;</a></div>
+</div></section>
+
 <section class="s gridbg" id="about-teaser" aria-labelledby="abt-h"><div class="wrap">
   <div class="rv teaser"><div class="eyebrow">Who We Are</div>
   <h2 id="abt-h">Led by an experienced CISO and U.S. Air Force veteran.</h2>
@@ -674,7 +762,7 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
   <div class="rv"><div class="eyebrow">FAQ</div>
   <h2 id="faq-h">Common questions</h2></div>
   <div class="faq rv">
-    <details><summary>What is a fractional CISO (vCISO)?</summary><p>A fractional or virtual CISO is a senior security executive who leads your security program part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire.</p></details>
+    <details><summary>What is a fractional CISO (vCISO)?</summary><p>A CISO (Chief Information Security Officer) is the executive who owns a company&rsquo;s cybersecurity: the plan, the budget, the policies, and the answers when customers, insurers, or the board ask &ldquo;are we secure?&rdquo; A fractional or virtual CISO (vCISO) does that job part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire.</p></details>
     <details><summary>Who is a good fit for Nexus Security Advisors?</summary><p>Small and mid-sized businesses in any industry, including financial services, healthcare, defense suppliers, manufacturing, technology, and professional services, that need executive security leadership, are facing an audit or assessment, or are rolling out AI and need it governed.</p></details>
     <details><summary>Can you help us prepare for CMMC?</summary><p>Yes. We assess your current state against NIST SP 800-171 and CMMC requirements, identify gaps, and build a prioritized, owner-assigned plan to close them.</p></details>
     <details><summary>How do you approach AI governance?</summary><p>We start by finding the AI tools and agents actually in use, then build AI risk into each initiative's business case, apply least privilege to AI agents, and align to frameworks such as NIST AI RMF, ISO/IEC 42001, the EU AI Act, and the OWASP AI Exchange.</p></details>
@@ -715,5 +803,6 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.nexussecurityadvisors.com/#org","name":"Nexus Security Advisors","url":"https://www.nexussecurityadvisors.com/","logo":"https://www.nexussecurityadvisors.com/nexus-logo.webp","email":"info@nexussecurityadvisors.com","description":"Fractional CISO (vCISO), compliance readiness, and AI governance consultancy for small and mid-sized businesses in every industry, including financial services and healthcare.","areaServed":[{"@type":"Country","name":"United States"}],"founder":{"@id":"https://www.nexussecurityadvisors.com/#dan"},"sameAs":["https://www.linkedin.com/company/nexus-security-advisors","https://www.facebook.com/NexusSecurityAdvisors","https://github.com/NexusSecurityAdvisors","https://bsky.app/profile/did:plc:s2zq7m67kblpnp6c33ig6uwt"],"knowsAbout":["Fractional CISO","vCISO","AI governance","CMMC","NIST SP 800-171","NIST AI RMF","ISO/IEC 42001","ISO 27001","HIPAA","SOC 2","EU AI Act","NIST CSF 2.0","FTC Safeguards Rule","PCI DSS","EU Cyber Resilience Act","Penetration testing","Incident response","Cyber threat intelligence"],"slogan":"Executive cyber leadership that aligns security, compliance, and AI to business outcomes.","audience":{"@type":"BusinessAudience","name":"Small and mid-sized businesses in every industry"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"info@nexussecurityadvisors.com","url":"https://www.nexussecurityadvisors.com/get-started","availableLanguage":"en"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Cybersecurity leadership services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Fractional CISO (vCISO)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Cybersecurity Assessment & Roadmap (NIST CSF 2.0)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Compliance Readiness (CMMC, HIPAA, SOC 2, PCI DSS, EU CRA)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"AI Governance & AI Security","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Incident Response Planning & Executive Tabletop Exercises","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Penetration Test Scoping & Oversight","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Startup Security Leadership (SOC 2, enterprise security reviews, investor due diligence)","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US","url":"https://www.nexussecurityadvisors.com/industries"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Board & Executive Cyber Risk Reporting","provider":{"@id":"https://www.nexussecurityadvisors.com/#org"},"areaServed":"US"}}]},"foundingDate":"2025","legalName":"Nexus Security Advisors","image":"https://www.nexussecurityadvisors.com/nexus-og.png","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"US"}},{"@type":"WebSite","@id":"https://www.nexussecurityadvisors.com/#website","url":"https://www.nexussecurityadvisors.com/","name":"Nexus Security Advisors","inLanguage":"en-US","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"}},{"@type":"Person","@id":"https://www.nexussecurityadvisors.com/#dan","name":"Dan Sorensen","jobTitle":"Founder & Principal vCISO","description":"Founder of Nexus Security Advisors; fractional CISO and AI governance strategist with 22+ years of U.S. Air Force and Air National Guard service, OWASP AI Exchange core team member, and PhD candidate in cybersecurity leadership.","knowsAbout":["EU Cyber Resilience Act","CMMC","AI governance","Cyber threat intelligence","Fractional CISO","NIST CSF 2.0","NIST AI RMF","ISO/IEC 42001","OWASP AI Exchange","Incident response"],"worksFor":{"@id":"https://www.nexussecurityadvisors.com/#org"},"url":"https://www.dansorensen.info","sameAs":["https://www.linkedin.com/in/cisodan/","https://www.dansorensen.info","https://www.forbes.com/councils/forbestechcouncil/people/dansorensen/","https://www.dansorensen.info/blog","https://www.credly.com/users/dan-sorensen","https://www.thinkers360.com/tl/profiles/view/27033","https://bsky.app/profile/did:plc:qfh6jcyeesvpb3aqwt4funlj"],"knowsLanguage":["English","Spanish","Portuguese","Italian"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a fractional CISO (vCISO)?","acceptedAnswer":{"@type":"Answer","text":"A fractional or virtual CISO is a senior security executive who leads your security program part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire."}},{"@type":"Question","name":"Who is a good fit for Nexus Security Advisors?","acceptedAnswer":{"@type":"Answer","text":"Small and mid-sized businesses in any industry, including financial services, healthcare, defense suppliers, manufacturing, technology, and professional services, that need executive security leadership, are facing an audit or assessment, or are rolling out AI and need it governed."}},{"@type":"Question","name":"Can you help us prepare for CMMC?","acceptedAnswer":{"@type":"Answer","text":"Yes. We assess your current state against NIST SP 800-171 and CMMC requirements, identify gaps, and build a prioritized, owner-assigned plan to close them."}},{"@type":"Question","name":"How do you approach AI governance?","acceptedAnswer":{"@type":"Answer","text":"We start by finding the AI tools and agents actually in use, then build AI risk into each initiative's business case, apply least privilege to AI agents, and align to frameworks such as NIST AI RMF, ISO/IEC 42001, the EU AI Act, and the OWASP AI Exchange."}},{"@type":"Question","name":"Can we sign an NDA before sharing details?","acceptedAnswer":{"@type":"Answer","text":"Yes. We are happy to sign a mutual NDA before any detailed discussion of your environment."}},{"@type":"Question","name":"Do you replace our IT team or MSP?","acceptedAnswer":{"@type":"Answer","text":"No. We provide security leadership and oversight and work alongside your IT team or managed service provider, helping them prioritize and measure what matters."}},{"@type":"Question","name":"How is a fractional CISO engagement priced?","acceptedAnswer":{"@type":"Answer","text":"Usually as a predictable monthly retainer sized to your needs, or a fixed fee for project work such as an assessment or readiness sprint. We recommend an option after the free discovery call."}},{"@type":"Question","name":"How do we get started?","acceptedAnswer":{"@type":"Answer","text":"Complete the short intake on our Get Started page. Tell us your industry, size, and the challenge in front of you, and we'll tell you plainly whether we're a fit."}}]}]}</script>
 
 <script src="/js/a11y-tools-1.js" defer></script>
+<script src="/js/home-motion-37c90a3d63.js" defer></script>
 </body>
 </html>
