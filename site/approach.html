@@ -340,6 +340,15 @@
 #nsa .kpis div{padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(14,19,26,.55)}
 #nsa .kpis b{display:block;color:var(--text);font-size:14px}
 #nsa .kpis span{font-size:12.5px;color:var(--muted)}
+#nsa .pillars{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:pl}
+#nsa .pillars li{counter-increment:pl;padding:16px 16px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(14,19,26,.55)}
+#nsa .pillars h4{margin:0 0 6px;font-size:15px;color:var(--text)}
+#nsa .pillars h4:before{content:counter(pl,decimal-leading-zero);display:block;font-size:12px;letter-spacing:1.8px;color:var(--accent);margin-bottom:4px}
+#nsa .pillars p{margin:0 0 10px;font-size:14px}
+#nsa .pillars dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12.5px;color:var(--muted)}
+#nsa .pillars dt{font-weight:600;color:var(--silver)}
+#nsa .pillars dd{margin:0}
+#nsa .pfw{margin-top:34px}
 #nsa .refs{margin-top:22px;border:1px solid var(--line);border-radius:12px;padding:0 20px;background:rgba(14,19,26,.5)}
 #nsa .refs summary{font-size:15px}
 #nsa .refs ol{font-size:14px;padding-left:22px;margin:0 0 18px}
@@ -377,8 +386,8 @@
 #nsa .replay{margin-left:auto;font:inherit;font-size:11.5px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:4px;padding:2px 8px;cursor:pointer}
 #nsa .replay:hover{color:var(--text);border-color:var(--accent)}
 #nsa .term .tb{align-items:center}
-@media(max-width:960px){#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
-@media(max-width:600px){#nsa .alinks,#nsa .kpis{grid-template-columns:1fr}#nsa .apd{padding:20px}}
+@media(max-width:960px){#nsa .pillars{grid-template-columns:1fr 1fr}#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
+@media(max-width:600px){#nsa .alinks,#nsa .kpis,#nsa .pillars{grid-template-columns:1fr}#nsa .apd{padding:20px}}
 /* reveal */
 #nsa.js .rv{opacity:.55;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
 #nsa.js .rv.in{opacity:1;transform:none}
@@ -525,6 +534,13 @@ html,body{margin:0;background:#0E131A}
     </div>
   </div>
 
+  <div class="pfw rv" id="framework">
+    <h3>The Nexus CISO Framework: 12 pillars</h3>
+    <p>Every engagement is organized around twelve pillars. Each one maps to the NIST CSF 2.0 functions and categories it supports, and, for organizations in scope, to the EU Network and Information Security Directive (NIS2) and the EU Cyber Resilience Act (CRA).</p>
+    <ol class="pillars"><li><h4>Business-Aligned Risk Strategy</h4><p>Security priorities set by what the business cannot afford to lose, scored the same way every time.</p><dl><dt>CSF 2.0</dt><dd>GV.OC, GV.RM, ID.RA</dd><dt>NIS2</dt><dd>Art. 20; Art. 21(2)(a)</dd><dt>CRA</dt><dd>Art. 13 product risk assessment</dd></dl></li><li><h4>AI Security &amp; Governance</h4><p>Inventory, risk-rate, and govern AI use and AI features, aligned to the NIST AI Risk Management Framework (AI RMF) and ISO/IEC 42001.</p><dl><dt>CSF 2.0</dt><dd>GV.RM, ID.AM, PR.DS</dd><dt>NIS2</dt><dd>Art. 21(2)(a), (e)</dd><dt>CRA</dt><dd>Annex I, for AI-enabled products</dd></dl></li><li><h4>Third-Party &amp; Supply Chain Risk</h4><p>Know which vendors and components you depend on, what they can reach, and what happens if one fails.</p><dl><dt>CSF 2.0</dt><dd>GV.SC</dd><dt>NIS2</dt><dd>Art. 21(2)(d), (e)</dd><dt>CRA</dt><dd>Art. 13 component due diligence; Annex I Part II (software bill of materials)</dd></dl></li><li><h4>Incident Response &amp; Business Continuity</h4><p>A tested plan, clear decision rights, backups that restore, and reporting clocks you can meet.</p><dl><dt>CSF 2.0</dt><dd>RS, RC</dd><dt>NIS2</dt><dd>Art. 21(2)(b), (c); Art. 23 reporting</dd><dt>CRA</dt><dd>Art. 14 reporting</dd></dl></li><li><h4>Compliance &amp; Audit Readiness</h4><p>One control set mapped to many frameworks, with evidence collected as you go instead of the week before the audit.</p><dl><dt>CSF 2.0</dt><dd>GV.OC, GV.OV, ID.IM</dd><dt>NIS2</dt><dd>Art. 21(2)(f)</dd><dt>CRA</dt><dd>Conformity assessment and technical documentation</dd></dl></li><li><h4>Cloud Security Architecture</h4><p>Secure-by-default configurations, segmentation, encryption, and logging across your cloud and SaaS estate.</p><dl><dt>CSF 2.0</dt><dd>PR.PS, PR.IR, PR.DS</dd><dt>NIS2</dt><dd>Art. 21(2)(e), (h)</dd><dt>CRA</dt><dd>Annex I Part I (secure by default)</dd></dl></li><li><h4>Identity &amp; Access Management</h4><p>MFA everywhere it matters, least privilege, and access reviews that remove what nobody needs.</p><dl><dt>CSF 2.0</dt><dd>PR.AA</dd><dt>NIS2</dt><dd>Art. 21(2)(i), (j)</dd><dt>CRA</dt><dd>Annex I Part I (unauthorized access)</dd></dl></li><li><h4>Security Culture &amp; Awareness</h4><p>Training people actually use, measured by how often they report, not how often they click.</p><dl><dt>CSF 2.0</dt><dd>PR.AT, GV.RR</dd><dt>NIS2</dt><dd>Art. 20(2); Art. 21(2)(g)</dd><dt>CRA</dt><dd>Indirect</dd></dl></li><li><h4>Budget Optimization &amp; ROI</h4><p>Spend tied to risk reduced, so every dollar has a reason the board can follow.</p><dl><dt>CSF 2.0</dt><dd>GV.RR, GV.OV</dd><dt>NIS2</dt><dd>Art. 20; Art. 21(1) proportionality</dd><dt>CRA</dt><dd>Indirect</dd></dl></li><li><h4>Emerging Threat Intelligence</h4><p>Track the threats and vulnerabilities that matter to your sector and act on them before they act on you.</p><dl><dt>CSF 2.0</dt><dd>ID.RA, DE.CM, DE.AE</dd><dt>NIS2</dt><dd>Art. 21(2)(e); Art. 29 information sharing</dd><dt>CRA</dt><dd>Annex I Part II (vulnerability handling); Art. 14</dd></dl></li><li><h4>Talent Development &amp; Team Building</h4><p>Grow the people who run security day to day, with clear roles, coaching, and a bench that covers absences.</p><dl><dt>CSF 2.0</dt><dd>GV.RR, PR.AT</dd><dt>NIS2</dt><dd>Art. 20(2); Art. 21(2)(i)</dd><dt>CRA</dt><dd>Indirect</dd></dl></li><li><h4>Program Leadership &amp; Continuous Improvement</h4><p>Servant leadership, Lean Six Sigma, Agile, and program management that turn the plan into closed findings and measurable gains.</p><dl><dt>CSF 2.0</dt><dd>GV.OV, ID.IM</dd><dt>NIS2</dt><dd>Art. 21(2)(f)</dd><dt>CRA</dt><dd>Indirect</dd></dl></li></ol>
+    <p class="note">CSF 2.0 codes: GV Govern, ID Identify, PR Protect, DE Detect, RS Respond, RC Recover. NIS2 articles refer to Directive (EU) 2022/2555; CRA references refer to Regulation (EU) 2024/2847, which applies to manufacturers of products with digital elements. A dash means the pillar supports the regulation indirectly.quot;IndirectA dash means the pillar supports the regulation indirectly.quot; means the pillar supports the regulation without mapping to a specific requirement. Mappings show where each pillar does most of its work. They are not a legal determination of which obligations apply to your organization.</p>
+  </div>
+
   <details class="refs rv"><summary>Methodology foundations &amp; references</summary>
     <p>Our methods draw on established, peer-reviewed and consensus standards, so results are repeatable and defensible to auditors, boards, and regulators:</p>
     <ol>
@@ -536,6 +552,9 @@ html,body{margin:0;background:#0E131A}
       <li>ISO, <em>ISO 31000:2018 Risk management &mdash; Guidelines</em>. <a href="https://www.iso.org/standard/31000" target="_blank" rel="noopener noreferrer">iso.org</a></li>
       <li>International Organization for Standardization and International Electrotechnical Commission (ISO/IEC), <em>ISO/IEC 27005:2022 Guidance on managing information security risks</em>. <a href="https://www.iso.org/standard/80585.html" target="_blank" rel="noopener noreferrer">iso.org</a></li>
       <li>The Open Group, <em>Open Factor Analysis of Information Risk (FAIR)&trade; risk analysis</em>, for quantifying risk in financial terms when needed. <a href="https://www.opengroup.org/certifications/openfair" target="_blank" rel="noopener noreferrer">opengroup.org</a></li>
+      <li>European Parliament and Council, <em>Directive (EU) 2022/2555 on measures for a high common level of cybersecurity across the Union (NIS2 Directive)</em>, 2022. <a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu</a></li>
+      <li>European Parliament and Council, <em>Regulation (EU) 2024/2847 on horizontal cybersecurity requirements for products with digital elements (Cyber Resilience Act)</em>, 2024. <a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu</a></li>
+      <li>NIST, <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>, NIST AI 100-1, 2023. <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener noreferrer">nist.gov</a></li>
       <li>Center for Internet Security (CIS), <em>CIS Critical Security Controls</em>. <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener noreferrer">cisecurity.org</a></li>
     </ol>
   </details>
