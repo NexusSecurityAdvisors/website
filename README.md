@@ -38,7 +38,9 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 1. **Bindings > KV namespace**: create a namespace `nexus-readiness-rl`, then bind it as `RL` (Production and Preview).
 2. **Variables and Secrets**: add `ANTHROPIC_API_KEY` as an encrypted secret (a key from the `website-leadgen` workspace in Claude Console). Optional: `AI_DAILY_CAP` (default 150).
 3. **Security > WAF > Rate limiting rule** (included on the free plan): if URI Path equals `/api/readiness`, allow 10 requests per 1 minute per IP, then Block. This is an edge layer in front of the KV limits.
-4. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
+4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness` as well as `/csp-report`, or every submission gets Cloudflare's "Sorry, you have been blocked" page:
+   `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and http.request.uri.path in {"/csp-report" "/api/readiness"}))`
+5. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
 
 ### Local test
 `npx wrangler pages dev site --kv RL --binding LEAD_SINK=off`. `LEAD_SINK=off` skips the Zoho POST so tests don't create real leads.
