@@ -1,7 +1,7 @@
 /* Nexus accessibility tools: read-aloud (browser speech, no third party) and
    free page translation links (Google Translate web proxy). No data leaves the
    browser unless the visitor chooses a translation link. Versioned filename:
-   /js/* is cached for a year, so rename (a11y-tools-2.js) when changing it. */
+   /js/* is cached for a year, so rename (a11y-tools-3.js) when changing it. */
 (function () {
   'use strict';
   if (window.__nsaA11y) return; window.__nsaA11y = 1;
@@ -10,7 +10,7 @@
   var onProxy = /\.translate\.goog$/.test(host);
 
   var css = d.createElement('link');
-  css.rel = 'stylesheet'; css.href = '/js/a11y-tools-1.css';
+  css.rel = 'stylesheet'; css.href = '/js/a11y-tools-2.css';
   d.head.appendChild(css);
 
   var LANGS = [

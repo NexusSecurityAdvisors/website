@@ -1,7 +1,11 @@
-/* Nexus accessibility tools (see a11y-tools-1.js) */
+/* Nexus accessibility tools (see a11y-tools-2.js) */
 .nsa-a11y,.nsa-a11y *{box-sizing:border-box}
 .nsa-a11y{position:fixed;left:16px;bottom:16px;z-index:70;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5}
-.nsa-a11y-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid #2B9BF4;background:#0E1B2E;color:#F3F5F7;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.nsa-a11y-btn{display:inline-flex;align-items:center;gap:0;min-height:44px;min-width:44px;padding:11px;border-radius:999px;border:1px solid #2B9BF4;background:#0E1B2E;color:#F3F5F7;font:inherit;font-weight:600;line-height:20px;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4)}
+/* Compact by default so the launcher never covers page content; the label slides out on hover, focus, or while open. The span stays in the accessibility tree, so the button keeps its name. */
+.nsa-a11y-btn span{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .2s ease}
+.nsa-a11y-btn:hover,.nsa-a11y-btn:focus-visible,.nsa-a11y-btn[aria-expanded="true"]{gap:8px;padding:10px 16px 10px 12px}
+.nsa-a11y-btn:hover span,.nsa-a11y-btn:focus-visible span,.nsa-a11y-btn[aria-expanded="true"] span{max-width:240px}
 .nsa-a11y-btn svg{width:20px;height:20px;fill:#2B9BF4;flex-shrink:0}
 .nsa-a11y-btn:hover{background:#152A45}
 .nsa-a11y-btn:focus-visible,.nsa-a11y-panel button:focus-visible,.nsa-a11y-panel a:focus-visible{outline:3px solid #F3F5F7;outline-offset:2px}
