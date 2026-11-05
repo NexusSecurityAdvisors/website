@@ -438,7 +438,7 @@
 #nsa .rhero{position:relative;padding:96px 0 60px;background:radial-gradient(ellipse at 80% 0%,rgba(26,111,209,.28),transparent 55%),linear-gradient(180deg,#0E131A,#0E1B2E);overflow:hidden}
 #nsa .rhero .wrap{position:relative;z-index:2}
 
-#nsa .cltabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:-30px;position:relative;z-index:3}
+#nsa .cltabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:-30px;position:relative;z-index:3}
 #nsa .cltab{font:inherit;text-align:left;cursor:pointer;padding:16px;border:1px solid var(--line);border-radius:12px;background:rgba(14,27,46,.88);color:var(--silver);transition:all .2s}
 #nsa .cltab b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
 #nsa .cltab small{font-size:12px;color:var(--muted)}
@@ -526,11 +526,11 @@ html,body{margin:0;background:#0E131A}
 </div></div>
 <header class="rhero" id="top"><canvas id="net" aria-hidden="true"></canvas><div class="wrap">
   <h1><span class="grad">Readiness checklists</span> you can use today.</h1>
-  <p class="lead">Work through Cybersecurity Maturity Model Certification (CMMC), Health Insurance Portability and Accountability Act (HIPAA), System and Organization Controls (SOC) 2, cyber insurance, European Union (EU) Cyber Resilience Act (CRA), and artificial intelligence (AI) governance checklists right here, then download them as Word, Excel, PDF, CSV, or JSON for your team, governance, risk, and compliance (GRC) platform, or security monitoring tools.</p>
+  <p class="lead">Work through Cybersecurity Maturity Model Certification (CMMC), Health Insurance Portability and Accountability Act (HIPAA), System and Organization Controls (SOC) 2, cyber insurance, European Union (EU) Cyber Resilience Act (CRA), artificial intelligence (AI) governance, and AI agent onboarding and offboarding checklists right here, then download them as Word, Excel, PDF, CSV, or JSON for your team, governance, risk, and compliance (GRC) platform, or security monitoring tools.</p>
 </div></header>
 
 <main id="main"><div class="wrap">
-  <div class="cltabs" role="tablist" aria-label="Checklists"><button type="button" class="cltab" role="tab" data-id="cmmc" aria-selected="false"><b>CMMC / NIST 800-171</b><small>20 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="hipaa" aria-selected="false"><b>HIPAA / 405(d)</b><small>19 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="soc2" aria-selected="false"><b>SOC 2</b><small>18 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="insurance" aria-selected="false"><b>Cyber Insurance</b><small>16 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="cra" aria-selected="false"><b>EU CRA</b><small>13 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="aigov" aria-selected="false"><b>AI Governance</b><small>12 items</small><span class="bar2"><i></i></span></button></div>
+  <div class="cltabs" role="tablist" aria-label="Checklists"><button type="button" class="cltab" role="tab" data-id="cmmc" aria-selected="false"><b>CMMC / NIST 800-171</b><small>20 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="hipaa" aria-selected="false"><b>HIPAA / 405(d)</b><small>19 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="soc2" aria-selected="false"><b>SOC 2</b><small>18 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="insurance" aria-selected="false"><b>Cyber Insurance</b><small>16 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="cra" aria-selected="false"><b>EU CRA</b><small>13 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="aigov" aria-selected="false"><b>AI Governance</b><small>12 items</small><span class="bar2"><i></i></span></button><button type="button" class="cltab" role="tab" data-id="agents" aria-selected="false"><b>AI Agents</b><small>22 items</small><span class="bar2"><i></i></span></button></div>
   <section class="clhead" aria-live="polite">
     <div><div class="eyebrow" id="cl-aud"></div><h2 id="cl-title"></h2><p class="clintro" id="cl-intro"></p>
       <div class="dlgrp"><span class="dlh">Download my answers</span>
@@ -547,7 +547,7 @@ html,body{margin:0;background:#0E131A}
         <a class="dl" id="d-docx" href="#" download><em>DOCX</em>Word</a>
         <a class="dl" id="d-xlsx" href="#" download><em>XLSX</em>Excel</a>
         <a class="dl" id="d-pdf" href="#" download><em>PDF</em>Printable</a>
-        <a class="dl" href="/nexus-security-readiness-pack.xlsx" download><em>XLSX</em>All 6 checklists</a>
+        <a class="dl" href="/nexus-security-readiness-pack.xlsx" download><em>XLSX</em>All 7 checklists</a>
       </div></div>
       <p class="hint" id="m-msg" aria-live="polite">Your statuses and notes are saved in this browser only; nothing is sent to us. &ldquo;Download my answers&rdquo; creates the file on your device. To continue on another computer, download JSON and use &ldquo;Restore from JSON&rdquo; there.</p>
     </div>
@@ -560,7 +560,7 @@ html,body{margin:0;background:#0E131A}
     <button type="button" class="dl" id="reset">Reset</button>
   </div>
   <div id="cl-body" class="ph-no-capture"></div>
-  <noscript><ul><li><b>CMMC / National Institute of Standards and Technology (NIST) Special Publication (SP) 800-171 Readiness Self-Check</b>: <a href="/nexus-cmmc-checklist.docx">Word</a> &middot; <a href="/nexus-cmmc-checklist.xlsx">Excel</a> &middot; <a href="/nexus-cmmc-checklist.pdf">PDF</a></li><li><b>HIPAA Security Rule &amp; 405(d) Readiness Self-Check</b>: <a href="/nexus-hipaa-checklist.docx">Word</a> &middot; <a href="/nexus-hipaa-checklist.xlsx">Excel</a> &middot; <a href="/nexus-hipaa-checklist.pdf">PDF</a></li><li><b>SOC 2 Readiness Roadmap &amp; Self-Check</b>: <a href="/nexus-soc2-checklist.docx">Word</a> &middot; <a href="/nexus-soc2-checklist.xlsx">Excel</a> &middot; <a href="/nexus-soc2-checklist.pdf">PDF</a></li><li><b>Cyber Insurance Readiness Self-Check</b>: <a href="/nexus-insurance-checklist.docx">Word</a> &middot; <a href="/nexus-insurance-checklist.xlsx">Excel</a> &middot; <a href="/nexus-insurance-checklist.pdf">PDF</a></li><li><b>EU Cyber Resilience Act (CRA) Readiness Self-Check</b>: <a href="/nexus-cra-checklist.docx">Word</a> &middot; <a href="/nexus-cra-checklist.xlsx">Excel</a> &middot; <a href="/nexus-cra-checklist.pdf">PDF</a></li><li><b>AI Governance Readiness Self-Check</b>: <a href="/nexus-aigov-checklist.docx">Word</a> &middot; <a href="/nexus-aigov-checklist.xlsx">Excel</a> &middot; <a href="/nexus-aigov-checklist.pdf">PDF</a></li></ul></noscript>
+  <noscript><ul><li><b>CMMC / National Institute of Standards and Technology (NIST) Special Publication (SP) 800-171 Readiness Self-Check</b>: <a href="/nexus-cmmc-checklist.docx">Word</a> &middot; <a href="/nexus-cmmc-checklist.xlsx">Excel</a> &middot; <a href="/nexus-cmmc-checklist.pdf">PDF</a></li><li><b>HIPAA Security Rule &amp; 405(d) Readiness Self-Check</b>: <a href="/nexus-hipaa-checklist.docx">Word</a> &middot; <a href="/nexus-hipaa-checklist.xlsx">Excel</a> &middot; <a href="/nexus-hipaa-checklist.pdf">PDF</a></li><li><b>SOC 2 Readiness Roadmap &amp; Self-Check</b>: <a href="/nexus-soc2-checklist.docx">Word</a> &middot; <a href="/nexus-soc2-checklist.xlsx">Excel</a> &middot; <a href="/nexus-soc2-checklist.pdf">PDF</a></li><li><b>Cyber Insurance Readiness Self-Check</b>: <a href="/nexus-insurance-checklist.docx">Word</a> &middot; <a href="/nexus-insurance-checklist.xlsx">Excel</a> &middot; <a href="/nexus-insurance-checklist.pdf">PDF</a></li><li><b>EU Cyber Resilience Act (CRA) Readiness Self-Check</b>: <a href="/nexus-cra-checklist.docx">Word</a> &middot; <a href="/nexus-cra-checklist.xlsx">Excel</a> &middot; <a href="/nexus-cra-checklist.pdf">PDF</a></li><li><b>AI Governance Readiness Self-Check</b>: <a href="/nexus-aigov-checklist.docx">Word</a> &middot; <a href="/nexus-aigov-checklist.xlsx">Excel</a> &middot; <a href="/nexus-aigov-checklist.pdf">PDF</a></li><li><b>AI Agent Onboarding &amp; Offboarding Checklist</b>: <a href="/nexus-agents-checklist.docx">Word</a> &middot; <a href="/nexus-agents-checklist.xlsx">Excel</a> &middot; <a href="/nexus-agents-checklist.pdf">PDF</a></li></ul></noscript>
 
   <section class="s" aria-labelledby="ing-h" style="padding:60px 0 20px">
     <div class="eyebrow">Use it anywhere</div><h2 id="ing-h">Bring the checklist into your tools</h2>
@@ -591,8 +591,9 @@ html,body{margin:0;background:#0E131A}
   <div class="legal">&copy; 2026 Nexus Security Advisors. All rights reserved. &nbsp;&middot;&nbsp; <a href="/trust">Trust &amp; Security</a> &nbsp;&middot;&nbsp; <a href="/trust#privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/trust#disclosure">Report a vulnerability</a></div>
 </div></footer>
 </div>
-<script src="/js/checklists-1-ba3c5e6e19.js"></script>
+<script src="/js/checklists-1-79f4518328.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Interactive Cybersecurity Readiness Checklists","url":"https://www.nexussecurityadvisors.com/checklists","description":"Free interactive readiness checklists for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, EU CRA, and AI governance, downloadable as Word, Excel, PDF, CSV, and JSON.","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"},"isPartOf":{"@id":"https://www.nexussecurityadvisors.com/#website"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.nexussecurityadvisors.com/"},{"@type":"ListItem","position":2,"name":"Readiness Checklists","item":"https://www.nexussecurityadvisors.com/checklists"}]}]}</script>
 
+<script src="/js/a11y-tools-1.js" defer></script>
 </body>
 </html>

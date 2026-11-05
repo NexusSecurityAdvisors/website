@@ -7,10 +7,14 @@ python3 tools/check_readiness.py --base http://localhost:8788 --local           
 
 Exercises the Pages Function at /api/readiness without creating a lead, calling Claude or spending
 a rate-limit slot: every probe is rejected or short-circuited before those steps.
-Cloudflare Bot Fight Mode blocks POSTs from cloud (GitHub runner) IP ranges at the edge, before the
-function runs, and the free plan cannot exempt them. So against production an edge-blocked POST is
-reported as a warning and the POST probes are skipped; the workflow runs the same probes in full
-against the function served locally by `wrangler pages dev` (--local makes them mandatory).
+An edge 403 (an HTML page instead of the function's JSON) is classified by its headers:
+- `cf-mitigated: challenge` is a bot challenge aimed at this client (Bot Fight Mode challenges cloud
+  IP ranges such as GitHub runners). Real browsers pass it, so against production this is a warning and
+  the POST probes are skipped; the workflow runs them in full against `wrangler pages dev` (--local).
+- Anything else is a WAF/security-rule block, which hits real visitors too. That is a failure, reported
+  with the Ray ID to look up under Security > Analytics > Events. (Nov 2026: the custom rule
+  "Static site: allow only GET/HEAD/OPTIONS" blocked every POST to /api/readiness this way, and the
+  old "assume Bot Fight Mode" warning hid it.)
 - GET /readiness-check serves the page and its client script
 - GET /api/readiness            -> 405 with Allow: POST
 - POST from a foreign Origin    -> 403 forbidden
@@ -75,15 +79,18 @@ def main():
     origin = {"Origin": BASE, "Content-Type": "application/json"}
     probe = call("POST", "/api/readiness", json.dumps({"track": "__synthetic__"}), origin)
     if probe[0] == 403 and not probe[2].lstrip().startswith("{"):
-        msg = "POST /api/readiness blocked at the Cloudflare edge (Bot Fight Mode) for this runner"
-        if LOCAL:
-            errors.append(msg)
+        h = {k.lower(): v for k, v in probe[1].items()}
+        ray = h.get("cf-ray", "?")
+        if h.get("cf-mitigated", "").lower() == "challenge" and not LOCAL:
+            print(f"::warning::POST /api/readiness got a Cloudflare bot challenge for this client (Ray {ray}); "
+                  "POST probes skipped here and covered by the local run")
         else:
-            print(f"::warning::{msg}; POST probes skipped here and covered by the local run")
-            print(f"{'FAIL' if errors else 'PASS'}: {len(errors)} error(s)")
-            for e in errors:
-                print(f"::error::{e}")
-            sys.exit(1 if errors else 0)
+            errors.append(f"POST /api/readiness blocked at the Cloudflare edge by a security rule (Ray {ray}); "
+                          "real visitors are blocked too. Look up the Ray ID under Security > Analytics > Events")
+        print(f"{'FAIL' if errors else 'PASS'}: {len(errors)} error(s)")
+        for e in errors:
+            print(f"::error::{e}")
+        sys.exit(1 if errors else 0)
     expect("foreign origin", call("POST", "/api/readiness", "{}",
            {"Origin": "https://evil.example", "Content-Type": "application/json"}), 403, "forbidden")
     expect("wrong content type", call("POST", "/api/readiness", "x=1",

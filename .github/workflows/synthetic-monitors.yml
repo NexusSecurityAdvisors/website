@@ -4,8 +4,8 @@ name: Synthetic monitors
 # - dns:       domain and email-authentication posture (tools/check_dns.py)
 # - readiness: Readiness Check API on production, without creating leads (tools/check_readiness.py)
 # - readiness-local: the same API probes against the function run locally with `wrangler pages dev`
-#   (Cloudflare Bot Fight Mode blocks POSTs from GitHub runners at the edge, so production can only
-#   be probed with GETs from here)
+#   (if Cloudflare answers the runner with a bot challenge, the production job warns and skips its
+#   POST probes; any other edge block fails it, because real visitors would be blocked too)
 # Each check opens (or updates) its own issue on failure and closes it when healthy again.
 on:
   schedule:

@@ -1,6 +1,6 @@
 # Nexus Security Advisors
 
-> Nexus Security Advisors is a U.S. cybersecurity leadership firm founded in 2025 that provides fractional and virtual CISO (vCISO) services, compliance readiness (CMMC / NIST SP 800-171, HIPAA, SOC 2, PCI DSS, EU Cyber Resilience Act), AI governance and AI security, and NIST CSF 2.0 security posture assessments for small and mid-sized businesses in every industry, plus SOC 2 and enterprise security-review support for startups. It is an SBA-certified Service-Disabled Veteran-Owned Small Business (SDVOSB) founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.
+> Nexus Security Advisors is a U.S. cybersecurity leadership firm founded in 2025 that provides fractional and virtual CISO (vCISO) services, compliance readiness (CMMC / NIST SP 800-171, HIPAA, SOC 2, PCI DSS, EU Cyber Resilience Act), AI governance and AI security, and NIST CSF 2.0 security posture assessments for small and mid-sized businesses in every industry, plus SOC 2 and enterprise security-review support for startups. It is a veteran-owned small business founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.
 
 Key facts:
 - Serves clients across the United States; works alongside a client's IT team or managed service provider (MSP) rather than replacing them.
@@ -32,7 +32,7 @@ Key facts:
 
 - [Free security readiness check](https://www.nexussecurityadvisors.com/readiness-check): Answer 8 questions for an instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance or AI governance, with your top 3 priorities.
 - [Personal device and privacy security](https://www.nexussecurityadvisors.com/personal-security): Checklists for laptops, phones, home networks and identity, plus a BYOD policy template.
-- [Readiness checklists](https://www.nexussecurityadvisors.com/checklists): Interactive CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, EU CRA and AI governance self-checks.
+- [Readiness checklists](https://www.nexussecurityadvisors.com/checklists): Interactive CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, EU CRA, AI governance, and AI agent onboarding/offboarding self-checks.
 - [Tabletop exercise kit](https://www.nexussecurityadvisors.com/tabletop): Facilitator guide, roles and eight incident scenarios with injects.
 - [Resource library](https://www.nexussecurityadvisors.com/resources): 300+ curated free cybersecurity and AI security resources.
 - [Learning hub](https://www.nexussecurityadvisors.com/learn): Free cybersecurity and AI learning paths by role.
