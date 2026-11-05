@@ -560,6 +560,7 @@ html,body{margin:0;background:#0E131A}
     </div>
     <label class="consent"><input type="checkbox" id="rc-consent"> I agree that Nexus Security Advisors may store my answers and contact me about my results, as described in the <a href="/trust#privacy">privacy notice</a>. *</label>
     <div class="hp" aria-hidden="true"><label for="rc-hp">Leave this field empty</label><input type="text" id="rc-hp" tabindex="-1" autocomplete="off"></div>
+    <div class="q" id="rc-ts"></div>
     <div class="navbtns"><button type="button" class="btn ghost" id="rc-back2">&larr; Back</button><button type="button" class="btn" id="rc-send">See my results &rarr;</button></div>
     <p class="rc-note">Your summary may be drafted with AI from your multiple-choice answers only, then shown to you as-is. Please do not enter confidential details.</p>
    </section>
@@ -587,6 +588,7 @@ html,body{margin:0;background:#0E131A}
 </div></footer>
 </div>
 <script src="/js/readiness-check.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=rcTsReady" async defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Security Readiness Check","url":"https://www.nexussecurityadvisors.com/readiness-check","description":"Answer 8 quick questions and get a free, instant readiness score for CMMC/NIST 800-171, HIPAA, SOC 2, cyber insurance, or AI governance, with your top 3 priorities.","publisher":{"@id":"https://www.nexussecurityadvisors.com/#org"},"isPartOf":{"@id":"https://www.nexussecurityadvisors.com/#website"},"inLanguage":"en-US"}</script>
 <script src="/js/a11y-tools-1.js" defer></script>
 </body>

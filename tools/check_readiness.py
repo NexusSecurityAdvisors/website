@@ -108,6 +108,10 @@ def main():
         "hp": "synthetic-monitor",  # honeypot: the API treats this as a bot and never stores or forwards it
         "elapsed": 60000,
     }
+    no_token = {**submission, "hp": ""}
+    expect("missing Turnstile token", call("POST", "/api/readiness", json.dumps(no_token), origin),
+           403, "verification_failed")
+
     result = expect("scored submission (honeypot path)", call("POST", "/api/readiness", json.dumps(submission), origin), 200)
     if result and (result.get("source") != "rules" or not result.get("report")):
         errors.append(f"scored submission: expected a rules-based report, got keys {sorted(result)}")

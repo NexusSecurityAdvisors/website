@@ -77,6 +77,11 @@ export async function onRequestPost(context) {
   const score = scoreIt(track, answers);
   if (body.hp || !(Number(body.elapsed) > 8000)) return json({ ...score, report: fallbackReport(track, score), source: "rules" });
 
+  // ---- 3b. Turnstile: server-side siteverify. Gates everything below (AI call, CRM lead).
+  if (!(await verifyTurnstile(env, body["cf-turnstile-response"], request.headers.get("cf-connecting-ip")))) {
+    return json({ error: "verification_failed", message: "We couldn't verify this request. Please complete the security check and try again." }, 403);
+  }
+
   // ---- 4. rate limits (KV). Fail closed on the AI call, fail open on the lead.
   const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
   const day = new Date().toISOString().slice(0, 10);
@@ -218,4 +223,33 @@ async function bump(kv, key, ttl) {
 async function sha(s) {
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("nsa:" + s));
   return [...new Uint8Array(d)].slice(0, 12).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+// Turnstile siteverify. Tokens are single-use; the browser never calls siteverify.
+const TS_ACTION = "readiness_check";
+async function verifyTurnstile(env, token, ip) {
+  if (typeof token !== "string" || !token || token.length > 2048) return false;
+  if (!env.TURNSTILE_SECRET) { console.log("turnstile_error", "TURNSTILE_SECRET not set"); return false; }
+  // Production allowlist only: never include localhost / 127.0.0.1 here.
+  const hosts = String(env.TURNSTILE_HOSTNAMES || DEFAULT_ORIGINS.map((o) => new URL(o).hostname).join(","))
+    .split(",").map((h) => h.trim().toLowerCase()).filter(Boolean);
+  if (!hosts.length) { console.log("turnstile_error", "empty hostname allowlist"); return false; }
+  const form = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
+  if (ip) form.set("remoteip", ip);
+  try {
+    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form, signal: AbortSignal.timeout(10000) });
+    if (!r.ok) { console.log("turnstile_error", `siteverify_http_${r.status}`); return false; }
+    const d = await r.json();
+    if (d.success !== true) {
+      const codes = Array.isArray(d["error-codes"]) ? d["error-codes"].join(",") : "unsuccessful";
+      console.log("turnstile_rejected", codes);
+      return false;
+    }
+    if (d.action !== TS_ACTION) { console.log("turnstile_rejected", "unexpected_action"); return false; }
+    if (!hosts.includes(String(d.hostname || "").toLowerCase())) {
+      console.log("turnstile_rejected", "unexpected_hostname");
+      return false;
+    }
+    return true;
+  } catch (e) { console.log("turnstile_error", String(e && e.message)); return false; }
 }

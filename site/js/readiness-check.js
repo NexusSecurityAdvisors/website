@@ -4,7 +4,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var steps = [$('rc-s0'), $('rc-s1'), $('rc-s2'), $('rc-s3')], err = $('rc-err');
-  function show(n) { steps.forEach(function (s, i) { s.hidden = i !== n; }); err.textContent = ''; var y = root.getBoundingClientRect().top + window.pageYOffset - 90; if (window.pageYOffset > y) window.scrollTo(0, y); }
+  function show(n) { steps.forEach(function (s, i) { s.hidden = i !== n; }); if (n === 2) rcTsMount(); err.textContent = ''; var y = root.getBoundingClientRect().top + window.pageYOffset - 90; if (window.pageYOffset > y) window.scrollTo(0, y); }
 
   fetch('/readiness-bank.json', { credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (b) {
     BANK = b; var html = '';
@@ -41,16 +41,18 @@
     var c = { name: $('rc-name').value.trim(), email: $('rc-email').value.trim(), company: $('rc-company').value.trim(), role: $('rc-role').value.trim(), size: $('rc-size').value, industry: $('rc-ind').value };
     if (!c.name || !c.company || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email)) { err.textContent = 'Please enter your name, a valid work email, and company.'; return; }
     if (!$('rc-consent').checked) { err.textContent = 'Please check the consent box to see your results.'; return; }
+    var token = rcTsToken();
+    if (!token) { err.textContent = 'Please complete the security check to see your results.'; return; }
     var answers = {}; BANK.tracks[track].questions.forEach(function (q) { answers[q.id] = root.querySelector('input[name="' + q.id + '"]:checked').value; });
     var btn = this; btn.disabled = true; btn.textContent = 'Building your report…'; err.textContent = '';
     fetch('/api/readiness', {
       method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ track: track, answers: answers, contact: c, consent: true, hp: $('rc-hp').value, elapsed: Date.now() - t0 })
-    }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); }).then(function (x) {
+      body: JSON.stringify({ track: track, answers: answers, contact: c, consent: true, hp: $('rc-hp').value, elapsed: Date.now() - t0, 'cf-turnstile-response': token })
+    }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); }).then(function (x) { rcTsReset();
       btn.disabled = false; btn.textContent = 'See my results →';
       if (!x.ok) { err.textContent = x.d.message || 'Something went wrong. Please try again, or email info@nexussecurityadvisors.com.'; return; }
       render(x.d, c);
-    }).catch(function () { btn.disabled = false; btn.textContent = 'See my results →'; err.textContent = 'Network error. Please try again.'; });
+    }).catch(function () { rcTsReset(); btn.disabled = false; btn.textContent = 'See my results →'; err.textContent = 'Network error. Please try again.'; });
   });
 
   function render(d, c) {
@@ -71,3 +73,16 @@
   }
   $('rc-restart').addEventListener('click', function () { t0 = Date.now(); show(0); });
 })();
+
+// Cloudflare Turnstile (explicit render). Tokens are single-use: reset after each request.
+var RC_TS_SITEKEY = '0x4AAAAAAF0PKlsgoUMRf2Nh';
+var rcTsId = null;
+function rcTsMount() {
+  var el = document.getElementById('rc-ts');
+  var step = document.getElementById('rc-s2');
+  if (!el || !step || step.hidden || rcTsId !== null || !window.turnstile) return;
+  rcTsId = window.turnstile.render(el, { sitekey: RC_TS_SITEKEY, action: 'readiness_check' });
+}
+function rcTsToken() { return (window.turnstile && rcTsId !== null && window.turnstile.getResponse(rcTsId)) || ''; }
+function rcTsReset() { if (window.turnstile && rcTsId !== null) window.turnstile.reset(rcTsId); }
+window.rcTsReady = rcTsMount;

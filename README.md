@@ -30,13 +30,13 @@ Security contact: see `/.well-known/security.txt` or https://www.nexussecurityad
 
 - `site/readiness-check.html`, `site/js/readiness-check.js`: page and client logic (CSP-compliant, no inline script).
 - `site/readiness-bank.json`: question bank used by both the page and the API.
-- `functions/api/readiness.js`: Cloudflare Pages Function at `POST /api/readiness`. Validates input, blocks bots (honeypot and minimum fill time), rate-limits (5 per IP per hour, 3 per email per day), scores server-side, optionally writes the summary with Claude Haiku, and posts the lead to Zoho Web-to-Lead server-side.
+- `functions/api/readiness.js`: Cloudflare Pages Function at `POST /api/readiness`. Validates input, blocks bots (honeypot, minimum fill time, and server-verified Turnstile), rate-limits (5 per IP per hour, 3 per email per day), scores server-side, optionally writes the summary with Claude Haiku, and posts the lead to Zoho Web-to-Lead server-side.
 
 The Anthropic API key exists only as a Cloudflare secret. The browser never sees it. Without a key, the tool still works with the built-in report.
 
 ### Cloudflare setup (Pages project > Settings)
 1. **Bindings > KV namespace**: create a namespace `nexus-readiness-rl`, then bind it as `RL` (Production and Preview).
-2. **Variables and Secrets**: add `ANTHROPIC_API_KEY` as an encrypted secret (a key from the `website-leadgen` workspace in Claude Console). Optional: `AI_DAILY_CAP` (default 150).
+2. **Variables and Secrets**: add `ANTHROPIC_API_KEY` as an encrypted secret (a key from the `website-leadgen` workspace in Claude Console) and `TURNSTILE_SECRET` as an encrypted secret from the existing Turnstile widget. Optional: `AI_DAILY_CAP` (default 150) and `TURNSTILE_HOSTNAMES` (comma-separated hostnames for this deployment; defaults to `www.nexussecurityadvisors.com,nexussecurityadvisors.com`). Keep production hostnames exact and never include `localhost` or `127.0.0.1` in a production value.
 3. **Security > WAF > Rate limiting rule** (included on the free plan): if URI Path equals `/api/readiness`, allow 10 requests per 1 minute per IP, then Block. This is an edge layer in front of the KV limits.
 4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness` as well as `/csp-report`, or every submission gets Cloudflare's "Sorry, you have been blocked" page:
    `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and http.request.uri.path in {"/csp-report" "/api/readiness"}))`
