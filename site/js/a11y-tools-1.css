@@ -1,0 +1,21 @@
+/* Nexus accessibility tools (see a11y-tools-1.js) */
+.nsa-a11y,.nsa-a11y *{box-sizing:border-box}
+.nsa-a11y{position:fixed;left:16px;bottom:16px;z-index:70;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5}
+.nsa-a11y-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid #2B9BF4;background:#0E1B2E;color:#F3F5F7;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.nsa-a11y-btn svg{width:20px;height:20px;fill:#2B9BF4;flex-shrink:0}
+.nsa-a11y-btn:hover{background:#152A45}
+.nsa-a11y-btn:focus-visible,.nsa-a11y-panel button:focus-visible,.nsa-a11y-panel a:focus-visible{outline:3px solid #F3F5F7;outline-offset:2px}
+.nsa-a11y-panel{position:absolute;left:0;bottom:56px;width:min(320px,calc(100vw - 32px));max-height:calc(100vh - 96px);overflow:auto;padding:18px;border-radius:12px;border:1px solid rgba(43,155,244,.5);background:#0E1B2E;color:#F3F5F7;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.nsa-a11y-panel[hidden]{display:none}
+.nsa-a11y-panel h2{font-family:inherit;font-size:13px;letter-spacing:1.6px;text-transform:uppercase;color:#7FC2FA;font-weight:700;margin:0 0 10px}
+.nsa-a11y-panel h2+*{margin-top:0}
+.nsa-a11y-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.nsa-a11y-row button{min-height:40px;min-width:72px;padding:8px 14px;border-radius:6px;border:1px solid #C9CCCF;background:#1A6FD1;color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.nsa-a11y-row button[disabled]{background:transparent;color:#A7AEB8;border-color:#5B6573;cursor:default}
+.nsa-a11y-status{min-height:1.5em;margin:0 0 14px;color:#C9CCCF;font-size:14px}
+.nsa-a11y-langs{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:6px}
+.nsa-a11y-langs a,.nsa-a11y-note a{color:#7FC2FA;text-decoration:underline;text-underline-offset:3px}
+.nsa-a11y-langs a{display:inline-block;padding:4px 0}
+.nsa-a11y-note{margin:8px 0 0;font-size:13px;color:#C9CCCF}
+@media print{.nsa-a11y{display:none}}
+@media (prefers-reduced-motion:reduce){.nsa-a11y *{transition:none!important}}
