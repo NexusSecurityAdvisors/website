@@ -522,6 +522,18 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 @media(max-width:1000px){#nsa .cdgrid{grid-template-columns:1fr}#nsa .cdemo{max-width:440px}}
 @media(prefers-reduced-motion:reduce){#nsa .hmock .m-pin,#nsa .cd-ring,#nsa .cd-bar i{transition:none}#nsa .cd-pause{display:none}}
 </style>
+<style id="msg-css">
+#nsa a.hmock{display:block;color:inherit;text-decoration:none;border-radius:16px;transition:transform .25s ease}
+#nsa a.hmock:hover{transform:translateY(-3px)}
+#nsa a.hmock:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+#nsa .hcap{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);text-align:center}
+#nsa .hcap b{color:var(--accent);font-weight:600}
+#nsa a.hmock:hover .hcap b{text-decoration:underline}
+#nsa .hgrid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1100px){#nsa .hgrid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){#nsa .hgrid4{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#nsa a.hmock{transition:none}#nsa a.hmock:hover{transform:none}}
+</style>
 </head>
 <body>
 <div id="nsa">
@@ -543,9 +555,9 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 <header class="hero" id="top">
   <div class="wrap hgrid">
     <div class="hcopy">
-    <span class="pill"><span class="dot"></span>Fractional CISO &amp; AI Governance</span>
-    <h1><span class="grad">Fractional CISO</span> and AI governance for small and mid-sized businesses.</h1>
-    <p class="lead">Senior security leadership and safe AI adoption, without a full-time hire. We own your security program, report to your board, and work alongside your IT team.</p>
+    <span class="pill"><span class="dot"></span>Fractional CISO (vCISO) &amp; AI Governance</span>
+    <h1><span class="grad">Your senior security leader</span>, without the full-time cost.</h1>
+    <p class="lead">We serve as your part-time Chief Information Security Officer (CISO): we own your security program, report to your board, and make AI use safe. Built on NIST CSF 2.0, ISO/IEC 27001, and the NIST AI RMF.</p>
     <div class="ctas">
       <a class="btn" href="/get-started">Request Your Free 30-Minute Call</a>
       <a class="btn ghost" href="/readiness-check">Take the Free Readiness Check</a>
@@ -564,7 +576,7 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
       <li>Forbes Technology Council</li>
     </ul>
     </div>
-    <figure class="hmock" role="img" aria-label="Illustrative sample of a Nexus board risk summary. Over three quarters the top three risks move from high to low on a five-by-five likelihood and impact matrix, open risks fall from 12 to 6, and maturity rises from 2.4 to 2.9.">
+    <a class="hmock" href="/approach#lab" aria-label="Build your own risk summary in the free Risk Lab. Preview: an illustrative board risk summary where, over three quarters, the top three risks move from high to low on a five-by-five likelihood and impact matrix and maturity rises from 2.4 to 2.9.">
       <svg viewBox="0 0 400 430" aria-hidden="true" focusable="false">
         <rect x="0.5" y="0.5" width="399" height="429" rx="14" class="m-card"/>
         <text x="24" y="38" class="m-k">BOARD RISK SUMMARY</text>
@@ -595,8 +607,8 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
         <g class="m-row"><circle cx="34" cy="364" r="8" class="m-dot"/><text x="34" y="368" text-anchor="middle" class="m-n">2</text><text x="52" y="369" class="m-r">Unapproved AI tools with client data</text><text x="376" y="369" text-anchor="end" class="m-ok" id="ms2">Due in 60 days</text></g>
         <g class="m-row"><circle cx="34" cy="396" r="8" class="m-dot"/><text x="34" y="400" text-anchor="middle" class="m-n">3</text><text x="52" y="401" class="m-r">Untested backups</text><text x="376" y="401" text-anchor="end" class="m-ok" id="ms3">Due in 90 days</text></g>
       </svg>
-      <figcaption>Illustrative sample. Not client data.</figcaption>
-    </figure>
+      <span class="hcap">Illustrative sample, not client data. <b>Build your own risk summary &rarr;</b></span>
+    </a>
   </div>
 </header>
 
@@ -726,6 +738,19 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
   <div class="ctas rv"><a class="btn" href="/checklists">Open the interactive checklists &rarr;</a><a class="btn ghost" href="/nexus-security-readiness-pack.xlsx" download>Download all (Excel)</a></div>
 </div></section>
 
+<section class="s" id="how" aria-labelledby="how-h"><div class="wrap">
+  <div class="rv"><div class="eyebrow">How We Work</div>
+  <h2 id="how-h">Servant leadership, run like a disciplined program.</h2>
+  <p class="lead">We lead by serving your people first, and we deliver security the way strong programs deliver anything: clear priorities, short cycles, measured results.</p></div>
+  <div class="grid hgrid4">
+    <article class="card rv"><div class="n">01</div><h3>Servant leadership</h3><p>We listen before we recommend, explain the &ldquo;why&rdquo; in plain English, and measure success by how capable your team becomes, not how dependent it is on us.</p></article>
+    <article class="card rv"><div class="n">02</div><h3>Lean and Six Sigma</h3><p>We remove wasted steps from security work and fix root causes with data, using DMAIC (define, measure, analyze, improve, control) so gains stick.</p></article>
+    <article class="card rv"><div class="n">03</div><h3>Agile and Scrum</h3><p>Your roadmap becomes a prioritized backlog delivered in short sprints, with Scrum Master support for security and AI initiatives.</p></article>
+    <article class="card rv"><div class="n">04</div><h3>Program and project management</h3><p>Milestones, owners (RACI), risks, and status reporting your executives and board can follow, including PMO support for security, compliance, and AI programs.</p></article>
+  </div>
+  <div class="ctas rv"><a class="btn ghost" href="/approach">See our approach &rarr;</a></div>
+</div></section>
+
 <section class="s gridbg" id="about-teaser" aria-labelledby="abt-h"><div class="wrap">
   <div class="rv teaser"><div class="eyebrow">Who We Are</div>
   <h2 id="abt-h">Led by an experienced CISO and U.S. Air Force veteran.</h2>
@@ -737,7 +762,7 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
   <div class="rv"><div class="eyebrow">FAQ</div>
   <h2 id="faq-h">Common questions</h2></div>
   <div class="faq rv">
-    <details><summary>What is a fractional CISO (vCISO)?</summary><p>A fractional or virtual CISO is a senior security executive who leads your security program part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire.</p></details>
+    <details><summary>What is a fractional CISO (vCISO)?</summary><p>A CISO (Chief Information Security Officer) is the executive who owns a company&rsquo;s cybersecurity: the plan, the budget, the policies, and the answers when customers, insurers, or the board ask &ldquo;are we secure?&rdquo; A fractional or virtual CISO (vCISO) does that job part-time. You get CISO-level strategy, risk management, and board reporting without the cost of a full-time hire.</p></details>
     <details><summary>Who is a good fit for Nexus Security Advisors?</summary><p>Small and mid-sized businesses in any industry, including financial services, healthcare, defense suppliers, manufacturing, technology, and professional services, that need executive security leadership, are facing an audit or assessment, or are rolling out AI and need it governed.</p></details>
     <details><summary>Can you help us prepare for CMMC?</summary><p>Yes. We assess your current state against NIST SP 800-171 and CMMC requirements, identify gaps, and build a prioritized, owner-assigned plan to close them.</p></details>
     <details><summary>How do you approach AI governance?</summary><p>We start by finding the AI tools and agents actually in use, then build AI risk into each initiative's business case, apply least privilege to AI agents, and align to frameworks such as NIST AI RMF, ISO/IEC 42001, the EU AI Act, and the OWASP AI Exchange.</p></details>
