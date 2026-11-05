@@ -211,7 +211,7 @@ EXPLORE = """<section class="s alt" id="explore" aria-labelledby="ex-h"><div cla
 ABOUT_TEASER = """<section class="s gridbg" id="about-teaser" aria-labelledby="abt-h"><div class="wrap">
   <div class="rv teaser"><div class="eyebrow">Who We Are</div>
   <h2 id="abt-h">Led by an experienced CISO and U.S. Air Force veteran.</h2>
-  <p>Nexus Security Advisors is an SBA-certified Service-Disabled Veteran-Owned Small Business (SDVOSB) founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.</p>
+  <p>Nexus Security Advisors is a veteran-owned small business founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.</p>
   <div class="ctas"><a class="btn ghost" href="/about">About Nexus &amp; our founder &rarr;</a></div></div>
 </div></section>"""
 
@@ -249,7 +249,7 @@ sub("/regulatory-watch", "Regulatory Watch: CMMC, HIPAA, PCI DSS, EU CRA Status 
     rhero("Regulatory watch:", "where the rules stand right now.", "Key dates, what to do next, and links to the official sources for the regulations our clients ask about most."),
     [S["regs"]])
 sub("/about", "About Nexus Security Advisors &amp; Founder Dan Sorensen",
-    "Nexus Security Advisors is an SDVOSB cybersecurity leadership firm founded by Dan Sorensen, fractional vCISO, AI governance advisor, and U.S. Air Force veteran.",
+    "Nexus Security Advisors is a veteran-owned cybersecurity leadership firm founded by Dan Sorensen, fractional vCISO, AI governance advisor, and U.S. Air Force veteran.",
     rhero("About", "Nexus Security Advisors.", "A veteran-owned cybersecurity leadership firm helping small and mid-sized businesses align security, compliance, and AI with business outcomes."),
     [S["founder"], S["newsletter"], S["insights"]])
 
