@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-06
 
+- Forms: Turnstile verification failures now log Cloudflare's error code (e.g. `invalid-input-secret`) in Functions logs ([#68](https://github.com/NexusSecurityAdvisors/website/pull/68))
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
 - Intake: each Zoho lead's Description carries the visitor's PostHog ID (only when analytics is running for them), so a lead can be matched to its analytics session; privacy notice updated ([#62](https://github.com/NexusSecurityAdvisors/website/pull/62))
 - Release runbook: squash-merge only, and a record of when signed commits on `main` were enforced (2026-11-06)
