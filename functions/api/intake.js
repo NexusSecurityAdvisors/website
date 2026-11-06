@@ -82,7 +82,14 @@ export async function onRequestPost(context) {
   if (body.consent !== true) return json({ error: "invalid", field: "consent" }, 400);
 
   // ---- 3. anti-bot: honeypot + minimum fill time. Pretend success so bots learn nothing.
-  if (body.hp || !(Number(body.elapsed) > 8000)) return json({ ok: true });
+  // Turnstile (3b) is the real gate; the timer only catches instant scripted posts. Keep it low:
+  // a prospect who autofills a short form can finish in a few seconds, and a false positive here
+  // silently drops a real lead. Logged so any drops are visible.
+  const MIN_FILL_MS = 3000;
+  if (body.hp || !(Number(body.elapsed) > MIN_FILL_MS)) {
+    console.log("intake_silent_drop", body.hp ? "honeypot" : `fast_${Math.round(Number(body.elapsed) || 0)}ms`);
+    return json({ ok: true });
+  }
 
   // ---- 3b. Turnstile: server-side siteverify gates the CRM lead.
   if (!(await verifyTurnstile(env, body["cf-turnstile-response"], request.headers.get("cf-connecting-ip")))) {
