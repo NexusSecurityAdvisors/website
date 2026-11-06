@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-06
 
+- Intake: Send no longer shows a "complete the security check" error while Cloudflare Turnstile is still running or retrying; it waits and submits automatically, with a clear message after 20 s or if the check fails to load (PR_NUM)
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
 - Intake: each Zoho lead's Description carries the visitor's PostHog ID (only when analytics is running for them), so a lead can be matched to its analytics session; privacy notice updated ([#62](https://github.com/NexusSecurityAdvisors/website/pull/62))
 - Release runbook: squash-merge only, and a record of when signed commits on `main` were enforced (2026-11-06)
