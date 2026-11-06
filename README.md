@@ -45,6 +45,18 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 ### Local test
 `npx wrangler pages dev site --kv RL --binding LEAD_SINK=off`. `LEAD_SINK=off` skips the Zoho POST so tests don't create real leads.
 
+## Consultation intake (/get-started)
+
+The 5-step intake no longer posts from the browser straight to Zoho. It sends JSON to `functions/api/intake.js` (`POST /api/intake`), which:
+
+- checks origin and size, and forwards only an allowlist of Zoho fields (the client cannot override form tokens, Lead Source, or add fields)
+- requires consent, drops honeypot and too-fast (<8s) submissions with a fake success
+- verifies Cloudflare Turnstile server-side (action `intake`, same widget and `TURNSTILE_SECRET` as the Readiness Check)
+- rate-limits per IP (5/hour) and per email (3/day) in the `RL` KV namespace, failing open if the binding is missing
+- posts the lead to Zoho Web-to-Lead and only reports success to the visitor if Zoho accepted it
+
+`/api/intake` is already in the WAF exception above. Local test: `npx wrangler pages dev site --kv RL --binding LEAD_SINK=off`.
+
 ## Analytics (PostHog)
 
 - `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay strips cookies and forwards only to PostHog's two hosts. It needs the `/r7/` exception in the custom WAF rule above.

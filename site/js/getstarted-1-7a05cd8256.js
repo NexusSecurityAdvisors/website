@@ -23,7 +23,7 @@
   'ORGANIZATION','  Industry: '+o.industry,'  Employees: '+o.size,'  IT/security today: '+(o.team||'-'),'  Main systems: '+(o.environment||'-'),'',
   'NEEDS','  Services: '+L(o.services),'  Frameworks: '+L(o.frameworks),'  Triggers: '+L(o.triggers),'',
   'PRIORITIES','  Biggest concern/goal: '+o.goal,'  Deadlines: '+(o.deadline||'-'),'  Start: '+o.timeline,'  Budget: '+(o.budget||'Prefer not to say'),'  Heard about us: '+(o.source||'-'),'','HOW YOU FOUND US (recorded automatically)','  First visit: '+TF(AT().first),'  Latest visit: '+TF(AT().last),'','CONSENT','  Agreed to privacy notice and to be contacted: '+(document.getElementById('f-consent')&&document.getElementById('f-consent').checked?'yes ('+new Date().toISOString()+')':'not yet')].join('\n');}
- function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';try{(window.__nsaq=window.__nsaq||[]).push(['intake_step_viewed',{step:i+1,steps:S.length}])}catch(e){}
+ function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';try{(window.__nsaq=window.__nsaq||[]).push(['intake_step_viewed',{step:i+1,steps:S.length}])}catch(e){}try{gsTsMount()}catch(e){}
    back.disabled=i===0;next.style.display=i===S.length-1?'none':'';err.textContent='';
    if(i===S.length-1){var o=val(),t=summary();document.getElementById('sum').textContent=t;
      document.getElementById('b-mail').href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting intake: '+o.company)+'&body='+encodeURIComponent(t);}
@@ -39,6 +39,12 @@
  document.getElementById('b-copy').addEventListener('click',function(){copyT(summary(),'Summary copied.');});
  document.getElementById('b-dl').addEventListener('click',function(){var o=val(),b=new Blob([summary()],{type:'text/plain'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='nexus-intake-'+(o.company||'summary').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.txt';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500);ok.textContent='Summary downloaded.';});
 
+ var T0=Date.now();
+ var GS_TS_SITEKEY='0x4AAAAAAF0PKlsgoUMRf2Nh',gsTsId=null;
+ function gsTsMount(){var el=document.getElementById('gs-ts');if(!el||gsTsId!==null||!window.turnstile||!S[4]||S[4].hidden)return;gsTsId=window.turnstile.render(el,{sitekey:GS_TS_SITEKEY,action:'intake'});}
+ function gsTsToken(){return(window.turnstile&&gsTsId!==null&&window.turnstile.getResponse(gsTsId))||'';}
+ function gsTsReset(){if(window.turnstile&&gsTsId!==null)window.turnstile.reset(gsTsId);}
+ window.gsTsReady=gsTsMount;
  var CFG={u:'https://crm.zoho.com/crm/WebToLeadForm',a:'26b3ed224959eed21ff859b2a27cafa0d48f0956b8c076ea103a1426f52ecb13',b:'81b32ded400032379d48d3c5a8d6689e97cebacbd3fa5615348025ea152850642c388991f70c0f9840f72fa50c75a555',t:'TGVhZHM=',r:'https://www.nexussecurityadvisors.com/get-started?submitted=1',ls:'Website Inquiry Form'};
  function split(n){n=(n||'').trim().replace(/\s+/g,' ');var p=n.split(' ');return p.length>1?{f:p.slice(0,-1).join(' '),l:p[p.length-1]}:{f:'',l:n};}
  function clip(v,m){v=String(v||'');return v.length>m?v.slice(0,m):v;}
@@ -51,12 +57,14 @@ document.getElementById('b-send').addEventListener('click',function(){
    err.textContent='';var hpv=document.getElementById('f-hp').value;if(hpv){return;}
    if(!CFG.a||!CFG.b||/^TEST/.test(CFG.a)){var o0=val();window.location.href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting request: '+(o0.company||''))+'&body='+encodeURIComponent(summary());ok.textContent='Your email app should open with your request filled in. Just press send. If it does not open, use "Download a copy" and email it to info@nexussecurityadvisors.com.';return;}
    var o=val(),nm=split(o.name),w=(o.website||'').trim();if(w&&!/^https?:\/\//i.test(w))w='https://'+w;
-   var data={xnQsjsdp:CFG.a,zc_gad:'',xmIwtLD:CFG.b,actionType:CFG.t,returnURL:CFG.r,'First Name':clip(neut(nm.f),40),'Last Name':clip(neut(nm.l||o.name),80),Email:clip(o.email,100),Company:clip(neut(o.company),200),Designation:clip(neut(o.role),100),Phone:clip(phone(o.phone),30),Website:clip(neut(w),255),'Lead Source':CFG.ls,LEADCF6:clip(summary(),30000),aG9uZXlwb3Q:hpv};
-   Object.assign(data,nsaMap(o));var fm=document.createElement('form');fm.method='POST';fm.action=CFG.u;fm.acceptCharset='UTF-8';fm.style.display='none';fm.setAttribute('data-hs-do-not-collect','true');fm.className='ph-no-capture';
-   Object.keys(data).forEach(function(k){[].concat(data[k]).forEach(function(x){var el=document.createElement(k==='LEADCF6'?'textarea':'input');if(el.tagName==='INPUT')el.type='hidden';el.name=k;el.value=x;fm.appendChild(el);});});
-   document.body.appendChild(fm);var btn=this;btn.disabled=true;btn.textContent='Sending…';
-   try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}
-   fm.submit();});
+   var data={'First Name':clip(neut(nm.f),40),'Last Name':clip(neut(nm.l||o.name),80),Email:clip(o.email,100),Company:clip(neut(o.company),200),Designation:clip(neut(o.role),100),Phone:clip(phone(o.phone),30),Website:clip(neut(w),255),LEADCF6:clip(summary(),30000)};
+   Object.assign(data,nsaMap(o));
+   var tok=gsTsToken();if(!tok){ok.textContent='';err.textContent='Please complete the security check just above the Send button.';return;}
+   var btn=this;btn.disabled=true;btn.textContent='Sending\u2026';
+   fetch('/api/intake',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fields:data,consent:true,hp:hpv,elapsed:Date.now()-T0,'cf-turnstile-response':tok})})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d&&d.ok===true,d:d};});})
+    .then(function(x){if(!x.ok)throw x.d;try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}location.href='/get-started?submitted=1';})
+    .catch(function(d){gsTsReset();btn.disabled=false;btn.textContent='Send my request \u2192';ok.textContent='';err.textContent=(d&&d.message)||'We couldn\u2019t send your request. Please try again, or email it to info@nexussecurityadvisors.com.';});});
  var pend=null;try{pend=sessionStorage.getItem('nsa-intake-pending')}catch(e){}
  window.addEventListener('pageshow',function(e){if(e.persisted){var bs=document.getElementById('b-send');bs.disabled=false;bs.textContent='Send my request \u2192';}});
  if(/[?&]submitted=1(&|$)/.test(location.search)&&pend){try{sessionStorage.removeItem(KEY);sessionStorage.removeItem('nsa-intake-pending')}catch(e){}
