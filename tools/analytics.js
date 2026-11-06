@@ -16,7 +16,7 @@ opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored un
 // for a returning visitor, or when the banner is answered). If HubSpot is blocked, EU visitors stay opted out.
 ;(window._hsp=window._hsp||[]).push(['addPrivacyConsentListener',function(c){try{
  var ok=c&&c.categories?!!c.categories.analytics:!!(c&&c.allowed);
- if(ok){if(!posthog.has_opted_in_capturing())posthog.opt_in_capturing()}
+ if(ok){if(posthog.has_opted_out_capturing()||(NSA_EU&&!posthog.has_opted_in_capturing()))posthog.opt_in_capturing()} // outside Europe capture is already on unless the visitor declined earlier; avoids a $opt_in event per visitor
  else if(!posthog.has_opted_out_capturing())posthog.opt_out_capturing();}catch(e){}}]);
 // Internal traffic: open any page once with ?internal=1 in each of your own browsers to tag them
 // (PostHog's default filter then excludes them); ?internal=0 removes the tag.
