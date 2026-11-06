@@ -7,6 +7,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 ## 2026-11-06
 
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
+- Release runbook: squash-merge only, and a record of when signed commits on `main` were enforced (2026-11-06)
 
 ## 2026-11-05
 
