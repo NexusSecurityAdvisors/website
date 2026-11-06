@@ -76,7 +76,10 @@ async function retrieveAsset(context, pathWithSearch) {
   const cache = caches.default;
   let response = await cache.match(context.request);
   if (!response) {
-    response = await fetch(`https://${ASSET_HOST}${pathWithSearch}`);
+    const upstream = await fetch(`https://${ASSET_HOST}${pathWithSearch}`);
+    // Copy so headers are mutable; drop Set-Cookie so no upstream cookie reaches visitors or the edge cache.
+    response = new Response(upstream.body, upstream);
+    response.headers.delete("set-cookie");
     if (response.ok) context.waitUntil(cache.put(context.request, response.clone()));
   }
   return response;
