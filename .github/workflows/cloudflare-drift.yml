@@ -1,0 +1,54 @@
+name: Cloudflare drift check
+
+# Daily read-only snapshot of the nexussecurityadvisors.com zone (custom WAF rules, rate limiting,
+# managed rulesets, redirects, security-relevant zone settings, DNS records, DNSSEC), compared with
+# the committed baseline in tools/cloudflare-baseline.json. Any unreviewed change, whether from the
+# dashboard, a leaked credential or an automatic toggle, fails this workflow, which the daily CI
+# digest then reports.
+#
+# Requires the repository secret CLOUDFLARE_API_TOKEN_RO: the "gha-ci-config-check" Account API
+# token (read-only, scoped to this zone, 90-day expiry; rotate it before it expires).
+# To accept an intended change, download the "cloudflare-snapshot" artifact from a run, review it,
+# and commit it over tools/cloudflare-baseline.json in a PR.
+on:
+  schedule:
+    - cron: "37 11 * * *" # daily 11:37 UTC (06:37 Eastern), before the CI digest
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: cloudflare-drift
+  cancel-in-progress: false
+
+jobs:
+  drift:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Snapshot and compare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_RO }}
+          CF_ZONE_ID: df64700760d6f587a183f531cdec1f61 # nexussecurityadvisors.com (not secret)
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN_RO is not set; skipping the drift check."
+            exit 0
+          fi
+          python tools/cf_drift.py --snapshot cloudflare-snapshot.json --check
+      - name: Upload snapshot
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cloudflare-snapshot
+          path: cloudflare-snapshot.json
+          if-no-files-found: ignore
+          retention-days: 30
