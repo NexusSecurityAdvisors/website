@@ -40,6 +40,9 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 3. **Security > WAF > Rate limiting rule** (included on the free plan): if URI Path equals `/api/readiness`, allow 10 requests per 1 minute per IP, then Block. This is an edge layer in front of the KV limits.
 4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness`, `/api/intake`, `/csp-report` and the analytics relay under `/r7/`, or submissions get Cloudflare's "Sorry, you have been blocked" page and analytics stops:
    `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and (http.request.uri.path in {"/csp-report" "/api/readiness" "/api/intake"} or starts_with(http.request.uri.path, "/r7/"))))`
+   A second custom rule, "PostHog relay /r7/: require same-origin POST, no traversal" (Block), gates the relay:
+   `(http.request.method eq "POST" and starts_with(http.request.uri.path, "/r7/") and (not any(http.request.headers["origin"][*] eq "https://www.nexussecurityadvisors.com") or raw.http.request.uri.path contains ".." or raw.http.request.uri.path contains "\\" or lower(raw.http.request.uri.path) contains "%5c" or lower(raw.http.request.uri.path) contains "%2e" or len(http.request.headers["content-length"][0]) > 7))`
+   Keep **Rules > Settings > URL Normalization** on the "Cloudflare" type with "Normalize URLs to origin" on, so the WAF and the Functions see the same path.
 5. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
 
 ### Local test
@@ -47,7 +50,7 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 
 ## Analytics (PostHog)
 
-- `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay strips cookies and forwards only to PostHog's two hosts. It needs the `/r7/` exception in the custom WAF rule above.
+- `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay forwards only to PostHog's two hosts and only for an allowlist of SDK endpoints (anything else returns 404). It rebuilds request headers from an allowlist, so cookies and Authorization (including `phx_` personal API keys) never reach PostHog, caps bodies at 2 MB, and strips `Set-Cookie` from responses. If PostHog adds an SDK endpoint, add it to `API_ROUTES` or those calls will 404. It needs the `/r7/` exception in the custom WAF rule above.
 - Page scripts send custom events with `(window.__nsaq = window.__nsaq || []).push([name, props])`, never `posthog.capture` directly: they run before the deferred analytics.js, and the queue is flushed once PostHog initialises. Current events: `intake_step_viewed`, `intake_submitted`, `readiness_check_completed`. Never put form contents or contact details in event properties.
 - Your own visits: open any page once with `?internal=1` in each browser you use. PostHog's default filter then excludes it. `?internal=0` removes the tag.
 - PostHog honours Do Not Track. Project-side settings (IP discarding, replay masking, the test-account filter) live in PostHog, not in this repo.
