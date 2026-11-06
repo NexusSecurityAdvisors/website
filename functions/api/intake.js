@@ -81,6 +81,16 @@ export async function onRequestPost(context) {
   if (!fields["Last Name"] || !fields.Company) return json({ error: "invalid", field: "contact" }, 400);
   if (body.consent !== true) return json({ error: "invalid", field: "consent" }, 400);
 
+  // PostHog anonymous ID (join key between the Zoho lead and its analytics session). Optional: the
+  // browser sends it only when PostHog loaded and the visitor has not opted out. Strict pattern, so it
+  // can never carry form contents. Appended to the Description (LEADCF6) because Web-to-Lead only
+  // accepts fields already on the Zoho web form; move it to a dedicated field once one is added there.
+  const phId = typeof body.ph === "string" && /^[A-Za-z0-9-]{8,64}$/.test(body.ph) ? body.ph : "";
+  if (phId) {
+    const tag = "\n\nANALYTICS\n  PostHog ID: " + phId;
+    fields.LEADCF6 = (fields.LEADCF6 || "").slice(0, FIELDS.LEADCF6 - tag.length) + tag;
+  }
+
   // ---- 3. anti-bot: honeypot + minimum fill time. Pretend success so bots learn nothing.
   // Turnstile (3b) is the real gate; the timer only catches instant scripted posts. Keep it low:
   // a prospect who autofills a short form can finish in a few seconds, and a false positive here

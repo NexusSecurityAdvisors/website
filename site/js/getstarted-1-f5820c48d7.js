@@ -23,6 +23,9 @@
  try{(window.__nsaq=window.__nsaq||[]).push(['intake_step_viewed',{step:1,steps:1}])}catch(e){}
  f.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='checkbox'){e.preventDefault();}});
 
+ // PostHog anonymous ID, sent with the request so the Zoho lead can be matched to its analytics session.
+ // Only when PostHog has really loaded and the visitor has not opted out (EU visitors who declined send nothing).
+ function gsPhId(){try{var p=window.posthog;if(!p||!p.__loaded||p.has_opted_out_capturing())return '';var d=String(p.get_distinct_id()||'');return /^[A-Za-z0-9-]{8,64}$/.test(d)?d:'';}catch(e){return '';}}
  var T0=Date.now();
  var GS_TS_SITEKEY='0x4AAAAAAF0PKlsgoUMRf2Nh',gsTsId=null;
  function gsTsMount(){var el=document.getElementById('gs-ts');if(!el||gsTsId!==null||!window.turnstile||f.querySelector('.st').hidden)return;gsTsId=window.turnstile.render(el,{sitekey:GS_TS_SITEKEY,action:'intake'});}
@@ -42,7 +45,7 @@ document.getElementById('b-send').addEventListener('click',function(){
    Object.assign(data,nsaMap(o));
    var tok=gsTsToken();if(!tok){ok.textContent='';err.textContent='Please complete the security check just above the Send button.';return;}
    var btn=this;btn.disabled=true;btn.textContent='Sending…';
-   fetch('/api/intake',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fields:data,consent:true,hp:hpv,elapsed:Date.now()-T0,'cf-turnstile-response':tok})})
+   fetch('/api/intake',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fields:data,consent:true,hp:hpv,elapsed:Date.now()-T0,ph:gsPhId(),'cf-turnstile-response':tok})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d&&d.ok===true,d:d};});})
     .then(function(x){if(!x.ok)throw x.d;try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}location.href='/get-started?submitted=1';})
     .catch(function(d){gsTsReset();btn.disabled=false;btn.textContent='Send my request →';ok.textContent='';err.textContent=(d&&d.message)||'We couldn’t send your request. Please try again, or email info@nexussecurityadvisors.com.';});});
