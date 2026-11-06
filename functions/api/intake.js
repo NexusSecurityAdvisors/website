@@ -62,9 +62,14 @@ export async function onRequestPost(context) {
     s = s.trim().slice(0, max);
     return /^[=+\-@]/.test(s) ? "'" + s : s; // formula-injection guard for CRM exports
   };
+  // Phone: keep only phone characters instead of quoting, so "+1 352 555 0100" stays a dialable
+  // E.164 number in Zoho. Without letters or "=", no formula payload can survive.
+  const cleanPhone = (v, max) => String(v ?? "").replace(/[^0-9+()\-. x]/gi, "").replace(/\s+/g, " ").trim().slice(0, max);
   const fields = {};
   for (const [k, max] of Object.entries(FIELDS)) {
-    if (typeof src[k] === "string" && src[k].trim()) fields[k] = clean(src[k], max, k === "LEADCF6");
+    if (typeof src[k] !== "string" || !src[k].trim()) continue;
+    const v = k === "Phone" ? cleanPhone(src[k], max) : clean(src[k], max, k === "LEADCF6");
+    if (v) fields[k] = v;
   }
   for (const [k, max] of Object.entries(MULTI)) {
     const v = Array.isArray(src[k]) ? src[k] : typeof src[k] === "string" ? [src[k]] : [];
