@@ -4,6 +4,7 @@ Static site for Nexus Security Advisors, deployed on **Cloudflare Pages**.
 
 - `site/` – the deployed website (Cloudflare Pages build output directory). Pretty URLs: `/services` serves `services.html`.
 - `site/_headers` – security headers (CSP, HSTS, frame, referrer, permissions policies).
+- `functions/_middleware.js` – adds a fresh nonce to `script-src` on every HTML response, so Cloudflare's injected bot-detection script is allowed without `'unsafe-inline'`.
 - `site/_redirects` – legacy URL redirects.
 - `tools/build.py` – rebuilds `site/` from the original Zoho Sites exports in `zoho-export/`.
 - `zoho-export/` – original page snippets and assets exported from Zoho Sites (Oct 2026), kept for reference.
