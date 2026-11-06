@@ -8,6 +8,10 @@ Lists every workflow + branch whose most recent run in the window failed, across
 repositories the token can see. A failure that a later run on the same workflow and branch already
 fixed is left out, so the digest only shows what is still red. Exit code: 0 = all green, 1 = failures.
 
+Forks are skipped by default: they inherit upstream CI that depends on the upstream project's
+secrets, tenants and registries, so it fails in this org regardless of our changes. Set
+INCLUDE_FORKS=1 to scan them anyway. Skipped forks are listed in the digest.
+
 Token: a fine-grained personal access token (resource owner NexusSecurityAdvisors, all repositories,
 permissions Actions: read and Metadata: read) stored as the CI_DIGEST_TOKEN secret. Without it the
 workflow falls back to its own GITHUB_TOKEN, which can only see public repositories.
@@ -24,6 +28,7 @@ ORG = os.environ.get("ORG", "NexusSecurityAdvisors")
 HOURS = int(sys.argv[sys.argv.index("--hours") + 1]) if "--hours" in sys.argv else 24
 TOKEN = os.environ.get("GH_TOKEN", "")
 RED = {"failure", "timed_out", "startup_failure"}
+INCLUDE_FORKS = os.environ.get("INCLUDE_FORKS", "") == "1"
 
 
 def api(path, params=None):
@@ -43,6 +48,8 @@ def api(path, params=None):
 def main():
     since = datetime.now(timezone.utc) - timedelta(hours=HOURS)
     repos = [r for r in api(f"/orgs/{ORG}/repos", {"type": "all", "sort": "pushed"}) if not r.get("archived")]
+    forks = sorted(r["name"] for r in repos if r.get("fork") and not INCLUDE_FORKS)
+    repos = [r for r in repos if INCLUDE_FORKS or not r.get("fork")]
     red, scanned = [], 0
     for repo in repos:
         try:
@@ -65,6 +72,8 @@ def main():
     print(f"## CI digest: {datetime.now(timezone.utc):%Y-%m-%d} (last {HOURS}h, {scanned} repositories scanned)\n")
     if not TOKEN or os.environ.get("TOKEN_KIND") == "fallback":
         print("_Using the workflow token: private repositories are not included. Add a CI_DIGEST_TOKEN secret to cover them._\n")
+    if forks:
+        print(f"_Forks not scanned (upstream CI; set INCLUDE_FORKS=1 to include): {', '.join(forks)}._\n")
     if not red:
         print("All workflows green.")
         return 0
