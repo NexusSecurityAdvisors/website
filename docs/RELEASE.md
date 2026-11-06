@@ -17,8 +17,13 @@ The site deploys on Cloudflare Pages (project `nexussecurityadvisors`). **Every 
 
 ## 3. Merge
 
-- Use a merge commit or squash. Either works.
+- **Squash and merge only.** The org ruleset on default branches requires signed commits and linear history. A merge commit fails the linear-history rule. **Rebase and merge** copies the branch commits onto `main` without GitHub signing them, so unsigned branch commits get rejected. Squash produces one commit signed by GitHub, whether or not the branch commits were signed.
 - Don't merge while a "Before merging" step is still open.
+
+### Commit signing
+
+- Signed commits on `main` are enforced from **2026-11-06**. History before that date includes unsigned branch commits (shown as "Unverified" on GitHub). Each one reached `main` through a reviewed PR whose merge commit GitHub signed. They are not rewritten, because re-signing them would need a force push to `main` and would change every SHA referenced by PRs, the changelog and Cloudflare deployments.
+- Branch commits don't need to be signed, because the squash commit is what lands on `main`. Commits created through the GitHub web UI or API are signed by GitHub and show as Verified.
 
 ## 4. Verify (within 10 minutes of merge)
 
