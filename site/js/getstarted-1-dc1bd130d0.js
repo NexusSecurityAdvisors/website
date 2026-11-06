@@ -15,6 +15,11 @@
  function check(n){var o=val();var need={0:['name','email','company'],1:['industry','size','team'],2:['services'],3:['goal','timeline']}[n]||[];
    for(var k=0;k<need.length;k++){var v=o[need[k]];if(!v||(Array.isArray(v)&&!v.length))return 'Please complete the required fields (*) to continue.';}
    if(n===0&&(o.email.length>100||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(o.email)))return 'Please enter a valid email address.';return '';}
+ // analytics.js loads with defer, so this script can run before window.posthog exists
+ // (it always does on the Zoho return trip). Queue the event until DOMContentLoaded,
+ // which fires after deferred scripts have run.
+ function ph(e,p){function c(){try{if(window.posthog&&window.posthog.capture)window.posthog.capture(e,p)}catch(x){}}
+   if(window.posthog&&window.posthog.capture)c();else if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',c,{once:true});else c();}
  function L(a){return a&&a.length?a.join('; '):'(none)'}
  function AT(){var a=null;try{a=window.nsaAttribution&&window.nsaAttribution()}catch(e){}a=a||{};a.first=a.first||{};return a;}
  function TF(x){return x&&x.src?String(x.src)+' / '+(x.med||'-')+(x.cmp?' / '+x.cmp:'')+(x.land?', landed on '+x.land:'')+(x.ts?' ('+x.ts+')':''):'-'}
@@ -23,7 +28,7 @@
   'ORGANIZATION','  Industry: '+o.industry,'  Employees: '+o.size,'  IT/security today: '+(o.team||'-'),'  Main systems: '+(o.environment||'-'),'',
   'NEEDS','  Services: '+L(o.services),'  Frameworks: '+L(o.frameworks),'  Triggers: '+L(o.triggers),'',
   'PRIORITIES','  Biggest concern/goal: '+o.goal,'  Deadlines: '+(o.deadline||'-'),'  Start: '+o.timeline,'  Budget: '+(o.budget||'Prefer not to say'),'  Heard about us: '+(o.source||'-'),'','HOW YOU FOUND US (recorded automatically)','  First visit: '+TF(AT().first),'  Latest visit: '+TF(AT().last),'','CONSENT','  Agreed to privacy notice and to be contacted: '+(document.getElementById('f-consent')&&document.getElementById('f-consent').checked?'yes ('+new Date().toISOString()+')':'not yet')].join('\n');}
- function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';try{if(window.posthog)window.posthog.capture('intake_step_viewed',{step:i+1,steps:S.length})}catch(e){}
+ function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';ph('intake_step_viewed',{step:i+1,steps:S.length});
    back.disabled=i===0;next.style.display=i===S.length-1?'none':'';err.textContent='';
    if(i===S.length-1){var o=val(),t=summary();document.getElementById('sum').textContent=t;
      document.getElementById('b-mail').href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting intake: '+o.company)+'&body='+encodeURIComponent(t);}
@@ -40,7 +45,7 @@
  document.getElementById('b-dl').addEventListener('click',function(){var o=val(),b=new Blob([summary()],{type:'text/plain'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='nexus-intake-'+(o.company||'summary').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.txt';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500);ok.textContent='Summary downloaded.';});
 
  var CFG={u:'https://crm.zoho.com/crm/WebToLeadForm',a:'26b3ed224959eed21ff859b2a27cafa0d48f0956b8c076ea103a1426f52ecb13',b:'81b32ded400032379d48d3c5a8d6689e97cebacbd3fa5615348025ea152850642c388991f70c0f9840f72fa50c75a555',t:'TGVhZHM=',r:'https://www.nexussecurityadvisors.com/get-started?submitted=1',ls:'Website Inquiry Form'};
- function split(n){n=(n||'').trim().replace(/\s+/g,' ');var p=n.split(' ');return p.length>1?{f:p.slice(0,-1).join(' '),l:p[p.length-1]}:{f:'',l:n};}
+ function split(n){n=(n||'').trim().replace(/\s+/g,' ');var p=n.split(' ');if(p.length<2)return {f:'',l:n};var P=/^(de|da|di|do|dos|das|del|della|der|den|du|la|le|van|von|bin|ibn|al|el|st\.?|mac|mc|ten|ter)$/i,k=p.length-1;while(k>1&&P.test(p[k-1]))k--;return {f:p.slice(0,k).join(' '),l:p.slice(k).join(' ')};}
  function clip(v,m){v=String(v||'');return v.length>m?v.slice(0,m):v;}
  function neut(v){v=String(v||'').trim();return /^[=+\-@\t\r]/.test(v)?"'"+v:v;}
  function phone(v){v=String(v||'').replace(/[^\d+()\-.\sxXet]/g,'').trim();return v.replace(/^\+(?!\d)/,'');}
@@ -60,7 +65,7 @@ document.getElementById('b-send').addEventListener('click',function(){
  var pend=null;try{pend=sessionStorage.getItem('nsa-intake-pending')}catch(e){}
  window.addEventListener('pageshow',function(e){if(e.persisted){var bs=document.getElementById('b-send');bs.disabled=false;bs.textContent='Send my request \u2192';}});
  if(/[?&]submitted=1(&|$)/.test(location.search)&&pend){try{sessionStorage.removeItem(KEY);sessionStorage.removeItem('nsa-intake-pending')}catch(e){}
-   f.hidden=true;var sn=document.getElementById('sent');f.parentNode.appendChild(sn);sn.hidden=false;try{if(window.posthog)window.posthog.capture('intake_submitted')}catch(e){}var st=document.getElementById('steps');if(st)st.style.display='none';
+   f.hidden=true;var sn=document.getElementById('sent');f.parentNode.appendChild(sn);sn.hidden=false;ph('intake_submitted');var st=document.getElementById('steps');if(st)st.style.display='none';
    try{history.replaceState(null,'',location.pathname)}catch(e){}setTimeout(function(){sn.focus()},50);}
  else{if(/[?&]submitted=1/.test(location.search)){try{history.replaceState(null,'',location.pathname)}catch(e){}}restore();go(0);}
 

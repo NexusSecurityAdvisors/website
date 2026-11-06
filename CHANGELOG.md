@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-05
 
+- Get Started: `intake_submitted` now reaches PostHog after the Zoho redirect; surname particles (de, van, da…) stay in Last Name; analytics only load on the production host (PR_PLACEHOLDER)
 - CSP: drop unused HubSpot ads pixel host; send report-only violations to PostHog CSP tracking ([#48](https://github.com/NexusSecurityAdvisors/website/pull/48))
 - Accessibility: compact launcher no longer covers the hero; underlined inline links; keyboard-scrollable EU AI Act tables ([#47](https://github.com/NexusSecurityAdvisors/website/pull/47))
 - Approach: 12-pillar Nexus CISO Framework mapped to NIST CSF 2.0, NIS2 and the CRA ([#46](https://github.com/NexusSecurityAdvisors/website/pull/46))
