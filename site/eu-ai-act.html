@@ -33,7 +33,7 @@
 #nsa{--bg:#0E131A;--bg2:#0E1B2E;--deep:#152A45;--glass:rgba(21,42,69,.38);--line:rgba(201,204,207,.14);--line2:rgba(43,155,244,.35);--blue:#1A6FD1;--blue-h:#155CB0;--accent:#2B9BF4;--text:#F3F5F7;--silver:#C9CCCF;--muted:#A7AEB8;--head:Questrial,"Segoe UI",Arial,sans-serif;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--silver);line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 #nsa *{box-sizing:border-box}
 #nsa [id]{scroll-margin-top:84px}
-#nsa a{color:inherit;text-decoration:none}
+#nsa a{color:inherit;text-decoration:none}#nsa :is(p,td,dd,figcaption,blockquote,.out,.kb) a:not(.btn),#nsa main li a:not(.btn){text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
 #nsa a:focus-visible,#nsa summary:focus-visible,#nsa button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 #nsa .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
 #nsa h1,#nsa h2,#nsa h3{font-family:var(--head);color:var(--text);font-weight:400;letter-spacing:.2px}
@@ -494,7 +494,7 @@ html,body{margin:0;background:#0E131A}
 #nsa .pane h3{margin-top:0}
 #nsa .pane.good{border-top:2px solid var(--accent)}
 #nsa .pane.bad{border-top:2px solid #E0A93B}
-#nsa .tw{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:12px;-webkit-overflow-scrolling:touch}
+#nsa .tw:focus-visible{outline:2px solid var(--accent);outline-offset:2px}#nsa .tw{overflow-x:auto;margin-top:24px;border:1px solid var(--line);border-radius:12px;-webkit-overflow-scrolling:touch}
 #nsa table.t{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
 #nsa table.t th{text-align:left;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);font-weight:700;background:rgba(14,27,46,.85);padding:12px 14px}
 #nsa table.t td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--silver);line-height:1.5}
@@ -528,7 +528,7 @@ html,body{margin:0;background:#0E131A}
 <section class="s alt ag" id="who" aria-labelledby="wh2-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Scope</div><h2 id="wh2-h">Does the EU AI Act apply to a U.S. business?</h2>
   <p class="lead">Possibly, even if you have no office in Europe. Like the General Data Protection Regulation (GDPR), the Act reaches outside the EU.<sup><a href="#eu1">[1]</a></sup></p></div>
-  <div class="tw rv"><table class="t"><thead><tr><th scope="col">Your role</th><th scope="col">What it means</th><th scope="col">Applies when</th></tr></thead><tbody>
+  <div class="tw rv" tabindex="0" role="region" aria-labelledby="wh2-h"><table class="t"><thead><tr><th scope="col">Your role</th><th scope="col">What it means</th><th scope="col">Applies when</th></tr></thead><tbody>
     <tr><td>Provider</td><td>You develop an AI system or model, or have one developed, and sell or release it under your name</td><td>You place it on the EU market, or its output is used in the EU</td></tr>
     <tr><td>Deployer</td><td>You use an AI system in your business (most SMBs)</td><td>You are in the EU, or the AI&#39;s output is used in the EU</td></tr>
     <tr><td>Importer or distributor</td><td>You bring AI products made by others into the EU market or resell them</td><td>You make them available in the EU</td></tr>
@@ -549,7 +549,7 @@ html,body{margin:0;background:#0E131A}
     <text x="735" y="202" fill="#C9CCCF" font-size="13" text-anchor="start">Disclose AI use</text>
     <text x="825" y="278" fill="#C9CCCF" font-size="13" text-anchor="start">Voluntary codes</text>
     </g></svg><figcaption>Most everyday business AI, such as drafting tools and spam filters, is minimal or limited risk.</figcaption></figure>
-  <div class="tw rv"><table class="t"><thead><tr><th scope="col">Tier</th><th scope="col">Examples</th><th scope="col">Obligations</th></tr></thead><tbody>
+  <div class="tw rv" tabindex="0" role="region" aria-labelledby="eut eud"><table class="t"><thead><tr><th scope="col">Tier</th><th scope="col">Examples</th><th scope="col">Obligations</th></tr></thead><tbody>
     <tr><td>Unacceptable</td><td>Social scoring, manipulative AI, emotion recognition at work or school</td><td>Prohibited</td></tr>
     <tr><td>High risk</td><td>AI used in hiring, credit scoring, insurance pricing, education, critical infrastructure, or as a safety component of regulated products</td><td>Risk management, data quality, documentation, human oversight, accuracy, cybersecurity, registration</td></tr>
     <tr><td>Limited risk</td><td>Chatbots, AI-generated images, audio, video, and text, deepfakes</td><td>Tell people they are dealing with AI; label synthetic content</td></tr>
@@ -559,7 +559,7 @@ html,body{margin:0;background:#0E131A}
 
 <section class="s alt ag" id="timeline" aria-labelledby="tl-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Timeline</div><h2 id="tl-h">When each part applies (as amended in 2026).</h2></div>
-  <div class="tw rv"><table class="t"><thead><tr><th scope="col">Date</th><th scope="col">What applies</th></tr></thead><tbody>
+  <div class="tw rv" tabindex="0" role="region" aria-labelledby="tl-h"><table class="t"><thead><tr><th scope="col">Date</th><th scope="col">What applies</th></tr></thead><tbody>
     <tr><td>August 1, 2024</td><td>The Act enters into force</td></tr>
     <tr><td>February 2, 2025</td><td>Prohibited practices banned; AI literacy duty begins</td></tr>
     <tr><td>August 2, 2025</td><td>Rules for general-purpose AI models; governance and penalty provisions</td></tr>
@@ -628,7 +628,7 @@ html,body{margin:0;background:#0E131A}
 
 <section class="s ag" id="penalties" aria-labelledby="pn-h"><div class="wrap">
   <div class="rv"><div class="eyebrow">Article 99</div><h2 id="pn-h">Penalties.</h2></div>
-  <div class="tw rv"><table class="t"><thead><tr><th scope="col">Violation</th><th scope="col">Maximum fine</th></tr></thead><tbody>
+  <div class="tw rv" tabindex="0" role="region" aria-labelledby="pn-h"><table class="t"><thead><tr><th scope="col">Violation</th><th scope="col">Maximum fine</th></tr></thead><tbody>
     <tr><td>Prohibited AI practices</td><td>Up to &euro;35 million or 7% of worldwide annual turnover, whichever is higher</td></tr>
     <tr><td>Most other obligations, including high-risk and transparency duties</td><td>Up to &euro;15 million or 3% of worldwide annual turnover, whichever is higher</td></tr>
     <tr><td>Supplying incorrect or misleading information to authorities</td><td>Up to &euro;7.5 million or 1% of worldwide annual turnover, whichever is higher</td></tr>
