@@ -2,7 +2,8 @@ name: Synthetic monitors
 
 # Daily checks that complement the Production monitor:
 # - dns:       domain and email-authentication posture (tools/check_dns.py)
-# - readiness: Readiness Check API on production, without creating leads (tools/check_readiness.py)
+# - readiness: Readiness Check API on production, without creating leads (tools/check_readiness.py);
+#   skipped on pull requests, since production serves main rather than the PR branch
 # - readiness-local: the same API probes against the function run locally with `wrangler pages dev`
 #   (if Cloudflare answers the runner with a bot challenge, the production job warns and skips its
 #   POST probes; any other edge block fails it, because real visitors would be blocked too)
@@ -38,6 +39,9 @@ jobs:
           - name: readiness
             script: tools/check_readiness.py
             title: "Readiness Check API monitor: /api/readiness"
+            # Production runs main, not the PR branch, so a PR that changes API behavior would
+            # always fail here. PRs are gated by readiness-local; production is checked daily.
+            production_only: true
           - name: readiness-local
             script: tools/check_readiness.py
             args: --base http://localhost:8788 --local
@@ -59,8 +63,14 @@ jobs:
             --compatibility-date 2026-10-01 > wrangler.log 2>&1 &
           for _ in $(seq 60); do curl -sf -o /dev/null http://localhost:8788/readiness-check && exit 0; sleep 2; done
           cat wrangler.log; exit 1
+      - name: Skip production probe on pull requests
+        if: github.event_name == 'pull_request' && matrix.production_only
+        run: |
+          echo "Skipped on pull_request: production serves main, not this branch." | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "The readiness-local job tests this branch's function; the daily run verifies production."
       - name: Run check
         id: check
+        if: ${{ !(github.event_name == 'pull_request' && matrix.production_only) }}
         env:
           SCRIPT: ${{ matrix.script }}
           ARGS: ${{ matrix.args }}
@@ -72,7 +82,7 @@ jobs:
           cat report.txt
           { echo '```'; cat report.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Fail the pull request check
-        if: github.event_name == 'pull_request' && steps.check.outputs.status != '0'
+        if: github.event_name == 'pull_request' && steps.check.outcome == 'success' && steps.check.outputs.status != '0'
         run: exit 1
       - name: Open, update or close the monitor issue
         if: github.event_name != 'pull_request'
