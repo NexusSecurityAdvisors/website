@@ -73,9 +73,20 @@ export async function onRequest(context) {
     context.waitUntil(
       fetch(POSTHOG_REPORT_URL, {
         method: "POST",
-        headers: { "content-type": "application/reports+json" },
+        // PostHog silently drops reports that arrive without the browser's User-Agent, and it needs
+        // the visitor IP for geo enrichment (the project discards the raw IP after lookup), the same
+        // way the /r7 relay forwards it.
+        headers: {
+          "content-type": "application/reports+json",
+          "user-agent": request.headers.get("user-agent") || "nexus-csp-report-relay",
+          "x-forwarded-for": request.headers.get("cf-connecting-ip") || "",
+        },
         body,
-      }).catch(() => {})
+      })
+        .then((r) => {
+          if (!r.ok) console.warn(`csp-report: PostHog returned ${r.status}`);
+        })
+        .catch((e) => console.warn(`csp-report: forward failed: ${e}`))
     );
   }
   return noContent();
