@@ -6,7 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-06
 
-- CSP (report-only): trial dropping `*.posthog.com` from script-src and narrowing connect-src to `us.posthog.com` now that PostHog loads through the `/r7` relay; sync stale `tools/_headers` with the deployed file (PR TBD)
+- CSP (report-only): trial dropping `*.posthog.com` from script-src and narrowing connect-src to `us.posthog.com` now that PostHog loads through the `/r7` relay; sync stale `tools/_headers` with the deployed file ([#59](https://github.com/NexusSecurityAdvisors/website/pull/59))
 
 ## 2026-11-05
 
