@@ -6,7 +6,10 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-05
 
-- Add CHANGELOG and release runbook (docs/RELEASE.md)
+- CSP: drop unused HubSpot ads pixel host; send report-only violations to PostHog CSP tracking ([#48](https://github.com/NexusSecurityAdvisors/website/pull/48))
+- Accessibility: compact launcher no longer covers the hero; underlined inline links; keyboard-scrollable EU AI Act tables ([#47](https://github.com/NexusSecurityAdvisors/website/pull/47))
+- Approach: 12-pillar Nexus CISO Framework mapped to NIST CSF 2.0, NIS2 and the CRA ([#46](https://github.com/NexusSecurityAdvisors/website/pull/46))
+- Add CHANGELOG and release runbook (docs/RELEASE.md) ([#45](https://github.com/NexusSecurityAdvisors/website/pull/45))
 - Home: stat matches the four services listed ([#42](https://github.com/NexusSecurityAdvisors/website/pull/42))
 - Add separate AI agent onboarding and offboarding checklist PDFs ([#39](https://github.com/NexusSecurityAdvisors/website/pull/39))
 - Home: animated board risk summary and Readiness Check demo ([#37](https://github.com/NexusSecurityAdvisors/website/pull/37))
