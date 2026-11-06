@@ -23,7 +23,7 @@
   'ORGANIZATION','  Industry: '+o.industry,'  Employees: '+o.size,'  IT/security today: '+(o.team||'-'),'  Main systems: '+(o.environment||'-'),'',
   'NEEDS','  Services: '+L(o.services),'  Frameworks: '+L(o.frameworks),'  Triggers: '+L(o.triggers),'',
   'PRIORITIES','  Biggest concern/goal: '+o.goal,'  Deadlines: '+(o.deadline||'-'),'  Start: '+o.timeline,'  Budget: '+(o.budget||'Prefer not to say'),'  Heard about us: '+(o.source||'-'),'','HOW YOU FOUND US (recorded automatically)','  First visit: '+TF(AT().first),'  Latest visit: '+TF(AT().last),'','CONSENT','  Agreed to privacy notice and to be contacted: '+(document.getElementById('f-consent')&&document.getElementById('f-consent').checked?'yes ('+new Date().toISOString()+')':'not yet')].join('\n');}
- function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';try{if(window.posthog)window.posthog.capture('intake_step_viewed',{step:i+1,steps:S.length})}catch(e){}
+ function go(n){n=Math.max(0,Math.min(n,S.length-1));i=n;S.forEach(function(s,k){s.hidden=k!==i});li.forEach(function(l,k){l.className=k===i?'on':(k<i?'ok':'')});pb.style.width=(i/(S.length-1)*100)+'%';try{(window.__nsaq=window.__nsaq||[]).push(['intake_step_viewed',{step:i+1,steps:S.length}])}catch(e){}
    back.disabled=i===0;next.style.display=i===S.length-1?'none':'';err.textContent='';
    if(i===S.length-1){var o=val(),t=summary();document.getElementById('sum').textContent=t;
      document.getElementById('b-mail').href='mailto:info@nexussecurityadvisors.com?subject='+encodeURIComponent('Consulting intake: '+o.company)+'&body='+encodeURIComponent(t);}
@@ -60,7 +60,7 @@ document.getElementById('b-send').addEventListener('click',function(){
  var pend=null;try{pend=sessionStorage.getItem('nsa-intake-pending')}catch(e){}
  window.addEventListener('pageshow',function(e){if(e.persisted){var bs=document.getElementById('b-send');bs.disabled=false;bs.textContent='Send my request \u2192';}});
  if(/[?&]submitted=1(&|$)/.test(location.search)&&pend){try{sessionStorage.removeItem(KEY);sessionStorage.removeItem('nsa-intake-pending')}catch(e){}
-   f.hidden=true;var sn=document.getElementById('sent');f.parentNode.appendChild(sn);sn.hidden=false;try{if(window.posthog)window.posthog.capture('intake_submitted')}catch(e){}var st=document.getElementById('steps');if(st)st.style.display='none';
+   f.hidden=true;var sn=document.getElementById('sent');f.parentNode.appendChild(sn);sn.hidden=false;try{(window.__nsaq=window.__nsaq||[]).push(['intake_submitted'])}catch(e){}var st=document.getElementById('steps');if(st)st.style.display='none';
    try{history.replaceState(null,'',location.pathname)}catch(e){}setTimeout(function(){sn.focus()},50);}
  else{if(/[?&]submitted=1/.test(location.search)){try{history.replaceState(null,'',location.pathname)}catch(e){}}restore();go(0);}
 

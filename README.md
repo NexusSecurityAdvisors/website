@@ -38,9 +38,17 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 1. **Bindings > KV namespace**: create a namespace `nexus-readiness-rl`, then bind it as `RL` (Production and Preview).
 2. **Variables and Secrets**: add `ANTHROPIC_API_KEY` as an encrypted secret (a key from the `website-leadgen` workspace in Claude Console) and `TURNSTILE_SECRET` as an encrypted secret from the existing Turnstile widget. Optional: `AI_DAILY_CAP` (default 150) and `TURNSTILE_HOSTNAMES` (comma-separated hostnames for this deployment; defaults to `www.nexussecurityadvisors.com,nexussecurityadvisors.com`). Keep production hostnames exact and never include `localhost` or `127.0.0.1` in a production value.
 3. **Security > WAF > Rate limiting rule** (included on the free plan): if URI Path equals `/api/readiness`, allow 10 requests per 1 minute per IP, then Block. This is an edge layer in front of the KV limits.
-4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness` as well as `/csp-report`, or every submission gets Cloudflare's "Sorry, you have been blocked" page:
-   `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and http.request.uri.path in {"/csp-report" "/api/readiness"}))`
+4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness`, `/api/intake`, `/csp-report` and the analytics relay under `/r7/`, or submissions get Cloudflare's "Sorry, you have been blocked" page and analytics stops:
+   `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and (http.request.uri.path in {"/csp-report" "/api/readiness" "/api/intake"} or starts_with(http.request.uri.path, "/r7/"))))`
 5. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
 
 ### Local test
 `npx wrangler pages dev site --kv RL --binding LEAD_SINK=off`. `LEAD_SINK=off` skips the Zoho POST so tests don't create real leads.
+
+## Analytics (PostHog)
+
+- `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay strips cookies and forwards only to PostHog's two hosts. It needs the `/r7/` exception in the custom WAF rule above.
+- Page scripts send custom events with `(window.__nsaq = window.__nsaq || []).push([name, props])`, never `posthog.capture` directly: they run before the deferred analytics.js, and the queue is flushed once PostHog initialises. Current events: `intake_step_viewed`, `intake_submitted`, `readiness_check_completed`. Never put form contents or contact details in event properties.
+- Your own visits: open any page once with `?internal=1` in each browser you use. PostHog's default filter then excludes it. `?internal=0` removes the tag.
+- PostHog honours Do Not Track. Project-side settings (IP discarding, replay masking, the test-account filter) live in PostHog, not in this repo.
+

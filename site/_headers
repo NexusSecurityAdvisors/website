@@ -18,6 +18,10 @@
 /js/analytics.js
   ! Cache-Control
 
+# Not content-hashed either (tools/check_readiness.py fetches it by this name), so it revalidates.
+/js/readiness-check.js
+  ! Cache-Control
+
 /*.webp
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 

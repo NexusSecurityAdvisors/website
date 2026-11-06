@@ -69,7 +69,7 @@
       sessionStorage.setItem('nsa-intake', JSON.stringify({ savedAt: Date.now(), data: data }));
     } catch (e) {}
     show(3);
-    try { if (window.posthog) window.posthog.capture('readiness_check_completed', { track: track, band: d.band, source: d.source }); } catch (e) {}
+    try { (window.__nsaq = window.__nsaq || []).push(['readiness_check_completed', { track: track, band: d.band, source: d.source }]); } catch (e) {}
   }
   $('rc-restart').addEventListener('click', function () { t0 = Date.now(); show(0); });
 })();
