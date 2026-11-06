@@ -62,9 +62,14 @@ export async function onRequestPost(context) {
     s = s.trim().slice(0, max);
     return /^[=+\-@]/.test(s) ? "'" + s : s; // formula-injection guard for CRM exports
   };
+  // Phone: keep only phone characters instead of quoting, so "+1 352 555 0100" stays a dialable
+  // E.164 number in Zoho. Without letters or "=", no formula payload can survive.
+  const cleanPhone = (v, max) => String(v ?? "").replace(/[^0-9+()\-. x]/gi, "").replace(/\s+/g, " ").trim().slice(0, max);
   const fields = {};
   for (const [k, max] of Object.entries(FIELDS)) {
-    if (typeof src[k] === "string" && src[k].trim()) fields[k] = clean(src[k], max, k === "LEADCF6");
+    if (typeof src[k] !== "string" || !src[k].trim()) continue;
+    const v = k === "Phone" ? cleanPhone(src[k], max) : clean(src[k], max, k === "LEADCF6");
+    if (v) fields[k] = v;
   }
   for (const [k, max] of Object.entries(MULTI)) {
     const v = Array.isArray(src[k]) ? src[k] : typeof src[k] === "string" ? [src[k]] : [];
@@ -77,7 +82,14 @@ export async function onRequestPost(context) {
   if (body.consent !== true) return json({ error: "invalid", field: "consent" }, 400);
 
   // ---- 3. anti-bot: honeypot + minimum fill time. Pretend success so bots learn nothing.
-  if (body.hp || !(Number(body.elapsed) > 8000)) return json({ ok: true });
+  // Turnstile (3b) is the real gate; the timer only catches instant scripted posts. Keep it low:
+  // a prospect who autofills a short form can finish in a few seconds, and a false positive here
+  // silently drops a real lead. Logged so any drops are visible.
+  const MIN_FILL_MS = 3000;
+  if (body.hp || !(Number(body.elapsed) > MIN_FILL_MS)) {
+    console.log("intake_silent_drop", body.hp ? "honeypot" : `fast_${Math.round(Number(body.elapsed) || 0)}ms`);
+    return json({ ok: true });
+  }
 
   // ---- 3b. Turnstile: server-side siteverify gates the CRM lead.
   if (!(await verifyTurnstile(env, body["cf-turnstile-response"], request.headers.get("cf-connecting-ip")))) {

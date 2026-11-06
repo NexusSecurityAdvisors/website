@@ -5,13 +5,25 @@
 var NSA_PROD=/^(www\.)?nexussecurityadvisors\.com$/.test(location.hostname);
 if(!NSA_PROD){window.__nsaq={push:function(){}};}
 else{
+// Consent: visitors in Europe (EU/EEA, UK, Switzerland) start opted out of analytics until they accept
+// analytics cookies in the HubSpot consent banner. Region comes from the browser time zone, so nothing
+// is sent to work it out. Everyone else is measured by default and can still decline in the banner.
+var NSA_EU=(function(){try{var z=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+ return /^Europe\//.test(z)||/^Atlantic\/(Reykjavik|Canary|Madeira|Azores|Faroe)$/.test(z)}catch(e){return false}})();
 posthog.init('phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2', {
 api_host: '/r7', // first-party relay (functions/r7), so ad blockers don't drop events
 ui_host: 'https://us.posthog.com',
 defaults: '2026-05-30',
 person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
 respect_dnt: true, // honour Do Not Track
+opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored until consent
 })
+// The HubSpot banner is the single consent switch. Its callback runs once HubSpot loads (immediately
+// for a returning visitor, or when the banner is answered). If HubSpot is blocked, EU visitors stay opted out.
+;(window._hsp=window._hsp||[]).push(['addPrivacyConsentListener',function(c){try{
+ var ok=c&&c.categories?!!c.categories.analytics:!!(c&&c.allowed);
+ if(ok){if(posthog.has_opted_out_capturing()||(NSA_EU&&!posthog.has_opted_in_capturing()))posthog.opt_in_capturing()} // outside Europe capture is already on unless the visitor declined earlier; avoids a $opt_in event per visitor
+ else if(!posthog.has_opted_out_capturing())posthog.opt_out_capturing();}catch(e){}}]);
 // Internal traffic: open any page once with ?internal=1 in each of your own browsers to tag them
 // (PostHog's default filter then excludes them); ?internal=0 removes the tag.
 ;(function(){try{var v=new URLSearchParams(location.search).get('internal');

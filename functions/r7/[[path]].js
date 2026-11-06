@@ -11,7 +11,9 @@
  *
  * Privacy and safety:
  *   - Strips the Cookie header so no site cookies (HubSpot, etc.) reach PostHog.
- *   - Strips Authorization unless it is a PostHog project key (phc_/phs_/phx_).
+ *   - Strips Authorization unless it is the public project key (phc_). Personal (phx_) and secret
+ *     (phs_) keys never come from the browser SDK, so they are never relayed: this domain must not
+ *     become a way to reach PostHog's private API with someone else's key.
  *   - Forwards the visitor IP as X-Forwarded-For so PostHog can derive approximate location;
  *     the project setting "Discard client IP data" drops the raw IP after that lookup.
  *   - Only proxies to the two fixed PostHog hosts; no open-proxy behaviour.
@@ -52,7 +54,7 @@ async function retrieveAsset(context, pathWithSearch) {
 async function forwardRequest(request, pathWithSearch) {
   const headers = new Headers(request.headers);
   headers.delete("cookie");
-  if (!/^Bearer ph[csx]_/.test(headers.get("authorization") ?? "")) {
+  if (!/^Bearer phc_[A-Za-z0-9]+$/.test(headers.get("authorization") ?? "")) {
     headers.delete("authorization");
   }
   headers.set("X-Forwarded-For", request.headers.get("CF-Connecting-IP") || "");

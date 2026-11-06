@@ -48,3 +48,5 @@ npx -y @lhci/cli@0.15.1 autorun       # Lighthouse (needs Chrome)
 - **AI crawlers** are explicitly allowed in `robots.txt`; `llms.txt` gives AI assistants a plain-text map of the site. Keep both in step when pages are added.
 
 References: [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/) · [MDN: Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) · [RFC 9116: security.txt](https://www.rfc-editor.org/rfc/rfc9116) · [Cloudflare Pages headers](https://developers.cloudflare.com/pages/configuration/headers/)
+
+Releases, verification and rollback: see [RELEASE.md](RELEASE.md). Production change history: [CHANGELOG.md](../CHANGELOG.md).
