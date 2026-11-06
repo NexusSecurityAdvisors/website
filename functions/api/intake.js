@@ -83,7 +83,7 @@ export async function onRequestPost(context) {
 
   // PostHog anonymous ID (join key between the Zoho lead and its analytics session). Optional: the
   // browser sends it only when PostHog loaded and the visitor has not opted out. Strict pattern, so it
-  // can never carry form contents. Appended to the Description (LEADCF6) because Web-to-Lead only
+  // can never carry form contents. Appended to the summary (LEADCF6, Zoho "Inquiry Message") because Web-to-Lead only
   // accepts fields already on the Zoho web form; move it to a dedicated field once one is added there.
   const phId = typeof body.ph === "string" && /^[A-Za-z0-9-]{8,64}$/.test(body.ph) ? body.ph : "";
   if (phId) {
@@ -168,7 +168,14 @@ async function verifyTurnstile(env, token, ip) {
   if (ip) form.set("remoteip", ip);
   try {
     const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form, signal: AbortSignal.timeout(10000) });
-    if (!r.ok) { console.log("turnstile_error", `siteverify_http_${r.status}`); return false; }
+    if (!r.ok) {
+      // Siteverify answers 4xx with a JSON body naming the cause (e.g. invalid-input-secret when
+      // TURNSTILE_SECRET is wrong). Log the codes so an outage names its cause in Functions logs.
+      let codes = "";
+      try { const b = await r.json(); codes = Array.isArray(b["error-codes"]) ? b["error-codes"].join(",") : ""; } catch {}
+      console.log("turnstile_error", `siteverify_http_${r.status}`, codes || "no_error_codes");
+      return false;
+    }
     const d = await r.json();
     if (d.success !== true) { console.log("turnstile_rejected", Array.isArray(d["error-codes"]) ? d["error-codes"].join(",") : "unsuccessful"); return false; }
     if (d.action !== TS_ACTION) { console.log("turnstile_rejected", "unexpected_action"); return false; }
