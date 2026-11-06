@@ -4,6 +4,10 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-06
+
+- CSP (report-only): trial dropping `*.posthog.com` from script-src and narrowing connect-src to `us.posthog.com` now that PostHog loads through the `/r7` relay; sync stale `tools/_headers` with the deployed file ([#59](https://github.com/NexusSecurityAdvisors/website/pull/59))
+
 ## 2026-11-05
 
 - CSP: drop unused HubSpot ads pixel host; send report-only violations to PostHog CSP tracking ([#48](https://github.com/NexusSecurityAdvisors/website/pull/48))
