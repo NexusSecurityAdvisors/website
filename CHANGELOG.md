@@ -6,7 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-10
 
-- Security contact: security.txt and the Trust page disclosure section now point to the dedicated security@nexussecurityadvisors.com mailbox; security.txt lists en, es, pt and it as preferred languages
+- Security contact: security.txt and the Trust page disclosure section now point to the dedicated security@nexussecurityadvisors.com mailbox; security.txt lists en, es, pt and it as preferred languages ([#75](https://github.com/NexusSecurityAdvisors/website/pull/75))
 
 ## 2026-11-06
 
