@@ -4,6 +4,10 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-10
+
+- Security contact: security.txt and the Trust page disclosure section now point to the dedicated security@nexussecurityadvisors.com mailbox; security.txt lists en, es, pt and it as preferred languages
+
 ## 2026-11-06
 
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
