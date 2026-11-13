@@ -1,7 +1,8 @@
 # Security policy
 
 To report a vulnerability in nexussecurityadvisors.com or this repository, use GitHub's
-**Report a vulnerability** button on the Security tab (private), or follow the contact details in
+**Report a vulnerability** button on the Security tab (private), or email
+[security@nexussecurityadvisors.com](mailto:security@nexussecurityadvisors.com). Contact details are also in
 [`/.well-known/security.txt`](https://www.nexussecurityadvisors.com/.well-known/security.txt).
 Please do not open a public issue for security problems.
 
