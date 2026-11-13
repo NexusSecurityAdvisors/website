@@ -60,4 +60,18 @@ opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored un
  if(t.src)s.last=t;
  s.exp=now+TTL;ls.setItem(K,JSON.stringify(s));
 }catch(e){}})();
+// Lead-funnel clicks (issue #77). Checklist and lead-magnet downloads, and clicks on any link to the
+// intake or the readiness check, are queued like page-script events, so production-only sending, EU consent
+// and ?internal=1 filtering all still apply. Only file names, paths and button text are sent, never form data.
+;(function(){try{
+ function q(n,p){try{(window.__nsaq=window.__nsaq||[]).push([n,p])}catch(e){}}
+ document.addEventListener('click',function(ev){try{
+  var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;if(!a)return;
+  var u=new URL(a.getAttribute('href'),location.href);if(u.origin!==location.origin)return;
+  var path=u.pathname,page=location.pathname,m=/^\/(nexus-[\w-]+)\.(pdf|docx|xlsx)$/i.exec(path);
+  if(m){q('lead_magnet_downloaded',{file:m[1],format:m[2].toLowerCase(),page:page});return;}
+  var t=/^\/(get-started|readiness-check)\/?$/.exec(path);
+  if(t&&!(t[0].replace(/\/$/,'')===page.replace(/\/$/,''))){q('cta_clicked',{target:'/'+t[1],page:page,label:String(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,60)});}
+ }catch(e){}},true);
+}catch(e){}})();
 window.nsaAttribution=function(){try{var s=JSON.parse(localStorage.getItem('nsa_attr')||'null');return s&&s.exp>Date.now()?s:null}catch(e){return null}};
