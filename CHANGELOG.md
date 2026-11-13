@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-12
 
+- CSP (report-only): trial dropping `*.posthog.com` from script-src and narrowing connect-src to `us.posthog.com` now that PostHog loads through the `/r7` relay ([#59](https://github.com/NexusSecurityAdvisors/website/pull/59))
 - Analytics: lead-funnel events for readiness-check starts, checklist downloads and clicks to Request a Call or the readiness check ([#82](https://github.com/NexusSecurityAdvisors/website/pull/82))
 - Home: hero credential chips now link out (Veteran-owned to About, OWASP AI Exchange, Forbes Technology Council); dropped the "Led by Dan Sorensen" chip and the "Who We Are" section, which About already covers ([#76](https://github.com/NexusSecurityAdvisors/website/pull/76))
 
