@@ -8,7 +8,8 @@ Resolves over DNS-over-HTTPS (Google and Cloudflare JSON APIs) so results do not
 runner's resolver, and fails (exit 1) on regressions:
 - MX still points at Zoho; SPF present, single record, authorizes zohomail.com, ends in ~all or -all
 - DMARC is enforcing (quarantine or reject) for the domain and subdomains, with aggregate reports
-- the active DKIM selector (zoho) is published; the 2048-bit selector (zoho2048) is checked too
+- the active 2048-bit DKIM selector (zoho2048) is published; the retired 1024-bit selector (zoho,
+  removed 2026-11-06) is only noted if it reappears
 - TLS-RPT and MTA-STS records exist, and the MTA-STS policy file is served and lists the real MX hosts
 - DNSSEC: a DS record is published and resolvers return authenticated (AD) answers
 - CAA restricts certificate issuance and has an iodef contact
@@ -98,13 +99,16 @@ def check_dmarc():
 
 
 def check_dkim():
-    for sel, required in (("zoho", True), ("zoho2048", False)):
+    # zoho2048 is the signing key since 2026-11-06; the 1024-bit "zoho" key was retired that day.
+    for sel, active in (("zoho2048", True), ("zoho", False)):
         recs = [r for r in doh(f"{sel}._domainkey.{DOMAIN}", "TXT")[0] if "p=" in r]
         key = tags(recs[0]).get("p", "") if recs else ""
-        if not key:
-            (errors if required else warnings).append(f"DKIM: selector {sel} not published")
-        else:
+        if active and not key:
+            errors.append(f"DKIM: active selector {sel} not published")
+        elif active:
             notes.append(f"DKIM {sel}: published ({len(key)}-character public key)")
+        elif key:
+            warnings.append(f"DKIM: retired 1024-bit selector {sel} is published again; remove it")
 
 
 def check_tls_reporting(mx_hosts):
