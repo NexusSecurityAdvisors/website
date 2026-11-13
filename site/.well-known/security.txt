@@ -2,6 +2,6 @@ Contact: mailto:security@nexussecurityadvisors.com
 Contact: mailto:info@nexussecurityadvisors.com
 Contact: https://www.nexussecurityadvisors.com/trust#disclosure
 Expires: 2027-10-01T00:00:00.000Z
-Preferred-Languages: en
+Preferred-Languages: en, es, pt, it
 Canonical: https://www.nexussecurityadvisors.com/.well-known/security.txt
 Policy: https://www.nexussecurityadvisors.com/trust#disclosure

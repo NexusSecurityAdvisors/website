@@ -8,6 +8,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 - Analytics: lead-funnel events for readiness-check starts, checklist downloads and clicks to Request a Call or the readiness check ([#82](https://github.com/NexusSecurityAdvisors/website/pull/82))
 - Home: hero credential chips now link out (Veteran-owned to About, OWASP AI Exchange, Forbes Technology Council); dropped the "Led by Dan Sorensen" chip and the "Who We Are" section, which About already covers ([#76](https://github.com/NexusSecurityAdvisors/website/pull/76))
+- Security contact: the Trust page disclosure section and SECURITY.md point to the dedicated security@nexussecurityadvisors.com mailbox (info@ stays as the second security.txt contact); security.txt lists en, es, pt and it as preferred languages ([#75](https://github.com/NexusSecurityAdvisors/website/pull/75))
 
 ## 2026-11-06
 
