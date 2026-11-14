@@ -28,9 +28,16 @@
  function gsPhId(){try{var p=window.posthog;if(!p||!p.__loaded||p.has_opted_out_capturing())return '';var d=String(p.get_distinct_id()||'');return /^[A-Za-z0-9-]{8,64}$/.test(d)?d:'';}catch(e){return '';}}
  var T0=Date.now();
  var GS_TS_SITEKEY='0x4AAAAAAF0PKlsgoUMRf2Nh',gsTsId=null;
- function gsTsMount(){var el=document.getElementById('gs-ts');if(!el||gsTsId!==null||!window.turnstile||f.querySelector('.st').hidden)return;gsTsId=window.turnstile.render(el,{sitekey:GS_TS_SITEKEY,action:'intake'});}
+ // A Send click that arrives before Turnstile has a token waits here instead of showing an error;
+ // gsTsDone submits it as soon as the check passes. Turnstile retries failed checks on its own; the 20 s timeout releases the button with a clear message.
+ var gsTsWait=null,gsTsTimer=null,GS_TS_HELP=' Please try again in a moment, or email info@nexussecurityadvisors.com.';
+ function gsTsMount(){var el=document.getElementById('gs-ts');if(!el||gsTsId!==null||!window.turnstile||f.querySelector('.st').hidden)return;gsTsId=window.turnstile.render(el,{sitekey:GS_TS_SITEKEY,action:'intake',callback:gsTsDone,'error-callback':gsTsFail,'expired-callback':gsTsExpired,retry:'auto','refresh-expired':'auto'});}
  function gsTsToken(){return(window.turnstile&&gsTsId!==null&&window.turnstile.getResponse(gsTsId))||'';}
  function gsTsReset(){if(window.turnstile&&gsTsId!==null)window.turnstile.reset(gsTsId);}
+ function gsTsRelease(msg){var w=gsTsWait;gsTsWait=null;clearTimeout(gsTsTimer);if(!w)return;w.btn.disabled=false;w.btn.textContent='Send my request \u2192';ok.textContent='';err.textContent=msg;}
+ function gsTsDone(tok){var w=gsTsWait;if(!w||!tok)return;gsTsWait=null;clearTimeout(gsTsTimer);ok.textContent='';w.go(tok);}
+ function gsTsFail(){if(gsTsWait)ok.textContent='Retrying the security check…';}
+ function gsTsExpired(){if(gsTsWait)return;gsTsReset();}
  window.gsTsReady=gsTsMount;
  function split(n){n=(n||'').trim().replace(/\s+/g,' ');var p=n.split(' ');if(p.length<2)return {f:'',l:n};var P=/^(de|da|di|do|dos|das|del|della|der|den|du|la|le|van|von|bin|ibn|al|el|st\.?|mac|mc|ten|ter)$/i,k=p.length-1;while(k>1&&P.test(p[k-1]))k--;return {f:p.slice(0,k).join(' '),l:p.slice(k).join(' ')};}
  function clip(v,m){v=String(v||'');return v.length>m?v.slice(0,m):v;}
@@ -43,12 +50,17 @@ document.getElementById('b-send').addEventListener('click',function(){
    var o=val(),nm=split(o.name);
    var data={'First Name':clip(neut(nm.f),40),'Last Name':clip(neut(nm.l||o.name),80),Email:clip(o.email,100),Company:clip(neut(o.company),200),LEADCF6:clip(summary(),30000)};
    Object.assign(data,nsaMap(o));
-   var tok=gsTsToken();if(!tok){ok.textContent='';err.textContent='Please complete the security check just above the Send button.';return;}
-   var btn=this;btn.disabled=true;btn.textContent='Sending…';
+   var btn=this;if(gsTsWait)return;
+   function go(tok){btn.disabled=true;btn.textContent='Sending…';
    fetch('/api/intake',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({fields:data,consent:true,hp:hpv,elapsed:Date.now()-T0,ph:gsPhId(),'cf-turnstile-response':tok})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d&&d.ok===true,d:d};});})
     .then(function(x){if(!x.ok)throw x.d;try{sessionStorage.setItem('nsa-intake-pending','1')}catch(e){}location.href='/get-started?submitted=1';})
-    .catch(function(d){gsTsReset();btn.disabled=false;btn.textContent='Send my request →';ok.textContent='';err.textContent=(d&&d.message)||'We couldn’t send your request. Please try again, or email info@nexussecurityadvisors.com.';});});
+    .catch(function(d){gsTsReset();btn.disabled=false;btn.textContent='Send my request →';ok.textContent='';err.textContent=(d&&d.message)||'We couldn’t send your request. Please try again, or email info@nexussecurityadvisors.com.';});}
+   var tok=gsTsToken();if(tok){go(tok);return;}
+   // No token yet: the check is still running, retrying, or its script has not loaded. Wait instead of erroring.
+   if(!window.turnstile){err.textContent='The security check did not load. Please refresh the page'+GS_TS_HELP.replace(' Please try again in a moment,',',');return;}
+   gsTsMount();gsTsWait={btn:btn,go:go};btn.disabled=true;btn.textContent='Checking…';ok.textContent='Running a quick security check…';
+   gsTsTimer=setTimeout(function(){gsTsRelease('The security check is taking longer than usual.'+GS_TS_HELP);},20000);});
  var pend=null;try{pend=sessionStorage.getItem('nsa-intake-pending')}catch(e){}
  window.addEventListener('pageshow',function(e){if(e.persisted){var bs=document.getElementById('b-send');bs.disabled=false;bs.textContent='Send my request →';}});
  if(/[?&]submitted=1(&|$)/.test(location.search)&&pend){try{sessionStorage.removeItem(KEY);sessionStorage.removeItem('nsa-intake-pending')}catch(e){}
