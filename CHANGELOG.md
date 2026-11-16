@@ -4,6 +4,12 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-16
+
+- CSP: `style-src` is now `'self'` only (enforced and Report-Only). All `<style>` blocks moved to content-hashed files under `/css/` (pages now share cached CSS instead of ~40 KB inline per page); `style=` attributes became classes in one `/css/inline-*.css`; the scripts that built `style=` markup now apply it via the CSSOM. `tools/externalise_styles.py` does the conversion and `tools/check_site.py` fails CI on any inline style
+- Headers: `Cross-Origin-Embedder-Policy: credentialless` site-wide, except `/get-started` and `/readiness-check` (Turnstile's iframe sends no COEP); HSTS in `_headers` matches the edge (1 year, includeSubDomains, preload); the domain is submitted to the HSTS preload list
+- security.txt: second `Canonical` for the apex URL, since scanners fetch it via the apex redirect
+
 ## 2026-11-12
 
 - Analytics: lead-funnel events for readiness-check starts, checklist downloads and clicks to Request a Call or the readiness check ([#82](https://github.com/NexusSecurityAdvisors/website/pull/82))

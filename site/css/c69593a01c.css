@@ -1,0 +1,9 @@
+#nsa details.fold{margin-top:26px;border:0;padding:0;background:none}
+#nsa details.fold>summary{list-style:none;display:inline-block;position:relative;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);padding:11px 46px 11px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(14,27,46,.55)}
+#nsa details.fold>summary::-webkit-details-marker{display:none}
+#nsa details.fold>summary:hover,#nsa details.fold>summary:focus-visible{border-color:var(--accent)}
+#nsa details.fold>summary:after{content:"";position:absolute;right:20px;top:15px;width:8px;height:8px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .2s}
+#nsa details.fold[open]>summary:after{top:19px;transform:rotate(-135deg)}
+#nsa details.fold .c,#nsa details.fold[open] .o{display:none}
+#nsa details.fold[open] .c{display:inline}
+#nsa details.fold>.foldb>:first-child{margin-top:18px}

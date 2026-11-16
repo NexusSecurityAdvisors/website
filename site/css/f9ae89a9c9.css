@@ -1,0 +1,9 @@
+#nsa .aip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:28px}
+#nsa .aip-price{margin:14px 0 4px;font-family:var(--head);font-size:15px;color:var(--muted)}
+#nsa .aip-price b{font-size:28px;color:var(--text);font-weight:600;margin-left:4px}
+#nsa .aip-price small{font-size:14px;color:var(--muted)}
+#nsa .aip-note{margin-top:18px;font-size:14px;color:var(--muted)}
+#nsa .aip-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+#nsa .aip .crow{grid-template-columns:1.2fr 1fr .8fr}
+#nsa .aip .refs{margin-top:22px}
+@media(max-width:600px){#nsa .aip .crow{grid-template-columns:1fr}#nsa .aip .crow span{padding:8px 14px}#nsa .aip .crow.ch{display:none}}
