@@ -1,0 +1,24 @@
+html,body{margin:0;background:#0E131A}
+#nsa .rhero h1{margin-top:0}
+#nsa .links a,#nsa .links .ddt{white-space:nowrap}
+#nsa .navr .btn.sm{white-space:nowrap}
+@media(max-width:1360px){#nsa .navr .ico{display:none}#nsa .links{gap:18px}}
+@media(max-width:1060px) and (min-width:961px){#nsa .links{gap:14px;font-size:13.5px}#nsa .navr .btn.sm{padding-left:12px;padding-right:12px}}
+#nsa .explore .chk em{font-style:normal}
+#nsa .teaser{max-width:760px}
+#nsa .aip-grid .card{display:flex;flex-direction:column}
+#nsa .aip-grid .card .aip-price{margin-top:auto}
+#nsa .rhero{position:relative;padding:96px 0 60px;background:radial-gradient(ellipse at 80% 0%,rgba(26,111,209,.28),transparent 55%),linear-gradient(180deg,#0E131A,#0E1B2E);overflow:hidden}
+#nsa .rhero .wrap{position:relative;z-index:2}
+#nsa .rmf.f4{grid-template-columns:repeat(4,1fr)}
+#nsa #airmfout{margin-bottom:6px}
+#nsa .rfull{grid-column:1/-1}
+#nsa .sts{list-style:none;margin:0;padding:0}
+#nsa .sts li{padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+#nsa .sts li:last-child{border-bottom:0}
+#nsa .sts b{display:block;color:var(--text);font-size:13px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:2px}
+#nsa .sts strong{color:var(--text);font-weight:600}
+#nsa .slinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+#nsa .slinks a{font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:4px 10px;color:var(--silver);transition:all .2s}
+#nsa .slinks a:hover{border-color:var(--accent);color:var(--text)}
+@media(max-width:600px){#nsa .rmf.f4{grid-template-columns:repeat(2,1fr)}}

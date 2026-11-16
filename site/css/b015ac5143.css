@@ -1,0 +1,29 @@
+#nsa .grid.xgrid:has(details[open]){align-items:start}
+#nsa .card.xcard{padding:0}
+#nsa .xcard details{display:flex;flex-direction:column;height:100%;border-bottom:0}
+#nsa .xcard summary:after{display:none}
+#nsa .xcard summary{flex:1;font-size:inherit;font-weight:400;color:inherit;position:static}
+#nsa .xcard p{padding:0}
+#nsa .xcard summary{list-style:none;cursor:pointer;padding:28px 28px 22px;display:flex;flex-direction:column;border-radius:12px;outline:none}
+#nsa .xcard summary::-webkit-details-marker{display:none}
+#nsa .xcard summary:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+#nsa .xcard summary .out{margin-top:auto}
+#nsa .xcard .xt{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.3px}
+#nsa .xcard .xt i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid var(--line2);border-radius:50%;font-size:14px;line-height:1;transition:transform .25s}
+#nsa .xcard .xt .c{display:none}
+#nsa .xcard details[open] .xt .o{display:none}
+#nsa .xcard details[open] .xt .c{display:inline}
+#nsa .xcard details[open] .xt i{transform:rotate(45deg)}
+#nsa .xcard details[open]{border-color:var(--line2)}
+#nsa .card.xcard:has(details[open]){border-color:var(--line2);transform:none}
+#nsa .xbody{padding:0 28px 26px;border-top:1px solid var(--line);animation:xin .3s ease}
+#nsa .xbody h4{font-family:var(--head);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin:18px 0 8px;font-weight:600}
+#nsa .xbody ul{margin:0;padding:0;list-style:none}
+#nsa .xbody li{position:relative;padding-left:20px;font-size:14px;line-height:1.5;margin:6px 0;color:var(--silver)}
+#nsa .xbody li:before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:2px;background:var(--accent);opacity:.8}
+#nsa .xbody p{font-size:14px;margin:0;color:var(--silver)}
+#nsa .xbody .xl{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px}
+#nsa .xbody .xl a{font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:none}
+#nsa .xbody .xl a:hover{text-decoration:underline}
+@keyframes xin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#nsa .xbody{animation:none}#nsa .xcard .xt i{transition:none}}

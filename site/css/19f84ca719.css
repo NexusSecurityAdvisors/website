@@ -1,0 +1,10 @@
+#nsa #rc.wiz{grid-template-columns:1fr;max-width:860px}
+#rc .rc-track{align-items:flex-start}#rc #rc-tracks{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}#rc .rc-ans{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:560px){#rc .rc-ans{grid-template-columns:repeat(2,minmax(0,1fr))}}#rc .rc-track small{opacity:.75;font-size:13px}
+#rc .q{margin-bottom:18px}
+#rc .rc-res{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin:6px 0 18px}
+#rc .rc-big{font-size:56px;font-weight:700;line-height:1}
+#rc .rc-bar{height:10px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;flex:1;min-width:200px}
+#rc .rc-bar i{display:block;height:100%;background:linear-gradient(90deg,#1A6FD1,#9FB3C8)}
+#rc ol.rc-pri{padding-left:20px}#rc ol.rc-pri li{margin:0 0 12px}#rc ol.rc-pri li span{display:block;opacity:.85}
+#rc .rc-note{font-size:13px;opacity:.7}
+#rc .rc-err{color:#ff8a8a;min-height:1.2em}
