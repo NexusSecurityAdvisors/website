@@ -1,0 +1,50 @@
+{
+  // Cloudflare Worker that serves the site (static assets in site/ + the Pages Functions in functions/).
+  //
+  // Why a Worker and not Pages: Pages manages TLS for its custom hostnames, so the zone's
+  // Minimum TLS 1.3 never reached www (internet.nl cipher-suite, cipher-order and SHA-1 findings).
+  // A Worker on a zone route is an ordinary zone hostname, so the zone TLS policy applies.
+  //
+  // Build:  npx wrangler pages functions build --outdir=dist-worker
+  // Deploy: npx wrangler deploy   (CI: .github/workflows/deploy-worker.yml)
+  "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
+  "name": "nexus-website",
+  "compatibility_date": "2026-10-01",
+
+  // Compiled from functions/ by `wrangler pages functions build` (not committed).
+  "main": "./dist-worker/index.js",
+
+  "assets": {
+    "directory": "./site",
+    "binding": "ASSETS",
+    // Every request goes through functions/_middleware.js first, so HTML responses get the
+    // per-request CSP nonce (Bot Fight Mode). _headers and _redirects still apply: the middleware
+    // serves assets through the ASSETS binding, which runs the header and redirect rules.
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  },
+
+  "kv_namespaces": [
+    // Rate limits for /api/intake and /api/readiness (same namespace the Pages project uses).
+    { "binding": "RL", "id": "4f3aacd2fb4c4d8d8b4767abf6129b7b" }
+  ],
+
+  "vars": {
+    // Staging hostname is included until cutover; remove it in Phase 4 (infra #20).
+    "ALLOWED_ORIGINS": "https://www.nexussecurityadvisors.com,https://nexussecurityadvisors.com,https://stage.nexussecurityadvisors.com",
+    "TURNSTILE_HOSTNAMES": "www.nexussecurityadvisors.com,nexussecurityadvisors.com,stage.nexussecurityadvisors.com"
+  },
+  // Secrets (set once with `wrangler secret put`, never committed):
+  //   TURNSTILE_SECRET, ANTHROPIC_API_KEY, plus any of ZOHO_XNQ / ZOHO_XMI / AI_DAILY_CAP set on Pages.
+
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+
+  "routes": [
+    // Phase 2: staging only. www is still served by Pages until cutover.
+    { "pattern": "stage.nexussecurityadvisors.com", "custom_domain": true }
+    // Phase 3 (cutover) adds:
+    // { "pattern": "www.nexussecurityadvisors.com/*", "zone_name": "nexussecurityadvisors.com" }
+  ]
+}
