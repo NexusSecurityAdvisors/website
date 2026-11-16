@@ -43,9 +43,10 @@
   "observability": { "enabled": true },
 
   "routes": [
-    // Phase 2: staging only. www is still served by Pages until cutover.
-    { "pattern": "stage.nexussecurityadvisors.com", "custom_domain": true }
-    // Phase 3 (cutover) adds:
-    // { "pattern": "www.nexussecurityadvisors.com/*", "zone_name": "nexussecurityadvisors.com" }
+    // stage stays until Phase 4 cleanup (infra #20).
+    { "pattern": "stage.nexussecurityadvisors.com", "custom_domain": true },
+    // Phase 3 (cutover): a Workers route on the existing proxied www record, so the Universal
+    // certificate keeps serving (HSTS preload) and the zone's TLS 1.3 minimum applies to www.
+    { "pattern": "www.nexussecurityadvisors.com/*", "zone_name": "nexussecurityadvisors.com" }
   ]
 }
