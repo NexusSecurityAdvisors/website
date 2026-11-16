@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-16
 
+- Operators: the site can also run as a Cloudflare Worker (`wrangler.jsonc`, `.github/workflows/deploy-worker.yml`), serving only stage.nexussecurityadvisors.com until cutover. www stays on Pages for now. This is the fix for TLS 1.2 still being offered on www, since Pages ignores the zone minimum TLS (infra#20)
 - CSP: `style-src` is now `'self'` only (enforced and Report-Only). All `<style>` blocks moved to content-hashed files under `/css/` (pages now share cached CSS instead of ~40 KB inline per page); `style=` attributes became classes in one `/css/inline-*.css`; the scripts that built `style=` markup now apply it via the CSSOM. `tools/externalise_styles.py` does the conversion and `tools/check_site.py` fails CI on any inline style
 - Headers: `Cross-Origin-Embedder-Policy: credentialless` site-wide, except `/get-started` and `/readiness-check` (Turnstile's iframe sends no COEP); HSTS in `_headers` matches the edge (1 year, includeSubDomains, preload); the domain is submitted to the HSTS preload list
 - Monitor: the daily live check ignores the per-request CSP nonce when comparing production with `_headers` (it warned on every run), and also compares COEP
