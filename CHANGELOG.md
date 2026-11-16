@@ -6,8 +6,12 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-16
 
+- Operators: the site can also run as a Cloudflare Worker (`wrangler.jsonc`, `.github/workflows/deploy-worker.yml`), serving only stage.nexussecurityadvisors.com until cutover. www stays on Pages for now. This is the fix for TLS 1.2 still being offered on www, since Pages ignores the zone minimum TLS (infra#20)
+- Headers: `Referrer-Policy: same-origin` (was `strict-origin-when-cross-origin`). Third parties we load from or link to (HubSpot, PostHog, Cloudflare, Thinkers360, outbound links) no longer receive our origin; on-site referrers are unchanged (infra#21)
+- Secure Website checklist: new Step 4, "Verify": which free scanners to run and in what order, how to read and confirm findings (with common false positives), the traps that cost points (redirect headers, HSTS preload hops and permanence, includeSubDomains and forgotten hosts, TLS 1.3-only versus NIST's TLS 1.2 requirement, 0-RTT, inline styles, COEP, security.txt Canonical), and keeping results green. Every technical claim cites a primary source (IETF RFCs, NIST, OWASP, MDN, hstspreload.org, Mozilla, Cloudflare docs) in a sources panel with a review date; adds WebPage structured data and a printable two-page PDF with numbered sources, /nexus-website-scan-checklist.pdf
 - CSP: `style-src` is now `'self'` only (enforced and Report-Only). All `<style>` blocks moved to content-hashed files under `/css/` (pages now share cached CSS instead of ~40 KB inline per page); `style=` attributes became classes in one `/css/inline-*.css`; the scripts that built `style=` markup now apply it via the CSSOM. `tools/externalise_styles.py` does the conversion and `tools/check_site.py` fails CI on any inline style
 - Headers: `Cross-Origin-Embedder-Policy: credentialless` site-wide, except `/get-started` and `/readiness-check` (Turnstile's iframe sends no COEP); HSTS in `_headers` matches the edge (1 year, includeSubDomains, preload); the domain is submitted to the HSTS preload list
+- Monitor: the daily live check ignores the per-request CSP nonce when comparing production with `_headers` (it warned on every run), and also compares COEP
 - security.txt: second `Canonical` for the apex URL, since scanners fetch it via the apex redirect
 
 ## 2026-11-12

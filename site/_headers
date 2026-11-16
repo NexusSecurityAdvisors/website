@@ -5,7 +5,7 @@
   Reporting-Endpoints: csp="https://www.nexussecurityadvisors.com/csp-report", posthog="https://us.i.posthog.com/report/?token=phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2&v=ro-1"
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
+  Referrer-Policy: same-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Embedder-Policy: credentialless
@@ -53,6 +53,10 @@
   Content-Type: text/plain; charset=utf-8
 /security.txt
   Content-Type: text/plain; charset=utf-8
+
+# Staging Worker hostname (infra #20): keep it out of search results until it is removed.
+https://stage.nexussecurityadvisors.com/*
+  X-Robots-Tag: noindex, nofollow
 
 # Keep *.pages.dev copies out of search results (canonical host is www).
 https://:project.pages.dev/*
