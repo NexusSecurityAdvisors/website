@@ -10,6 +10,7 @@
   Cross-Origin-Opener-Policy: same-origin
   X-Permitted-Cross-Domain-Policies: none
   Cross-Origin-Resource-Policy: same-origin
+  ! Access-Control-Allow-Origin
 
 # Content-hashed bundles: cache for a year. analytics.js is not hashed, so it revalidates.
 /js/*
