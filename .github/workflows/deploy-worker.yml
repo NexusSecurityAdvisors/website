@@ -1,0 +1,66 @@
+name: Deploy Worker
+
+# Builds functions/ into a Worker and deploys it with the static assets in site/ (wrangler.jsonc).
+# While infra #20 is in progress the Worker only serves stage.nexussecurityadvisors.com;
+# www stays on Cloudflare Pages until the cutover adds the www route to wrangler.jsonc.
+#
+# Secrets (repository or "cloudflare" environment):
+#   CLOUDFLARE_API_TOKEN   scoped to Account: Workers Scripts Edit + Zone (nexussecurityadvisors.com):
+#                          Workers Routes Edit, 90-day expiry
+#   CLOUDFLARE_ACCOUNT_ID
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "functions/**", "wrangler.jsonc", ".github/workflows/deploy-worker.yml"]
+  pull_request:
+    paths: ["site/**", "functions/**", "wrangler.jsonc", ".github/workflows/deploy-worker.yml"]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: deploy-worker-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WRANGLER_VERSION: "4.151.1"
+  WRANGLER_SEND_METRICS: "false"
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build functions into a Worker
+        run: npx --yes "wrangler@${WRANGLER_VERSION}" pages functions build --outdir=dist-worker
+
+      - name: Dry-run deploy (no credentials)
+        run: npx --yes "wrangler@${WRANGLER_VERSION}" deploy --dry-run --outdir=dist-dry-run
+
+  deploy:
+    needs: validate
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: cloudflare
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build functions into a Worker
+        run: npx --yes "wrangler@${WRANGLER_VERSION}" pages functions build --outdir=dist-worker
+
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes "wrangler@${WRANGLER_VERSION}" deploy
