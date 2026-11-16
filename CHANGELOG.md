@@ -8,6 +8,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 - CSP: `style-src` is now `'self'` only (enforced and Report-Only). All `<style>` blocks moved to content-hashed files under `/css/` (pages now share cached CSS instead of ~40 KB inline per page); `style=` attributes became classes in one `/css/inline-*.css`; the scripts that built `style=` markup now apply it via the CSSOM. `tools/externalise_styles.py` does the conversion and `tools/check_site.py` fails CI on any inline style
 - Headers: `Cross-Origin-Embedder-Policy: credentialless` site-wide, except `/get-started` and `/readiness-check` (Turnstile's iframe sends no COEP); HSTS in `_headers` matches the edge (1 year, includeSubDomains, preload); the domain is submitted to the HSTS preload list
+- Monitor: the daily live check ignores the per-request CSP nonce when comparing production with `_headers` (it warned on every run), and also compares COEP
 - security.txt: second `Canonical` for the apex URL, since scanners fetch it via the apex redirect
 
 ## 2026-11-12

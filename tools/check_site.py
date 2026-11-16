@@ -131,8 +131,12 @@ def live_checks():
     with urllib.request.urlopen(req, timeout=30) as r:
         live = {k.lower(): v for k, v in r.headers.items()}  # HTTP header names are case-insensitive; Cloudflare Pages sends _headers rules in lowercase
     check_headers(live, "production /")
-    if live.get("content-security-policy") != want.get("content-security-policy"):
+    # functions/_middleware.js adds a per-request 'nonce-…' to script-src; ignore it when comparing.
+    strip_nonce = lambda csp: re.sub(r"'nonce-[^']*'\s*", "", csp or "")
+    if strip_nonce(live.get("content-security-policy")) != strip_nonce(want.get("content-security-policy")):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
+    if live.get("cross-origin-embedder-policy") != want.get("cross-origin-embedder-policy"):
+        warnings.append("production COEP differs from site/_headers")
     ctx = ssl.create_default_context()
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2  # never negotiate TLS 1.0/1.1
     with socket.create_connection((HOST, 443), timeout=30) as s, ctx.wrap_socket(s, server_hostname=HOST) as t:
