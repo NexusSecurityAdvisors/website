@@ -9,7 +9,7 @@
   // Deploy: npx wrangler deploy   (CI: .github/workflows/deploy-worker.yml)
   "$schema": "https://unpkg.com/wrangler@4.151.1/config-schema.json",
   "name": "nexus-website",
-  "compatibility_date": "2026-10-01",
+  "compatibility_date": "2026-10-29", // matches the Pages project
 
   // Compiled from functions/ by `wrangler pages functions build` (not committed).
   "main": "./dist-worker/index.js",
@@ -34,8 +34,9 @@
     "ALLOWED_ORIGINS": "https://www.nexussecurityadvisors.com,https://nexussecurityadvisors.com,https://stage.nexussecurityadvisors.com",
     "TURNSTILE_HOSTNAMES": "www.nexussecurityadvisors.com,nexussecurityadvisors.com,stage.nexussecurityadvisors.com"
   },
-  // Secrets (set once with `wrangler secret put`, never committed):
-  //   TURNSTILE_SECRET, ANTHROPIC_API_KEY, plus any of ZOHO_XNQ / ZOHO_XMI / AI_DAILY_CAP set on Pages.
+  // Copied from the Pages project (Nov 16): secret TURNSTILE_SECRET (`wrangler secret put`, never
+  // committed) and text variable AI_DAILY_CAP (add its value under "vars" before cutover).
+  // ANTHROPIC_API_KEY and the ZOHO_* overrides are not set on Pages, so the code defaults apply.
 
   "workers_dev": false,
   "preview_urls": false,
