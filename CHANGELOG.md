@@ -22,6 +22,8 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-12
 
+- DNS monitor: require the 2048-bit DKIM key (zoho2048) and stop failing on the 1024-bit key retired on 2026-11-06
+- CSP (report-only): trial dropping `*.posthog.com` from script-src and narrowing connect-src to `us.posthog.com` now that PostHog loads through the `/r7` relay ([#59](https://github.com/NexusSecurityAdvisors/website/pull/59))
 - Analytics: lead-funnel events for readiness-check starts, checklist downloads and clicks to Request a Call or the readiness check ([#82](https://github.com/NexusSecurityAdvisors/website/pull/82))
 - Home: hero credential chips now link out (Veteran-owned to About, OWASP AI Exchange, Forbes Technology Council); dropped the "Led by Dan Sorensen" chip and the "Who We Are" section, which About already covers ([#76](https://github.com/NexusSecurityAdvisors/website/pull/76))
 - Security contact: the Trust page disclosure section and SECURITY.md point to the dedicated security@nexussecurityadvisors.com mailbox (info@ stays as the second security.txt contact); security.txt lists en, es, pt and it as preferred languages ([#75](https://github.com/NexusSecurityAdvisors/website/pull/75))
@@ -29,6 +31,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 ## 2026-11-06
 
 - Footer: "Cookie settings" link on every page reopens the consent banner so visitors can change or withdraw consent ([#67](https://github.com/NexusSecurityAdvisors/website/pull/67))
+- Intake: Send no longer shows a "complete the security check" error while Cloudflare Turnstile is still running or retrying; it waits and submits automatically, with a clear message after 20 s or if the check fails to load ([#71](https://github.com/NexusSecurityAdvisors/website/pull/71))
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
 - Intake: each Zoho lead's Description carries the visitor's PostHog ID (only when analytics is running for them), so a lead can be matched to its analytics session; privacy notice updated ([#62](https://github.com/NexusSecurityAdvisors/website/pull/62))
 - Release runbook: squash-merge only, and a record of when signed commits on `main` were enforced (2026-11-06)
