@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-18
 
+- Analytics: intake form drop-off events `intake_started` (first field typed), `intake_blocked` (required, email, consent or Turnstile) and `intake_send_failed` (HTTP status and error code), so the Pulse can show viewed → started → sent → submitted. Existing event names unchanged; no form contents in event properties ([#78](https://github.com/NexusSecurityAdvisors/website/issues/78))
 - Forms: Turnstile verification failures now log Cloudflare's error code (e.g. `invalid-input-secret`) in Functions logs ([#68](https://github.com/NexusSecurityAdvisors/website/pull/68))
 
 ## 2026-11-16
