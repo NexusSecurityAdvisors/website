@@ -7,6 +7,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 ## 2026-11-18
 
 - Forms: Turnstile verification failures now log Cloudflare's error code (e.g. `invalid-input-secret`) in Functions logs ([#68](https://github.com/NexusSecurityAdvisors/website/pull/68))
+- Monitor: the daily DNS check requires the active 2048-bit DKIM selector `zoho2048` instead of the 1024-bit `zoho` key retired on 2026-11-06 (which failed the check every day since), and warns if `zoho` is ever republished
 
 ## 2026-11-16
 
