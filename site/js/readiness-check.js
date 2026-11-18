@@ -28,12 +28,14 @@
       html += '</div></div>';
     });
     $('rc-qs').innerHTML = html; show(1);
+    try { (window.__nsaq = window.__nsaq || []).push(['readiness_check_started', { track: track }]); } catch (e) {}
   });
   $('rc-back1').addEventListener('click', function () { show(0); });
   $('rc-next').addEventListener('click', function () {
     var miss = BANK.tracks[track].questions.filter(function (q) { return !root.querySelector('input[name="' + q.id + '"]:checked'); });
     if (miss.length) { err.textContent = 'Please answer all ' + BANK.tracks[track].questions.length + ' questions ("Not sure" is fine).'; return; }
     show(2);
+    try { (window.__nsaq = window.__nsaq || []).push(['readiness_check_answered', { track: track }]); } catch (e) {}
   });
   $('rc-back2').addEventListener('click', function () { show(1); });
 

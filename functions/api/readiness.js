@@ -238,7 +238,14 @@ async function verifyTurnstile(env, token, ip) {
   if (ip) form.set("remoteip", ip);
   try {
     const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form, signal: AbortSignal.timeout(10000) });
-    if (!r.ok) { console.log("turnstile_error", `siteverify_http_${r.status}`); return false; }
+    if (!r.ok) {
+      // Siteverify answers 4xx with a JSON body naming the cause (e.g. invalid-input-secret when
+      // TURNSTILE_SECRET is wrong). Log the codes so an outage names its cause in Functions logs.
+      let codes = "";
+      try { const b = await r.json(); codes = Array.isArray(b["error-codes"]) ? b["error-codes"].join(",") : ""; } catch {}
+      console.log("turnstile_error", `siteverify_http_${r.status}`, codes || "no_error_codes");
+      return false;
+    }
     const d = await r.json();
     if (d.success !== true) {
       const codes = Array.isArray(d["error-codes"]) ? d["error-codes"].join(",") : "unsuccessful";

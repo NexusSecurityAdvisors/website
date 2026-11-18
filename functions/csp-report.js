@@ -41,6 +41,7 @@ const FIELDS = {
 };
 const URL_FIELDS = new Set(["documentURL", "referrer", "blockedURL", "sourceFile"]);
 const NUMBER_FIELDS = new Set(["lineNumber", "columnNumber", "statusCode"]);
+const EXTENSION = /^(chrome|moz|safari|safari-web|ms-browser)-extension(:|$)/i;
 
 const noContent = () => new Response(null, { status: 204, headers: { "cache-control": "no-store" } });
 
@@ -124,7 +125,10 @@ function clean(raw) {
     }
   }
   // A report with neither a directive nor a blocked resource is useless for fixing the policy.
-  return out.effectiveDirective || out.blockedURL ? out : null;
+  if (!out.effectiveDirective && !out.blockedURL) return null;
+  // Violations raised by a visitor's browser extension say nothing about our pages.
+  if (EXTENSION.test(out.sourceFile || "") || EXTENSION.test(out.blockedURL || "")) return null;
+  return out;
 }
 
 // Keep scheme, host and path; drop query string and fragment. Keywords like "inline" pass through.

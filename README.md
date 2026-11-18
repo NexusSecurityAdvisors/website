@@ -4,6 +4,7 @@ Static site for Nexus Security Advisors, deployed on **Cloudflare Pages**.
 
 - `site/` – the deployed website (Cloudflare Pages build output directory). Pretty URLs: `/services` serves `services.html`.
 - `site/_headers` – security headers (CSP, HSTS, frame, referrer, permissions policies).
+- `functions/_middleware.js` – adds a fresh nonce to `script-src` on every HTML response, so Cloudflare's injected bot-detection script is allowed without `'unsafe-inline'`.
 - `site/_redirects` – legacy URL redirects.
 - `tools/build.py` – rebuilds `site/` from the original Zoho Sites exports in `zoho-export/`.
 - `zoho-export/` – original page snippets and assets exported from Zoho Sites (Oct 2026), kept for reference.
@@ -37,13 +38,8 @@ The Anthropic API key exists only as a Cloudflare secret. The browser never sees
 ### Cloudflare setup (Pages project > Settings)
 1. **Bindings > KV namespace**: create a namespace `nexus-readiness-rl`, then bind it as `RL` (Production and Preview).
 2. **Variables and Secrets**: add `ANTHROPIC_API_KEY` as an encrypted secret (a key from the `website-leadgen` workspace in Claude Console) and `TURNSTILE_SECRET` as an encrypted secret from the existing Turnstile widget. Optional: `AI_DAILY_CAP` (default 150) and `TURNSTILE_HOSTNAMES` (comma-separated hostnames for this deployment; defaults to `www.nexussecurityadvisors.com,nexussecurityadvisors.com`). Keep production hostnames exact and never include `localhost` or `127.0.0.1` in a production value.
-3. **Security > WAF > Rate limiting rule** (included on the free plan): if URI Path equals `/api/readiness`, allow 10 requests per 1 minute per IP, then Block. This is an edge layer in front of the KV limits.
-4. **Security > Security rules > Custom rules**: the rule "Static site: allow only GET/HEAD/OPTIONS" blocks every other method. Its exception must include `/api/readiness`, `/api/intake`, `/csp-report` and the analytics relay under `/r7/`, or submissions get Cloudflare's "Sorry, you have been blocked" page and analytics stops:
-   `(not http.request.method in {"GET" "HEAD" "OPTIONS"} and not starts_with(http.request.uri.path, "/cdn-cgi/") and not (http.request.method eq "POST" and http.host eq "www.nexussecurityadvisors.com" and (http.request.uri.path in {"/csp-report" "/api/readiness" "/api/intake"} or starts_with(http.request.uri.path, "/r7/"))))`
-   A second custom rule, "PostHog relay /r7/: require same-origin POST, no traversal" (Block), gates the relay:
-   `(http.request.method eq "POST" and starts_with(http.request.uri.path, "/r7/") and (not any(http.request.headers["origin"][*] eq "https://www.nexussecurityadvisors.com") or raw.http.request.uri.path contains ".." or raw.http.request.uri.path contains "\\" or lower(raw.http.request.uri.path) contains "%5c" or lower(raw.http.request.uri.path) contains "%2e" or len(http.request.headers["content-length"][0]) > 7))`
-   Keep **Rules > Settings > URL Normalization** on the "Cloudflare" type with "Normalize URLs to origin" on, so the WAF and the Functions see the same path.
-5. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
+3. **Edge rules (WAF, rate limiting, URL normalization)**: the custom WAF rules must let `POST` through to `www` on `/api/readiness`, `/api/intake`, `/csp-report` and the analytics relay under `/r7/`, or submissions get Cloudflare's "Sorry, you have been blocked" page and analytics stops. The exact rules and settings are documented in the private `NexusSecurityAdvisors/infra` repo, where a daily drift check compares the live zone with a reviewed baseline. Change them there, not here.
+4. Optional: in Zoho CRM, add "Readiness Check" to the Lead Source picklist so leads are tagged cleanly.
 
 ### Local test
 `npx wrangler pages dev site --kv RL --binding LEAD_SINK=off`. `LEAD_SINK=off` skips the Zoho POST so tests don't create real leads.
@@ -54,7 +50,7 @@ The 5-step intake no longer posts from the browser straight to Zoho. It sends JS
 
 - checks origin and size, and forwards only an allowlist of Zoho fields (the client cannot override form tokens, Lead Source, or add fields)
 - requires consent, drops honeypot and too-fast (<8s) submissions with a fake success
-- appends the visitor's PostHog anonymous ID (if PostHog loaded and they did not opt out) to the lead Description as `PostHog ID: …`, the join key between a Zoho lead and its analytics session. Web-to-Lead accepts only fields on the Zoho web form, so move it to a dedicated field once one is added there
+- appends the visitor's PostHog anonymous ID (if PostHog loaded and they did not opt out) to the end of the lead summary (`LEADCF6`, shown in Zoho as **Inquiry Message**) as `PostHog ID: …`, the join key between a Zoho lead and its analytics session. Web-to-Lead accepts only fields on the Zoho web form, so move it to a dedicated field once one is added there
 - verifies Cloudflare Turnstile server-side (action `intake`, same widget and `TURNSTILE_SECRET` as the Readiness Check)
 - rate-limits per IP (5/hour) and per email (3/day) in the `RL` KV namespace, failing open if the binding is missing
 - posts the lead to Zoho Web-to-Lead and only reports success to the visitor if Zoho accepted it
@@ -63,7 +59,7 @@ The 5-step intake no longer posts from the browser straight to Zoho. It sends JS
 
 ## Analytics (PostHog)
 
-- `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay forwards only to PostHog's two hosts and only for an allowlist of SDK endpoints (anything else returns 404). It rebuilds request headers from an allowlist, so cookies and Authorization (including `phx_` personal API keys) never reach PostHog, caps bodies at 2 MB, and strips `Set-Cookie` from responses. If PostHog adds an SDK endpoint, add it to `API_ROUTES` or those calls will 404. It needs the `/r7/` exception in the custom WAF rule above.
+- `site/js/analytics.js` (source copy: `tools/analytics.js`) loads PostHog through the first-party relay `functions/r7/[[path]].js` (`/r7/*` to PostHog US Cloud), based on [PostHog's Cloudflare proxy](https://posthog.com/docs/advanced/proxy/cloudflare). The relay forwards only to PostHog's two hosts and only for an allowlist of SDK endpoints (anything else returns 404). It rebuilds request headers from an allowlist, so cookies and Authorization (including `phx_` personal API keys) never reach PostHog, caps bodies at 2 MB, and strips `Set-Cookie` from responses. If PostHog adds an SDK endpoint, add it to `API_ROUTES` or those calls will 404. It needs the `/r7/` exception in the edge rules above.
 - Page scripts send custom events with `(window.__nsaq = window.__nsaq || []).push([name, props])`, never `posthog.capture` directly: they run before the deferred analytics.js, and the queue is flushed once PostHog initialises. Current events: `intake_step_viewed`, `intake_submitted`, `readiness_check_completed`. Never put form contents or contact details in event properties.
 - Your own visits: open any page once with `?internal=1` in each browser you use. PostHog's default filter then excludes it. `?internal=0` removes the tag.
 - PostHog honours Do Not Track. Project-side settings (IP discarding, replay masking, the test-account filter) live in PostHog, not in this repo.
