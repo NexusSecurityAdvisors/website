@@ -4,6 +4,10 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-18
+
+- Forms: Turnstile verification failures now log Cloudflare's error code (e.g. `invalid-input-secret`) in Functions logs ([#68](https://github.com/NexusSecurityAdvisors/website/pull/68))
+
 ## 2026-11-16
 
 - Hosting: www is served by the Cloudflare Worker (`nexus-website`) instead of Pages, so the zone's TLS 1.3 minimum now applies to www. internet.nl on the Worker scored 100% (TLS cipher suites, cipher order and key-exchange hash fixed) (infra#8, infra#20)

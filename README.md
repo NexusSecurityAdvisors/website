@@ -50,7 +50,7 @@ The 5-step intake no longer posts from the browser straight to Zoho. It sends JS
 
 - checks origin and size, and forwards only an allowlist of Zoho fields (the client cannot override form tokens, Lead Source, or add fields)
 - requires consent, drops honeypot and too-fast (<8s) submissions with a fake success
-- appends the visitor's PostHog anonymous ID (if PostHog loaded and they did not opt out) to the lead Description as `PostHog ID: …`, the join key between a Zoho lead and its analytics session. Web-to-Lead accepts only fields on the Zoho web form, so move it to a dedicated field once one is added there
+- appends the visitor's PostHog anonymous ID (if PostHog loaded and they did not opt out) to the end of the lead summary (`LEADCF6`, shown in Zoho as **Inquiry Message**) as `PostHog ID: …`, the join key between a Zoho lead and its analytics session. Web-to-Lead accepts only fields on the Zoho web form, so move it to a dedicated field once one is added there
 - verifies Cloudflare Turnstile server-side (action `intake`, same widget and `TURNSTILE_SECRET` as the Readiness Check)
 - rate-limits per IP (5/hour) and per email (3/day) in the `RL` KV namespace, failing open if the binding is missing
 - posts the lead to Zoho Web-to-Lead and only reports success to the visitor if Zoho accepted it
