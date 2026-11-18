@@ -1,0 +1,7 @@
+@media(max-width:600px){
+html body #nsa section.s{padding:44px 0}
+html body #nsa .hero{padding:56px 0 60px}
+html body #nsa .grid,html body #nsa .steps{margin-top:24px;gap:14px}
+html body #nsa .card,html body #nsa .step{padding:20px}
+html body #nsa .cta{padding-top:56px;padding-bottom:56px}
+}

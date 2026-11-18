@@ -211,7 +211,7 @@ EXPLORE = """<section class="s alt" id="explore" aria-labelledby="ex-h"><div cla
 ABOUT_TEASER = """<section class="s gridbg" id="about-teaser" aria-labelledby="abt-h"><div class="wrap">
   <div class="rv teaser"><div class="eyebrow">Who We Are</div>
   <h2 id="abt-h">Led by an experienced CISO and U.S. Air Force veteran.</h2>
-  <p>Nexus Security Advisors is a veteran-owned small business founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange core team member, and a Forbes Technology Council contributor.</p>
+  <p>Nexus Security Advisors is a veteran-owned small business founded by Dan Sorensen, a fractional vCISO and AI governance advisor with 22+ years of U.S. Air Force and Air National Guard service, an OWASP AI Exchange contributor and working-team member, and a Forbes Technology Council contributor.</p>
   <div class="ctas"><a class="btn ghost" href="/about">About Nexus &amp; our founder &rarr;</a></div></div>
 </div></section>"""
 

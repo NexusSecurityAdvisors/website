@@ -11,6 +11,8 @@ Repository checks
   - _headers sets the required security headers (HSTS >= 180 days); the CSP has no unsafe-eval and keeps script-src strict
   - security.txt has Contact, Canonical and an Expires date at least 30 days away (RFC 9116)
   - no executable inline <script> blocks (JSON-LD data is allowed; the CSP relies on external scripts)
+  - no <style> blocks or style= attributes in pages, and no style="..." markup built in site/js
+    (style-src is 'self'; use a class, or data-css + el.style.cssText; tools/externalise_styles.py converts pages)
 Live checks (--live)
   - production responses carry the same security headers as site/_headers
   - TLS certificate is valid for at least 21 more days
@@ -27,7 +29,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 HOST = "www.nexussecurityadvisors.com"
-MIN_HSTS = 15552000  # 180 days; matches the zone-level HSTS policy (raise to 31536000+ for preload)
+MIN_HSTS = 31536000  # 1 year: the hstspreload.org minimum (the zone is submitted for preload)
 REQUIRED_HEADERS = ["Strict-Transport-Security", "Content-Security-Policy", "X-Content-Type-Options",
                     "Referrer-Policy", "Permissions-Policy", "X-Frame-Options", "Cross-Origin-Opener-Policy"]
 errors, warnings = [], []
@@ -61,10 +63,16 @@ def check_headers(h, where):
     for d in ("frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'"):
         if d not in csp:
             err(f"{where}: CSP missing {d}")
+    style_src = re.search(r"style-src ([^;]+)", csp)
+    if not style_src or "'unsafe-inline'" in style_src.group(1):
+        err(f"{where}: style-src missing or allows 'unsafe-inline'")
     hsts = h.get("strict-transport-security", "")
     m = re.search(r"max-age=(\d+)", hsts)
     if not m or int(m.group(1)) < MIN_HSTS:
         err(f"{where}: HSTS max-age below {MIN_HSTS // 86400} days")
+    for d in ("includesubdomains", "preload"):
+        if d not in hsts.lower():
+            err(f"{where}: HSTS missing {d} (the domain is on the preload list)")
 
 
 def check_security_txt(text, where):
@@ -90,6 +98,10 @@ def repo_checks():
         html = page.read_text(encoding="utf-8")
         if re.search(r"<script\b(?![^>]*\bsrc\s*=)(?![^>]*application/ld\+json)[^>]*>\s*\S", html, re.IGNORECASE):
             err(f"{page.name}: inline <script> found (CSP expects external scripts)")
+        if re.search(r"<style\b", html, re.IGNORECASE):
+            err(f"{page.name}: <style> block found (style-src is 'self'; run tools/externalise_styles.py site)")
+        if re.search(r"<[a-zA-Z][^>]*\sstyle\s*=", html):
+            err(f"{page.name}: style= attribute found (style-src is 'self'; run tools/externalise_styles.py site)")
         for ref in re.findall(r'(?:href|src)="([^"]+)"', html):
             if ref.startswith(("http:", "https:", "mailto:", "tel:", "#", "data:", "javascript:")):
                 if ref.startswith("http:"):
@@ -106,6 +118,9 @@ def repo_checks():
     for page in pages:
         if page.stem not in in_map and page.stem != "404":
             err(f"{page.name} is not in sitemap.xml")
+    for js in sorted((SITE / "js").glob("*.js")):
+        if re.search(r"\sstyle=\\?[\"']", js.read_text(encoding="utf-8")):
+            err(f"js/{js.name}: builds style= markup (blocked by style-src 'self'; use data-css + el.style.cssText)")
     check_headers(headers_file(), "site/_headers")
     check_security_txt((SITE / ".well-known" / "security.txt").read_text(), "site/.well-known/security.txt")
 
@@ -116,8 +131,12 @@ def live_checks():
     with urllib.request.urlopen(req, timeout=30) as r:
         live = {k.lower(): v for k, v in r.headers.items()}  # HTTP header names are case-insensitive; Cloudflare Pages sends _headers rules in lowercase
     check_headers(live, "production /")
-    if live.get("content-security-policy") != want.get("content-security-policy"):
+    # functions/_middleware.js adds a per-request 'nonce-…' to script-src; ignore it when comparing.
+    strip_nonce = lambda csp: re.sub(r"'nonce-[^']*'\s*", "", csp or "")
+    if strip_nonce(live.get("content-security-policy")) != strip_nonce(want.get("content-security-policy")):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
+    if live.get("cross-origin-embedder-policy") != want.get("cross-origin-embedder-policy"):
+        warnings.append("production COEP differs from site/_headers")
     ctx = ssl.create_default_context()
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2  # never negotiate TLS 1.0/1.1
     with socket.create_connection((HOST, 443), timeout=30) as s, ctx.wrap_socket(s, server_hostname=HOST) as t:

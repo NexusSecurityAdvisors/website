@@ -1,0 +1,3 @@
+#nsa a.chip{color:var(--silver);text-decoration:none;transition:border-color .2s,color .2s,background .2s}
+#nsa a.chip:hover,#nsa a.chip:focus-visible{color:var(--text);border-color:var(--accent);background:rgba(43,155,244,.12)}
+#nsa .ticker:focus-within .track{animation-play-state:paused}

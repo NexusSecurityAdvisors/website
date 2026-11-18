@@ -1,0 +1,10 @@
+#nsa a.hmock{display:block;color:inherit;text-decoration:none;border-radius:16px;transition:transform .25s ease}
+#nsa a.hmock:hover{transform:translateY(-3px)}
+#nsa a.hmock:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+#nsa .hcap{display:block;margin-top:10px;font-size:12.5px;color:var(--muted);text-align:center}
+#nsa .hcap b{color:var(--accent);font-weight:600}
+#nsa a.hmock:hover .hcap b{text-decoration:underline}
+#nsa .hgrid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1100px){#nsa .hgrid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){#nsa .hgrid4{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#nsa a.hmock{transition:none}#nsa a.hmock:hover{transform:none}}

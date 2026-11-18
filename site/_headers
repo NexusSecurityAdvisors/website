@@ -1,15 +1,29 @@
 /*
-  Strict-Transport-Security: max-age=31536000
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://*.posthog.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.usemessages.com https://*.hubspot.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.thinkers360.com https://*.hubspot.com https://*.hsforms.com https://*.hs-analytics.net https://*.hs-banner.com; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://*.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsforms.com https://*.hs-analytics.net https://*.usemessages.com; frame-src https://*.hubspot.com https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests; report-uri https://www.nexussecurityadvisors.com/csp-report; report-to csp
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.usemessages.com https://*.hubspot.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.thinkers360.com https://*.hubspot.com https://*.hsforms.com https://*.hs-analytics.net https://*.hs-banner.com; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://us.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsforms.com https://*.hs-analytics.net https://*.usemessages.com; frame-src https://*.hubspot.com https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests; report-uri https://www.nexussecurityadvisors.com/csp-report https://us.i.posthog.com/report/?token=phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2&v=ro-1; report-to posthog
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://*.posthog.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.usemessages.com https://*.hubspot.com; style-src 'self'; img-src 'self' data: https://www.thinkers360.com https://*.hubspot.com https://*.hsforms.com https://*.hs-analytics.net https://*.hs-banner.com; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://*.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsforms.com https://*.hs-analytics.net https://*.usemessages.com; frame-src https://*.hubspot.com https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests; report-uri https://www.nexussecurityadvisors.com/csp-report; report-to csp
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://*.hs-scripts.com https://*.hs-analytics.net https://*.hs-banner.com https://*.hscollectedforms.net https://*.usemessages.com https://*.hubspot.com; style-src 'self'; img-src 'self' data: https://www.thinkers360.com https://*.hubspot.com https://*.hsforms.com https://*.hs-analytics.net https://*.hs-banner.com; font-src 'self'; connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com https://us.posthog.com https://*.hubspot.com https://*.hubapi.com https://*.hs-banner.com https://*.hscollectedforms.net https://*.hsforms.com https://*.hs-analytics.net https://*.usemessages.com; frame-src https://*.hubspot.com https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests; report-uri https://www.nexussecurityadvisors.com/csp-report https://us.i.posthog.com/report/?token=phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2&v=ro-1; report-to posthog
   Reporting-Endpoints: csp="https://www.nexussecurityadvisors.com/csp-report", posthog="https://us.i.posthog.com/report/?token=phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2&v=ro-1"
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
+  Referrer-Policy: same-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), browsing-topics=()
   Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
   X-Permitted-Cross-Domain-Policies: none
   Cross-Origin-Resource-Policy: same-origin
+  ! Access-Control-Allow-Origin
+
+# Turnstile's iframe (challenges.cloudflare.com) doesn't send COEP/CORP, so the two pages that
+# embed it opt out. credentialless elsewhere: cross-origin no-cors loads (Thinkers360 badges,
+# Cloudflare's beacon) go without cookies instead of needing a CORP header.
+/get-started
+  ! Cross-Origin-Embedder-Policy
+/get-started.html
+  ! Cross-Origin-Embedder-Policy
+/readiness-check
+  ! Cross-Origin-Embedder-Policy
+/readiness-check.html
+  ! Cross-Origin-Embedder-Policy
 
 # Content-hashed bundles: cache for a year. analytics.js is not hashed, so it revalidates.
 /js/*
@@ -39,6 +53,10 @@
   Content-Type: text/plain; charset=utf-8
 /security.txt
   Content-Type: text/plain; charset=utf-8
+
+# Staging Worker hostname (infra #20): keep it out of search results until it is removed.
+https://stage.nexussecurityadvisors.com/*
+  X-Robots-Tag: noindex, nofollow
 
 # Keep *.pages.dev copies out of search results (canonical host is www).
 https://:project.pages.dev/*

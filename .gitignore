@@ -1,3 +1,6 @@
 .wrangler/
 node_modules/
 .dev.vars
+
+# Compiled Worker from functions/ (wrangler pages functions build)
+dist-worker/

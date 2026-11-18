@@ -1,6 +1,8 @@
 (function(){
   var root=document.getElementById('nsa'); if(!root) return;
   root.classList.add('js');
+  // CSP style-src 'self': markup built in JS carries styles as data-css, applied via the CSSOM.
+  var css=function(el){if(el)[].forEach.call(el.querySelectorAll('[data-css]'),function(n){n.style.cssText=n.getAttribute('data-css');n.removeAttribute('data-css');});return el;};
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // reveal on scroll
   var els=root.querySelectorAll('.rv');
@@ -31,7 +33,7 @@
     mx.innerHTML=html;
     mx.addEventListener('click',function(e){var c=e.target.closest('.cell');if(!c)return;mx.querySelectorAll('.sel').forEach(function(n){n.classList.remove('sel')});c.classList.add('sel');
       var l=+c.getAttribute('data-l'),i=+c.getAttribute('data-i'),s=l*i,b=band(s);
-      out.innerHTML='<b>Likelihood '+l+' &times; Impact '+i+' = '+s+'</b><span class="lvl" style="--c:'+b[2]+'">'+b[0].toUpperCase()+'</span><br>Example remediation deadline: <b>'+b[3]+'</b>. Each finding also gets a named owner and a retest date.';});
+      out.innerHTML='<b>Likelihood '+l+' &times; Impact '+i+' = '+s+'</b><span class="lvl" data-css="--c:'+b[2]+'">'+b[0].toUpperCase()+'</span><br>Example remediation deadline: <b>'+b[3]+'</b>. Each finding also gets a named owner and a retest date.';css(out);});
     var def=mx.querySelector('.cell[data-l="4"][data-i="5"]');if(def)def.click();
   }
   // terminal typing
@@ -64,10 +66,10 @@
    {o:'Show measurable risk reduction to leadership, boards, customers, and auditors.',a:['Select a small set of meaningful measures and trend them over time','Retest closed findings and update residual risk','Brief leadership and the board in plain business language','Prepare evidence packages for audits, assessments, and customer reviews'],d:['Quarterly board scorecard','Updated risk register and profile','Audit-ready evidence package'],t:'Monthly and quarterly cadence',s:['NIST SP 800-55','NIST CSF 2.0 Govern','SEC / board oversight practices']}];
   var sb=[].slice.call(root.querySelectorAll('.stepbtn')),apd=document.getElementById('apd');
   function showStep(k){var x=APD[k];sb.forEach(function(b,j){var on=j===k;b.setAttribute('aria-expanded',on);b.parentNode.classList.toggle('on',on);});
-    apd.innerHTML='<div class="full"><h4>Step '+(k+1)+' objective</h4><p style="margin:0;color:var(--text);font-size:16px">'+x.o+'</p></div>'+
+    apd.innerHTML='<div class="full"><h4>Step '+(k+1)+' objective</h4><p data-css="margin:0;color:var(--text);font-size:16px">'+x.o+'</p></div>'+
      '<div><h4>Key activities</h4><ul>'+x.a.map(function(v){return '<li>'+v+'</li>'}).join('')+'</ul></div>'+
      '<div><h4>Deliverables</h4><ul>'+x.d.map(function(v){return '<li>'+v+'</li>'}).join('')+'</ul></div>'+
-     '<div><h4>Typical timeframe</h4><p style="margin:0 0 14px">'+x.t+'</p><h4>Standards &amp; methods</h4><div class="meta2">'+x.s.map(function(v){return '<span class="chip">'+v+'</span>'}).join('')+'</div></div>';}
+     '<div><h4>Typical timeframe</h4><p data-css="margin:0 0 14px">'+x.t+'</p><h4>Standards &amp; methods</h4><div class="meta2">'+x.s.map(function(v){return '<span class="chip">'+v+'</span>'}).join('')+'</div></div>';css(apd);}
   sb.forEach(function(b,k){b.addEventListener('click',function(){showStep(k)})});if(apd)showStep(0);
   // regulatory tab deep links from Who We Serve
   root.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[data-tab]');if(!a)return;var t=document.getElementById(a.getAttribute('data-tab'));if(t)t.click();});
@@ -81,14 +83,14 @@
   var scns=document.getElementById('scns'),ctrls=document.getElementById('ctrls'),mini=document.getElementById('mini'),curS='ransom';var ST=Object.create(null);window.NexusRiskLab={SC:SC,ST:ST,band:band2};
   if(scns){
     scns.innerHTML=Object.keys(SC).map(function(k){return '<button type="button" class="scn" role="tab" data-k="'+k+'" aria-selected="false">'+SC[k].n+'</button>'}).join('');
-    var mh='';for(var ii=5;ii>=1;ii--)for(var ll=1;ll<=5;ll++){var bb=band2(ii*ll);mh+='<i data-l="'+ll+'" data-i="'+ii+'" style="--c:'+bb[1]+'"></i>';}mini.innerHTML=mh;
+    var mh='';for(var ii=5;ii>=1;ii--)for(var ll=1;ll<=5;ll++){var bb=band2(ii*ll);mh+='<i data-l="'+ll+'" data-i="'+ii+'" data-css="--c:'+bb[1]+'"></i>';}mini.innerHTML=mh;css(mini);
     var calc=function(){var s=SC[curS],L=s.l,I=s.i,on=[],off=[];ST[curS]=[];[].forEach.call(ctrls.querySelectorAll('input'),function(x,j){var c=s.c[j];ST[curS][j]=!!x.checked;if(x.checked){L-=c[1];I-=c[2];on.push(c[0])}else off.push(c);});
       L=Math.max(1,L);I=Math.max(1,I);var inh=s.l*s.i,res=L*I,bi=band2(inh),br=band2(res);
       document.getElementById('g-in').textContent=inh;document.getElementById('g-re').textContent=res;
       var gi=document.getElementById('gb-in'),gr=document.getElementById('gb-re');gi.style.width=(inh/25*100)+'%';gi.style.background=bi[1];gr.style.width=(res/25*100)+'%';gr.style.background=br[1];
       var best=off.slice().sort(function(a,b){return (b[1]+b[2])-(a[1]+a[2])})[0];
-      document.getElementById('simres').innerHTML='<b>'+s.n+':</b> '+s.d+'<br>Residual: likelihood '+L+' &times; impact '+I+' = <b>'+res+'</b> <span class="lvl" style="--c:'+br[1]+'">'+br[0].toUpperCase()+'</span> &mdash; '+br[2]+'.'+
-        (best?'<br>Biggest next move: <b>'+best[0]+'</b>.':'<br>All modeled controls in place. Validate them with testing and evidence.');
+      document.getElementById('simres').innerHTML='<b>'+s.n+':</b> '+s.d+'<br>Residual: likelihood '+L+' &times; impact '+I+' = <b>'+res+'</b> <span class="lvl" data-css="--c:'+br[1]+'">'+br[0].toUpperCase()+'</span> &mdash; '+br[2]+'.'+
+        (best?'<br>Biggest next move: <b>'+best[0]+'</b>.':'<br>All modeled controls in place. Validate them with testing and evidence.');css(document.getElementById('simres'));
       [].forEach.call(mini.children,function(c){var l=+c.getAttribute('data-l'),i2=+c.getAttribute('data-i');c.className=(l===L&&i2===I)?'re':((l===s.l&&i2===s.i)?'in':'');});try{document.dispatchEvent(new CustomEvent('nexus-risk-update'));}catch(e){}};
     var pickS=function(k){if(!Object.prototype.hasOwnProperty.call(SC,k))return;curS=k;[].forEach.call(scns.children,function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});
       ctrls.innerHTML=SC[k].c.map(function(c,j){var eff=(c[1]?'&minus;'+c[1]+' likelihood':'')+(c[1]&&c[2]?', ':'')+(c[2]?'&minus;'+c[2]+' impact':'');return '<label class="ctrl"><input type="checkbox" role="switch" data-j="'+j+'"'+(ST[k]&&ST[k][j]?' checked':'')+'><div><b>'+c[0]+'</b><span>'+eff+'</span></div></label>'}).join('');calc();};
