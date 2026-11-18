@@ -353,7 +353,7 @@
 @media(max-width:960px){#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
 @media(max-width:600px){#nsa .alinks,#nsa .kpis{grid-template-columns:1fr}#nsa .apd{padding:20px}}
 /* reveal */
-#nsa.js .rv{opacity:.55;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+#nsa.js .rv{transform:translateY(8px);transition:transform .45s ease}
 #nsa.js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){#nsa *{animation:none!important;transition:none!important}#nsa.js .rv{opacity:1;transform:none}#nsa .track{flex-wrap:wrap;width:auto}}
 @media(prefers-reduced-motion:no-preference){#nsa{scroll-behavior:smooth}}
@@ -500,17 +500,6 @@ html,body{margin:0;background:#0E131A}
 #nsa .xdet{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:0 20px;background:rgba(14,19,26,.45)}
 #nsa .xdet summary{font-size:16px}
 #nsa .xdet > div{padding-bottom:16px}
-#nsa .roi{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:26px}
-#nsa .roi-in{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:20px}
-#nsa .roi-in label{display:flex;flex-direction:column;justify-content:space-between;gap:6px;font-size:13.5px;color:var(--silver)}
-#nsa .roi-in input{font:inherit;font-size:15px;color:var(--text);background:rgba(14,19,26,.85);border:1px solid var(--line2);border-radius:8px;padding:9px 10px;width:100%}
-#nsa .roi-in input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-#nsa .roi-out{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;background:rgba(26,111,209,.10);border:1px solid var(--line2);border-radius:12px;padding:20px}
-#nsa .roi-k{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:8px;background:rgba(14,19,26,.55)}
-#nsa .roi-k span{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
-#nsa .roi-k b{font-family:var(--head);font-size:22px;font-weight:400;color:var(--text)}
-#nsa .roi-sum{grid-column:1/-1;font-size:14.5px;color:var(--silver);margin:4px 0 0}
-@media(max-width:900px){#nsa .roi{grid-template-columns:1fr}}
-@media(max-width:560px){#nsa .roi-in,#nsa .roi-out{grid-template-columns:1fr}}
+#nsa .qq{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}#nsa .qq legend{color:var(--text);font-weight:600;padding:0 6px}#nsa .qo{display:block;padding:6px 4px;color:var(--silver);cursor:pointer}#nsa .qo input{margin-right:8px;accent-color:#2B9BF4}#nsa .qf{margin:8px 0 0;font-size:14px}#nsa .qf.ok{color:#5FD07A}#nsa .qf.no{color:#E0A93B}#nsa .qscore{align-self:center;color:var(--text);font-weight:600}#nsa .flagl{display:flex;flex-direction:column;gap:6px;color:var(--silver);font-size:14px}#nsa .flagl input{font:inherit;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;color:var(--text);background:rgba(14,19,26,.85);border:1px solid var(--line2);border-radius:8px;padding:10px}#nsa #ctf_out{margin-top:10px;font-weight:600;color:var(--text)}
 #nsa .disc{font-size:13px;color:var(--muted);margin-top:18px}
 @media(max-width:600px){#nsa .pane{padding:20px}#nsa figure.dg{padding:10px}}

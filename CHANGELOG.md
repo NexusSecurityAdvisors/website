@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-18
 
+- PageSpeed: scroll-reveal sections no longer start at 55% opacity (Lighthouse measured them mid-fade as low contrast; the slide-in stays), the logo ships as content-hashed responsive WebP (200/300/360/440w, cached for a year), PostHog SDK files are cached longer by the `/r7` relay, and `upgrade-insecure-requests` is dropped from the report-only CSP (browsers ignore it there and log a console error).
 - Publications: added two November 2026 Forbes Technology Council Expert Panels that quote Dan (Nov 5 open-source dependency trust signals; Nov 10 outdated IAM assumptions); counts move from 75 to 77 (Forbes 63: 10 bylined, 53 Expert Panels).
 - CMMC checklist: item CMMC-04 now cites DFARS 252.204-7021, DFARS 252.240-7997 (formerly 252.204-7019/7020, renumbered or removed by class deviation 2026-O0025 on Feb 1, 2026) and the 32 CFR 170 affirmation; page data, `.docx`, `.xlsx` and `.pdf` updated, and the content-hashed checklists bundle renamed
 - CMMC (Regulatory Watch): timeline now dates the Reform Task Force review close to September 2026 (report delivered about Sept 11, not yet public), not October

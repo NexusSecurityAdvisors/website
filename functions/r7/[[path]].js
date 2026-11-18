@@ -16,6 +16,9 @@
  *     personal API keys), and all hop-by-hop headers are never forwarded.
  *   - Caps request bodies at MAX_BODY_BYTES.
  *   - Strips Set-Cookie from upstream responses.
+ *   - SDK caching: versioned files (/static/1.2.3/...) are immutable for a year; other /static/ files
+ *     (the array.js loader) get a day plus stale-while-revalidate, at the edge and in browsers.
+ *     /array/<key>/config.js keeps PostHog's short TTL so project setting changes land quickly.
  *   - Forwards the visitor IP as X-Forwarded-For so PostHog can derive approximate location;
  *     the project setting "Discard client IP data" drops the raw IP after that lookup.
  *
@@ -72,6 +75,15 @@ export async function onRequest(context) {
   return forwardRequest(request, pathWithSearch);
 }
 
+const VERSIONED_ASSET = /^\/static\/\d+\.\d+\.\d+\//;
+
+export function assetCacheControl(path) {
+  if (!path.startsWith("/static/")) return null;
+  return VERSIONED_ASSET.test(path)
+    ? "public, max-age=31536000, immutable"
+    : "public, max-age=86400, stale-while-revalidate=604800";
+}
+
 async function retrieveAsset(context, pathWithSearch) {
   const cache = caches.default;
   let response = await cache.match(context.request);
@@ -80,6 +92,8 @@ async function retrieveAsset(context, pathWithSearch) {
     // Copy so headers are mutable; drop Set-Cookie so no upstream cookie reaches visitors or the edge cache.
     response = new Response(upstream.body, upstream);
     response.headers.delete("set-cookie");
+    const cc = response.ok ? assetCacheControl(pathWithSearch) : null;
+    if (cc) response.headers.set("Cache-Control", cc);
     if (response.ok) context.waitUntil(cache.put(context.request, response.clone()));
   }
   return response;
