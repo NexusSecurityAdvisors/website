@@ -4,9 +4,30 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
-## 2026-11-06
+## 2026-11-18
 
 - Forms: Turnstile verification failures now log Cloudflare's error code (e.g. `invalid-input-secret`) in Functions logs ([#68](https://github.com/NexusSecurityAdvisors/website/pull/68))
+
+## 2026-11-16
+
+- Hosting: www is served by the Cloudflare Worker (`nexus-website`) instead of Pages, so the zone's TLS 1.3 minimum now applies to www. internet.nl on the Worker scored 100% (TLS cipher suites, cipher order and key-exchange hash fixed) (infra#8, infra#20)
+- Operators: the site can also run as a Cloudflare Worker (`wrangler.jsonc`, `.github/workflows/deploy-worker.yml`), serving only stage.nexussecurityadvisors.com until cutover. www stays on Pages for now. This is the fix for TLS 1.2 still being offered on www, since Pages ignores the zone minimum TLS (infra#20)
+- Headers: `Referrer-Policy: same-origin` (was `strict-origin-when-cross-origin`). Third parties we load from or link to (HubSpot, PostHog, Cloudflare, Thinkers360, outbound links) no longer receive our origin; on-site referrers are unchanged (infra#21)
+- Secure Website checklist: new Step 4, "Verify": which free scanners to run and in what order, how to read and confirm findings (with common false positives), the traps that cost points (redirect headers, HSTS preload hops and permanence, includeSubDomains and forgotten hosts, TLS 1.3-only versus NIST's TLS 1.2 requirement, 0-RTT, inline styles, COEP, security.txt Canonical), and keeping results green. Every technical claim cites a primary source (IETF RFCs, NIST, OWASP, MDN, hstspreload.org, Mozilla, Cloudflare docs) in a sources panel with a review date; adds WebPage structured data and a printable two-page PDF with numbered sources, /nexus-website-scan-checklist.pdf
+- CSP: `style-src` is now `'self'` only (enforced and Report-Only). All `<style>` blocks moved to content-hashed files under `/css/` (pages now share cached CSS instead of ~40 KB inline per page); `style=` attributes became classes in one `/css/inline-*.css`; the scripts that built `style=` markup now apply it via the CSSOM. `tools/externalise_styles.py` does the conversion and `tools/check_site.py` fails CI on any inline style
+- Headers: `Cross-Origin-Embedder-Policy: credentialless` site-wide, except `/get-started` and `/readiness-check` (Turnstile's iframe sends no COEP); HSTS in `_headers` matches the edge (1 year, includeSubDomains, preload); the domain is submitted to the HSTS preload list
+- Monitor: the daily live check ignores the per-request CSP nonce when comparing production with `_headers` (it warned on every run), and also compares COEP
+- security.txt: second `Canonical` for the apex URL, since scanners fetch it via the apex redirect
+
+## 2026-11-12
+
+- Analytics: lead-funnel events for readiness-check starts, checklist downloads and clicks to Request a Call or the readiness check ([#82](https://github.com/NexusSecurityAdvisors/website/pull/82))
+- Home: hero credential chips now link out (Veteran-owned to About, OWASP AI Exchange, Forbes Technology Council); dropped the "Led by Dan Sorensen" chip and the "Who We Are" section, which About already covers ([#76](https://github.com/NexusSecurityAdvisors/website/pull/76))
+- Security contact: the Trust page disclosure section and SECURITY.md point to the dedicated security@nexussecurityadvisors.com mailbox (info@ stays as the second security.txt contact); security.txt lists en, es, pt and it as preferred languages ([#75](https://github.com/NexusSecurityAdvisors/website/pull/75))
+
+## 2026-11-06
+
+- Footer: "Cookie settings" link on every page reopens the consent banner so visitors can change or withdraw consent ([#67](https://github.com/NexusSecurityAdvisors/website/pull/67))
 - CSP: Report-Only policy now allows inline styles like the enforced one, so violation reports show real script problems instead of ~400 style reports a week ([#63](https://github.com/NexusSecurityAdvisors/website/pull/63))
 - Intake: each Zoho lead's Description carries the visitor's PostHog ID (only when analytics is running for them), so a lead can be matched to its analytics session; privacy notice updated ([#62](https://github.com/NexusSecurityAdvisors/website/pull/62))
 - Release runbook: squash-merge only, and a record of when signed commits on `main` were enforced (2026-11-06)

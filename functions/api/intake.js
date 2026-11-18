@@ -164,6 +164,7 @@ async function verifyTurnstile(env, token, ip) {
   // Production allowlist only: never include localhost / 127.0.0.1 here.
   const hosts = String(env.TURNSTILE_HOSTNAMES || DEFAULT_ORIGINS.map((o) => new URL(o).hostname).join(","))
     .split(",").map((h) => h.trim().toLowerCase()).filter(Boolean);
+  if (!hosts.length) { console.log("turnstile_error", "empty hostname allowlist"); return false; }
   const form = new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token });
   if (ip) form.set("remoteip", ip);
   try {
