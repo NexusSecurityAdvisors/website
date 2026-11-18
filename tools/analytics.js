@@ -61,3 +61,14 @@ opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored un
  s.exp=now+TTL;ls.setItem(K,JSON.stringify(s));
 }catch(e){}})();
 window.nsaAttribution=function(){try{var s=JSON.parse(localStorage.getItem('nsa_attr')||'null');return s&&s.exp>Date.now()?s:null}catch(e){return null}};
+
+// "Cookie settings" footer link: reopen the HubSpot consent banner so visitors can change or
+// withdraw consent (GDPR Art. 7(3)). The link points at /trust#privacy, which is also the
+// fallback when the banner is not available for this visitor (HubSpot shows it in Europe only).
+;(function(){try{document.addEventListener('click',function(e){
+ var a=e.target&&e.target.closest&&e.target.closest('a[data-cookie-settings]');if(!a)return;
+ if(!NSA_PROD)return;
+ e.preventDefault();
+ try{(window._hsp=window._hsp||[]).push(['showBanner'])}catch(x){}
+ setTimeout(function(){if(!document.getElementById('hs-eu-cookie-confirmation'))location.href=a.getAttribute('href')},700);
+});}catch(e){}})();
