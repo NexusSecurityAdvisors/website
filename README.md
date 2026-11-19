@@ -17,6 +17,8 @@ Every push to `main` deploys automatically. No build step is required on Cloudfl
 ```bash
 python3 tools/serve.py site                      # preview with the production CSP at http://127.0.0.1:8088
 python3 tools/build.py zoho-export site          # rebuild site/ from the Zoho exports (standard library only)
+python3 tools/externalise_styles.py site          # move inline CSS into hashed files under site/css/
+python3 tools/bundle_styles.py site               # then combine each page's stylesheets into one /css/b-<hash>.css
 ```
 
 Both scripts need only the Python standard library. Use the version in `.python-version`.
