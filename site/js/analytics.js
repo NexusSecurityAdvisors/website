@@ -21,6 +21,10 @@ if(NSA_EU||NSA_OFF)(function(){try{
 }catch(e){}})();
 if(!NSA_PROD||NSA_OFF){window.__nsaq={push:function(){}};}
 else{
+// Start PostHog and HubSpot after the page has loaded and the main thread is idle (3 s cap), so their
+// scripts never compete with first paint or the first tap (PageSpeed: unused/duplicated/legacy JS,
+// forced reflow, long tasks). Page events queued in window.__nsaq meanwhile are sent when it starts.
+var NSA_START=function(){
 posthog.init('phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2', {
 api_host: '/r7', // first-party relay (functions/r7), so ad blockers don't drop events
 ui_host: 'https://us.posthog.com',
@@ -39,6 +43,9 @@ cookieless_mode: NSA_EU ? 'always' : 'never', // Europe: no cookies or local/ses
  for(var i=0;i<q.length;i++)window.__nsaq.push(q[i]);})();
 // HubSpot tracking sets cookies, so it loads outside Europe only.
 if(!NSA_EU)(function(){var s=document.createElement('script');s.id='hs-script-loader';s.async=true;s.defer=true;s.src='https://js-na2.hs-scripts.com/247780434.js';document.head.appendChild(s);})();
+};
+(function(){var go=function(){if('requestIdleCallback' in window)requestIdleCallback(NSA_START,{timeout:3000});else setTimeout(NSA_START,1);};
+ if(document.readyState==='complete')go();else window.addEventListener('load',go,{once:true});})();
 }
 // Lead-source attribution (first-party, no identifiers). Remembers how a visitor first
 // arrived (UTM tags, ad click IDs, or the referring site, including AI assistants) and the
