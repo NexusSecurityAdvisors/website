@@ -22,7 +22,7 @@
   function onScroll(){var d=document.documentElement,max=d.scrollHeight-d.clientHeight,y=window.pageYOffset||d.scrollTop;
     if(prog)prog.style.width=(max>0?y/max*100:0)+'%';if(top)top.classList.toggle('on',y>700);
     if(steps){var r=steps.getBoundingClientRect(),vh=window.innerHeight,p=Math.max(0,Math.min(1,(vh*0.85-r.top)/(r.height+vh*0.35)));steps.style.setProperty('--p',(p*100).toFixed(1)+'%');}}
-  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});requestAnimationFrame(onScroll); // first read waits a frame: no forced layout during startup (PageSpeed: forced reflow)
   // spotlight follow
   root.addEventListener('pointermove',function(e){var t=e.target.closest&&e.target.closest('.spot');if(!t)return;var r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px');});
   // risk matrix
