@@ -31,6 +31,9 @@ ui_host: 'https://us.posthog.com',
 defaults: '2026-05-30',
 person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
 respect_dnt: true, // honour Do Not Track
+disable_surveys: true, // no PostHog surveys on this site; skips surveys.js (PageSpeed: duplicated + unused JS)
+advanced_disable_feature_flags: true, // no flags or experiments in this project; skips the /flags call and flag code (#133)
+capture_dead_clicks: false, // ~1 event a week; skips dead-clicks-autocapture.js (#133)
 cookieless_mode: NSA_EU ? 'always' : 'never', // Europe: no cookies or local/session storage; needs "Cookieless server hash mode" on in the PostHog project
 })
 // Internal traffic: open any page once with ?internal=1 in each of your own browsers to tag them

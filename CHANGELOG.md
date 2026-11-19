@@ -4,6 +4,10 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-19
+
+- Performance (PageSpeed, mobile and desktop): the founder headshot on the home page is served as content-hashed 56/112/168 px variants with `srcset` (was one 360 px file shown at 56 px, cached for one day), so it is about 2 KB instead of 12 KB and cached for a year. PostHog surveys are turned off (`disable_surveys`; the site has none), so `surveys.js` and its second copy of DOMPurify no longer load (PageSpeed: duplicated and unused JavaScript). Feature-flag loading and dead-click capture are off too (no flags or experiments in the project; dead clicks averaged one event a week), dropping the `/flags` request and `dead-clicks-autocapture.js` (#133).
+
 ## 2026-11-18
 
 - Performance: the four Inter files (400/500/600/700, 96.7 KB) are replaced by one Inter variable font trimmed to the same 230 characters and the 400–700 weight range (34.6 KB, content-hashed and preloaded), so the first screen no longer waits on three late font downloads.
