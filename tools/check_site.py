@@ -121,8 +121,16 @@ def repo_checks():
     for js in sorted((SITE / "js").glob("*.js")):
         if re.search(r"\sstyle=\\?[\"']", js.read_text(encoding="utf-8")):
             err(f"js/{js.name}: builds style= markup (blocked by style-src 'self'; use data-css + el.style.cssText)")
+    for problem in stamp_problems(SITE):
+        err(f"{problem} (run tools/stamp_assets.py site)")
     check_headers(headers_file(), "site/_headers")
     check_security_txt((SITE / ".well-known" / "security.txt").read_text(), "site/.well-known/security.txt")
+
+
+def stamp_problems(site):
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from stamp_assets import stamp
+    return stamp(site, check=True)[0]
 
 
 def live_checks():
