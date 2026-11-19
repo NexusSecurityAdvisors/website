@@ -541,6 +541,14 @@ html body #nsa .cta{padding-top:56px;padding-bottom:56px}
 .s-eee3f850:is(#_#_#_,*){margin-top:20px}
 .s-f3a422ee:is(#_#_#_,*){margin:0 0 8px 0}
 .s-f4a584a1:is(#_#_#_,*){margin-top:14px;max-width:340px}
+.founder{display:flex;align-items:center;gap:14px;margin:22px 0 0;padding:12px 14px;border:1px solid var(--line2);border-radius:14px;background:rgba(14,27,46,.6);max-width:560px}
+.founder img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 56px;border:1px solid var(--line2)}
+.founder p{margin:0;font-size:14px;line-height:1.45;color:var(--silver)}
+.founder p b{display:block;color:var(--text);font-size:15px}
+#nsa .founder a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.howline{max-width:760px}
+.gs-adv{margin:14px 0 0;font-size:15px;color:var(--silver)}
+#nsa .gs-adv a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 #nsa .grid.xgrid:has(details[open]){align-items:start}
 #nsa .card.xcard{padding:0}
 #nsa .xcard details{display:flex;flex-direction:column;height:100%;border-bottom:0}
