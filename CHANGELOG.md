@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-18
 
+- Performance: PostHog and HubSpot now start after the page has loaded and the main thread is idle (3 s cap), so their scripts no longer compete with first paint (PageSpeed: unused, duplicated and legacy JavaScript, forced reflow). Page events queued before then are still sent. `tools/analytics.js` re-synced with the live file (it had drifted before #111).
 - CSP: removed `style-src-attr 'unsafe-inline'` (back to `style-src 'self'` only). It was added in #118 for HubSpot's consent banner, which is now disabled: Europe gets cookieless analytics without HubSpot (#111), so no banner is shown anywhere.
 - Privacy (infra#37): no cookie banner. Visitors in Europe (EU/EEA, UK, Switzerland, by browser time zone) get PostHog in cookieless mode, no HubSpot tracking code and no lead-source attribution storage; HubSpot/PostHog cookies left from earlier visits are cleared. Everyone else is unchanged. Footer "Cookie settings" (which reopened a banner that never existed) is now "Privacy choices", linking a new /trust#privacy-choices section with a button to turn analytics off in this browser; Global Privacy Control is honored. Trust page privacy notice updated to match.
 - CSP: allow inline style attributes only (`style-src-attr 'unsafe-inline'`, enforced and Report-Only) so HubSpot's consent banner renders; it was blocked by #88's `style-src 'self'`. `<style>` elements and scripts stay strict, and site pages still may not use `style=` (check_site enforces it)

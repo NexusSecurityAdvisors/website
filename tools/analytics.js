@@ -3,27 +3,36 @@
 // skip PostHog and HubSpot so they don't pollute reports. The posthog stub above stays defined,
 // so page scripts can call it safely; nothing is sent. Lead-source attribution below still runs.
 var NSA_PROD=/^(www\.)?nexussecurityadvisors\.com$/.test(location.hostname);
-if(!NSA_PROD){window.__nsaq={push:function(){}};}
-else{
-// Consent: visitors in Europe (EU/EEA, UK, Switzerland) start opted out of analytics until they accept
-// analytics cookies in the HubSpot consent banner. Region comes from the browser time zone, so nothing
-// is sent to work it out. Everyone else is measured by default and can still decline in the banner.
+// Privacy (infra#37). Visitors in Europe (EU/EEA, UK, Switzerland) get cookieless analytics: PostHog
+// runs in cookieless mode (nothing stored on the device; PostHog counts visitors with a daily-salted
+// server-side hash) and HubSpot's tracking code, which sets cookies, is not loaded. No consent banner is
+// needed for that. Region comes from the browser time zone, so nothing is sent to work it out.
+// Anyone can turn analytics off: Global Privacy Control, Do Not Track (respect_dnt), or the button on
+// /trust#privacy-choices, which saves that one choice in this browser.
 var NSA_EU=(function(){try{var z=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
  return /^Europe\//.test(z)||/^Atlantic\/(Reykjavik|Canary|Madeira|Azores|Faroe)$/.test(z)}catch(e){return false}})();
+var NSA_OFF=(function(){try{return navigator.globalPrivacyControl===true||localStorage.getItem('nsa_analytics')==='off'}catch(e){return false}})();
+// Europe or analytics off: remove HubSpot and PostHog cookies and storage left from an earlier visit.
+if(NSA_EU||NSA_OFF)(function(){try{
+ document.cookie.split(';').forEach(function(c){var n=c.split('=')[0].trim();
+  if(/^(hubspotutk|__hstc|__hssc|__hssrc|__hs_\w+|ph_\w+_posthog)$/.test(n))['',';domain=.nexussecurityadvisors.com',';domain=nexussecurityadvisors.com'].forEach(function(d){
+   document.cookie=n+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/'+d;});});
+ [localStorage,sessionStorage].forEach(function(st){for(var i=st.length-1;i>=0;i--){var k=st.key(i);if(/^ph_\w+_posthog|^__ph_opt_in_out_/.test(k))st.removeItem(k);}});
+}catch(e){}})();
+if(!NSA_PROD||NSA_OFF){window.__nsaq={push:function(){}};}
+else{
+// Start PostHog and HubSpot after the page has loaded and the main thread is idle (3 s cap), so their
+// scripts never compete with first paint or the first tap (PageSpeed: unused/duplicated/legacy JS,
+// forced reflow, long tasks). Page events queued in window.__nsaq meanwhile are sent when it starts.
+var NSA_START=function(){
 posthog.init('phc_DuzGMcGgYX9NfaIQr0gtNWEDi2dmQr5kZr4CwxgUJA2', {
 api_host: '/r7', // first-party relay (functions/r7), so ad blockers don't drop events
 ui_host: 'https://us.posthog.com',
 defaults: '2026-05-30',
 person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
 respect_dnt: true, // honour Do Not Track
-opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored until consent
+cookieless_mode: NSA_EU ? 'always' : 'never', // Europe: no cookies or local/session storage; needs "Cookieless server hash mode" on in the PostHog project
 })
-// The HubSpot banner is the single consent switch. Its callback runs once HubSpot loads (immediately
-// for a returning visitor, or when the banner is answered). If HubSpot is blocked, EU visitors stay opted out.
-;(window._hsp=window._hsp||[]).push(['addPrivacyConsentListener',function(c){try{
- var ok=c&&c.categories?!!c.categories.analytics:!!(c&&c.allowed);
- if(ok){if(posthog.has_opted_out_capturing()||(NSA_EU&&!posthog.has_opted_in_capturing()))posthog.opt_in_capturing()} // outside Europe capture is already on unless the visitor declined earlier; avoids a $opt_in event per visitor
- else if(!posthog.has_opted_out_capturing())posthog.opt_out_capturing();}catch(e){}}]);
 // Internal traffic: open any page once with ?internal=1 in each of your own browsers to tag them
 // (PostHog's default filter then excludes them); ?internal=0 removes the tag.
 ;(function(){try{var v=new URLSearchParams(location.search).get('internal');
@@ -32,14 +41,21 @@ opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored un
 // Send anything queued, then route later pushes straight to PostHog.
 ;(function(){var q=window.__nsaq||[];window.__nsaq={push:function(e){try{posthog.capture(e[0],e[1])}catch(x){}}};
  for(var i=0;i<q.length;i++)window.__nsaq.push(q[i]);})();
-;(function(){var s=document.createElement('script');s.id='hs-script-loader';s.async=true;s.defer=true;s.src='https://js-na2.hs-scripts.com/247780434.js';document.head.appendChild(s);})();
+// HubSpot tracking sets cookies, so it loads outside Europe only.
+if(!NSA_EU)(function(){var s=document.createElement('script');s.id='hs-script-loader';s.async=true;s.defer=true;s.src='https://js-na2.hs-scripts.com/247780434.js';document.head.appendChild(s);})();
+};
+(function(){var go=function(){if('requestIdleCallback' in window)requestIdleCallback(NSA_START,{timeout:3000});else setTimeout(NSA_START,1);};
+ if(document.readyState==='complete')go();else window.addEventListener('load',go,{once:true});})();
 }
 // Lead-source attribution (first-party, no identifiers). Remembers how a visitor first
 // arrived (UTM tags, ad click IDs, or the referring site, including AI assistants) and the
 // latest non-direct visit, for 90 days in this browser only. The intake form on
 // /get-started sends these with the request so each Zoho CRM lead shows where it came from.
 ;(function(){try{
- var K='nsa_attr',TTL=90*864e5,now=Date.now(),ls=window.localStorage;
+ var K='nsa_attr';
+ // Europe or analytics off: store nothing on the device, and clear anything kept from an earlier visit.
+ if(NSA_EU||NSA_OFF){try{localStorage.removeItem(K)}catch(e){}return;}
+ var TTL=90*864e5,now=Date.now(),ls=window.localStorage;
  var q=new URLSearchParams(location.search),ref=document.referrer||'',host='';
  try{host=ref?new URL(ref).hostname.replace(/^www\./,'').toLowerCase():''}catch(e){}
  if(/(^|\.)nexussecurityadvisors\.com$/.test(host))host='';
@@ -60,15 +76,32 @@ opt_out_capturing_by_default: NSA_EU, // EU/UK: nothing is captured or stored un
  if(t.src)s.last=t;
  s.exp=now+TTL;ls.setItem(K,JSON.stringify(s));
 }catch(e){}})();
+// Lead-funnel clicks (issue #77). Checklist and lead-magnet downloads, and clicks on any link to the
+// intake or the readiness check, are queued like page-script events, so production-only sending, EU consent
+// and ?internal=1 filtering all still apply. Only file names, paths and button text are sent, never form data.
+;(function(){try{
+ function q(n,p){try{(window.__nsaq=window.__nsaq||[]).push([n,p])}catch(e){}}
+ document.addEventListener('click',function(ev){try{
+  var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;if(!a)return;
+  var u=new URL(a.getAttribute('href'),location.href);if(u.origin!==location.origin)return;
+  var path=u.pathname,page=location.pathname,m=/^\/(nexus-[\w-]+)\.(pdf|docx|xlsx)$/i.exec(path);
+  if(m){q('lead_magnet_downloaded',{file:m[1],format:m[2].toLowerCase(),page:page});return;}
+  var t=/^\/(get-started|readiness-check)\/?$/.exec(path);
+  if(t&&!(t[0].replace(/\/$/,'')===page.replace(/\/$/,''))){q('cta_clicked',{target:'/'+t[1],page:page,label:String(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,60)});}
+ }catch(e){}},true);
+}catch(e){}})();
 window.nsaAttribution=function(){try{var s=JSON.parse(localStorage.getItem('nsa_attr')||'null');return s&&s.exp>Date.now()?s:null}catch(e){return null}};
 
-// "Cookie settings" footer link: reopen the HubSpot consent banner so visitors can change or
-// withdraw consent (GDPR Art. 7(3)). The link points at /trust#privacy, which is also the
-// fallback when the banner is not available for this visitor (HubSpot shows it in Europe only).
-;(function(){try{document.addEventListener('click',function(e){
- var a=e.target&&e.target.closest&&e.target.closest('a[data-cookie-settings]');if(!a)return;
- if(!NSA_PROD)return;
- e.preventDefault();
- try{(window._hsp=window._hsp||[]).push(['showBanner'])}catch(x){}
- setTimeout(function(){if(!document.getElementById('hs-eu-cookie-confirmation'))location.href=a.getAttribute('href')},700);
-});}catch(e){}})();
+// Privacy choices on /trust#privacy-choices: a button that turns analytics off (or back on) in this
+// browser. The choice is the only thing saved, and only when the visitor asks for it.
+;(function(){try{
+ function label(){var b=document.querySelector('[data-analytics-toggle]'),st=document.querySelector('[data-analytics-status]');if(!b)return;
+  var gpc=navigator.globalPrivacyControl===true,off=gpc||localStorage.getItem('nsa_analytics')==='off';
+  b.textContent=off?'Turn analytics back on':'Turn off analytics in this browser';b.disabled=gpc;b.hidden=false;
+  if(st)st.textContent=gpc?'Your browser sends Global Privacy Control, so analytics is off.':off?'Analytics is off in this browser.':NSA_EU?'Cookieless analytics is on.':'Analytics is on.';}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',label);else label();
+ document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('[data-analytics-toggle]');if(!b)return;
+  try{if(localStorage.getItem('nsa_analytics')==='off'){localStorage.removeItem('nsa_analytics');}
+   else{localStorage.setItem('nsa_analytics','off');localStorage.removeItem('nsa_attr');try{if(window.posthog&&posthog.__loaded)posthog.opt_out_capturing()}catch(x){}}}catch(x){}
+  location.reload();});
+}catch(e){}})();
