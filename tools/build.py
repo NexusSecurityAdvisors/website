@@ -316,3 +316,9 @@ sm += [f"  <url><loc>{SITE}{'/' if u == '/' else u}</loc></url>" for u in urls]
 sm.append("</urlset>")
 open(os.path.join(OUT, "sitemap.xml"), "w").write("\n".join(sm) + "\n")
 print("built", len(urls), "pages;", len(JS_SEEN), "js files")
+
+# analytics.js and readiness-check.js keep fixed names; stamp ?v=<content hash> on their script tags
+# so the year-long /js/* cache never serves an old copy (tools/stamp_assets.py, checked by check_site.py).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stamp_assets import stamp as _stamp
+_stamp(OUT)
