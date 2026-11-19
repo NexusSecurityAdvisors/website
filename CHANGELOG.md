@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-18
 
+- Performance: the four Inter files (400/500/600/700, 96.7 KB) are replaced by one Inter variable font trimmed to the same 230 characters and the 400–700 weight range (34.6 KB, content-hashed and preloaded), so the first screen no longer waits on three late font downloads.
 - Performance: the mobile-menu script loads with `defer` instead of blocking the parser near the top of every page, and the scroll-progress script's first measurement waits one animation frame, removing a 30 ms forced reflow at startup (PageSpeed: forced reflow, network dependency tree). Both files renamed to their new content hash.
 - Performance: `analytics.js` and `readiness-check.js` are cached for a year like the other scripts instead of revalidating on every page view. They keep their names; script tags carry `?v=<content hash>`, stamped by the new `tools/stamp_assets.py` and enforced by `tools/check_site.py`.
 - Performance: PostHog and HubSpot now start after the page has loaded and the main thread is idle (3 s cap), so their scripts no longer compete with first paint (PageSpeed: unused, duplicated and legacy JavaScript, forced reflow). Page events queued before then are still sent. `tools/analytics.js` re-synced with the live file (it had drifted before #111).
