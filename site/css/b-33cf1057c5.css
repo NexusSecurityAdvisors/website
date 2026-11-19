@@ -1,8 +1,8 @@
 @font-face{font-family:Questrial;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-questrial-400.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-inter-400.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/nsa-inter-500.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/nsa-inter-600.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/nsa-inter-700.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400 700;font-display:swap;src:url(/nsa-inter-var-b106f57cb6.woff2) format("woff2")}
+
+
+
 #nsa{--bg:#0E131A;--bg2:#0E1B2E;--deep:#152A45;--glass:rgba(21,42,69,.38);--line:rgba(201,204,207,.14);--line2:rgba(43,155,244,.35);--blue:#1A6FD1;--blue-h:#155CB0;--accent:#2B9BF4;--text:#F3F5F7;--silver:#C9CCCF;--muted:#A7AEB8;--head:Questrial,"Segoe UI",Arial,sans-serif;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--silver);line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 #nsa *{box-sizing:border-box}
 #nsa [id]{scroll-margin-top:84px}
@@ -420,6 +420,18 @@ html,body{margin:0;background:#0E131A}
 #nsa .aip-grid .card .aip-price{margin-top:auto}
 #nsa .rhero{position:relative;padding:96px 0 60px;background:radial-gradient(ellipse at 80% 0%,rgba(26,111,209,.28),transparent 55%),linear-gradient(180deg,#0E131A,#0E1B2E);overflow:hidden}
 #nsa .rhero .wrap{position:relative;z-index:2}
+#nsa .rmf.f4{grid-template-columns:repeat(4,1fr)}
+#nsa #airmfout{margin-bottom:6px}
+#nsa .rfull{grid-column:1/-1}
+#nsa .sts{list-style:none;margin:0;padding:0}
+#nsa .sts li{padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+#nsa .sts li:last-child{border-bottom:0}
+#nsa .sts b{display:block;color:var(--text);font-size:13px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:2px}
+#nsa .sts strong{color:var(--text);font-weight:600}
+#nsa .slinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+#nsa .slinks a{font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:4px 10px;color:var(--silver);transition:all .2s}
+#nsa .slinks a:hover{border-color:var(--accent);color:var(--text)}
+@media(max-width:600px){#nsa .rmf.f4{grid-template-columns:repeat(2,1fr)}}
 #nsa .cnote{margin:16px 0 0;font-size:14px;color:var(--muted)}
 .s-0429b1ea:is(#_#_#_,*){--c:#C2384B}
 .s-043808a9:is(#_#_#_,*){display:contents}
@@ -466,35 +478,3 @@ html,body{margin:0;background:#0E131A}
 .s-eee3f850:is(#_#_#_,*){margin-top:20px}
 .s-f3a422ee:is(#_#_#_,*){margin:0 0 8px 0}
 .s-f4a584a1:is(#_#_#_,*){margin-top:14px;max-width:340px}
-#nsa .grid.xgrid:has(details[open]){align-items:start}
-#nsa .card.xcard{padding:0}
-#nsa .xcard details{display:flex;flex-direction:column;height:100%;border-bottom:0}
-#nsa .xcard summary:after{display:none}
-#nsa .xcard summary{flex:1;font-size:inherit;font-weight:400;color:inherit;position:static}
-#nsa .xcard p{padding:0}
-#nsa .xcard summary{list-style:none;cursor:pointer;padding:28px 28px 22px;display:flex;flex-direction:column;border-radius:12px;outline:none}
-#nsa .xcard summary::-webkit-details-marker{display:none}
-#nsa .xcard summary:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
-#nsa .xcard summary .out{margin-top:auto}
-#nsa .xcard .xt{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.3px}
-#nsa .xcard .xt i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid var(--line2);border-radius:50%;font-size:14px;line-height:1;transition:transform .25s}
-#nsa .xcard .xt .c{display:none}
-#nsa .xcard details[open] .xt .o{display:none}
-#nsa .xcard details[open] .xt .c{display:inline}
-#nsa .xcard details[open] .xt i{transform:rotate(45deg)}
-#nsa .xcard details[open]{border-color:var(--line2)}
-#nsa .card.xcard:has(details[open]){border-color:var(--line2);transform:none}
-#nsa .xbody{padding:0 28px 26px;border-top:1px solid var(--line);animation:xin .3s ease}
-#nsa .xbody h4{font-family:var(--head);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin:18px 0 8px;font-weight:600}
-#nsa .xbody ul{margin:0;padding:0;list-style:none}
-#nsa .xbody li{position:relative;padding-left:20px;font-size:14px;line-height:1.5;margin:6px 0;color:var(--silver)}
-#nsa .xbody li:before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:2px;background:var(--accent);opacity:.8}
-#nsa .xbody p{font-size:14px;margin:0;color:var(--silver)}
-#nsa .xbody .xl{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px}
-#nsa .xbody .xl a{font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:none}
-#nsa .xbody .xl a:hover{text-decoration:underline}
-@keyframes xin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){#nsa .xbody{animation:none}#nsa .xcard .xt i{transition:none}}
-#nsa a.chip{color:var(--silver);text-decoration:none;transition:border-color .2s,color .2s,background .2s}
-#nsa a.chip:hover,#nsa a.chip:focus-visible{color:var(--text);border-color:var(--accent);background:rgba(43,155,244,.12)}
-#nsa .ticker:focus-within .track{animation-play-state:paused}

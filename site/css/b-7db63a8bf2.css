@@ -1,8 +1,8 @@
 @font-face{font-family:Questrial;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-questrial-400.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/nsa-inter-400.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/nsa-inter-500.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/nsa-inter-600.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/nsa-inter-700.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400 700;font-display:swap;src:url(/nsa-inter-var-b106f57cb6.woff2) format("woff2")}
+
+
+
 #nsa{--bg:#0E131A;--bg2:#0E1B2E;--deep:#152A45;--glass:rgba(21,42,69,.38);--line:rgba(201,204,207,.14);--line2:rgba(43,155,244,.35);--blue:#1A6FD1;--blue-h:#155CB0;--accent:#2B9BF4;--text:#F3F5F7;--silver:#C9CCCF;--muted:#A7AEB8;--head:Questrial,"Segoe UI",Arial,sans-serif;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--silver);line-height:1.65;margin:0;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 #nsa *{box-sizing:border-box}
 #nsa [id]{scroll-margin-top:84px}
