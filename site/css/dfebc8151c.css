@@ -353,7 +353,7 @@
 @media(max-width:960px){#nsa .apd{grid-template-columns:1fr}#nsa .apx,#nsa .simgrid{grid-template-columns:1fr}}
 @media(max-width:600px){#nsa .alinks,#nsa .kpis{grid-template-columns:1fr}#nsa .apd{padding:20px}}
 /* reveal */
-#nsa.js .rv{opacity:.55;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+#nsa.js .rv{transform:translateY(8px);transition:transform .45s ease}
 #nsa.js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){#nsa *{animation:none!important;transition:none!important}#nsa.js .rv{opacity:1;transform:none}#nsa .track{flex-wrap:wrap;width:auto}}
 @media(prefers-reduced-motion:no-preference){#nsa{scroll-behavior:smooth}}
