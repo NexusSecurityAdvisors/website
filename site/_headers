@@ -25,21 +25,14 @@
 /readiness-check.html
   ! Cross-Origin-Embedder-Policy
 
-# Content-hashed bundles: cache for a year. analytics.js is not hashed, so it revalidates.
+# Content-hashed bundles: cache for a year. analytics.js and readiness-check.js keep fixed names but
+# every script tag carries ?v=<content hash> (tools/stamp_assets.py, enforced by check_site.py).
 /js/*
   Cache-Control: public, max-age=31536000, immutable
 
 # Content-hashed stylesheets (tools/externalise_styles.py and tools/bundle_styles.py name them by hash).
 /css/*
   Cache-Control: public, max-age=31536000, immutable
-
-/js/analytics.js
-  ! Cache-Control
-
-
-# Not content-hashed either (tools/check_readiness.py fetches it by this name), so it revalidates.
-/js/readiness-check.js
-  ! Cache-Control
 
 /*.webp
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
