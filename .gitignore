@@ -4,3 +4,7 @@ node_modules/
 
 # Compiled Worker from functions/ (wrangler pages functions build)
 dist-worker/
+
+# Python bytecode
+__pycache__/
+*.pyc
