@@ -6,6 +6,7 @@ Add a line here in the same PR as the change. Format: what changed for visitors 
 
 ## 2026-11-19
 
+- Performance: PostHog real-user web vitals turned off (`capture_performance: { web_vitals: false }`, and in the project settings), so `web-vitals-with-attribution.js` and its polyfills no longer load (PageSpeed: legacy JavaScript, #133). PageSpeed / Lighthouse CI still measure Core Web Vitals.
 - Performance: Nexus logo variants (200/300/360/440 px) recompressed (WebP q70, visually unchanged): 5.7→3.6, 9.5→6.4, 12.4→8.5 and 14.7→10.4 KB (PageSpeed: improve image delivery). New content-hashed file names, all references updated.
 - Performance (PageSpeed, mobile and desktop): the founder headshot on the home page is served as content-hashed 56/112/168 px variants with `srcset` (was one 360 px file shown at 56 px, cached for one day), so it is about 2 KB instead of 12 KB and cached for a year. PostHog surveys are turned off (`disable_surveys`; the site has none), so `surveys.js` and its second copy of DOMPurify no longer load (PageSpeed: duplicated and unused JavaScript). Feature-flag loading and dead-click capture are off too (no flags or experiments in the project; dead clicks averaged one event a week), dropping the `/flags` request and `dead-clicks-autocapture.js` (#133).
 
