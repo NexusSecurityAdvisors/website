@@ -1,0 +1,226 @@
+# Custom Semgrep rules for LLM / agent code paths CodeQL does not model.
+# Maps to OWASP Top 10 for LLM Apps 2025 (LLM01, LLM05, LLM06) and MITRE ATLAS AML.T0051.
+rules:
+  # ---------- Python ----------
+  - id: py-llm-output-to-dangerous-sink
+    languages: [python]
+    severity: ERROR
+    message: >-
+      Model output or tool-call arguments reach a dangerous sink without validation.
+      Validate against an allowlist or schema first (LLM05 improper output handling, LLM06 excessive agency).
+    metadata: &out
+      category: security
+      owasp-llm: ["LLM05:2025", "LLM06:2025"]
+      atlas: "AML.T0051"
+      confidence: MEDIUM
+    mode: taint
+    pattern-sources:
+      - pattern-either:
+          - pattern: $C.chat.completions.create(...)
+          - pattern: $C.responses.create(...)
+          - pattern: $C.messages.create(...)
+          - pattern: $C.generate_content(...)
+          - pattern: $LLM.invoke(...)
+          - pattern: ollama.chat(...)
+          - pattern: $TC.function.arguments
+          - patterns:
+              - pattern-inside: |
+                  if $B.type == "tool_use":
+                      ...
+              - pattern: $B.input
+    pattern-sanitizers: &pysan
+      - patterns:
+          - pattern: $F(...)
+          - metavariable-regex:
+              metavariable: $F
+              regex: (?i).*(validate|allowlist|sanitiz|model_validate|parse_obj|shlex\.quote|escape).*
+    pattern-sinks: &pysinks
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: exec(...)
+          - pattern: compile(...)
+          - pattern: os.system(...)
+          - pattern: os.popen(...)
+          - pattern: subprocess.$M(...)
+          - pattern: pickle.loads(...)
+          - pattern: yaml.load(...)
+          - pattern: shutil.rmtree(...)
+          - pattern: os.remove(...)
+          - pattern: open(...)
+          - pattern: requests.$M($URL, ...)
+          - pattern: httpx.$M($URL, ...)
+          - pattern: urllib.request.urlopen(...)
+          - pattern: $CUR.execute(...)
+          - pattern: $CUR.executescript(...)
+
+  - id: py-mcp-tool-arg-to-dangerous-sink
+    languages: [python]
+    severity: ERROR
+    message: >-
+      MCP tool argument reaches a dangerous sink. The calling model may be under prompt injection;
+      treat tool arguments as attacker-controlled and validate them (LLM01, LLM06).
+    metadata: *out
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern-inside: |
+                  @$M.tool(...)
+                  def $F(..., $P, ...): ...
+              - pattern-inside: |
+                  @$M.tool(...)
+                  async def $F(..., $P, ...): ...
+              - pattern-inside: |
+                  @$M.tool
+                  def $F(..., $P, ...): ...
+              - pattern-inside: |
+                  @$M.tool
+                  async def $F(..., $P, ...): ...
+          - focus-metavariable: $P
+    pattern-sanitizers: *pysan
+    pattern-sinks: *pysinks
+
+  - id: py-untrusted-into-system-prompt
+    languages: [python]
+    severity: WARNING
+    message: >-
+      Untrusted content (request data, fetched web/file content) flows into a system prompt.
+      Keep it in a delimited user turn and never in system instructions (LLM01 prompt injection).
+    metadata: &inj
+      category: security
+      owasp-llm: ["LLM01:2025"]
+      atlas: "AML.T0051"
+      confidence: MEDIUM
+    mode: taint
+    pattern-sources:
+      - pattern-either:
+          - pattern: flask.request.$A
+          - pattern: request.$A
+          - pattern: requests.$M(...)
+          - pattern: httpx.$M(...)
+          - pattern: open(...).read()
+          - pattern: $PAGE.inner_text(...)
+    pattern-sinks:
+      - pattern-either:
+          - patterns:
+              - pattern-inside: '{"role": "system", "content": $X}'
+              - pattern: $X
+          - patterns:
+              - pattern-inside: $C.messages.create(..., system=$X, ...)
+              - pattern: $X
+          - pattern: SystemMessage(content=$X)
+          - pattern: SystemMessage($X)
+
+  - id: py-dynamic-tool-dispatch
+    languages: [python]
+    severity: WARNING
+    message: >-
+      Tool is dispatched by a model-chosen name without an explicit allowlist. Map names through a
+      fixed dict of permitted tools instead (LLM06 excessive agency).
+    metadata: *out
+    pattern-either:
+      - pattern: getattr($O, $TC.function.name, ...)
+      - patterns:
+          - pattern-inside: |
+              if $B.type == "tool_use":
+                  ...
+          - pattern: getattr($O, $B.name, ...)
+      - pattern: globals()[$X](...)
+      - pattern: importlib.import_module($TC.function.name)
+
+  # ---------- JavaScript / TypeScript (Node, Deno, browser) ----------
+  - id: js-llm-output-to-dangerous-sink
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: >-
+      Model output or tool-call arguments reach a dangerous sink without validation.
+      Parse with a schema (zod/valibot) and allowlist before use (LLM05, LLM06).
+    metadata: *out
+    mode: taint
+    pattern-sources:
+      - pattern-either:
+          - pattern: $C.chat.completions.create(...)
+          - pattern: $C.responses.create(...)
+          - pattern: $C.messages.create(...)
+          - pattern: generateText(...)
+          - pattern: generateObject(...)
+          - pattern: streamText(...)
+          - pattern: $TC.function.arguments
+          - patterns:
+              - pattern-inside: |
+                  if ($B.type === "tool_use") { ... }
+              - pattern: $B.input
+    pattern-sanitizers: &jssan
+      - pattern-either:
+          - pattern: $SCHEMA.parse(...)
+          - pattern: $SCHEMA.safeParse(...)
+          - pattern: DOMPurify.sanitize(...)
+          - patterns:
+              - pattern: $F(...)
+              - metavariable-regex:
+                  metavariable: $F
+                  regex: (?i).*(validate|allowlist|sanitiz|escape).*
+    pattern-sinks: &jssinks
+      - pattern-either:
+          - pattern: eval(...)
+          - pattern: new Function(...)
+          - pattern: $CP.exec(...)
+          - pattern: $CP.execSync(...)
+          - pattern: $CP.spawn(...)
+          - pattern: new Deno.Command(...)
+          - pattern: Deno.writeTextFile(...)
+          - pattern: Deno.readTextFile(...)
+          - pattern: Deno.remove(...)
+          - pattern: $FS.writeFile(...)
+          - pattern: $FS.writeFileSync(...)
+          - pattern: $FS.readFile(...)
+          - pattern: $FS.rm(...)
+          - pattern: $FS.unlink(...)
+          - pattern: fetch($URL, ...)
+          - pattern: $SQL.unsafe(...)
+          - pattern: $DB.$QUERY(`...${$X}...`)
+          - pattern: $EL.innerHTML = $X
+          - pattern: '<$T dangerouslySetInnerHTML={{__html: $X}} />'
+
+  - id: js-mcp-tool-arg-to-dangerous-sink
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: >-
+      MCP tool handler argument reaches a dangerous sink. The calling model may be under prompt
+      injection; treat arguments as attacker-controlled and validate them (LLM01, LLM06).
+    metadata: *out
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern-inside: $S.tool(..., async ($A, ...) => { ... })
+              - pattern-inside: $S.tool(..., ($A, ...) => { ... })
+              - pattern-inside: $S.registerTool(..., async ($A, ...) => { ... })
+              - pattern-inside: $S.registerTool(..., ($A, ...) => { ... })
+          - focus-metavariable: $A
+    pattern-sanitizers: *jssan
+    pattern-sinks: *jssinks
+
+  - id: js-untrusted-into-system-prompt
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: >-
+      Untrusted content (request body/query, fetched content) flows into a system prompt.
+      Keep it in a delimited user turn, never in system instructions (LLM01 prompt injection).
+    metadata: *inj
+    mode: taint
+    pattern-sources:
+      - pattern-either:
+          - pattern: $REQ.json()
+          - pattern: $REQ.text()
+          - pattern: $REQ.body
+          - pattern: $REQ.query
+          - pattern: $REQ.params
+    pattern-sinks:
+      - pattern-either:
+          - patterns:
+              - pattern-inside: '{role: "system", content: $X}'
+              - pattern: $X
+          - patterns:
+              - pattern-inside: '{..., system: $X, ...}'
+              - pattern: $X
