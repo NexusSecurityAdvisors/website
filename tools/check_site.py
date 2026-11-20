@@ -12,12 +12,16 @@ Repository checks
   - security.txt has Contact, Canonical and an Expires date at least 30 days away (RFC 9116)
   - no executable inline <script> blocks (JSON-LD data is allowed; the CSP relies on external scripts)
   - no <style> blocks or style= attributes in pages, and no style="..." markup built in site/js
-    (style-src is 'self'; use a class, or data-css + el.style.cssText; tools/externalise_styles.py converts pages)
+    (style-src is 'self'; use a class, or data-css + el.style.cssText; tools/externalise_styles.py converts pages).
+    The one exception is a <style data-critical> block from tools/critical/critical_css.mjs, and only
+    when its SHA-256 is listed in style-src of every CSP line in _headers
 Live checks (--live)
   - production responses carry the same security headers as site/_headers
   - TLS certificate is valid for at least 21 more days
   - /.well-known/security.txt is served and not expiring soon
 """
+import base64
+import hashlib
 import re
 import socket
 import ssl
@@ -94,14 +98,20 @@ def check_security_txt(text, where):
 
 
 def repo_checks():
+    STYLE_SRCS = re.findall(r"style-src ([^;\n]+)", (SITE / "_headers").read_text(encoding="utf-8"))
     files = {p.relative_to(SITE).as_posix() for p in SITE.rglob("*") if p.is_file()}
     pages = sorted(SITE.glob("*.html"))
     for page in pages:
         html = page.read_text(encoding="utf-8")
         if re.search(r"<script\b(?![^>]*\bsrc\s*=)(?![^>]*application/ld\+json)[^>]*>\s*\S", html, re.IGNORECASE):
             err(f"{page.name}: inline <script> found (CSP expects external scripts)")
-        if re.search(r"<style\b", html, re.IGNORECASE):
-            err(f"{page.name}: <style> block found (style-src is 'self'; run tools/externalise_styles.py site)")
+        for m in re.finditer(r"<style\b([^>]*)>(.*?)</style>", html, re.IGNORECASE | re.S):
+            if m.group(1).strip() != "data-critical":
+                err(f"{page.name}: <style> block found (style-src is 'self'; run tools/externalise_styles.py site)")
+                continue
+            digest = "'sha256-" + base64.b64encode(hashlib.sha256(m.group(2).encode("utf-8")).digest()).decode() + "'"
+            if not STYLE_SRCS or any(digest not in src for src in STYLE_SRCS):
+                err(f"{page.name}: critical CSS hash missing from style-src (run node tools/critical/critical_css.mjs site)")
         if re.search(r"<[a-zA-Z][^>]*\sstyle\s*=", html):
             err(f"{page.name}: style= attribute found (style-src is 'self'; run tools/externalise_styles.py site)")
         for ref in re.findall(r'(?:href|src)="([^"]+)"', html):

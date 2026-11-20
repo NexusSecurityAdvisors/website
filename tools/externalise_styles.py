@@ -27,7 +27,7 @@ TAG = re.compile(
 )
 STYLE_ATTR = re.compile(r"\s+style\s*=\s*(\"([^\"]*)\"|'([^']*)')", re.I)
 CLASS_ATTR = re.compile(r"(\s+class\s*=\s*)(\"([^\"]*)\"|'([^']*)')", re.I)
-STYLE_BLOCK = re.compile(r"<style\b[^>]*>(.*?)</style>", re.S | re.I)
+STYLE_BLOCK = re.compile(r"<style\b(?![^>]*\bdata-critical\b)[^>]*>(.*?)</style>", re.S | re.I)  # data-critical blocks come from tools/critical/critical_css.mjs and stay inline
 INLINE_LINK = re.compile(r'\s*<link rel="stylesheet" href="/css/inline-[0-9a-f]{10}\.css">')
 
 
