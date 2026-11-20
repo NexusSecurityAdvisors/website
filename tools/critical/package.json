@@ -1,0 +1,9 @@
+{
+  "name": "nexus-critical-css",
+  "private": true,
+  "description": "Build-time tool: inline each page's critical CSS (tools/critical_css.mjs).",
+  "type": "module",
+  "dependencies": {
+    "beasties": "0.5.5"
+  }
+}
