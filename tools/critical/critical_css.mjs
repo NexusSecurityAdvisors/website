@@ -9,15 +9,18 @@
  *   1. inlines the rules that page actually uses in <style data-critical> in <head> (beasties),
  *   2. moves the full bundle <link> to the end of <body>, where it no longer blocks rendering
  *      (it still supplies rules for classes that scripts add later, such as the open menu),
- *   3. writes the SHA-256 of every critical block into style-src in both CSP lines of site/_headers,
- *      so the CSP stays free of 'unsafe-inline'.
+ *   3. writes the SHA-256 of every critical block to tools/critical/style-hashes.json, which
+ *      functions/_middleware.js adds to style-src on HTML responses, so the CSP stays free of
+ *      'unsafe-inline'. The hashes are not kept in site/_headers: Cloudflare rejects any _headers
+ *      line over 2,000 characters, and one hash per page pushed the CSP lines past that.
  * The script is idempotent: it first restores each page to its pre-critical form.
- * tools/check_site.py fails on a <style> block without data-critical or whose hash is not in style-src.
+ * tools/check_site.py fails on a <style> block without data-critical or whose hash is not in style-hashes.json.
  */
 import Beasties from "beasties";
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const root = process.argv[2] || "site";
 const CRITICAL = /<style data-critical>[\s\S]*?<\/style>\n?/g;
@@ -61,11 +64,14 @@ for (const file of pages(root).sort()) {
   done++;
 }
 
+// Hashes go to a JSON file the Worker middleware reads; site/_headers keeps a bare style-src 'self'.
+const list = [...hashes].sort().map((h) => `'sha256-${h}'`);
+const outPath = join(dirname(fileURLToPath(import.meta.url)), "style-hashes.json");
+writeFileSync(outPath, JSON.stringify(list, null, 2) + "\n");
 const hdrPath = join(root, "_headers");
-const list = [...hashes].sort().map((h) => `'sha256-${h}'`).join(" ");
 let hdr = readFileSync(hdrPath, "utf8");
 let n = 0;
-hdr = hdr.replace(/(style-src 'self')(?: 'sha256-[A-Za-z0-9+/=]+')*/g, (_, a) => { n++; return list ? `${a} ${list}` : a; });
+hdr = hdr.replace(/(style-src 'self')(?: 'sha256-[A-Za-z0-9+/=]+')*/g, (_, a) => { n++; return a; });
 if (!n) throw new Error("_headers: no style-src 'self' directive found");
 writeFileSync(hdrPath, hdr);
-console.log(`${done} page(s): critical CSS inlined, ${hashes.size} distinct block(s); style-src updated in ${n} CSP line(s)`);
+console.log(`${done} page(s): critical CSS inlined, ${hashes.size} distinct block(s); hashes written to ${relative(process.cwd(), outPath)}`);
