@@ -64,9 +64,11 @@ def check_headers(h, where):
     script_src = re.search(r"script-src ([^;]+)", csp)
     if script_src and ("'unsafe-inline'" in script_src.group(1) or " * " in f" {script_src.group(1)} "):
         err(f"{where}: script-src is not strict ({script_src.group(1)[:80]})")
-    for d in ("frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'"):
+    for d in ("frame-ancestors 'none'", "object-src 'none'", "default-src 'none'"):
         if d not in csp:
             err(f"{where}: CSP missing {d}")
+    if "base-uri 'none'" not in csp and "base-uri 'self'" not in csp:
+        err(f"{where}: CSP missing base-uri 'none' (or 'self')")
     style_src = re.search(r"style-src ([^;]+)", csp)
     if not style_src or "'unsafe-inline'" in style_src.group(1):
         err(f"{where}: style-src missing or allows 'unsafe-inline'")
