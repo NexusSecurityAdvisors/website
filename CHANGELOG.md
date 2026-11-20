@@ -4,6 +4,11 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-20
+
+- Fix: deploys failed after #139 because Cloudflare rejects any `_headers` line over 2,000 characters, and the 27 critical-CSS hashes pushed both CSP lines to about 2,600. The hashes now live in `tools/critical/style-hashes.json` and `functions/_middleware.js` adds them to `style-src` on HTML responses; `site/_headers` keeps a bare `style-src 'self'`. `check_site.py` now fails on any `_headers` or `_redirects` line over 2,000 characters.
+- Security: CSP is deny-by-default (`default-src 'none'`, `base-uri 'none'`), with `manifest-src`, `media-src` and `worker-src` listed explicitly (#141).
+
 ## 2026-11-19
 
 - Performance: each page now inlines the CSS it uses in `<style data-critical>`, and the full bundle loads at the end of `<body>`, so no stylesheet blocks first paint (PageSpeed render-blocking, #132). The CSP stays free of `'unsafe-inline'`: `tools/critical/critical_css.mjs` writes each block's SHA-256 into `style-src`, and `check_site.py` rejects any inline style whose hash isn't listed. `externalise_styles.py` leaves `data-critical` blocks alone.

@@ -19,10 +19,10 @@ python3 tools/serve.py site                      # preview with the production C
 python3 tools/build.py zoho-export site          # rebuild site/ from the Zoho exports (standard library only)
 python3 tools/externalise_styles.py site          # move inline CSS into hashed files under site/css/
 python3 tools/bundle_styles.py site               # then combine each page's stylesheets into one /css/b-<hash>.css
-(cd tools/critical && npm ci) && node tools/critical/critical_css.mjs site   # last: inline each page's critical CSS, hashes go into style-src
+(cd tools/critical && npm ci) && node tools/critical/critical_css.mjs site   # last: inline each page's critical CSS, hashes go to tools/critical/style-hashes.json
 ```
 
-The Python scripts need only the standard library. `tools/critical/critical_css.mjs` needs Node and the pinned `beasties` in `tools/critical/package.json`; re-run it after any page or CSS change (`check_site.py` fails if a page's critical-CSS hash is missing from `style-src`). Use the version in `.python-version`.
+The Python scripts need only the standard library. `tools/critical/critical_css.mjs` needs Node and the pinned `beasties` in `tools/critical/package.json`; re-run it after any page or CSS change (`check_site.py` fails if a page's critical-CSS hash is missing from `tools/critical/style-hashes.json`; `functions/_middleware.js` adds those hashes to `style-src` on HTML responses, because Cloudflare rejects any `_headers` line over 2,000 characters). Use the version in `.python-version`.
 
 > Note: `build.py` does not produce `site/nexus-favicon-512.webp` (it was added to `site/` directly). Restore it after a rebuild, or add it to `zoho-export/assets/`.
 

@@ -13,7 +13,13 @@
  *
  * Only script-src gets the nonce. Non-HTML responses (assets, /api, /r7, /csp-report) pass
  * through untouched.
+ *
+ * HTML responses also get the SHA-256 of each page's inlined critical CSS added to style-src
+ * (tools/critical/critical_css.mjs writes the list). They live here rather than in site/_headers
+ * because Cloudflare rejects any _headers line over 2,000 characters.
  */
+import STYLE_HASHES from "../tools/critical/style-hashes.json";
+
 const CSP_HEADERS = ["content-security-policy", "content-security-policy-report-only"];
 
 export async function onRequest(context) {
@@ -26,7 +32,7 @@ export async function onRequest(context) {
   const headers = new Headers(response.headers);
   for (const name of CSP_HEADERS) {
     const value = headers.get(name);
-    if (value) headers.set(name, addNonce(value, nonce));
+    if (value) headers.set(name, addStyleHashes(addNonce(value, nonce), STYLE_HASHES));
   }
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }
@@ -34,6 +40,12 @@ export async function onRequest(context) {
 // Insert 'nonce-…' at the start of the script-src directive (not script-src-elem/-attr).
 export function addNonce(policy, nonce) {
   return policy.replace(/(^|;\s*)script-src(\s)/, `$1script-src 'nonce-${nonce}'$2`);
+}
+
+// Append the critical-CSS hashes after 'self' in style-src (not style-src-elem/-attr).
+export function addStyleHashes(policy, hashes) {
+  if (!hashes.length) return policy;
+  return policy.replace(/(^|;\s*)style-src 'self'(?=[\s;]|$)/, `$1style-src 'self' ${hashes.join(" ")}`);
 }
 
 function makeNonce() {
