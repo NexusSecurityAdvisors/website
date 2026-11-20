@@ -15,6 +15,10 @@
  *   TURNSTILE_HOSTNAMES optional, comma-separated production hostnames.
  *   LEAD_SINK           set to "off" only for local testing (skips the Zoho POST).
  *   ALLOWED_ORIGINS     optional, comma-separated; defaults to the production hostnames.
+ *   ZEPTO_TOKEN         secret, ZeptoMail "Send Mail" token. When set, the visitor gets a fixed
+ *                       acknowledgment email after Zoho accepts the lead. Unset = no email.
+ *   ACK_FROM            optional sender (default info@nexussecurityadvisors.com; must be a
+ *                       verified ZeptoMail sender). ZEPTO_URL optional (EU/IN data centers).
  */
 const MAX_BODY = 48 * 1024;
 const LIMITS = { ipPerHour: 5, emailPerDay: 3 };
@@ -127,7 +131,60 @@ export async function onRequestPost(context) {
     console.log("zoho_error", String(e && e.message));
     return json({ error: "upstream", message: "Something went wrong sending your request. Please try again, or email it to info@nexussecurityadvisors.com." }, 502);
   }
+
+  // ---- 6. acknowledgment email to the visitor. Only after Zoho accepted the lead, and only for
+  // requests that passed Turnstile + rate limits above. Runs after the response (waitUntil), so a
+  // mail outage never fails or slows a real submission. No-op until ZEPTO_TOKEN is set.
+  context.waitUntil(sendAck(env, fields.Email).catch((e) => console.log("ack_error", String(e && e.message))));
   return json({ ok: true });
+}
+
+// Fixed text only. No visitor input (name, company, message) is echoed, so the form can't be used
+// to relay attacker-written content to a third party's inbox.
+const ACK = {
+  subject: "We received your request - Nexus Security Advisors",
+  text: [
+    "Hello,",
+    "",
+    "Thanks for contacting Nexus Security Advisors. We received your consultation request and will reply within one business day.",
+    "",
+    "If anything is urgent, reply to this email or call 303-970-2204.",
+    "",
+    "Nexus Security Advisors",
+    "https://www.nexussecurityadvisors.com",
+    "",
+    "You're receiving this one-time message because this address was entered on our consultation form. If that wasn't you, you can ignore it; no further email will be sent.",
+  ].join("\n"),
+};
+ACK.html =
+  '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:#0B1F3A;max-width:560px">' +
+  ACK.text.split("\n\n").map((p) => "<p>" + p.replace(/\n/g, "<br>").replace(/(https:\/\/\S+)/, '<a href="$1" style="color:#1E5AA8">$1</a>') + "</p>").join("") +
+  "</div>";
+
+async function sendAck(env, to) {
+  if (!env.ZEPTO_TOKEN || env.LEAD_SINK === "off") return; // not configured, or local testing
+  const from = env.ACK_FROM || "info@nexussecurityadvisors.com";
+  const res = await fetch(env.ZEPTO_URL || "https://api.zeptomail.com/v1.1/email", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      authorization: env.ZEPTO_TOKEN.startsWith("Zoho-enczapikey") ? env.ZEPTO_TOKEN : "Zoho-enczapikey " + env.ZEPTO_TOKEN,
+    },
+    body: JSON.stringify({
+      from: { address: from, name: "Nexus Security Advisors" },
+      to: [{ email_address: { address: to } }],
+      reply_to: [{ address: "info@nexussecurityadvisors.com", name: "Nexus Security Advisors" }],
+      subject: ACK.subject,
+      textbody: ACK.text,
+      htmlbody: ACK.html,
+      track_clicks: false,
+      track_opens: false,
+    }),
+    signal: AbortSignal.timeout(10000),
+  });
+  if (!res.ok) throw new Error("zepto_" + res.status);
+  console.log("ack_sent");
 }
 
 async function sendLead(env, fields) {
