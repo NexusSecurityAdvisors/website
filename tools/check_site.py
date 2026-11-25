@@ -14,7 +14,9 @@ Repository checks
   - no <style> blocks or style= attributes in pages, and no style="..." markup built in site/js
     (style-src is 'self'; use a class, or data-css + el.style.cssText; tools/externalise_styles.py converts pages).
     The one exception is a <style data-critical> block from tools/critical/critical_css.mjs, and only
-    when its SHA-256 is listed in style-src of every CSP line in _headers
+    when its SHA-256 is in style-src of that page's generated _headers rule (the global rule for 404),
+    and that rule matches the global CSP apart from the hash
+  - no _headers line is over 2,000 characters (Cloudflare rejects the deploy)
 Live checks (--live)
   - production responses carry the same security headers as site/_headers
   - TLS certificate is valid for at least 21 more days
@@ -22,7 +24,6 @@ Live checks (--live)
 """
 import base64
 import hashlib
-import json
 import re
 import socket
 import ssl
@@ -99,13 +100,24 @@ def check_security_txt(text, where):
 
 
 def repo_checks():
-    # Critical-CSS hashes: functions/_middleware.js adds these to style-src on HTML responses.
-    STYLE_HASHES = set(json.loads((ROOT / "tools" / "critical" / "style-hashes.json").read_text(encoding="utf-8")))
-    # Cloudflare rejects the whole deploy if any _headers line is over 2,000 characters.
-    for name in ("_headers", "_redirects"):
-        for n, line in enumerate((SITE / name).read_text(encoding="utf-8").splitlines(), 1):
-            if len(line) > 2000:
-                err(f"site/{name} line {n}: {len(line)} characters (Cloudflare's limit is 2,000)")
+    headers_text = (SITE / "_headers").read_text(encoding="utf-8")
+    for n, line in enumerate(headers_text.splitlines(), 1):
+        if len(line) > 2000:
+            err(f"_headers line {n}: {len(line)} characters (Cloudflare rejects lines over 2000)")
+    # path -> {header: value} for rules in _headers (global "/*" included)
+    RULES, cur = {}, None
+    for line in headers_text.splitlines():
+        if line and not line[0].isspace() and not line.startswith("#"):
+            cur = RULES.setdefault(line.strip(), {})
+        elif cur is not None and ":" in line and not line.strip().startswith(("!", "#")):
+            k, v = line.strip().split(":", 1)
+            cur[k.strip()] = v.strip()
+    def drop_hashes(v):
+        return re.sub(r" 'sha256-[A-Za-z0-9+/=]+'", "", v)
+    for path, hdrs in RULES.items():
+        for name in ("Content-Security-Policy", "Content-Security-Policy-Report-Only"):
+            if path != "/*" and name in hdrs and drop_hashes(hdrs[name]) != drop_hashes(RULES["/*"].get(name, "")):
+                err(f"_headers {path}: {name} differs from the global rule (re-run node tools/critical/critical_css.mjs site)")
     files = {p.relative_to(SITE).as_posix() for p in SITE.rglob("*") if p.is_file()}
     pages = sorted(SITE.glob("*.html"))
     for page in pages:
@@ -117,8 +129,10 @@ def repo_checks():
                 err(f"{page.name}: <style> block found (style-src is 'self'; run tools/externalise_styles.py site)")
                 continue
             digest = "'sha256-" + base64.b64encode(hashlib.sha256(m.group(2).encode("utf-8")).digest()).decode() + "'"
-            if digest not in STYLE_HASHES:
-                err(f"{page.name}: critical CSS hash missing from tools/critical/style-hashes.json (run node tools/critical/critical_css.mjs site)")
+            url = "/" if page.name == "index.html" else "/" + page.name[:-5]
+            rule = RULES.get(url) if url != "/404" else RULES.get("/*")
+            if not rule or any(digest not in rule.get(n, "") for n in ("Content-Security-Policy", "Content-Security-Policy-Report-Only")):
+                err(f"{page.name}: critical CSS hash missing from its _headers CSP (run node tools/critical/critical_css.mjs site)")
         if re.search(r"<[a-zA-Z][^>]*\sstyle\s*=", html):
             err(f"{page.name}: style= attribute found (style-src is 'self'; run tools/externalise_styles.py site)")
         for ref in re.findall(r'(?:href|src)="([^"]+)"', html):
@@ -158,9 +172,8 @@ def live_checks():
     with urllib.request.urlopen(req, timeout=30) as r:
         live = {k.lower(): v for k, v in r.headers.items()}  # HTTP header names are case-insensitive; Cloudflare Pages sends _headers rules in lowercase
     check_headers(live, "production /")
-    # functions/_middleware.js adds a per-request 'nonce-…' to script-src and the critical-CSS
-    # 'sha256-…' hashes to style-src; ignore both when comparing.
-    strip_nonce = lambda csp: re.sub(r"\s*'(?:nonce|sha256)-[^']*'", "", csp or "")
+    # functions/_middleware.js adds a per-request 'nonce-…' to script-src; ignore it when comparing.
+    strip_nonce = lambda csp: re.sub(r"'nonce-[^']*'\s*", "", csp or "")
     if strip_nonce(live.get("content-security-policy")) != strip_nonce(want.get("content-security-policy")):
         warnings.append("production CSP differs from site/_headers (deploy drift or edge rewrite)")
     if live.get("cross-origin-embedder-policy") != want.get("cross-origin-embedder-policy"):

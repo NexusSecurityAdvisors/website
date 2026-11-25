@@ -4,13 +4,9 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
-## 2026-11-20
-
-- Fix: deploys failed after #139 because Cloudflare rejects any `_headers` line over 2,000 characters, and the 27 critical-CSS hashes pushed both CSP lines to about 2,600. The hashes now live in `tools/critical/style-hashes.json` and `functions/_middleware.js` adds them to `style-src` on HTML responses; `site/_headers` keeps a bare `style-src 'self'`. `check_site.py` now fails on any `_headers` or `_redirects` line over 2,000 characters.
-- Security: CSP is deny-by-default (`default-src 'none'`, `base-uri 'none'`), with `manifest-src`, `media-src` and `worker-src` listed explicitly (#141).
-
 ## 2026-11-19
 
+- Fix: the #139 deploy was rejected because both global CSP lines in `_headers` grew past Cloudflare's 2,000-character line limit (27 style hashes). `critical_css.mjs` now writes one generated `_headers` rule per page that detaches the global CSP headers and sets them again with that page's hash only. The global rule keeps just the 404 page's hash. `check_site.py` now fails on any `_headers` line over 2,000 characters and on per-page CSPs that drift from the global one. `serve.py` applies the per-page CSP rules.
 - Performance: each page now inlines the CSS it uses in `<style data-critical>`, and the full bundle loads at the end of `<body>`, so no stylesheet blocks first paint (PageSpeed render-blocking, #132). The CSP stays free of `'unsafe-inline'`: `tools/critical/critical_css.mjs` writes each block's SHA-256 into `style-src`, and `check_site.py` rejects any inline style whose hash isn't listed. `externalise_styles.py` leaves `data-critical` blocks alone.
 - Performance: PostHog real-user web vitals turned off (`capture_performance: { web_vitals: false }`, and in the project settings), so `web-vitals-with-attribution.js` and its polyfills no longer load (PageSpeed: legacy JavaScript, #133). PageSpeed / Lighthouse CI still measure Core Web Vitals.
 - Performance: Nexus logo variants (200/300/360/440 px) recompressed (WebP q70, visually unchanged): 5.7→3.6, 9.5→6.4, 12.4→8.5 and 14.7→10.4 KB (PageSpeed: improve image delivery). New content-hashed file names, all references updated.
