@@ -104,6 +104,10 @@ def repo_checks():
     for n, line in enumerate(headers_text.splitlines(), 1):
         if len(line) > 2000:
             err(f"_headers line {n}: {len(line)} characters (Cloudflare rejects lines over 2000)")
+    # Cloudflare Pages allows at most 100 header rules per _headers file; fail with headroom to spare.
+    rule_lines = [l for l in headers_text.splitlines() if l and not l[0].isspace() and not l.startswith("#")]
+    if len(rule_lines) > 90:
+        err(f"_headers has {len(rule_lines)} header rules (Cloudflare allows 100; keep 90 or fewer)")
     # path -> {header: value} for rules in _headers (global "/*" included)
     RULES, cur = {}, None
     for line in headers_text.splitlines():

@@ -4,6 +4,10 @@ Production changes to www.nexussecurityadvisors.com, newest first. Every merge t
 
 Add a line here in the same PR as the change. Format: what changed for visitors or operators, then the PR number.
 
+## 2026-11-25
+
+- Tooling: `check_site.py` fails when `site/_headers` has more than 90 header rules (Cloudflare Pages caps a `_headers` file at 100), so the per-page CSP rules cannot hit the cap silently.
+
 ## 2026-11-19
 
 - Fix: the #139 deploy was rejected because both global CSP lines in `_headers` grew past Cloudflare's 2,000-character line limit (27 style hashes). `critical_css.mjs` now writes one generated `_headers` rule per page that detaches the global CSP headers and sets them again with that page's hash only. The global rule keeps just the 404 page's hash. `check_site.py` now fails on any `_headers` line over 2,000 characters and on per-page CSPs that drift from the global one. `serve.py` applies the per-page CSP rules.
