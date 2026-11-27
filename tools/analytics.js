@@ -36,6 +36,7 @@ advanced_disable_feature_flags: true, // no flags or experiments in this project
 capture_dead_clicks: false, // ~1 event a week; skips dead-clicks-autocapture.js (#133)
 capture_performance: { web_vitals: false }, // real-user web vitals off; skips web-vitals-with-attribution.js and its polyfills (PageSpeed: legacy JS, #133)
 cookieless_mode: NSA_EU ? 'always' : 'never', // Europe: no cookies or local/session storage; needs "Cookieless server hash mode" on in the PostHog project
+disable_session_recording: NSA_EU, // Europe: no session recording (infra#59); other visitors keep it
 })
 // Internal traffic: open any page once with ?internal=1 in each of your own browsers to tag them
 // (PostHog's default filter then excludes them); ?internal=0 removes the tag.
